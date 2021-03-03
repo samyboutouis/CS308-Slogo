@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class MovementList {
   private List<Movement> list;
 
