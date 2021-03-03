@@ -1,5 +1,5 @@
 public class MovementList {
-  List<Movement> list;
+  private List<Movement> list;
 
   public MovementList(){
     list = new ArrayList<>();

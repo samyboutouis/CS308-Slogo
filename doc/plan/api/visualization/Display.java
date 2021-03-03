@@ -1,5 +1,10 @@
 package slogo.visualization;
 
+import java.util.Map;
+import javafx.scene.paint.Color;
+import javafx.stage.FileChooser;
+import javafx.scene.image.Image;
+
 public interface Display {
   public void addToHistory(String input);
   // adds what is given as input to the history part of the Display

@@ -1,5 +1,8 @@
 package slogo.visualization;
 
+import api.Movement;
+import api.MovementList;
+
 public interface Turtle {
   /*
    * This method, given a list of movements created by the back-end from a user's input will cause the turtle to continually update to visualize all the movements. Will be called once the back-end parses a user's command.
