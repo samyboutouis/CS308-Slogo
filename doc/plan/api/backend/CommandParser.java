@@ -1,4 +1,7 @@
 package slogo.backend;
+import slogo.backend.Command;
+import slogo.Movement;
+import java.util.IllegalFormatException;
 
 public interface CommandParser {
   public Command convertCommand(String singleCommand) throws IllegalFormatException;
