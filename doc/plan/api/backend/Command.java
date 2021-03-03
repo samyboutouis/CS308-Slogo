@@ -1,4 +1,5 @@
 package slogo.backend;
+import slogo.Movement;
 
 public interface Command{
   
