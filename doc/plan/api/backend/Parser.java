@@ -1,5 +1,9 @@
 package slogo.backend;
 
+import api.MovementList;
+import api.Movement;
+import java.util.IllegalFormatException;
+
 public interface Parser {
   public MovementList parseCommand(String input, Movement turtleInfo) throws IllegalFormatException;
   // will utilize backend internal methods to break the string into commands, then each command into a movement, and then combine each movement into a MovementList
