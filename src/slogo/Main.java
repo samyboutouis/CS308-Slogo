@@ -1,9 +1,7 @@
 package slogo;
 
+import slogo.controller.Controller;
 
-/**
- * Feel free to completely change this code or delete it entirely. 
- */
 public class Main {
     /**
      * A method to test (and a joke :).
@@ -16,6 +14,6 @@ public class Main {
      * Start of the program.
      */
     public static void main (String[] args) {
-        System.out.println("Hello world");
+        Controller c = new Controller();
     }
 }
