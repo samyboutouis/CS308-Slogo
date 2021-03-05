@@ -189,10 +189,11 @@ We do not plan on using a front-end external API for this project (explained in 
 ## Team Responsibilities
 
 * Team Member #1: Andre Wang (jw542)
-  * \[Unfortunately, Andre was unable to join the team meetings due to technical difficulties and issues with his VPN (he is currently located in China)]
+  * Back-end
 * Team Member #2: Donghan Park (dp239)
   * Front-end
 * Team Member #3: Samy Boutouis (sb590)
   * Controller, will switch between front-end and back-end depending on need
 * Team Member #4: Felix Jiang (fj32)
   * Back-end
+* We plan to all write our own tests, rather than having one person dedicated to it
