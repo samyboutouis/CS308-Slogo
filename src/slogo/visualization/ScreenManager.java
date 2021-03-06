@@ -1,7 +1,5 @@
 package slogo.visualization;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.scene.Scene;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -18,21 +16,19 @@ public class ScreenManager {
 
   public ScreenManager(Pane root, Scene scene){
     gridPane = new GridPane();
-
     root.getChildren().add(gridPane);
-    gridPane.setMinSize(scene.getWidth(), scene.getHeight());
-    gridPane.setGridLinesVisible(true);
 
+    gridPane.setMinSize(scene.getWidth(), scene.getHeight());
     gridPane.setVgap(10);
     gridPane.setHgap(10);
 
-//    scene.heightProperty().addListener((obs, old, nw) -> {
-//      gridPane.setPrefHeight(nw.doubleValue());
-//    });
-//
-//    scene.widthProperty().addListener((obs, old, nw) -> {
-//      gridPane.setPrefWidth(nw.doubleValue());
-//    });
+    scene.heightProperty().addListener((observableValue, oldHeight, newHeight) -> {
+      gridPane.setMinHeight(newHeight.doubleValue());
+    });
+
+    scene.widthProperty().addListener((observableValue, oldWidth, newWidth) -> {
+      gridPane.setMinWidth(newWidth.doubleValue());
+    });
 
     for(int i = 0; i < GRID_LENGTH; i++){
       RowConstraints row = new RowConstraints();
