@@ -1,8 +1,12 @@
 package slogo;
 
-import slogo.controller.Controller;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
+import javafx.stage.Screen;
+import javafx.stage.Stage;
 
-public class Main {
+public class Main extends Application  {
     /**
      * A method to test (and a joke :).
      */
@@ -11,9 +15,28 @@ public class Main {
     }
 
     /**
-     * Start of the program.
+     * Starts the window application
+     * @param stage The top-level container class for the application window
      */
-    public static void main (String[] args) {
-        Controller c = new Controller();
+    @Override
+    public void start(Stage stage) {
+        createNewWindow();
+    }
+
+    /**
+     * Sets up the new window by initializing the primary scene and the top-level root node
+     */
+    public void createNewWindow(){
+        final String STAGE_TITLE = "SLogo Application";
+
+        Pane root = new Pane();
+        Scene scene = new Scene(root);
+
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.setTitle(STAGE_TITLE);
+        stage.setMaximized(true);
+
+        stage.show();
     }
 }
