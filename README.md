@@ -3,12 +3,11 @@ SLogo
 
 This project implements a development environment that helps users write programs to draw using a turtle.
 
-Names:
-
+Names: Andre Wang (jw542), Donghan Park (dp239), Samy Boutouis (sb590), Felix Jiang (fj32)
 
 ### Timeline
 
-Start Date: 
+Start Date: 03/04/2021
 
 Finish Date: 
 
