@@ -1,5 +1,6 @@
 package slogo.visualization;
 
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -11,17 +12,36 @@ import javafx.scene.layout.VBox;
 
 public class ScreenManager {
 
-  private final GridPane gridPane;
   private final static int GRID_LENGTH = 10;
+  private final static int PADDING_LENGTH = 10;
+
+  private final Scene scene;
+  private final GridPane gridPane;
 
   public ScreenManager(Pane root, Scene scene){
+    this.scene = scene;
+
     gridPane = new GridPane();
     root.getChildren().add(gridPane);
 
-    gridPane.setMinSize(scene.getWidth(), scene.getHeight());
-    gridPane.setVgap(10);
-    gridPane.setHgap(10);
+    setupGrid();
+    setupDisplays();
+  }
 
+  private void setupGrid(){
+    initializeGridSize();
+    initializeGridResizeListeners();
+    initializeGridRowsAndCols();
+  }
+
+  private void initializeGridSize(){
+    gridPane.setMinSize(scene.getWidth(), scene.getHeight());
+    gridPane.setVgap(PADDING_LENGTH);
+    gridPane.setHgap(PADDING_LENGTH);
+    gridPane.setPadding(new Insets(PADDING_LENGTH, PADDING_LENGTH, PADDING_LENGTH, PADDING_LENGTH));
+  }
+
+  private void initializeGridResizeListeners(){
     scene.heightProperty().addListener((observableValue, oldHeight, newHeight) -> {
       gridPane.setMinHeight(newHeight.doubleValue());
     });
@@ -29,7 +49,9 @@ public class ScreenManager {
     scene.widthProperty().addListener((observableValue, oldWidth, newWidth) -> {
       gridPane.setMinWidth(newWidth.doubleValue());
     });
+  }
 
+  private void initializeGridRowsAndCols(){
     for(int i = 0; i < GRID_LENGTH; i++){
       RowConstraints row = new RowConstraints();
       ColumnConstraints col = new ColumnConstraints();
@@ -38,11 +60,9 @@ public class ScreenManager {
       gridPane.getRowConstraints().add(row);
       gridPane.getColumnConstraints().add(col);
     }
-
-    setupWindows();
   }
 
-  private void setupWindows(){
+  private void setupDisplays(){
     Pane turtlePane = new Pane();
     Pane terminalPane = new Pane();
     VBox historyPane = new VBox();
