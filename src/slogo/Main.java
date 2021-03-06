@@ -15,8 +15,8 @@ public class Main extends Application  {
     }
 
     /**
-     * Starts the game window application
-     * @param stage The window application that displays the simulation
+     * Starts the window application
+     * @param stage The top-level container class for the application window
      */
     @Override
     public void start(Stage stage) {
@@ -24,27 +24,18 @@ public class Main extends Application  {
     }
 
     /**
-     * Sets up the new window by initializing the main scene and the root node
+     * Sets up the new window by initializing the primary scene and the top-level root node
      */
     public void createNewWindow(){
-
         final String STAGE_TITLE = "SLogo Application";
-        final double SCREEN_X = Screen.getPrimary().getVisualBounds().getMinX();
-        final double SCREEN_Y = Screen.getPrimary().getVisualBounds().getMinY();
-        final double SCREEN_WIDTH = Screen.getPrimary().getVisualBounds().getWidth();
-        final double SCREEN_HEIGHT = Screen.getPrimary().getVisualBounds().getHeight();
 
         Pane root = new Pane();
-        Scene scene = new Scene(root, SCREEN_WIDTH, SCREEN_HEIGHT);
+        Scene scene = new Scene(root);
 
         Stage stage = new Stage();
         stage.setScene(scene);
-
         stage.setTitle(STAGE_TITLE);
-        stage.setX(SCREEN_X);
-        stage.setY(SCREEN_Y);
-        stage.setWidth(SCREEN_WIDTH);
-        stage.setHeight(SCREEN_HEIGHT);
+        stage.setMaximized(true);
 
         stage.show();
     }
