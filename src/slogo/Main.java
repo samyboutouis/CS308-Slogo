@@ -3,8 +3,8 @@ package slogo;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
+import slogo.visualization.ScreenManager;
 
 public class Main extends Application  {
     /**
@@ -20,23 +20,17 @@ public class Main extends Application  {
      */
     @Override
     public void start(Stage stage) {
-        createNewWindow();
-    }
-
-    /**
-     * Sets up the new window by initializing the primary scene and the top-level root node
-     */
-    public void createNewWindow(){
         final String STAGE_TITLE = "SLogo Application";
 
         Pane root = new Pane();
         Scene scene = new Scene(root);
 
-        Stage stage = new Stage();
         stage.setScene(scene);
         stage.setTitle(STAGE_TITLE);
         stage.setMaximized(true);
 
         stage.show();
+
+        new ScreenManager(root, scene);
     }
 }
