@@ -14,6 +14,7 @@ public class TerminalDisplay {
   private final static String TERMINAL_BUTTON = "TerminalButton";
   private final static String TERMINAL_PROMPT = "TerminalPrompt";
   private final static String TERMINAL_TEXT_BOX_ID = "TerminalTextBoxID";
+  private final static String TERMINAL_BUTTON_ID = "TerminalButtonID";
   private final static int COLUMN_COUNT = 4;
 
   private final ResourceBundle resourceBundle;
@@ -52,9 +53,9 @@ public class TerminalDisplay {
     textBox = new TextArea();
     textBox.setPrefColumnCount(COLUMN_COUNT);
     textBox.setWrapText(true);
-    textBox.setId(resourceBundle.getString(TERMINAL_TEXT_BOX_ID));
     textBox.setFocusTraversable(false);
     textBox.setPromptText(resourceBundle.getString(TERMINAL_PROMPT));
+    textBox.setId(resourceBundle.getString(TERMINAL_TEXT_BOX_ID));
 
     pane.add(textBox, 0, 0, 3, 1);
   }
@@ -64,18 +65,27 @@ public class TerminalDisplay {
     button.setMaxWidth(Double.MAX_VALUE);
     button.setMaxHeight(Double.MAX_VALUE);
     button.setWrapText(true);
+    button.setId(resourceBundle.getString(TERMINAL_BUTTON_ID));
 
     pane.add(button, 3, 0, 1, 1);
   }
 
   private void applyButtonLogic(){
     button.setOnAction(e -> {
-      String command = textBox.getText();
-      if(command != null && command.trim().length() > 0){
+      String command = textBox.getText().trim();
+      if(command.length() > 0){
         System.out.println(command);
-        historyDisplay.addNewHistoryTab(command);
+        Button historyTab = historyDisplay.addNewHistoryTab(command);
+        applyHistoryTabLogic(historyTab);
       }
       textBox.clear();
+    });
+  }
+
+  private void applyHistoryTabLogic(Button historyTab){
+    historyTab.setOnAction(e -> {
+      String command = historyTab.getText();
+      textBox.setText(command);
     });
   }
 }

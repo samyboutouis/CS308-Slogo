@@ -4,6 +4,7 @@ import java.util.ResourceBundle;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
@@ -57,20 +58,32 @@ public class HistoryDisplay {
   }
 
   private void initializeHistoryBox(){
+    ScrollPane scrollPane = new ScrollPane();
+    scrollPane.setFitToWidth(true);
+    pane.add(scrollPane, 0, 1, 1, 9);
+
+    scrollPane.setId(resourceBundle.getString(HISTORY_BOX_ID));
+
     historyBox = new VBox();
-    historyBox.setId(resourceBundle.getString(HISTORY_BOX_ID));
     historyBox.setFillWidth(true);
     historyBox.setSpacing(PADDING_LENGTH);
     historyBox.setPadding(new Insets(PADDING_LENGTH, PADDING_LENGTH, PADDING_LENGTH, PADDING_LENGTH));
-    pane.add(historyBox, 0, 1, 1, 9);
+
+    scrollPane.setContent(historyBox);
   }
 
-  public void addNewHistoryTab(String command){
+  /**
+   *
+   * @param command
+   */
+  public Button addNewHistoryTab(String command){
     Button historyTab = new Button(command);
     historyTab.setMaxWidth(Double.MAX_VALUE);
     historyTab.setMaxHeight(Double.MAX_VALUE);
     historyTab.setId(resourceBundle.getString(HISTORY_TAB_ID));
 
     historyBox.getChildren().add(historyTab);
+
+    return historyTab;
   }
 }
