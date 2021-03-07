@@ -14,6 +14,7 @@ public class ScreenManager {
 
   private final static int GRID_LENGTH = 10;
   private final static int PADDING_LENGTH = 10;
+  private final static String RESOURCE_PACKAGE = "resources/languages";
 
   private final Scene scene;
   private final GridPane gridPane;
@@ -71,14 +72,14 @@ public class ScreenManager {
     HBox toolbarPane = new HBox();
 
     gridPane.add(toolbarPane, 0, 0, 10, 1);
-    gridPane.add(turtlePane, 0, 1, 6, 7);
-    gridPane.add(terminalPane, 0, 8, 6, 2);
-    gridPane.add(historyPane, 6, 1, 4, 5);
-    gridPane.add(variablesPane, 6, 6, 2, 4);
-    gridPane.add(userCommandsPane, 8, 6, 2, 4);
+    gridPane.add(turtlePane, 0, 1, 5, 7);
+    gridPane.add(terminalPane, 0, 8, 5, 2);
+    gridPane.add(historyPane, 5, 1, 5, 5);
+    gridPane.add(variablesPane, 5, 6, 2, 4);
+    gridPane.add(userCommandsPane, 7, 6, 3, 4);
 
     new TurtleDisplay(turtlePane);
-    new TerminalDisplay(terminalPane);
+    new TerminalDisplay(terminalPane, RESOURCE_PACKAGE);
     new HistoryDisplay(historyPane);
     new VariablesDisplay(variablesPane);
     new UserCommandsDisplay(userCommandsPane);

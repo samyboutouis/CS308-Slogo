@@ -1,5 +1,6 @@
 package slogo.visualization;
 
+import java.util.ResourceBundle;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
@@ -12,11 +13,14 @@ import javafx.scene.layout.VBox;
 public class TerminalDisplay {
 
   private final static int PADDING_LENGTH = 10;
+  private final static String BUTTON_LABEL = "TerminalButton";
 
+  private final ResourceBundle resourceBundle;
   private final GridPane pane;
 
-  public TerminalDisplay(GridPane pane){
+  public TerminalDisplay(GridPane pane, String resourcePackage){
     this.pane = pane;
+    this.resourceBundle = ResourceBundle.getBundle(String.format("%s/%s", resourcePackage, "English"));
 
     pane.setVgap(PADDING_LENGTH);
     pane.setHgap(PADDING_LENGTH);
@@ -44,8 +48,15 @@ public class TerminalDisplay {
   }
 
   private void initializeButton(){
-    Button button = new Button("BUTTON");
-    button.setMinHeight(100);
-    pane.add(button, 6, 0, 2, 1);
+    VBox box = new VBox();
+    box.setFillWidth(true);
+
+    Button button = new Button(resourceBundle.getString(BUTTON_LABEL));
+    button.setMaxWidth(Double.MAX_VALUE);
+    button.setMaxHeight(Double.MAX_VALUE);
+    VBox.setVgrow(button, Priority.ALWAYS);
+    box.getChildren().add(button);
+
+    pane.add(box, 6, 0, 2, 1);
   }
 }
