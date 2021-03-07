@@ -1,15 +1,76 @@
 package slogo.visualization;
 
+import java.util.ResourceBundle;
+import javafx.geometry.Insets;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 
 public class HistoryDisplay {
-  private VBox pane;
 
-  public HistoryDisplay(VBox pane){
+  private final static int PADDING_LENGTH = 10;
+  private final static String HISTORY_TITLE = "HistoryTitle";
+  private final static String HISTORY_BOX_ID = "HistoryBoxID";
+  private final static String HISTORY_TAB_ID = "HistoryTabID";
+  private final static int ROW_COUNT = 10;
+
+  private final GridPane pane;
+  private VBox historyBox;
+
+  private final ResourceBundle resourceBundle;
+
+  public HistoryDisplay(GridPane pane, String resourcePackage){
     this.pane = pane;
 
-    Text test = new Text("history");
-    pane.getChildren().add(test);
+    pane.setMaxWidth(Double.MAX_VALUE);
+    pane.setMaxHeight(Double.MAX_VALUE);
+
+    pane.setVgap(PADDING_LENGTH);
+    pane.setPadding(new Insets(PADDING_LENGTH, PADDING_LENGTH, PADDING_LENGTH, PADDING_LENGTH));
+
+    String language = "English";
+    this.resourceBundle = ResourceBundle.getBundle(String.format("%s/%s/%s", resourcePackage, "languages", language));
+
+    ColumnConstraints col = new ColumnConstraints();
+    col.setHgrow(Priority.ALWAYS);
+    col.setPercentWidth(100.0);
+    pane.getColumnConstraints().add(col);
+
+    for(int i = 0; i < ROW_COUNT; i++){
+      RowConstraints row = new RowConstraints();
+      row.setVgrow(Priority.ALWAYS);
+      row.setPercentHeight(100.0 / ROW_COUNT);
+      pane.getRowConstraints().add(row);
+    }
+
+    initializeTitleLabel();
+    initializeHistoryBox();
+  }
+
+  private void initializeTitleLabel(){
+    Label title = new Label(resourceBundle.getString(HISTORY_TITLE));
+    pane.add(title, 0, 0, 1, 1);
+  }
+
+  private void initializeHistoryBox(){
+    historyBox = new VBox();
+    historyBox.setId(resourceBundle.getString(HISTORY_BOX_ID));
+    historyBox.setFillWidth(true);
+    historyBox.setSpacing(PADDING_LENGTH);
+    historyBox.setPadding(new Insets(PADDING_LENGTH, PADDING_LENGTH, PADDING_LENGTH, PADDING_LENGTH));
+    pane.add(historyBox, 0, 1, 1, 9);
+  }
+
+  public void addNewHistoryTab(String command){
+    Button historyTab = new Button(command);
+    historyTab.setMaxWidth(Double.MAX_VALUE);
+    historyTab.setMaxHeight(Double.MAX_VALUE);
+    historyTab.setId(resourceBundle.getString(HISTORY_TAB_ID));
+
+    historyBox.getChildren().add(historyTab);
   }
 }

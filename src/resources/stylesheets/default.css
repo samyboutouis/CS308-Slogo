@@ -6,8 +6,30 @@
 
 #TerminalTextBox {
   -fx-font-size: 20;
+  -fx-background-radius: 20px;
+  -fx-border-radius: 20px;
+}
+
+#TerminalTextBox .scroll-pane{
+  -fx-background-color: white;
+  -fx-background-radius: 20px;
+}
+#TerminalTextBox .scroll-pane .viewport, #TerminalTextBox .scroll-pane .content{
+  -fx-background-color: transparent;
 }
 
 .displayWindow{
   -fx-background-color: #dedcdc;
+  -fx-background-radius: 20px;
+}
+
+#HistoryBox {
+  -fx-background-radius: 20px;
+  -fx-background-color: white;
+}
+
+#HistoryTab {
+  -fx-background-radius: 20px;
+  -fx-border-width: 0px;
+  -fx-background-color: #f5f5f5;
 }

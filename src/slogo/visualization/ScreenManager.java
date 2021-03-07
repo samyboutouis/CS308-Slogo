@@ -70,7 +70,7 @@ public class ScreenManager {
   private void setupDisplays(){
     Pane turtlePane = new Pane();
     GridPane terminalPane = new GridPane();
-    VBox historyPane = new VBox();
+    GridPane historyPane = new GridPane();
     VBox variablesPane = new VBox();
     VBox userCommandsPane = new VBox();
     HBox toolbarPane = new HBox();
@@ -90,8 +90,7 @@ public class ScreenManager {
     gridPane.add(userCommandsPane, 7, 6, 3, 4);
 
     new TurtleDisplay(turtlePane);
-    new TerminalDisplay(terminalPane, RESOURCE_PACKAGE);
-    new HistoryDisplay(historyPane);
+    new TerminalDisplay(terminalPane, RESOURCE_PACKAGE, new HistoryDisplay(historyPane, RESOURCE_PACKAGE));
     new VariablesDisplay(variablesPane);
     new UserCommandsDisplay(userCommandsPane);
     new ToolbarDisplay(toolbarPane);
