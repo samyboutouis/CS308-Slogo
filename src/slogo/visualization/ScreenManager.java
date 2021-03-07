@@ -64,7 +64,7 @@ public class ScreenManager {
 
   private void setupDisplays(){
     Pane turtlePane = new Pane();
-    Pane terminalPane = new Pane();
+    GridPane terminalPane = new GridPane();
     VBox historyPane = new VBox();
     VBox variablesPane = new VBox();
     VBox userCommandsPane = new VBox();
