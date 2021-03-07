@@ -1,19 +1,19 @@
 package slogo.visualization;
 
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import slogo.Turtle;
 
 public class TurtleDisplay {
-  private final Pane pane;
+  private final VBox vbox;
   private Turtle turtle;
 
-  public TurtleDisplay(Pane pane){
-    this.pane = pane;
-    this.turtle = new Turtle();
+  public TurtleDisplay(VBox vbox){
+    this.vbox = vbox;
+    this.turtle = new Turtle(vbox.getMinWidth(), vbox.getMinHeight());
     setScreen();
   }
 
   private void setScreen() {
-    pane.getChildren().add(turtle);
+    vbox.getChildren().add(turtle);
   }
 }

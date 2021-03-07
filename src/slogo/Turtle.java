@@ -16,12 +16,12 @@ public class Turtle extends ImageView {
   private double paneWidth;
   private double paneHeight;
 
-  public Turtle() {
+  public Turtle(double paneWidth, double paneHeight) {
     xCoordinate = 0;
     yCoordinate = 0;
     direction = 0;
     setDefaultImage();
-    setXY(0, 0);
+    setXY(paneWidth/2, paneHeight/2);
   }
 
   public void forward(double pixels) {
