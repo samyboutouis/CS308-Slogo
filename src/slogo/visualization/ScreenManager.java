@@ -60,6 +60,8 @@ public class ScreenManager {
       ColumnConstraints col = new ColumnConstraints();
       row.setVgrow(Priority.ALWAYS);
       col.setHgrow(Priority.ALWAYS);
+      row.setPercentHeight(10.0);
+      col.setPercentWidth(10.0);
       gridPane.getRowConstraints().add(row);
       gridPane.getColumnConstraints().add(col);
     }
@@ -67,7 +69,7 @@ public class ScreenManager {
 
   private void setupDisplays(){
     Pane turtlePane = new Pane();
-    HBox terminalPane = new HBox();
+    GridPane terminalPane = new GridPane();
     VBox historyPane = new VBox();
     VBox variablesPane = new VBox();
     VBox userCommandsPane = new VBox();

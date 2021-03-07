@@ -1,4 +1,12 @@
+* {
+  -fx-font-family: monospace;
+  -fx-font-size: 20;
+  -fx-text-fill: black;
+}
 
+#TerminalTextBox {
+  -fx-font-size: 20;
+}
 
 .displayWindow{
   -fx-background-color: #dedcdc;
