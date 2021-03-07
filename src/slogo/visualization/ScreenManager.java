@@ -14,7 +14,8 @@ public class ScreenManager {
 
   private final static int GRID_LENGTH = 10;
   private final static int PADDING_LENGTH = 10;
-  private final static String RESOURCE_PACKAGE = "resources/languages";
+  private final static String RESOURCE_PACKAGE = "resources";
+  private final static String DISPLAY_CLASS_NAME = "displayWindow";
 
   private final Scene scene;
   private final GridPane gridPane;
@@ -27,6 +28,7 @@ public class ScreenManager {
 
     setupGrid();
     setupDisplays();
+    setStyleSheet();
   }
 
   private void setupGrid(){
@@ -65,11 +67,18 @@ public class ScreenManager {
 
   private void setupDisplays(){
     Pane turtlePane = new Pane();
-    GridPane terminalPane = new GridPane();
+    HBox terminalPane = new HBox();
     VBox historyPane = new VBox();
     VBox variablesPane = new VBox();
     VBox userCommandsPane = new VBox();
     HBox toolbarPane = new HBox();
+
+    turtlePane.getStyleClass().add(DISPLAY_CLASS_NAME);
+    terminalPane.getStyleClass().add(DISPLAY_CLASS_NAME);
+    historyPane.getStyleClass().add(DISPLAY_CLASS_NAME);
+    variablesPane.getStyleClass().add(DISPLAY_CLASS_NAME);
+    userCommandsPane.getStyleClass().add(DISPLAY_CLASS_NAME);
+    toolbarPane.getStyleClass().add(DISPLAY_CLASS_NAME);
 
     gridPane.add(toolbarPane, 0, 0, 10, 1);
     gridPane.add(turtlePane, 0, 1, 5, 7);
@@ -84,5 +93,9 @@ public class ScreenManager {
     new VariablesDisplay(variablesPane);
     new UserCommandsDisplay(userCommandsPane);
     new ToolbarDisplay(toolbarPane);
+  }
+
+  private void setStyleSheet(){
+    scene.getStylesheets().add(getClass().getResource(String.format("/%s/stylesheets/%s", RESOURCE_PACKAGE, "default.css")).toExternalForm());
   }
 }

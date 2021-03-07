@@ -9,9 +9,6 @@ public class HistoryDisplay {
   public HistoryDisplay(VBox pane){
     this.pane = pane;
 
-    pane.setStyle("-fx-background-color: #fff000");
-
-
     Text test = new Text("history");
     pane.getChildren().add(test);
   }
