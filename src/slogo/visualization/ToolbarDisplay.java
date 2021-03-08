@@ -3,6 +3,7 @@ package slogo.visualization;
 import java.util.ResourceBundle;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
+import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ComboBox;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -10,6 +11,7 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
+import javafx.scene.paint.Color;
 
 public class ToolbarDisplay {
 
@@ -24,6 +26,10 @@ public class ToolbarDisplay {
   private final GridPane gridPane;
   private final ResourceBundle languageBundle;
   private final ResourceBundle resourceBundle;
+  private Button backgroundColorButton;
+  private Button penColorButton;
+  private Color backgroundColor;
+  private Color penColor;
 
   public ToolbarDisplay(GridPane pane, String resourcePackage) {
     this.gridPane = pane;
@@ -32,6 +38,8 @@ public class ToolbarDisplay {
     String language = "English";
     this.resourceBundle = ResourceBundle
       .getBundle(String.format("%s/%s/%s", resourcePackage, "languages", language));
+    backgroundColor = Color.web("#dedcdc");
+    penColor = Color.BLACK;
     initializeGridPane();
     setScreen();
   }
@@ -42,7 +50,6 @@ public class ToolbarDisplay {
     for (int i = 0; i < COLUMN_COUNT; i++) {
       ColumnConstraints col = new ColumnConstraints();
       col.setHgrow(Priority.ALWAYS);
-      col.setPercentWidth(100.0 / COLUMN_COUNT);
       gridPane.getColumnConstraints().add(col);
     }
     RowConstraints row = new RowConstraints();
@@ -60,17 +67,17 @@ public class ToolbarDisplay {
   }
 
   private void addPenColorButton() {
-    Button button = new Button();
-    button.setOnAction(event -> handlePenColorClick());
-    button.setGraphic(createImageView(PAINT_BRUSH_IMAGE));
-    gridPane.add(button, 0, 0, 1, 1);
+    penColorButton = new Button();
+    penColorButton.setOnAction(event -> handlePenColorClick());
+    penColorButton.setGraphic(createImageView(PAINT_BRUSH_IMAGE));
+    gridPane.add(penColorButton, 0, 0, 1, 1);
   }
 
   private void addBackgroundColorButton() {
-    Button button = new Button();
-    button.setOnAction(event -> handleBackgroundColorClick());
-    button.setGraphic(createImageView(PAINT_BUCKET_IMAGE));
-    gridPane.add(button, 1, 0, 1, 1);
+    backgroundColorButton = new Button();
+    backgroundColorButton.setOnAction(event -> handleBackgroundColorClick());
+    backgroundColorButton.setGraphic(createImageView(PAINT_BUCKET_IMAGE));
+    gridPane.add(backgroundColorButton, 1, 0, 1, 1);
   }
 
   private void addTurtleImageButton() {
@@ -104,11 +111,33 @@ public class ToolbarDisplay {
   }
 
   private void handlePenColorClick() {
+    penColorButton.setVisible(false);
+    penColorButton.setDisable(true);
+    ColorPicker colorPicker = new ColorPicker(penColor);
+    colorPicker.setOnAction(event -> handlePenColorPicker(colorPicker));
+    gridPane.add(colorPicker, 0, 0, 1, 1);
+  }
 
+  private void handlePenColorPicker(ColorPicker colorPicker) {
+    penColor = colorPicker.getValue();
+    gridPane.getChildren().remove(colorPicker);
+    penColorButton.setVisible(true);
+    penColorButton.setDisable(false);
   }
 
   private void handleBackgroundColorClick() {
+    backgroundColorButton.setVisible(false);
+    backgroundColorButton.setDisable(true);
+    ColorPicker colorPicker = new ColorPicker(backgroundColor);
+    colorPicker.setOnAction(event -> handleBackgroundColorPicker(colorPicker));
+    gridPane.add(colorPicker, 1, 0, 1, 1);
+  }
 
+  private void handleBackgroundColorPicker(ColorPicker colorPicker) {
+    backgroundColor = colorPicker.getValue();
+    gridPane.getChildren().remove(colorPicker);
+    backgroundColorButton.setVisible(true);
+    backgroundColorButton.setDisable(false);
   }
 
   private void handleTurtleImageClick() {
