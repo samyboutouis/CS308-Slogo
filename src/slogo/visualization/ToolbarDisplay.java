@@ -9,6 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
+import javafx.scene.layout.RowConstraints;
 
 public class ToolbarDisplay {
 
@@ -18,15 +19,19 @@ public class ToolbarDisplay {
   private static final String TURTLE_ICON_IMAGE = "resources/turtle-icon.png";
   private static final int ICON_WIDTH = 30;
   private static final int ICON_HEIGHT = 30;
-  private final static int COLUMN_COUNT = 18;
+  private final static int COLUMN_COUNT = 10;
 
   private final GridPane gridPane;
+  private final ResourceBundle languageBundle;
   private final ResourceBundle resourceBundle;
 
   public ToolbarDisplay(GridPane pane, String resourcePackage) {
     this.gridPane = pane;
-    this.resourceBundle = ResourceBundle
+    this.languageBundle = ResourceBundle
       .getBundle(String.format("%s/%s/%s", resourcePackage, "languages", "LanguageOptions"));
+    String language = "English";
+    this.resourceBundle = ResourceBundle
+      .getBundle(String.format("%s/%s/%s", resourcePackage, "languages", language));
     initializeGridPane();
     setScreen();
   }
@@ -37,8 +42,13 @@ public class ToolbarDisplay {
     for (int i = 0; i < COLUMN_COUNT; i++) {
       ColumnConstraints col = new ColumnConstraints();
       col.setHgrow(Priority.ALWAYS);
+      col.setPercentWidth(100.0 / COLUMN_COUNT);
       gridPane.getColumnConstraints().add(col);
     }
+    RowConstraints row = new RowConstraints();
+    row.setVgrow(Priority.ALWAYS);
+    row.setPercentHeight(100.0);
+    gridPane.getRowConstraints().add(row);
   }
 
   private void setScreen() {
@@ -46,6 +56,7 @@ public class ToolbarDisplay {
     addBackgroundColorButton();
     addTurtleImageButton();
     addLanguageDropdown();
+    addHelpButton();
   }
 
   private void addPenColorButton() {
@@ -72,18 +83,24 @@ public class ToolbarDisplay {
   private void addLanguageDropdown() {
     ComboBox<String> comboBox = new ComboBox<>();
     comboBox.getItems().addAll(
-      resourceBundle.getString("English"),
-      resourceBundle.getString("Chinese"),
-      resourceBundle.getString("French"),
-      resourceBundle.getString("German"),
-      resourceBundle.getString("Italian"),
-      resourceBundle.getString("Portuguese"),
-      resourceBundle.getString("Russian"),
-      resourceBundle.getString("Spanish"),
-      resourceBundle.getString("Urdu")
+      languageBundle.getString("English"),
+      languageBundle.getString("Chinese"),
+      languageBundle.getString("French"),
+      languageBundle.getString("German"),
+      languageBundle.getString("Italian"),
+      languageBundle.getString("Portuguese"),
+      languageBundle.getString("Russian"),
+      languageBundle.getString("Spanish"),
+      languageBundle.getString("Urdu")
     );
     comboBox.setValue("English");
     gridPane.add(comboBox, 3, 0, 4, 1);
+  }
+
+  private void addHelpButton() {
+    Button button = new Button(resourceBundle.getString("HelpButton"));
+    button.setOnAction(event -> handleHelpClick());
+    gridPane.add(button, 9, 0, 2, 1);
   }
 
   private void handlePenColorClick() {
@@ -95,6 +112,10 @@ public class ToolbarDisplay {
   }
 
   private void handleTurtleImageClick() {
+
+  }
+
+  private void handleHelpClick() {
 
   }
 

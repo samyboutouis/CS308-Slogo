@@ -13,22 +13,19 @@ public class Turtle extends ImageView {
   private double xCoordinate;
   private double yCoordinate;
   private double direction;
-  private double paneWidth;
-  private double paneHeight;
 
-  public Turtle(double paneWidth, double paneHeight) {
+  public Turtle() {
     xCoordinate = 0;
     yCoordinate = 0;
     direction = 0;
     setDefaultImage();
-    setXY(paneWidth/2, paneHeight/2);
   }
 
   public void forward(double pixels) {
     double xChange = Math.sin(Math.toRadians(direction)) * pixels;
     double yChange = Math.cos(Math.toRadians(direction)) * pixels;
-    this.setX(xCoordinate + xChange);
-    this.setY(yCoordinate + yChange);
+    this.setTranslateX(xChange);
+    this.setTranslateY(-yChange);
     xCoordinate += xChange;
     yCoordinate += yChange;
   }
@@ -36,8 +33,8 @@ public class Turtle extends ImageView {
   public void back(double pixels) {
     double xChange = Math.sin(Math.toRadians(direction)) * pixels;
     double yChange = Math.cos(Math.toRadians(direction)) * pixels;
-    this.setX(xCoordinate - xChange);
-    this.setY(yCoordinate - yChange);
+    this.setTranslateX(-xChange);
+    this.setTranslateY(yChange);
     xCoordinate -= xChange;
     yCoordinate -= yChange;
   }
