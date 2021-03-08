@@ -1,5 +1,6 @@
 package slogo.visualization;
 
+import java.io.File;
 import javafx.scene.control.Button;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -33,5 +34,9 @@ public class TurtleDisplay {
 //    Button button = new Button("FORWARD");
 //    button.setOnAction(event -> turtle.forward( 10));
 //    gridPane.add(button, 0, 0);
+  }
+
+  public void setTurtleImage(File file) {
+    turtle.setImage(file);
   }
 }

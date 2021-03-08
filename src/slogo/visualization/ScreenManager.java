@@ -86,12 +86,11 @@ public class ScreenManager {
     gridPane.add(historyPane, 5, 1, 5, 5);
     gridPane.add(variablesPane, 5, 6, 2, 4);
     gridPane.add(userCommandsPane, 7, 6, 3, 4);
-    new TurtleDisplay(turtlePane);
     new TerminalDisplay(terminalPane, RESOURCE_PACKAGE,
       new HistoryDisplay(historyPane, RESOURCE_PACKAGE));
     new VariablesDisplay(variablesPane);
     new UserCommandsDisplay(userCommandsPane);
-    new ToolbarDisplay(toolbarPane, RESOURCE_PACKAGE, stage);
+    new ToolbarDisplay(toolbarPane, RESOURCE_PACKAGE, stage, new TurtleDisplay(turtlePane));
   }
 
   private void setStyleSheet() {

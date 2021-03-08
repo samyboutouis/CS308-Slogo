@@ -29,6 +29,7 @@ public class ToolbarDisplay {
 
   private final Stage stage;
   private final GridPane gridPane;
+  private final TurtleDisplay turtleDisplay;
   private final ResourceBundle languageBundle;
   private final ResourceBundle resourceBundle;
   private Button backgroundColorButton;
@@ -36,9 +37,10 @@ public class ToolbarDisplay {
   private Color backgroundColor;
   private Color penColor;
 
-  public ToolbarDisplay(GridPane pane, String resourcePackage, Stage stage) {
+  public ToolbarDisplay(GridPane pane, String resourcePackage, Stage stage, TurtleDisplay turtleDisplay) {
     this.gridPane = pane;
     this.stage = stage;
+    this.turtleDisplay = turtleDisplay;
     this.languageBundle = ResourceBundle
       .getBundle(String.format("%s/%s/%s", resourcePackage, "languages", "LanguageOptions"));
     String language = "English";
@@ -154,7 +156,7 @@ public class ToolbarDisplay {
       .setAll(new ExtensionFilter("Image File", "*.png", "*.jpg", "*.svg"));
     File file = fileChooser.showOpenDialog(stage);
     if (file != null) {
-      //FIXME: use new image file
+      turtleDisplay.setTurtleImage(file);
     }
   }
 

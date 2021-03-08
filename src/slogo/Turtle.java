@@ -67,7 +67,7 @@ public class Turtle extends ImageView {
   }
 
   public void setImage(File file) {
-    Image image = new Image(file.toURI().toString());
+    Image image = new Image(file.toURI().toString(), IMAGE_WIDTH, IMAGE_HEIGHT, false, false);
     this.setImage(image);
   }
 
