@@ -24,8 +24,8 @@ public class Turtle extends ImageView {
   public void forward(double pixels) {
     double xChange = Math.sin(Math.toRadians(direction)) * pixels;
     double yChange = Math.cos(Math.toRadians(direction)) * pixels;
-    this.setTranslateX(xChange);
-    this.setTranslateY(-yChange);
+    this.setTranslateX(this.getTranslateX() + xChange);
+    this.setTranslateY(this.getTranslateY() - yChange);
     xCoordinate += xChange;
     yCoordinate += yChange;
   }
@@ -33,18 +33,20 @@ public class Turtle extends ImageView {
   public void back(double pixels) {
     double xChange = Math.sin(Math.toRadians(direction)) * pixels;
     double yChange = Math.cos(Math.toRadians(direction)) * pixels;
-    this.setTranslateX(-xChange);
-    this.setTranslateY(yChange);
+    this.setTranslateX(this.getTranslateX() - xChange);
+    this.setTranslateY(this.getTranslateY() + yChange);
     xCoordinate -= xChange;
     yCoordinate -= yChange;
   }
 
   public void right(double directionChange) {
     direction += directionChange;
+    this.setRotate(this.getRotate() + directionChange);
   }
 
   public void left(double directionChange) {
     direction -= directionChange;
+    this.setRotate(this.getRotate() - directionChange);
   }
 
   public void setDirection(double direction) {
@@ -54,8 +56,8 @@ public class Turtle extends ImageView {
   public void setXY(double xPosition, double yPosition) {
     xCoordinate = xPosition;
     yCoordinate = yPosition;
-    this.setX(xPosition);
-    this.setY(yPosition);
+    this.setTranslateX(xPosition);
+    this.setTranslateY(yPosition);
   }
 
   public void show() {
