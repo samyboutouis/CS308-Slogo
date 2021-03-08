@@ -9,6 +9,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 public class ScreenManager {
 
@@ -19,9 +20,11 @@ public class ScreenManager {
 
   private final Scene scene;
   private final GridPane gridPane;
+  private final Stage stage;
 
-  public ScreenManager(Pane root, Scene scene) {
+  public ScreenManager(Pane root, Scene scene, Stage stage) {
     this.scene = scene;
+    this.stage = stage;
     gridPane = new GridPane();
     root.getChildren().add(gridPane);
     setupGrid();
@@ -88,7 +91,7 @@ public class ScreenManager {
       new HistoryDisplay(historyPane, RESOURCE_PACKAGE));
     new VariablesDisplay(variablesPane);
     new UserCommandsDisplay(userCommandsPane);
-    new ToolbarDisplay(toolbarPane, RESOURCE_PACKAGE);
+    new ToolbarDisplay(toolbarPane, RESOURCE_PACKAGE, stage);
   }
 
   private void setStyleSheet() {

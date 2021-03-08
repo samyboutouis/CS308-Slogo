@@ -1,5 +1,6 @@
 package slogo.visualization;
 
+import java.io.File;
 import java.util.ResourceBundle;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
@@ -12,6 +13,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.paint.Color;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
+import javafx.stage.Stage;
 
 public class ToolbarDisplay {
 
@@ -23,6 +27,7 @@ public class ToolbarDisplay {
   private static final int ICON_HEIGHT = 30;
   private final static int COLUMN_COUNT = 10;
 
+  private final Stage stage;
   private final GridPane gridPane;
   private final ResourceBundle languageBundle;
   private final ResourceBundle resourceBundle;
@@ -31,8 +36,9 @@ public class ToolbarDisplay {
   private Color backgroundColor;
   private Color penColor;
 
-  public ToolbarDisplay(GridPane pane, String resourcePackage) {
+  public ToolbarDisplay(GridPane pane, String resourcePackage, Stage stage) {
     this.gridPane = pane;
+    this.stage = stage;
     this.languageBundle = ResourceBundle
       .getBundle(String.format("%s/%s/%s", resourcePackage, "languages", "LanguageOptions"));
     String language = "English";
@@ -141,7 +147,15 @@ public class ToolbarDisplay {
   }
 
   private void handleTurtleImageClick() {
-
+    FileChooser fileChooser = new FileChooser();
+    fileChooser.setTitle("Open Image File");
+    fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
+    fileChooser.getExtensionFilters()
+      .setAll(new ExtensionFilter("Image File", "*.png", "*.jpg", "*.svg"));
+    File file = fileChooser.showOpenDialog(stage);
+    if (file != null) {
+      //FIXME: use new image file
+    }
   }
 
   private void handleHelpClick() {
