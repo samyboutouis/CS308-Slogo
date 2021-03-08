@@ -1,19 +1,23 @@
 package slogo.visualization;
 
 import java.io.File;
-import javafx.scene.control.Button;
+import javafx.geometry.Insets;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
+import javafx.scene.paint.Color;
 import slogo.Turtle;
 
 public class TurtleDisplay {
 
   private final GridPane gridPane;
-  private Turtle turtle;
+  private final Turtle turtle;
 
-  public TurtleDisplay(GridPane gridPane){
+  public TurtleDisplay(GridPane gridPane) {
     this.gridPane = gridPane;
     initializeGridPane();
     this.turtle = new Turtle();
@@ -38,5 +42,10 @@ public class TurtleDisplay {
 
   public void setTurtleImage(File file) {
     turtle.setImage(file);
+  }
+
+  public void setBackgroundColor(Color color) {
+    gridPane
+      .setBackground(new Background(new BackgroundFill(color, new CornerRadii(20), Insets.EMPTY)));
   }
 }

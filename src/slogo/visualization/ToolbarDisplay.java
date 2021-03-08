@@ -143,6 +143,7 @@ public class ToolbarDisplay {
 
   private void handleBackgroundColorPicker(ColorPicker colorPicker) {
     backgroundColor = colorPicker.getValue();
+    turtleDisplay.setBackgroundColor(backgroundColor);
     gridPane.getChildren().remove(colorPicker);
     backgroundColorButton.setVisible(true);
     backgroundColorButton.setDisable(false);
