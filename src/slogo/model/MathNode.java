@@ -16,11 +16,11 @@ public class MathNode extends SlogoNode{
   @Override
   protected double getReturnValue(List<Command> commands) {
     switch(type){
-      case "SUM" -> {
+      case "Sum" -> {
         return parameters.get(0).getReturnValue(commands) +
             parameters.get(1).getReturnValue(commands);
       }
-      case "DIFFERENCE" -> {
+      case "Difference" -> {
         return parameters.get(0).getReturnValue(commands) -
             parameters.get(1).getReturnValue(commands);
       }
