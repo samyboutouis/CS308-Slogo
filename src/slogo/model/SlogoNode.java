@@ -21,8 +21,12 @@ public abstract class SlogoNode {
       return parameters.size() == numParameters;
     }
 
+    protected List<SlogoNode> getParameters() {
+      return parameters;
+    }
+
     protected abstract double getReturnValue(List<Command> commands);
 
-    protected abstract void createMovement();
+    protected abstract void createMovement(List<Command> commands);
 }
 

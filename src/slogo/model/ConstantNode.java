@@ -17,7 +17,7 @@ public class ConstantNode extends SlogoNode{
   }
 
   @Override
-  protected void createMovement() {
+  protected void createMovement(List<Command> commands) {
 
   }
 }

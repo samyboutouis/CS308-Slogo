@@ -29,7 +29,7 @@ public class MathNode extends SlogoNode{
   }
 
   @Override
-  protected void createMovement() {
-
+  protected void createMovement(List<Command> commands) {
+    // unused because no turtle movements need to be created
   }
 }
