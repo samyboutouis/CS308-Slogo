@@ -7,7 +7,7 @@ public class ConstantNode extends SlogoNode{
   private double value;
 
   public ConstantNode(double value) {
-    super(0);
+    super(0, "Constant");
     this.value = value;
   }
 

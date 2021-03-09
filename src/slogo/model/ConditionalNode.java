@@ -13,7 +13,7 @@ public class ConditionalNode extends SlogoNode{
 
   @Override
   public boolean isFull() {
-    return parameters.get(parameters.size() - 1).getType().equals("ListEnd");
+    return !parameters.isEmpty() && parameters.get(parameters.size() - 1).getType().equals("ListEnd");
   }
 
   @Override
@@ -22,7 +22,7 @@ public class ConditionalNode extends SlogoNode{
     switch(super.getType()){
       case "If" -> {
         double ret = 0;
-        if(parameters.get(0).getReturnValue(commands) != 0) {
+        if(parameters.get(0).getReturnValue(commands) != 0.0) {
           for(int i = 1; i < parameters.size(); i++){
             if(!parameters.get(i).getType().equals("ListStart") && !parameters.get(i).getType().equals("ListEnd")){
               ret = parameters.get(i).getReturnValue(commands);

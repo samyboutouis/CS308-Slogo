@@ -45,4 +45,8 @@ public abstract Command {
 
     stack:
 
-    sum fd 50 50
+    if fd 50 [ sum 50 50 ]
+
+          if
+         /  \
+        expr  commands

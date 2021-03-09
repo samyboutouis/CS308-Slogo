@@ -97,11 +97,9 @@ public class CommandReader {
     List<String> cleaned = new ArrayList<>();
     for(String line : preCleaned){
       if(!parser.getSymbol(line).equals("NO MATCH")){
-        System.out.println(line);
+        // System.out.println(line);
       }
       if (!parser.getSymbol(line).equals("Comment")){
-        System.out.println("comment");
-        System.out.println(line);
         cleaned.addAll(Arrays.asList(line.split(WHITESPACE)));
       }
     }
