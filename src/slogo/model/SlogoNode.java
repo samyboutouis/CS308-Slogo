@@ -13,8 +13,16 @@ public abstract class SlogoNode {
       parameters = new ArrayList<>();
     }
 
+    public void addNode(SlogoNode node) {
+      parameters.add(node);
+    }
+
+    public boolean isFull() {
+      return parameters.size() == numParameters;
+    }
+
     protected abstract double getReturnValue(List<Command> commands);
 
     protected abstract void createMovement();
-  }
 }
+
