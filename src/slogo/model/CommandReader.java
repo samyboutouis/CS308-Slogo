@@ -14,6 +14,7 @@ public class CommandReader {
   private static final String NEWLINE = "\n";
   private ProgramParser parser;
   private Map<String, Double> variables;
+  private List<Double> forTests;
 
   private List<Command> commands;
 
@@ -33,6 +34,13 @@ public class CommandReader {
     makeCommands(roots);
 
     return commands;
+  }
+
+  // used to test return values
+  public List<Double> testParseInput(String input) {
+    forTests = new ArrayList<>();
+    parseInput(input);
+    return forTests;
   }
 
   private List<SlogoNode> buildTree(List<String> cleaned){
@@ -88,7 +96,9 @@ public class CommandReader {
 
   private void makeCommands(List<SlogoNode> roots){
     for(SlogoNode root : roots){
-      System.out.println(root.getReturnValue(commands));
+      double value = root.getReturnValue(commands);
+      System.out.println(value);
+      forTests.add(value);
     }
   }
 

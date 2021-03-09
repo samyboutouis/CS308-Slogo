@@ -13,6 +13,10 @@ public class VariableNode extends SlogoNode{
     this.name = name;
   }
 
+  public void setValue(double value){
+    variables.put(name, value);
+  }
+
   @Override
   protected double getReturnValue(List<Command> commands) {
     if(!variables.containsKey(name)){
