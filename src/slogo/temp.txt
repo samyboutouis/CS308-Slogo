@@ -24,3 +24,25 @@ public abstract Command {
   for(Command c : commandList) {
     c.doCommand(turtle)
   }
+
+    SUM fd 20 50
+    SUM IF fd 20 [fd 20]
+    SUM 5
+
+    stack: LIFO
+        SUM
+      /     \
+    fd
+    /
+    20
+
+
+        SUM
+      /
+    SUM
+    / \
+    20 20
+
+    stack:
+
+    sum fd 50 50
