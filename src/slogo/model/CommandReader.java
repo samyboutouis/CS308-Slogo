@@ -2,7 +2,9 @@ package slogo.model;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Stack;
 import slogo.Command;
 
@@ -11,6 +13,7 @@ public class CommandReader {
   private static final String WHITESPACE = "\\s+";
   private static final String NEWLINE = "\n";
   private ProgramParser parser;
+  private Map<String, Double> variables;
 
   private List<Command> commands;
 
@@ -20,6 +23,7 @@ public class CommandReader {
     parser.addPatterns("Syntax");
 
     commands = new ArrayList<>();
+    variables = new HashMap<>();
   }
 
   public List<Command> parseInput(String input) throws IllegalArgumentException{
