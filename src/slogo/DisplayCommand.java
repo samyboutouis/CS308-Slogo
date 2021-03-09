@@ -4,7 +4,7 @@ package slogo;
 public class DisplayCommand implements Command{
 
   public DisplayCommand(String info){
-    
+
   }
 
   @Override
