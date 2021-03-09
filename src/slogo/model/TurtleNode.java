@@ -29,8 +29,7 @@ public class TurtleNode extends SlogoNode{
     return 0;
   }
 
-  @Override
-  protected void createMovement(List<Command> commands) {
+  private void createMovement(List<Command> commands) {
     switch(type){
       case "Forward" -> {
         commands.add(new MovementCommand(values.get(0), 0));

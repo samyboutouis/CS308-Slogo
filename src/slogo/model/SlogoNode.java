@@ -26,7 +26,5 @@ public abstract class SlogoNode {
     }
 
     protected abstract double getReturnValue(List<Command> commands);
-
-    protected abstract void createMovement(List<Command> commands);
 }
 

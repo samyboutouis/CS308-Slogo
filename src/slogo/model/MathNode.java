@@ -27,9 +27,4 @@ public class MathNode extends SlogoNode{
       default -> throw new IllegalStateException("Unexpected value: " + type);
     }
   }
-
-  @Override
-  protected void createMovement(List<Command> commands) {
-    // unused because no turtle movements need to be created
-  }
 }
