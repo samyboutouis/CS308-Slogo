@@ -53,9 +53,15 @@ public class CommandReader {
         case "Sum", "Difference" -> {
           curr = new MathNode(2, symbol);
         }
+        case "ListStart", "ListEnd" -> {
+          curr = new BracketNode(symbol);
+        }
+        case "If" -> {
+          curr = new ConditionalNode(symbol);
+        }
         default -> throw new IllegalArgumentException();
       }
-      if(curr.isFull() ){ // only true if node has no parameters
+      if(curr.isFull()){ // only true if node has no parameters
         if(st.isEmpty()) {
           roots.add(curr);
         }
