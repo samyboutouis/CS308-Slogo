@@ -6,13 +6,11 @@ import slogo.Command;
 import slogo.MovementCommand;
 
 public class TurtleNode extends SlogoNode{
-  private String type;
   private List<SlogoNode> parameters;
   private List<Double> values;
 
   public TurtleNode(int numParameters, String type){
-    super(numParameters);
-    this.type = type;
+    super(numParameters, type);
     parameters = super.getParameters();
     values = new ArrayList<>();
   }
@@ -20,7 +18,7 @@ public class TurtleNode extends SlogoNode{
   @Override
   protected double getReturnValue(List<Command> commands) {
     getValues(commands);
-    switch(type){
+    switch(super.getType()){
       case "Forward", "Backward", "Left", "Right" -> {
         createMovement(commands);
         return values.get(0);
@@ -30,7 +28,7 @@ public class TurtleNode extends SlogoNode{
   }
 
   private void createMovement(List<Command> commands) {
-    switch(type){
+    switch(super.getType()){
       case "Forward" -> {
         commands.add(new MovementCommand(values.get(0), 0));
       }
