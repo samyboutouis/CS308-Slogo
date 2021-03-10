@@ -19,6 +19,8 @@ import javafx.stage.Stage;
 
 public class ToolbarDisplay {
 
+  //FIXME: Button factory/creation design pattern
+
   private final static int PADDING_LENGTH = 10;
   private static final String PAINT_BRUSH_IMAGE = "resources/paint-brush.png";
   private static final String PAINT_BUCKET_IMAGE = "resources/paint-bucket.png";
@@ -98,15 +100,7 @@ public class ToolbarDisplay {
   private void addLanguageDropdown() {
     ComboBox<String> comboBox = new ComboBox<>();
     comboBox.getItems().addAll(
-      languageBundle.getString("English"),
-      languageBundle.getString("Chinese"),
-      languageBundle.getString("French"),
-      languageBundle.getString("German"),
-      languageBundle.getString("Italian"),
-      languageBundle.getString("Portuguese"),
-      languageBundle.getString("Russian"),
-      languageBundle.getString("Spanish"),
-      languageBundle.getString("Urdu")
+      languageBundle.keySet()
     );
     comboBox.setValue("English");
     gridPane.add(comboBox, 3, 0, 4, 1);
@@ -128,6 +122,7 @@ public class ToolbarDisplay {
 
   private void handlePenColorPicker(ColorPicker colorPicker) {
     penColor = colorPicker.getValue();
+    turtleDisplay.setPenColor(penColor);
     gridPane.getChildren().remove(colorPicker);
     penColorButton.setVisible(true);
     penColorButton.setDisable(false);

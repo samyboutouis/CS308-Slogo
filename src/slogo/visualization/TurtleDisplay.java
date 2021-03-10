@@ -24,7 +24,7 @@ public class TurtleDisplay {
   public TurtleDisplay(GridPane gridPane) {
     this.gridPane = gridPane;
     initializeGridPane();
-    this.turtle = new Turtle();
+    this.turtle = new Turtle(gridPane);
     setScreen();
   }
 
@@ -39,7 +39,6 @@ public class TurtleDisplay {
   }
 
   private void setScreen() {
-    gridPane.add(turtle, 0, 0);
     testButtons();
   }
 
@@ -52,10 +51,16 @@ public class TurtleDisplay {
     forward.setOnAction(event -> turtle.forward( 10));
     Button back = new Button("Back");
     back.setOnAction(event -> turtle.back( 10));
+    Button penUp = new Button("Pen Up");
+    penUp.setOnAction(event -> turtle.penUp());
+    Button penDown = new Button("Pen Down");
+    penDown.setOnAction(event -> turtle.penDown());
     gridPane.add(button, 0, 1);
     gridPane.add(left, 0, 2);
     gridPane.add(forward, 0, 3);
     gridPane.add(back, 0, 4);
+    gridPane.add(penUp, 0, 5);
+    gridPane.add(penDown, 0, 6);
   }
 
   public void setTurtleImage(File file) {
@@ -66,5 +71,9 @@ public class TurtleDisplay {
     gridPane
       .setBackground(new Background(
         new BackgroundFill(color, new CornerRadii(BACKGROUND_RADIUS), Insets.EMPTY)));
+  }
+
+  public void setPenColor(Color color) {
+    turtle.setPenColor(color);
   }
 }
