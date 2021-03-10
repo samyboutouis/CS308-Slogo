@@ -1,8 +1,16 @@
 package slogo.visualization;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.geometry.Insets;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ComboBox;
@@ -25,6 +33,7 @@ public class ToolbarDisplay {
   private static final String PAINT_BRUSH_IMAGE = "resources/paint-brush.png";
   private static final String PAINT_BUCKET_IMAGE = "resources/paint-bucket.png";
   private static final String TURTLE_ICON_IMAGE = "resources/turtle-icon.png";
+  private static final String REFERENCES_PATH = "src/resources/reference";
   private static final int ICON_WIDTH = 30;
   private static final int ICON_HEIGHT = 30;
   private final static int COLUMN_COUNT = 10;
@@ -73,7 +82,7 @@ public class ToolbarDisplay {
     addBackgroundColorButton();
     addTurtleImageButton();
     addLanguageDropdown();
-    addHelpButton();
+    addHelpDropdown();
   }
 
   private void addPenColorButton() {
@@ -106,10 +115,19 @@ public class ToolbarDisplay {
     gridPane.add(comboBox, 3, 0, 4, 1);
   }
 
-  private void addHelpButton() {
-    Button button = new Button(resourceBundle.getString("HelpButton"));
-    button.setOnAction(event -> handleHelpClick());
-    gridPane.add(button, 9, 0, 2, 1);
+  private void addHelpDropdown() {
+    ComboBox<String> comboBox = new ComboBox<>();
+    File folder = new File(REFERENCES_PATH);
+    File[] files = folder.listFiles();
+    List<String> commands = new ArrayList<>();
+    for (File file: files){
+      commands.add(file.getName());
+    }
+    Collections.sort(commands);
+    comboBox.getItems().addAll(commands);
+    comboBox.setValue(resourceBundle.getString("HelpButton"));
+    comboBox.setOnAction(event -> handleHelpClick(comboBox.getValue()));
+    gridPane.add(comboBox, 9, 0, 2, 1);
   }
 
   private void handlePenColorClick() {
@@ -156,8 +174,16 @@ public class ToolbarDisplay {
     }
   }
 
-  private void handleHelpClick() {
-
+  private void handleHelpClick(String command) {
+    try {
+      String text = new String(Files.readAllBytes(Paths.get(REFERENCES_PATH + "/" + command)));
+      Alert alert = new Alert(AlertType.INFORMATION, text);
+      alert.setHeaderText(command);
+      alert.showAndWait();
+    } catch (IOException e) {
+      Alert alert = new Alert(AlertType.ERROR, resourceBundle.getString("HelpError"));
+      alert.showAndWait();
+    }
   }
 
   private ImageView createImageView(String filePath) {
