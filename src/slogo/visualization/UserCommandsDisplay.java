@@ -20,6 +20,8 @@ public class UserCommandsDisplay extends ScrollingDisplay {
     userCommandsBox = setupVBoxContainer(USER_COMMANDS_TITLE, USER_COMMANDS_BOX_ID);
     String language = "English";
     this.resourceBundle = ResourceBundle.getBundle(String.format("%s/%s/%s", resourcePackage, "languages", language));
+
+    updateUserCommandsBox(new String[]{"yeet", "ok", "example"}); //test
   }
 
   /**

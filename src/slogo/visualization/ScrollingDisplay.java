@@ -32,7 +32,6 @@ public class ScrollingDisplay {
   /**
    *
    * @param title
-   * @param vBox
    * @param vBoxID
    * @return
    */
