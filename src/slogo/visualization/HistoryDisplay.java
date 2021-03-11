@@ -17,7 +17,7 @@ public class HistoryDisplay extends ScrollingDisplay {
 
   public HistoryDisplay(GridPane pane, String resourcePackage){
     super(pane, resourcePackage);
-  
+
     historyBox = setupVBoxContainer(HISTORY_TITLE, HISTORY_BOX_ID);
     String language = "English";
     this.resourceBundle = ResourceBundle.getBundle(String.format("%s/%s/%s", resourcePackage, "languages", language));

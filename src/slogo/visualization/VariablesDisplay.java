@@ -12,7 +12,6 @@ public class VariablesDisplay extends ScrollingDisplay {
   private final static String VARIABLES_TAG_ID = "VariablesTagID";
 
   private final ResourceBundle resourceBundle;
-
   private final VBox variablesBox;
 
   /**
