@@ -8,8 +8,8 @@ import javafx.scene.layout.VBox;
 public class UserCommandsDisplay extends ScrollingDisplay {
 
   private final static String USER_COMMANDS_TITLE = "UserCommandsTitle";
-  private final static String USER_COMMANDS_BOX_ID = "UserCommandsBox";
-  private final static String USER_COMMANDS_TAG_ID = "UserCommandsTag";
+  private final static String USER_COMMANDS_BOX_ID = "UserCommandsBoxID";
+  private final static String USER_COMMANDS_TAG_ID = "UserCommandsTagID";
 
   private final ResourceBundle resourceBundle;
   private final VBox userCommandsBox;

@@ -37,26 +37,26 @@
   -fx-background-radius: 20px;
 }
 
-#HistoryBox, #VariablesBox {
+#HistoryBox, #VariablesBox, #UserCommandsBox {
   -fx-background-radius: 20px;
   -fx-border-radius: 20px;
   -fx-background-color: white;
 }
 
-#HistoryBox .viewport, #VariablesBox .viewport{
+#HistoryBox .viewport, #VariablesBox .viewport, #UserCommandsBox .viewport{
   -fx-background-color: transparent;
 }
 
-#HistoryTab {
+#HistoryTag, #VariablesTag, #UserCommandsTag {
   -fx-background-radius: 20px;
   -fx-border-width: 0px;
   -fx-background-color: #f5f5f5;
 }
 
-#HistoryTab:hover {
+#HistoryTag:hover {
   -fx-background-color: #fafafa;
 }
 
-#HistoryTab:pressed {
+#HistoryTag:pressed {
   -fx-background-color: #e7e7e7;
 }
