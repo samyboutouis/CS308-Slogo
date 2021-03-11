@@ -68,7 +68,6 @@ public class HistoryDisplay {
 
     historyBox = new VBox();
     historyBox.setFillWidth(true);
-    historyBox.setMaxHeight(Double.MAX_VALUE);
     historyBox.setSpacing(PADDING_LENGTH);
     historyBox.setPadding(new Insets(PADDING_LENGTH));
 

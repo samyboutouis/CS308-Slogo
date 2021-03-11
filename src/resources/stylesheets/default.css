@@ -37,13 +37,13 @@
   -fx-background-radius: 20px;
 }
 
-#HistoryBox {
+#HistoryBox, #VariablesBox {
   -fx-background-radius: 20px;
   -fx-border-radius: 20px;
   -fx-background-color: white;
 }
 
-#HistoryBox .viewport{
+#HistoryBox .viewport, #VariablesBox .viewport{
   -fx-background-color: transparent;
 }
 
