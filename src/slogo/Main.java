@@ -24,6 +24,7 @@ public class Main extends Application  {
         Pane root = new Pane();
         Scene scene = new Scene(root);
         stage.setScene(scene);
+        stage.setMaximized(true);
         stage.setTitle(STAGE_TITLE);
         stage.show();
         new ScreenManager(root, scene, stage);
