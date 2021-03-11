@@ -11,8 +11,8 @@ public class Turtle {
   private static final String DEFAULT_IMAGE = "resources/turtle.png";
   private static final int IMAGE_HEIGHT = 50;
   private static final int IMAGE_WIDTH = 50;
-  private static final int INITIAL_WIDTH = 225;
-  private static final int INITIAL_HEIGHT = 215;
+  private static final int INITIAL_WIDTH = 320;
+  private static final int INITIAL_HEIGHT = 275;
 
   private ImageView imageView;
   private final AnchorPane anchorPane;
@@ -100,8 +100,8 @@ public class Turtle {
   private void setDefaultImage() {
     Image image = new Image(DEFAULT_IMAGE, IMAGE_WIDTH, IMAGE_HEIGHT, false, false);
     imageView = new ImageView(image);
-    imageView.setTranslateX(INITIAL_WIDTH + IMAGE_WIDTH / 2.0);
-    imageView.setTranslateY(INITIAL_HEIGHT + IMAGE_HEIGHT / 2.0);
+    imageView.setTranslateX(INITIAL_WIDTH);
+    imageView.setTranslateY(INITIAL_HEIGHT);
     anchorPane.getChildren().add(imageView);
   }
 

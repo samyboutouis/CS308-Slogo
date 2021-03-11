@@ -34,10 +34,7 @@ public class TurtleDisplay {
     Button left = new Button("Left");
     left.setOnAction(event -> turtle.left( 10));
     Button forward = new Button("Forward");
-    forward.setOnAction(event -> {
-      turtle.forward( 10);
-      System.out.println(anchorPane.getWidth() + " " + anchorPane.getHeight());
-    });
+    forward.setOnAction(event -> turtle.forward( 10));
     Button back = new Button("Back");
     back.setOnAction(event -> turtle.back( 10));
     Button penUp = new Button("Pen Up");
