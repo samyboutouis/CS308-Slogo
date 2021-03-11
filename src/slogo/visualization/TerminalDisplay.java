@@ -2,6 +2,8 @@ package slogo.visualization;
 
 import java.util.ResourceBundle;
 import javafx.geometry.Insets;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.ColumnConstraints;
@@ -15,6 +17,7 @@ public class TerminalDisplay {
   private final static String TERMINAL_PROMPT = "TerminalPrompt";
   private final static String TERMINAL_TEXT_BOX_ID = "TerminalTextBoxID";
   private final static String TERMINAL_BUTTON_ID = "TerminalButtonID";
+  private final static String ERROR_TITLE_PROPERTY = "ErrorTitle";
   private final static int COLUMN_COUNT = 4;
 
   private final ResourceBundle resourceBundle;
@@ -74,18 +77,32 @@ public class TerminalDisplay {
     button.setOnAction(e -> {
       String command = textBox.getText().trim();
       if(command.length() > 0){
-        System.out.println(command);
-        Button historyTab = historyDisplay.addNewHistoryTab(command);
-        applyHistoryTabLogic(historyTab);
+        try {
+          System.out.println(command); // change this to pass to backend instead
+
+          Button historyTab = historyDisplay.addNewHistoryTag(command);
+          applyHistoryTagLogic(historyTab);
+        }
+        catch (Exception error){
+          createErrorDialog(error); // backend throws new exception with specific error message
+        }
       }
       textBox.clear();
     });
   }
 
-  private void applyHistoryTabLogic(Button historyTab){
+  private void applyHistoryTagLogic(Button historyTab){
     historyTab.setOnAction(e -> {
       String command = historyTab.getText();
       textBox.setText(command);
     });
+  }
+
+  private void createErrorDialog(Exception error){
+    Alert newAlert = new Alert(AlertType.ERROR);
+    newAlert.setTitle(resourceBundle.getString(ERROR_TITLE_PROPERTY));
+    newAlert.setHeaderText(null);
+    newAlert.setContentText(resourceBundle.getString(error.getMessage()));
+    newAlert.showAndWait();
   }
 }

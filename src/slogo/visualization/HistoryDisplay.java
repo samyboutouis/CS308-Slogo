@@ -27,14 +27,14 @@ public class HistoryDisplay extends ScrollingDisplay {
    *
    * @param command
    */
-  public Button addNewHistoryTab(String command){
-    Button historyTab = new Button(command);
-    historyTab.setMaxWidth(Double.MAX_VALUE);
-    historyTab.setMaxHeight(Double.MAX_VALUE);
-    historyTab.setId(resourceBundle.getString(HISTORY_TAG_ID));
+  public Button addNewHistoryTag(String command){
+    Button historyTag = new Button(command);
+    historyTag.setMaxWidth(Double.MAX_VALUE);
+    historyTag.setMaxHeight(Double.MAX_VALUE);
+    historyTag.setId(resourceBundle.getString(HISTORY_TAG_ID));
 
-    historyBox.getChildren().add(historyTab);
+    historyBox.getChildren().add(historyTag);
 
-    return historyTab;
+    return historyTag;
   }
 }
