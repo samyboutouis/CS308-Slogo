@@ -21,7 +21,7 @@ public class UserCommandsDisplay extends ScrollingDisplay {
     String language = "English";
     this.resourceBundle = ResourceBundle.getBundle(String.format("%s/%s/%s", resourcePackage, "languages", language));
 
-    updateUserCommandsBox(new String[]{"yeet", "ok", "example"}); //test
+    //updateUserCommandsBox(new String[]{"yeet", "ok", "example"}); //test
   }
 
   /**

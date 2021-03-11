@@ -26,7 +26,7 @@ public class VariablesDisplay extends ScrollingDisplay {
     String language = "English";
     this.resourceBundle = ResourceBundle.getBundle(String.format("%s/%s/%s", resourcePackage, "languages", language));
 
-    updateVariablesBox(new String[]{"yeet", "ok", "example"}); //test
+    //updateVariablesBox(new String[]{"yeet", "ok", "example"}); //test
   }
 
   /**

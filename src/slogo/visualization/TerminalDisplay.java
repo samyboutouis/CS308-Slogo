@@ -80,8 +80,8 @@ public class TerminalDisplay {
         try {
           System.out.println(command); // change this to pass to backend instead
 
-          Button historyTab = historyDisplay.addNewHistoryTag(command);
-          applyHistoryTagLogic(historyTab);
+          Button historyTag = historyDisplay.addNewHistoryTag(command);
+          applyHistoryTagLogic(historyTag);
         }
         catch (Exception error){
           createErrorDialog(error); // backend throws new exception with specific error message
