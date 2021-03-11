@@ -1,27 +1,27 @@
 package slogo;
 
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 
 public class Pen {
-  private final GridPane gridPane;
+  private final AnchorPane anchorPane;
   private boolean isPenDown;
   private Color lineColor;
 
-  public Pen(GridPane gridPane) {
-    this.gridPane = gridPane;
+  public Pen(AnchorPane anchorPane) {
+    this.anchorPane = anchorPane;
     isPenDown = true;
     lineColor = Color.BLACK;
   }
 
-  public void drawLine(double startX, double startY, double endX, double endY) {
+  public void drawLine(double startX, double startY, double changeX, double changeY) {
     if(isPenDown) {
-      Line line = new Line(startX, startY, endX, endY);
+      Line line = new Line(0, 0, changeX, changeY);
+      line.setStroke(lineColor);
       line.setTranslateX(startX);
       line.setTranslateY(startY);
-      line.setStroke(lineColor);
-      gridPane.add(line, 0, 0);
+      anchorPane.getChildren().add(line);
     }
   }
 

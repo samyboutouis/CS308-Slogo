@@ -3,7 +3,7 @@ package slogo;
 import java.io.File;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 
 public class Turtle {
@@ -11,29 +11,31 @@ public class Turtle {
   private static final String DEFAULT_IMAGE = "resources/turtle.png";
   private static final int IMAGE_HEIGHT = 50;
   private static final int IMAGE_WIDTH = 50;
+  private static final int INITIAL_WIDTH = 225;
+  private static final int INITIAL_HEIGHT = 215;
 
   private ImageView imageView;
-  private final GridPane gridPane;
+  private final AnchorPane anchorPane;
   private double xCoordinate;
   private double yCoordinate;
   private double direction;
   private final Pen pen;
 
-  public Turtle(GridPane gridPane) {
-    this.gridPane = gridPane;
+  public Turtle(AnchorPane anchorPane) {
+    this.anchorPane = anchorPane;
     xCoordinate = 0;
     yCoordinate = 0;
     direction = 0;
-    pen = new Pen(gridPane);
+    pen = new Pen(anchorPane);
     setDefaultImage();
   }
 
   public void forward(double pixels) {
-    double xChange = Math.sin(Math.toRadians(direction)) * pixels;
-    double yChange = Math.cos(Math.toRadians(direction)) * pixels;
-    pen.drawLine(imageView.getTranslateX(), imageView.getTranslateY(),
-      imageView.getTranslateX() + xChange,
-      imageView.getTranslateY() - yChange);
+    double xChange = calculateComponentX(pixels);
+    double yChange = calculateComponentY(pixels);
+    double penX = imageView.getX() + imageView.getTranslateX() + IMAGE_WIDTH/2.0;
+    double penY = imageView.getY() + imageView.getTranslateY() + IMAGE_HEIGHT/2.0;
+    pen.drawLine(penX, penY, xChange, -yChange);
     imageView.setTranslateX(imageView.getTranslateX() + xChange);
     imageView.setTranslateY(imageView.getTranslateY() - yChange);
     xCoordinate += xChange;
@@ -41,15 +43,23 @@ public class Turtle {
   }
 
   public void back(double pixels) {
-    double xChange = Math.sin(Math.toRadians(direction)) * pixels;
-    double yChange = Math.cos(Math.toRadians(direction)) * pixels;
-    pen.drawLine(imageView.getTranslateX(), imageView.getTranslateY(),
-      imageView.getTranslateX() - xChange,
-      imageView.getTranslateY() + yChange);
+    double xChange = calculateComponentX(pixels);
+    double yChange = calculateComponentY(pixels);
+    double penX = imageView.getX() + imageView.getTranslateX() + IMAGE_WIDTH/2.0;
+    double penY = imageView.getY() + imageView.getTranslateY() + IMAGE_HEIGHT/2.0;
+    pen.drawLine(penX, penY, -xChange, yChange);
     imageView.setTranslateX(imageView.getTranslateX() - xChange);
     imageView.setTranslateY(imageView.getTranslateY() + yChange);
     xCoordinate -= xChange;
     yCoordinate -= yChange;
+  }
+
+  private double calculateComponentX(double pixels) {
+    return Math.sin(Math.toRadians(direction)) * pixels;
+  }
+
+  private double calculateComponentY(double pixels) {
+    return Math.cos(Math.toRadians(direction)) * pixels;
   }
 
   public void right(double directionChange) {
@@ -90,7 +100,9 @@ public class Turtle {
   private void setDefaultImage() {
     Image image = new Image(DEFAULT_IMAGE, IMAGE_WIDTH, IMAGE_HEIGHT, false, false);
     imageView = new ImageView(image);
-    gridPane.add(imageView, 0, 0);
+    imageView.setTranslateX(INITIAL_WIDTH + IMAGE_WIDTH / 2.0);
+    imageView.setTranslateY(INITIAL_HEIGHT + IMAGE_HEIGHT / 2.0);
+    anchorPane.getChildren().add(imageView);
   }
 
   public void setPenColor(Color color) {
@@ -103,5 +115,13 @@ public class Turtle {
 
   public void penUp() {
     pen.penUp();
+  }
+
+  public double getX() {
+    return xCoordinate;
+  }
+
+  public double getY() {
+    return yCoordinate;
   }
 }

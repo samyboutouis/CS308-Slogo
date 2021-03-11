@@ -108,9 +108,9 @@ public class ToolbarDisplay {
 
   private void addLanguageDropdown() {
     ComboBox<String> comboBox = new ComboBox<>();
-    comboBox.getItems().addAll(
-      languageBundle.keySet()
-    );
+    for(String language : languageBundle.keySet()) {
+      comboBox.getItems().add(languageBundle.getString(language));
+    }
     comboBox.setValue("English");
     gridPane.add(comboBox, 3, 0, 4, 1);
   }
