@@ -14,12 +14,13 @@ import javafx.scene.layout.VBox;
 public class HistoryDisplay {
 
   private final static int PADDING_LENGTH = 10;
+  private final static int ROW_COUNT = 10;
   private final static String HISTORY_TITLE = "HistoryTitle";
   private final static String HISTORY_BOX_ID = "HistoryBoxID";
   private final static String HISTORY_TAB_ID = "HistoryTabID";
-  private final static int ROW_COUNT = 10;
 
   private final GridPane pane;
+  private ScrollPane scrollPane;
   private VBox historyBox;
 
   private final ResourceBundle resourceBundle;
@@ -31,7 +32,7 @@ public class HistoryDisplay {
     pane.setMaxHeight(Double.MAX_VALUE);
 
     pane.setVgap(PADDING_LENGTH);
-    pane.setPadding(new Insets(PADDING_LENGTH, PADDING_LENGTH, PADDING_LENGTH, PADDING_LENGTH));
+    pane.setPadding(new Insets(PADDING_LENGTH));
 
     String language = "English";
     this.resourceBundle = ResourceBundle.getBundle(String.format("%s/%s/%s", resourcePackage, "languages", language));
@@ -58,16 +59,18 @@ public class HistoryDisplay {
   }
 
   private void initializeHistoryBox(){
-    ScrollPane scrollPane = new ScrollPane();
+    scrollPane = new ScrollPane();
     scrollPane.setFitToWidth(true);
-    pane.add(scrollPane, 0, 1, 1, 9);
+    scrollPane.setPrefViewportHeight(1);
 
     scrollPane.setId(resourceBundle.getString(HISTORY_BOX_ID));
+    pane.add(scrollPane, 0, 1, 1, 9);
 
     historyBox = new VBox();
     historyBox.setFillWidth(true);
+    historyBox.setMaxHeight(Double.MAX_VALUE);
     historyBox.setSpacing(PADDING_LENGTH);
-    historyBox.setPadding(new Insets(PADDING_LENGTH, PADDING_LENGTH, PADDING_LENGTH, PADDING_LENGTH));
+    historyBox.setPadding(new Insets(PADDING_LENGTH));
 
     scrollPane.setContent(historyBox);
   }
@@ -83,6 +86,8 @@ public class HistoryDisplay {
     historyTab.setId(resourceBundle.getString(HISTORY_TAB_ID));
 
     historyBox.getChildren().add(historyTab);
+
+    scrollPane.setVvalue(1.0); // doesnt auto scroll all the way down... wtf
 
     return historyTab;
   }
