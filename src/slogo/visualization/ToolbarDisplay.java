@@ -43,12 +43,14 @@ public class ToolbarDisplay {
   private final TurtleDisplay turtleDisplay;
   private final ResourceBundle languageBundle;
   private final ResourceBundle resourceBundle;
+  private final ResourceBundle idBundle;
   private Button backgroundColorButton;
   private Button penColorButton;
   private Color backgroundColor;
   private Color penColor;
 
-  public ToolbarDisplay(GridPane pane, String resourcePackage, Stage stage, TurtleDisplay turtleDisplay) {
+  public ToolbarDisplay(GridPane pane, String resourcePackage, Stage stage,
+    TurtleDisplay turtleDisplay) {
     this.gridPane = pane;
     this.stage = stage;
     this.turtleDisplay = turtleDisplay;
@@ -57,6 +59,8 @@ public class ToolbarDisplay {
     String language = "English";
     this.resourceBundle = ResourceBundle
       .getBundle(String.format("%s/%s/%s", resourcePackage, "languages", language));
+    this.idBundle = ResourceBundle
+      .getBundle(String.format("%s/%s/%s", resourcePackage, "stylesheets", "CSS_IDs"));
     backgroundColor = Color.web("#dedcdc");
     penColor = Color.BLACK;
     initializeGridPane();
@@ -89,11 +93,13 @@ public class ToolbarDisplay {
     penColorButton = new Button();
     penColorButton.setOnAction(event -> handlePenColorClick());
     penColorButton.setGraphic(createImageView(PAINT_BRUSH_IMAGE));
+    penColorButton.setId(idBundle.getString("PenColorButton"));
     gridPane.add(penColorButton, 0, 0, 1, 1);
   }
 
   private void addBackgroundColorButton() {
     backgroundColorButton = new Button();
+    backgroundColorButton.setId(idBundle.getString("BackgroundColorButton"));
     backgroundColorButton.setOnAction(event -> handleBackgroundColorClick());
     backgroundColorButton.setGraphic(createImageView(PAINT_BUCKET_IMAGE));
     gridPane.add(backgroundColorButton, 1, 0, 1, 1);
@@ -101,6 +107,7 @@ public class ToolbarDisplay {
 
   private void addTurtleImageButton() {
     Button button = new Button();
+    button.setId(idBundle.getString("TurtleImageButton"));
     button.setOnAction(event -> handleTurtleImageClick());
     button.setGraphic(createImageView(TURTLE_ICON_IMAGE));
     gridPane.add(button, 2, 0, 1, 1);
@@ -108,7 +115,8 @@ public class ToolbarDisplay {
 
   private void addLanguageDropdown() {
     ComboBox<String> comboBox = new ComboBox<>();
-    for(String language : languageBundle.keySet()) {
+    comboBox.setId(idBundle.getString("LanguageDropdown"));
+    for (String language : languageBundle.keySet()) {
       comboBox.getItems().add(languageBundle.getString(language));
     }
     comboBox.setValue("English");
@@ -117,10 +125,11 @@ public class ToolbarDisplay {
 
   private void addHelpDropdown() {
     ComboBox<String> comboBox = new ComboBox<>();
+    comboBox.setId(idBundle.getString("HelpDropdown"));
     File folder = new File(REFERENCES_PATH);
     File[] files = folder.listFiles();
     List<String> commands = new ArrayList<>();
-    for (File file: files){
+    for (File file : files) {
       commands.add(file.getName());
     }
     Collections.sort(commands);
