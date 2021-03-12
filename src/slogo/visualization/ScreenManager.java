@@ -8,7 +8,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class ScreenManager {
@@ -40,9 +39,10 @@ public class ScreenManager {
 
   private void initializeGridSize() {
     gridPane.setMinSize(scene.getWidth(), scene.getHeight());
+    gridPane.setMaxSize(scene.getWidth(), scene.getHeight());
     gridPane.setVgap(PADDING_LENGTH);
     gridPane.setHgap(PADDING_LENGTH);
-    gridPane.setPadding(new Insets(PADDING_LENGTH, PADDING_LENGTH, PADDING_LENGTH, PADDING_LENGTH));
+    gridPane.setPadding(new Insets(PADDING_LENGTH));
   }
 
   private void initializeGridResizeListeners() {
@@ -71,9 +71,10 @@ public class ScreenManager {
     AnchorPane turtlePane = new AnchorPane();
     GridPane terminalPane = new GridPane();
     GridPane historyPane = new GridPane();
-    VBox variablesPane = new VBox();
-    VBox userCommandsPane = new VBox();
+    GridPane variablesPane = new GridPane();
+    GridPane userCommandsPane = new GridPane();
     GridPane toolbarPane = new GridPane();
+
     turtlePane.getStyleClass().add(DISPLAY_CLASS_NAME);
     terminalPane.getStyleClass().add(DISPLAY_CLASS_NAME);
     historyPane.getStyleClass().add(DISPLAY_CLASS_NAME);
@@ -86,10 +87,11 @@ public class ScreenManager {
     gridPane.add(historyPane, 5, 1, 5, 5);
     gridPane.add(variablesPane, 5, 6, 2, 4);
     gridPane.add(userCommandsPane, 7, 6, 3, 4);
-    new TerminalDisplay(terminalPane, RESOURCE_PACKAGE,
-      new HistoryDisplay(historyPane, RESOURCE_PACKAGE));
-    new VariablesDisplay(variablesPane);
-    new UserCommandsDisplay(userCommandsPane);
+
+    //new TurtleDisplay(turtlePane);
+    new TerminalDisplay(terminalPane, RESOURCE_PACKAGE, new HistoryDisplay(historyPane, RESOURCE_PACKAGE));
+    new VariablesDisplay(variablesPane, RESOURCE_PACKAGE);
+    new UserCommandsDisplay(userCommandsPane, RESOURCE_PACKAGE);
     new ToolbarDisplay(toolbarPane, RESOURCE_PACKAGE, stage, new TurtleDisplay(turtlePane));
   }
 
