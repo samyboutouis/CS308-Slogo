@@ -1,24 +1,24 @@
-public abstract Command {
-    public class MovementCommand(int xCorChange, int yCorChange, int headingChange) {
-      doCommand(Turtle turtle) {
-        turtle.setX(turtle.getX() + xCor)
-        turtle.setY(turtle.getY() + yCor)
-        turtle.setHeading(turtle.getHeading() + heading)
-      }
-    }
+     public abstract Command {
+         public class MovementCommand(int xCorChange, int yCorChange, int headingChange) {
+           doCommand(Turtle turtle) {
+             turtle.setX(turtle.getX() + xCor)
+             turtle.setY(turtle.getY() + yCor)
+             turtle.setHeading(turtle.getHeading() + heading)
+           }
+         }
 
-    public class PenCommand(boolean penValue) {
-      doCommand(Turtle turtle) {
-        turtle.setPenValue(penValue)
-      }
-    }
+         public class PenCommand(boolean penValue) {
+           doCommand(Turtle turtle) {
+             turtle.setPenValue(penValue)
+           }
+         }
 
-    public class ClearScreenCommand() {
-      doCommand(Turtle turtle) {
+         public class ClearScreenCommand() {
+           doCommand(Turtle turtle) {
 
-      }
-    }
-  }
+           }
+         }
+       }
 
   // front-end
   for(Command c : commandList) {

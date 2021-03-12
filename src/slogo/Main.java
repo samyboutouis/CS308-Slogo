@@ -21,16 +21,12 @@ public class Main extends Application  {
     @Override
     public void start(Stage stage) {
         final String STAGE_TITLE = "SLogo Application";
-
         Pane root = new Pane();
         Scene scene = new Scene(root);
-
         stage.setScene(scene);
-        stage.setTitle(STAGE_TITLE);
         stage.setMaximized(true);
-
+        stage.setTitle(STAGE_TITLE);
         stage.show();
-
-        new ScreenManager(root, scene);
+        new ScreenManager(root, scene, stage);
     }
 }
