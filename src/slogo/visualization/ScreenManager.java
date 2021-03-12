@@ -38,8 +38,9 @@ public class ScreenManager {
   }
 
   private void initializeGridSize() {
-    gridPane.setMinSize(scene.getWidth(), scene.getHeight());
-    gridPane.setMaxSize(scene.getWidth(), scene.getHeight());
+    gridPane.setMinSize(0, 0);
+    gridPane.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+    gridPane.setPrefSize(scene.getWidth(), scene.getHeight());
     gridPane.setVgap(PADDING_LENGTH);
     gridPane.setHgap(PADDING_LENGTH);
     gridPane.setPadding(new Insets(PADDING_LENGTH));
@@ -47,10 +48,10 @@ public class ScreenManager {
 
   private void initializeGridResizeListeners() {
     scene.heightProperty().addListener((observableValue, oldHeight, newHeight) -> {
-      gridPane.setMinHeight(newHeight.doubleValue());
+      gridPane.setPrefHeight(newHeight.doubleValue());
     });
     scene.widthProperty().addListener((observableValue, oldWidth, newWidth) -> {
-      gridPane.setMinWidth(newWidth.doubleValue());
+      gridPane.setPrefWidth(newWidth.doubleValue());
     });
   }
 
