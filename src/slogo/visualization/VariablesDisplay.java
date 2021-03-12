@@ -26,14 +26,14 @@ public class VariablesDisplay extends ScrollingDisplay {
     String language = "English";
     this.resourceBundle = ResourceBundle.getBundle(String.format("%s/%s/%s", resourcePackage, "languages", language));
 
-    //updateVariablesBox(new String[]{"yeet", "ok", "example"}); //test
+    //updateBox(new String[]{"yeet", "ok", "example"}); //test
   }
 
   /**
    *
    * @param variablesList
    */
-  public void updateVariablesBox(String[] variablesList){
+  public void updateBox(String[] variablesList){
     variablesBox.getChildren().clear();
 
     for (String variableName : variablesList) {
