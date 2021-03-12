@@ -11,3 +11,7 @@ public class MovementCommand implements Command{
 
   }
 }
+
+
+
+
