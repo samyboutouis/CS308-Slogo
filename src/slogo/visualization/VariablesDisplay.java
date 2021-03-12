@@ -12,7 +12,7 @@ public class VariablesDisplay extends ScrollingDisplay {
   private final static String VARIABLES_TAG_ID = "VariablesTagID";
 
   private final ResourceBundle resourceBundle;
-  private final VBox variablesBox;
+  private final VBox variablesBox = null;
 
   /**
    *
@@ -22,7 +22,7 @@ public class VariablesDisplay extends ScrollingDisplay {
   public VariablesDisplay(GridPane pane, String resourcePackage){
     super(pane, resourcePackage);
 
-    variablesBox = setupVBoxContainer(VARIABLES_TITLE, VARIABLES_BOX_ID);
+    //variablesBox = setupVBoxContainer(VARIABLES_TITLE, VARIABLES_BOX_ID);
     String language = "English";
     this.resourceBundle = ResourceBundle.getBundle(String.format("%s/%s/%s", resourcePackage, "languages", language));
 

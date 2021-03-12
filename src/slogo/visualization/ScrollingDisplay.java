@@ -36,12 +36,6 @@ public class ScrollingDisplay {
    * @return
    */
   public VBox setupVBoxContainer(String title, String vBoxID){
-    pane.setMinWidth(0.0);
-    pane.setMinHeight(0.0);
-
-    pane.setMaxWidth(Double.MAX_VALUE);
-    pane.setMaxHeight(Double.MAX_VALUE);
-
     pane.setVgap(PADDING_LENGTH);
     pane.setPadding(new Insets(PADDING_LENGTH));
 

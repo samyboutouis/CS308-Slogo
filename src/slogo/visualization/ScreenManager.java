@@ -8,7 +8,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class ScreenManager {
@@ -39,8 +38,8 @@ public class ScreenManager {
   }
 
   private void initializeGridSize() {
-    gridPane.setMinSize(0.0, 0.0);
-    gridPane.setPrefSize(scene.getWidth(), scene.getHeight());
+    gridPane.setMinSize(scene.getWidth(), scene.getHeight());
+    gridPane.setMaxSize(scene.getWidth(), scene.getHeight());
     gridPane.setVgap(PADDING_LENGTH);
     gridPane.setHgap(PADDING_LENGTH);
     gridPane.setPadding(new Insets(PADDING_LENGTH));
