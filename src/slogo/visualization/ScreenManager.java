@@ -39,10 +39,11 @@ public class ScreenManager {
   }
 
   private void initializeGridSize() {
-    gridPane.setMinSize(scene.getWidth(), scene.getHeight());
+    gridPane.setMinSize(0.0, 0.0);
+    gridPane.setPrefSize(scene.getWidth(), scene.getHeight());
     gridPane.setVgap(PADDING_LENGTH);
     gridPane.setHgap(PADDING_LENGTH);
-    gridPane.setPadding(new Insets(PADDING_LENGTH, PADDING_LENGTH, PADDING_LENGTH, PADDING_LENGTH));
+    gridPane.setPadding(new Insets(PADDING_LENGTH));
   }
 
   private void initializeGridResizeListeners() {
@@ -88,7 +89,7 @@ public class ScreenManager {
     gridPane.add(variablesPane, 5, 6, 2, 4);
     gridPane.add(userCommandsPane, 7, 6, 3, 4);
 
-    new TurtleDisplay(turtlePane);
+    //new TurtleDisplay(turtlePane);
     new TerminalDisplay(terminalPane, RESOURCE_PACKAGE, new HistoryDisplay(historyPane, RESOURCE_PACKAGE));
     new VariablesDisplay(variablesPane, RESOURCE_PACKAGE);
     new UserCommandsDisplay(userCommandsPane, RESOURCE_PACKAGE);
