@@ -17,12 +17,14 @@ import slogo.model.nodes.control.VariableNode;
 public class CommandReader {
   private static final String WHITESPACE = "\\s+";
   private static final String NEWLINE = "\n";
-  private static final String RESOURCES_PACKAGE ="resources.parameters.";
-  private static final String PARAMETERS_FILE = "Commands";
+  private static final String RESOURCES_PACKAGE ="resources.";
+  private static final String PARAMETERS_FILE = "parameters.Commands";
+  private static final String PACKAGES_FILE = "packages.Packages";
   private ProgramParser parser;
   private Map<String, Double> variables;
   private List<Double> forTests;
   private ResourceBundle numParameters;
+  private ResourceBundle packageName;
   private List<Command> commands;
 
   public CommandReader(String language) {
@@ -30,6 +32,7 @@ public class CommandReader {
     parser.addPatterns(language);
     parser.addPatterns("Syntax");
     numParameters = ResourceBundle.getBundle(RESOURCES_PACKAGE + PARAMETERS_FILE);
+    packageName = ResourceBundle.getBundle(RESOURCES_PACKAGE + PACKAGES_FILE);
 
     commands = new ArrayList<>();
     variables = new HashMap<>();
@@ -67,7 +70,10 @@ public class CommandReader {
     List<SlogoNode> roots = new ArrayList<>();
     for(String s : cleaned){
       String symbol = parser.getSymbol(s);
-      Class<?> node = Class.forName("slogo.model.nodes." + symbol + "Node");
+      System.out.println(symbol);
+      System.out.println(s);
+      System.out.println("Felix\n");
+      Class<?> node = Class.forName("slogo.model.nodes." + packageName.getString(symbol) + "." + symbol + "Node");
 
       SlogoNode curr;
       int parameters = Integer.parseInt(numParameters.getString(symbol));
@@ -130,7 +136,7 @@ public class CommandReader {
         // System.out.println(line);
       }
       if (!parser.getSymbol(line).equals("Comment")){
-        cleaned.addAll(Arrays.asList(line.split(WHITESPACE)));
+        cleaned.addAll(Arrays.asList(line.trim().split(WHITESPACE)));
       }
     }
     return cleaned;
