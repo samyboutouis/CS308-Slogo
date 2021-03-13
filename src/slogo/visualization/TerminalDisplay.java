@@ -8,7 +8,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
+import slogo.Turtle;
 import slogo.model.CommandReader;
 
 public class TerminalDisplay {
@@ -80,7 +82,7 @@ public class TerminalDisplay {
       if(command.length() > 0){
         try {
           CommandReader commandReader = new CommandReader("English"); // change this to pass to backend instead
-          commandReader.parseInput(command);
+          new AnimationManager(commandReader.parseInput(command),);
 
           Button historyTag = historyDisplay.addNewHistoryTag(command);
           applyHistoryTagLogic(historyTag);
@@ -104,7 +106,7 @@ public class TerminalDisplay {
     Alert newAlert = new Alert(AlertType.ERROR);
     newAlert.setTitle(resourceBundle.getString(ERROR_TITLE_PROPERTY));
     newAlert.setHeaderText(null);
-    newAlert.setContentText(resourceBundle.getString(error.getMessage()));
+    newAlert.setContentText(error.getMessage());
     newAlert.showAndWait();
   }
 }
