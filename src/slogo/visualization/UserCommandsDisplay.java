@@ -12,6 +12,7 @@ public class UserCommandsDisplay extends ScrollingDisplay {
   private final static String USER_COMMANDS_TAG_ID = "UserCommandsTagID";
 
   private final ResourceBundle resourceBundle;
+  private final ResourceBundle idBundle;
   private final VBox userCommandsBox;
 
   public UserCommandsDisplay(GridPane pane, String resourcePackage){
@@ -20,6 +21,7 @@ public class UserCommandsDisplay extends ScrollingDisplay {
     userCommandsBox = setupVBoxContainer(USER_COMMANDS_TITLE, USER_COMMANDS_BOX_ID);
     String language = "English";
     this.resourceBundle = ResourceBundle.getBundle(String.format("%s/%s/%s", resourcePackage, "languages", language));
+    this.idBundle = ResourceBundle.getBundle(String.format("%s/%s/%s", resourcePackage, "stylesheets", "CSS_IDs"));
 
     updateBox(new String[]{"yeet", "ok", "example"}); //test
   }
@@ -40,7 +42,7 @@ public class UserCommandsDisplay extends ScrollingDisplay {
     Button commandsTab = new Button(variableName);
     commandsTab.setMaxWidth(Double.MAX_VALUE);
     commandsTab.setMaxHeight(Double.MAX_VALUE);
-    commandsTab.setId(resourceBundle.getString(USER_COMMANDS_TAG_ID));
+    commandsTab.setId(idBundle.getString(USER_COMMANDS_TAG_ID));
 
     userCommandsBox.getChildren().add(commandsTab);
   }

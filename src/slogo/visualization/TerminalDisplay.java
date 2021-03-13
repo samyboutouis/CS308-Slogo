@@ -24,6 +24,7 @@ public class TerminalDisplay {
   private final static int COLUMN_COUNT = 4;
 
   private final ResourceBundle resourceBundle;
+  private final ResourceBundle idBundle;
   private final GridPane pane;
   private TextArea textBox;
   private Button button;
@@ -49,6 +50,7 @@ public class TerminalDisplay {
 
     String language = "English";
     this.resourceBundle = ResourceBundle.getBundle(String.format("%s/%s/%s", resourcePackage, "languages", language));
+    this.idBundle = ResourceBundle.getBundle(String.format("%s/%s/%s", resourcePackage, "stylesheets", "CSS_IDs"));
 
     for(int i = 0; i < COLUMN_COUNT; i++){
       ColumnConstraints col = new ColumnConstraints();
@@ -69,7 +71,7 @@ public class TerminalDisplay {
     textBox.setWrapText(true);
     textBox.setFocusTraversable(false);
     textBox.setPromptText(resourceBundle.getString(TERMINAL_PROMPT));
-    textBox.setId(resourceBundle.getString(TERMINAL_TEXT_BOX_ID));
+    textBox.setId(idBundle.getString(TERMINAL_TEXT_BOX_ID));
 
     pane.add(textBox, 0, 0, 3, 1);
   }
@@ -79,7 +81,7 @@ public class TerminalDisplay {
     button.setMaxWidth(Double.MAX_VALUE);
     button.setMaxHeight(Double.MAX_VALUE);
     button.setWrapText(true);
-    button.setId(resourceBundle.getString(TERMINAL_BUTTON_ID));
+    button.setId(idBundle.getString(TERMINAL_BUTTON_ID));
 
     pane.add(button, 3, 0, 1, 1);
   }
