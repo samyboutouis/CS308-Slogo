@@ -3,13 +3,10 @@ package slogo.model.nodes.control;
 import java.util.List;
 import slogo.Command;
 import slogo.model.SlogoNode;
-import slogo.model.nodes.control.ListEndNode;
-import slogo.model.nodes.control.ListStartNode;
 
 public class IfElseNode extends SlogoNode{
   private List<SlogoNode> parameters;
   private int brackets; // how many pairs of brackets to expect
-  private int firstEnd; // index of first end bracket
 
   public IfElseNode(int numParameters) {
     super(numParameters); // dummy value since isFull is overridden
@@ -46,6 +43,7 @@ public class IfElseNode extends SlogoNode{
   }
 
   private int getFirstEnd() {
+    int firstEnd = 0;
     for(int i = 0; i < parameters.size(); i++){
       if(parameters.get(i) instanceof ListEndNode){
         firstEnd = i;
