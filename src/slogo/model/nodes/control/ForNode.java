@@ -31,7 +31,7 @@ public class ForNode extends SlogoNode {
     setFirstEnd();
     getIndexing();
     double ret = 0;
-    for(double i = forStart; i < forEnd; i = i + forIncrement){
+    for(double i = forStart; i <= forEnd; i = i + forIncrement){
       variable.setValue(i);
       for(int j = firstEnd; j < parameters.size(); j++){ // runs through all the commands in the loop
         if(!(parameters.get(j) instanceof ListStartNode) && !(parameters.get(j) instanceof ListEndNode)){
@@ -39,11 +39,6 @@ public class ForNode extends SlogoNode {
         }
       }
     }
-//    for [ :dist 1 110 1 ]
-//    [
-////      fd :dist
-////      rt product :dist 3
-////    ]
     return ret;
   }
 
