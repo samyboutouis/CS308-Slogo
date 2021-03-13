@@ -3,8 +3,6 @@ package slogo.model.nodes;
 import java.util.List;
 import slogo.Command;
 import slogo.model.SlogoNode;
-import slogo.model.nodes.ListEndNode;
-import slogo.model.nodes.ListStartNode;
 
 public class IfNode extends SlogoNode{
   private List<SlogoNode> parameters;
