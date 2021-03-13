@@ -66,14 +66,9 @@ public class Turtle {
     return Math.cos(Math.toRadians(direction)) * pixels;
   }
 
-  public void right(double directionChange) {
+  public void rotate(double directionChange) {
     direction += directionChange;
     imageView.setRotate(imageView.getRotate() + directionChange);
-  }
-
-  public void left(double directionChange) {
-    direction -= directionChange;
-    imageView.setRotate(imageView.getRotate() - directionChange);
   }
 
   public void setDirection(double direction) {
