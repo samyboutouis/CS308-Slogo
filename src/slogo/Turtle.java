@@ -1,6 +1,7 @@
 package slogo;
 
 import java.io.File;
+import java.util.ResourceBundle;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -20,6 +21,7 @@ public class Turtle {
   private double yCoordinate;
   private double direction;
   private final Pen pen;
+  private final ResourceBundle idBundle;
 
   public Turtle(AnchorPane anchorPane) {
     this.anchorPane = anchorPane;
@@ -27,6 +29,8 @@ public class Turtle {
     yCoordinate = 0;
     direction = 0;
     pen = new Pen(anchorPane);
+    this.idBundle = ResourceBundle
+      .getBundle(String.format("%s/%s/%s", "resources", "stylesheets", "CSS_IDs"));
     setDefaultImage();
   }
 
@@ -78,10 +82,12 @@ public class Turtle {
   }
 
   public void setXY(double xPosition, double yPosition) {
+    double xChange = xCoordinate - xPosition;
+    double yChange = yCoordinate - yPosition;
     xCoordinate = xPosition;
     yCoordinate = yPosition;
-    imageView.setTranslateX(xPosition);
-    imageView.setTranslateY(yPosition);
+    imageView.setTranslateX(xChange);
+    imageView.setTranslateY(yChange);
   }
 
   public void show() {
@@ -102,6 +108,7 @@ public class Turtle {
     imageView = new ImageView(image);
     imageView.setTranslateX(INITIAL_WIDTH);
     imageView.setTranslateY(INITIAL_HEIGHT);
+    imageView.setId(idBundle.getString("Turtle"));
     anchorPane.getChildren().add(imageView);
   }
 
