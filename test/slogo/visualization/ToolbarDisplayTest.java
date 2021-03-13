@@ -23,6 +23,7 @@ class ToolbarDisplayTest extends DukeApplicationTest {
   private Button myTurtleImageButton;
   private ComboBox<String> myLanguageDropdown;
   private ComboBox<String> myHelpDropdown;
+  private Pane myTurtlePane;
 
   @Override
   public void start (Stage stage) {
@@ -38,6 +39,7 @@ class ToolbarDisplayTest extends DukeApplicationTest {
     myTurtleImageButton = lookup("#" + idBundle.getString("TurtleImageButton")).query();
     myLanguageDropdown = lookup("#" + idBundle.getString("LanguageDropdown")).query();
     myHelpDropdown = lookup("#" + idBundle.getString("HelpDropdown")).query();
+    myTurtlePane = lookup("#" + idBundle.getString("TurtlePaneID")).query();
     addTurtle();
   }
 
@@ -57,6 +59,10 @@ class ToolbarDisplayTest extends DukeApplicationTest {
     clickOn(myBackgroundColorButton);
     assertTrue(myBackgroundColorButton.isDisabled());
     assertFalse(myBackgroundColorButton.isVisible());
+    ColorPicker colorPicker = lookup("#" + idBundle.getString("ColorPicker")).query();
+    setValue(colorPicker, Color.RED);
+    Color backgroundColor = (Color) myTurtlePane.getBackground().getFills().get(0).getFill();
+    assertEquals(backgroundColor, Color.RED);
   }
 
   @Test

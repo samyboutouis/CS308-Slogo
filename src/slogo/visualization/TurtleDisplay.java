@@ -15,7 +15,8 @@ import slogo.Turtle;
 public class TurtleDisplay {
   private static final String ID_PROPERTY = "resources/stylesheets/CSS_IDs";
   private static final int BACKGROUND_RADIUS = 20;
-  private static final String ADD_TURTLE_BUTTON = "AddTurtleButton";
+  private static final String ADD_TURTLE_BUTTON_ID = "AddTurtleButton";
+  private static final String TURTLE_PANE_ID = "TurtlePaneID";
 
   private final ResourceBundle idBundle;
   private final AnchorPane anchorPane;
@@ -30,6 +31,7 @@ public class TurtleDisplay {
 
   private void setScreen() {
     addTurtle();
+    anchorPane.setId(idBundle.getString(TURTLE_PANE_ID));
   }
 
   private void addTurtle() {
@@ -38,7 +40,7 @@ public class TurtleDisplay {
       turtle.addToScreen(anchorPane, anchorPane.getHeight(), anchorPane.getWidth());
       addTurtle.setDisable(true);
     });
-    addTurtle.setId(idBundle.getString(ADD_TURTLE_BUTTON));
+    addTurtle.setId(idBundle.getString(ADD_TURTLE_BUTTON_ID));
     VBox vBox = new VBox();
     vBox.getChildren().add(addTurtle);
     anchorPane.getChildren().add(vBox);
