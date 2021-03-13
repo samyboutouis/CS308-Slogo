@@ -26,6 +26,7 @@ public class ForwardNode extends SlogoNode {
 
   private void createMovement(List<Command> commands) {
     commands.add(new MovementCommand(values.get(0), 0));
+    // move forward the amount in values.get(0)
   }
 
   // gets values for all parameters of this node, needs commands list to create the commands when
