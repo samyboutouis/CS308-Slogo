@@ -25,6 +25,6 @@ public abstract class SlogoNode {
       return parameters;
     }
 
-    protected abstract double getReturnValue(List<Command> commands);
+    abstract double getReturnValue(List<Command> commands);
 }
 
