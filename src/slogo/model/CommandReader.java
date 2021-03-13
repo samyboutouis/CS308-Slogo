@@ -52,6 +52,7 @@ public class CommandReader {
       SlogoNode curr;
       switch(symbol){
         // reflection to create the class
+        // handle separately: Constant, Variable
         case "Constant" -> {
           // reflection but with the value in the constructor too
           curr = new ConstantNode(0, Double.parseDouble(s));

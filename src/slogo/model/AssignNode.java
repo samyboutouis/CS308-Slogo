@@ -3,6 +3,7 @@ package slogo.model;
 import java.util.List;
 import java.util.Map;
 import slogo.Command;
+import slogo.model.nodes.VariableNode;
 
 // implements make and set commands
 public class AssignNode extends SlogoNode{

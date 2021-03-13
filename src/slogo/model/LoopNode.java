@@ -2,6 +2,7 @@ package slogo.model;
 
 import java.util.List;
 import slogo.Command;
+import slogo.model.nodes.VariableNode;
 
 // implements repeat, dotimes, for
 public class LoopNode extends SlogoNode{

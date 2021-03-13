@@ -1,15 +1,17 @@
-package slogo.model;
+package slogo.model.nodes;
 
 import java.util.List;
 import java.util.Map;
 import slogo.Command;
+import slogo.model.SlogoNode;
 
-public class VariableNode extends SlogoNode{
+public class VariableNode extends SlogoNode {
   private Map<String, Double> variables;
   private String name;
 
-  public VariableNode(String type, Map<String, Double> variables, String name) {
-    super(0, type); // dummy value for parameters
+  public VariableNode(int numParameters, Map<String, Double> variables, String name) {
+    super(numParameters); // dummy value for parameters
+    this.variables = variables;
     this.name = name;
   }
 
@@ -18,7 +20,7 @@ public class VariableNode extends SlogoNode{
   }
 
   @Override
-  protected double getReturnValue(List<Command> commands) {
+  public double getReturnValue(List<Command> commands) {
     if(!variables.containsKey(name)){
       return 0;
     }
