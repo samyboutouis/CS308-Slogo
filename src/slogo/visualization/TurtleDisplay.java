@@ -43,6 +43,8 @@ public class TurtleDisplay {
     penDown.setOnAction(event -> turtle.penDown());
     Button clear = new Button("Clear");
     clear.setOnAction(event -> turtle.clearScreen());
+    Button toward = new Button("Toward");
+    toward.setOnAction(event -> turtle.towards(0, 0));
     VBox vBox = new VBox();
     vBox.getChildren().add(button);
     vBox.getChildren().add(left);
@@ -51,9 +53,9 @@ public class TurtleDisplay {
     vBox.getChildren().add(penUp);
     vBox.getChildren().add(penDown);
     vBox.getChildren().add(clear);
+    vBox.getChildren().add(toward);
     anchorPane.getChildren().add(vBox);
   }
-
 
   public void setTurtleImage(File file) {
     turtle.setImage(file);
