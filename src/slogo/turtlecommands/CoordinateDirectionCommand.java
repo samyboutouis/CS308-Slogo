@@ -18,5 +18,4 @@ public class CoordinateDirectionCommand implements Command {
     public void doCommand(Turtle turtle) {
       turtle.towards(x, y);
     }
-  }
 }
