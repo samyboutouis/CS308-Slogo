@@ -82,7 +82,7 @@ public class TerminalDisplay {
       if(command.length() > 0){
         try {
           CommandReader commandReader = new CommandReader("English"); // change this to pass to backend instead
-          new AnimationManager(commandReader.parseInput(command),);
+          //new AnimationManager(commandReader.parseInput(command), );
 
           Button historyTag = historyDisplay.addNewHistoryTag(command);
           applyHistoryTagLogic(historyTag);
