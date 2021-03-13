@@ -22,7 +22,7 @@ public class IfNode extends SlogoNode{
 
   @Override
   public double getReturnValue(List<Command> commands) {
-    // assume expr is just one tree
+      // assume expr is just one tree
       double ret = 0;
       if(parameters.get(0).getReturnValue(commands) != 0.0) { // does the expression part
         for(int i = 1; i < parameters.size(); i++){ // i = 1 should be list start
