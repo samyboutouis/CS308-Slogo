@@ -2,6 +2,7 @@ package slogo.visualization;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Method;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -24,47 +25,53 @@ import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
+import slogo.controller.Controller;
 
 public class ToolbarDisplay {
-
-  //FIXME: Button factory/creation design pattern
-
   private final static int PADDING_LENGTH = 10;
-  private static final String PAINT_BRUSH_IMAGE = "resources/paint-brush.png";
-  private static final String PAINT_BUCKET_IMAGE = "resources/paint-bucket.png";
-  private static final String TURTLE_ICON_IMAGE = "resources/turtle-icon.png";
-  private static final String REFERENCES_PATH = "src/resources/reference";
   private static final int ICON_WIDTH = 30;
   private static final int ICON_HEIGHT = 30;
   private final static int COLUMN_COUNT = 10;
+  private static final String DEFAULT_RESOURCE_FOLDER = "resources/";
+  private static final String REFERENCES_FOLDER = "src/resources/reference";
+  private static final String IMAGE_PROPERTY = "stylesheets/Image";
+  private static final String ID_PROPERTY = "stylesheets/CSS_IDs";
+  private static final String METHODS_PROPERTY = "methods/Methods";
 
   private final Stage stage;
   private final GridPane gridPane;
   private final TurtleDisplay turtleDisplay;
+  private final Controller controller;
+  private final String resourcePackage;
   private final ResourceBundle languageBundle;
   private final ResourceBundle resourceBundle;
+  private final ResourceBundle imageBundle;
   private final ResourceBundle idBundle;
-  private Button backgroundColorButton;
-  private Button penColorButton;
+  private final ResourceBundle commandBundle;
   private Color backgroundColor;
   private Color penColor;
+  private List<String> buttonList;
 
   public ToolbarDisplay(GridPane pane, String resourcePackage, Stage stage,
-    TurtleDisplay turtleDisplay) {
+    TurtleDisplay turtleDisplay, Controller controller) {
+    String language = "English";
     this.gridPane = pane;
     this.stage = stage;
     this.turtleDisplay = turtleDisplay;
+    this.controller = controller;
+    this.resourcePackage = resourcePackage;
     this.languageBundle = ResourceBundle
       .getBundle(String.format("%s/%s/%s", resourcePackage, "languages", "LanguageOptions"));
-    String language = "English";
     this.resourceBundle = ResourceBundle
       .getBundle(String.format("%s/%s/%s", resourcePackage, "languages", language));
-    this.idBundle = ResourceBundle
-      .getBundle(String.format("%s/%s/%s", resourcePackage, "stylesheets", "CSS_IDs"));
+    this.imageBundle = ResourceBundle.getBundle(DEFAULT_RESOURCE_FOLDER + IMAGE_PROPERTY);
+    this.idBundle = ResourceBundle.getBundle(DEFAULT_RESOURCE_FOLDER + ID_PROPERTY);
+    this.commandBundle = ResourceBundle.getBundle(DEFAULT_RESOURCE_FOLDER + METHODS_PROPERTY);
     backgroundColor = Color.web("#dedcdc");
     penColor = Color.BLACK;
+    buttonList = List.of("PenColorButton", "BackgroundColorButton", "TurtleImageButton");
     initializeGridPane();
-    setScreen();
+    makeToolbar();
   }
 
   private void initializeGridPane() {
@@ -81,36 +88,32 @@ public class ToolbarDisplay {
     gridPane.getRowConstraints().add(row);
   }
 
-  private void setScreen() {
-    addPenColorButton();
-    addBackgroundColorButton();
-    addTurtleImageButton();
+  private void makeToolbar() {
+    int colIndex = 0;
+    for(String label : buttonList) {
+      gridPane.add(makeButton(label), colIndex++, 0, 1, 1);
+    }
     addLanguageDropdown();
     addHelpDropdown();
   }
 
-  private void addPenColorButton() {
-    penColorButton = new Button();
-    penColorButton.setOnAction(event -> handlePenColorClick());
-    penColorButton.setGraphic(createImageView(PAINT_BRUSH_IMAGE));
-    penColorButton.setId(idBundle.getString("PenColorButton"));
-    gridPane.add(penColorButton, 0, 0, 1, 1);
-  }
-
-  private void addBackgroundColorButton() {
-    backgroundColorButton = new Button();
-    backgroundColorButton.setId(idBundle.getString("BackgroundColorButton"));
-    backgroundColorButton.setOnAction(event -> handleBackgroundColorClick());
-    backgroundColorButton.setGraphic(createImageView(PAINT_BUCKET_IMAGE));
-    gridPane.add(backgroundColorButton, 1, 0, 1, 1);
-  }
-
-  private void addTurtleImageButton() {
+  private Button makeButton(String property) {
     Button button = new Button();
-    button.setId(idBundle.getString("TurtleImageButton"));
-    button.setOnAction(event -> handleTurtleImageClick());
-    button.setGraphic(createImageView(TURTLE_ICON_IMAGE));
-    gridPane.add(button, 2, 0, 1, 1);
+    button.setId(idBundle.getString(property));
+    String label = imageBundle.getString(property);
+    button.setGraphic(new ImageView(
+      new Image(DEFAULT_RESOURCE_FOLDER + label, ICON_WIDTH,
+        ICON_HEIGHT, false, false)));
+    button.setOnAction(handler -> {
+      try {
+        Method m = this.getClass()
+          .getDeclaredMethod(commandBundle.getString(property), Button.class);
+        m.invoke(this, button);
+      } catch (Exception e) {
+        throw new RuntimeException("Improper configuration", e);
+      }
+    });
+    return button;
   }
 
   private void addLanguageDropdown() {
@@ -120,13 +123,14 @@ public class ToolbarDisplay {
       comboBox.getItems().add(languageBundle.getString(language));
     }
     comboBox.setValue("English");
+    comboBox.setOnAction(event -> handleLanguageClick(comboBox.getValue()));
     gridPane.add(comboBox, 3, 0, 4, 1);
   }
 
   private void addHelpDropdown() {
     ComboBox<String> comboBox = new ComboBox<>();
     comboBox.setId(idBundle.getString("HelpDropdown"));
-    File folder = new File(REFERENCES_PATH);
+    File folder = new File(REFERENCES_FOLDER);
     File[] files = folder.listFiles();
     List<String> commands = new ArrayList<>();
     for (File file : files) {
@@ -139,15 +143,15 @@ public class ToolbarDisplay {
     gridPane.add(comboBox, 9, 0, 2, 1);
   }
 
-  private void handlePenColorClick() {
+  private void handlePenColorClick(Button penColorButton) {
     penColorButton.setVisible(false);
     penColorButton.setDisable(true);
     ColorPicker colorPicker = new ColorPicker(penColor);
-    colorPicker.setOnAction(event -> handlePenColorPicker(colorPicker));
+    colorPicker.setOnAction(event -> handlePenColorPicker(penColorButton, colorPicker));
     gridPane.add(colorPicker, 0, 0, 1, 1);
   }
 
-  private void handlePenColorPicker(ColorPicker colorPicker) {
+  private void handlePenColorPicker(Button penColorButton, ColorPicker colorPicker) {
     penColor = colorPicker.getValue();
     turtleDisplay.setPenColor(penColor);
     gridPane.getChildren().remove(colorPicker);
@@ -155,15 +159,16 @@ public class ToolbarDisplay {
     penColorButton.setDisable(false);
   }
 
-  private void handleBackgroundColorClick() {
+  private void handleBackgroundColorClick(Button backgroundColorButton) {
     backgroundColorButton.setVisible(false);
     backgroundColorButton.setDisable(true);
     ColorPicker colorPicker = new ColorPicker(backgroundColor);
-    colorPicker.setOnAction(event -> handleBackgroundColorPicker(colorPicker));
+    colorPicker
+      .setOnAction(event -> handleBackgroundColorPicker(backgroundColorButton, colorPicker));
     gridPane.add(colorPicker, 1, 0, 1, 1);
   }
 
-  private void handleBackgroundColorPicker(ColorPicker colorPicker) {
+  private void handleBackgroundColorPicker(Button backgroundColorButton, ColorPicker colorPicker) {
     backgroundColor = colorPicker.getValue();
     turtleDisplay.setBackgroundColor(backgroundColor);
     gridPane.getChildren().remove(colorPicker);
@@ -171,7 +176,7 @@ public class ToolbarDisplay {
     backgroundColorButton.setDisable(false);
   }
 
-  private void handleTurtleImageClick() {
+  private void handleTurtleImageClick(Button button) {
     FileChooser fileChooser = new FileChooser();
     fileChooser.setTitle("Open Image File");
     fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
@@ -183,9 +188,13 @@ public class ToolbarDisplay {
     }
   }
 
+  private void handleLanguageClick(String language) {
+    controller.setLanguage(language);
+  }
+
   private void handleHelpClick(String command) {
     try {
-      String text = new String(Files.readAllBytes(Paths.get(REFERENCES_PATH + "/" + command)));
+      String text = new String(Files.readAllBytes(Paths.get(REFERENCES_FOLDER + "/" + command)));
       Alert alert = new Alert(AlertType.INFORMATION, text);
       alert.setHeaderText(command);
       alert.showAndWait();
@@ -193,11 +202,5 @@ public class ToolbarDisplay {
       Alert alert = new Alert(AlertType.ERROR, resourceBundle.getString("HelpError"));
       alert.showAndWait();
     }
-  }
-
-  private ImageView createImageView(String filePath) {
-    Image image = new Image(filePath, ICON_WIDTH, ICON_HEIGHT, false, false);
-    ImageView imageView = new ImageView(image);
-    return imageView;
   }
 }

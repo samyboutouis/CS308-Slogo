@@ -1,5 +1,7 @@
 package slogo;
 
+import java.util.ArrayList;
+import java.util.List;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
@@ -8,11 +10,13 @@ public class Pen {
   private final AnchorPane anchorPane;
   private boolean isPenDown;
   private Color lineColor;
+  private List<Line> lineList;
 
   public Pen(AnchorPane anchorPane) {
     this.anchorPane = anchorPane;
     isPenDown = true;
     lineColor = Color.BLACK;
+    lineList = new ArrayList<>();
   }
 
   public void drawLine(double startX, double startY, double changeX, double changeY) {
@@ -22,6 +26,7 @@ public class Pen {
       line.setTranslateX(startX);
       line.setTranslateY(startY);
       anchorPane.getChildren().add(line);
+      lineList.add(line);
     }
   }
 
@@ -35,5 +40,11 @@ public class Pen {
 
   public void penUp() {
     isPenDown = false;
+  }
+
+  public void removeLines() {
+    for(Line line : lineList) {
+      anchorPane.getChildren().remove(line);
+    }
   }
 }
