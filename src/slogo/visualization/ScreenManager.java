@@ -80,7 +80,7 @@ public class ScreenManager {
     GridPane variablesPane = new GridPane();
     GridPane userCommandsPane = new GridPane();
     GridPane toolbarPane = new GridPane();
-    turtle = new Turtle(turtlePane);
+    turtle = new Turtle();
 
     turtlePane.getStyleClass().add(DISPLAY_CLASS_NAME);
     terminalPane.getStyleClass().add(DISPLAY_CLASS_NAME);

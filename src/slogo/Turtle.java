@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
 public class Turtle {
@@ -16,19 +17,16 @@ public class Turtle {
   private static final int INITIAL_HEIGHT = 275;
 
   private ImageView imageView;
-  private final AnchorPane anchorPane;
   private double xCoordinate;
   private double yCoordinate;
   private double direction;
-  private final Pen pen;
+  private Pen pen;
   private final ResourceBundle idBundle;
 
-  public Turtle(AnchorPane anchorPane) {
-    this.anchorPane = anchorPane;
+  public Turtle() {
     xCoordinate = 0;
     yCoordinate = 0;
     direction = 0;
-    pen = new Pen(anchorPane);
     this.idBundle = ResourceBundle
       .getBundle(String.format("%s/%s/%s", "resources", "stylesheets", "CSS_IDs"));
     setDefaultImage();
@@ -101,18 +99,32 @@ public class Turtle {
   }
 
   public void setImage(File file) {
-    Image image = new Image(file.toURI().toString(), IMAGE_WIDTH, IMAGE_HEIGHT, false, false);
+    Image image = new Image(file.toURI().toString(), IMAGE_WIDTH, IMAGE_HEIGHT, true, false);
     imageView.setImage(image);
   }
 
   private void setDefaultImage() {
     Image image = new Image(DEFAULT_IMAGE, IMAGE_WIDTH, IMAGE_HEIGHT, false, false);
     imageView = new ImageView(image);
-    imageView.setTranslateX(INITIAL_WIDTH);
-    imageView.setTranslateY(INITIAL_HEIGHT);
     imageView.setId(idBundle.getString("Turtle"));
-    anchorPane.getChildren().add(imageView);
   }
+
+  public void addToScreen(Pane turtlePane, double height, double width) {
+    imageView.setTranslateX(width/2 - IMAGE_WIDTH/2);
+    imageView.setTranslateY(height/2 - IMAGE_HEIGHT/2);
+    turtlePane.getChildren().add(imageView);
+    pen = new Pen(turtlePane);
+    //initializeGridResizeListeners(turtlePane);
+  }
+
+//  private void initializeGridResizeListeners(Pane turtlePane) {
+//    turtlePane.heightProperty().addListener((observableValue, oldHeight, newHeight) -> {
+//      imageView.setTranslateY((Double) newHeight);
+//    });
+//    turtlePane.widthProperty().addListener((observableValue, oldWidth, newWidth) -> {
+//      imageView.setTranslateX((Double) newWidth);
+//    });
+//  }
 
   public void setPenColor(Color color) {
     pen.setColor(color);
