@@ -27,11 +27,13 @@ public class TerminalDisplay {
   private final GridPane pane;
   private TextArea textBox;
   private Button button;
-  private HistoryDisplay historyDisplay;
+  private final HistoryDisplay historyDisplay;
+  private final Turtle turtle;
 
-  public TerminalDisplay(GridPane pane, String resourcePackage, HistoryDisplay historyDisplay){
+  public TerminalDisplay(GridPane pane, String resourcePackage, HistoryDisplay historyDisplay, Turtle turtle){
     this.pane = pane;
     this.historyDisplay = historyDisplay;
+    this.turtle = turtle;
 
     pane.setMaxWidth(Double.MAX_VALUE);
     pane.setMaxHeight(Double.MAX_VALUE);
@@ -81,8 +83,8 @@ public class TerminalDisplay {
       String command = textBox.getText().trim();
       if(command.length() > 0){
         try {
-          CommandReader commandReader = new CommandReader("English"); // change this to pass to backend instead
-          //new AnimationManager(commandReader.parseInput(command), );
+          CommandReader commandReader = new CommandReader("English");
+          new AnimationManager(commandReader.parseInput(command), turtle);
 
           Button historyTag = historyDisplay.addNewHistoryTag(command);
           applyHistoryTagLogic(historyTag);
