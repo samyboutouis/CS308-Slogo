@@ -3,6 +3,7 @@ package slogo.turtlecommands;
 import slogo.Command;
 import slogo.Turtle;
 
+// handles TOWARDS
 public class CoordinateDirectionCommand implements Command {
 
     // deals with turtle call that sets direction to somewhere absolute using coordinates
