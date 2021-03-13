@@ -6,12 +6,12 @@ import slogo.Command;
 import slogo.turtlecommands.MovementCommand;
 import slogo.model.SlogoNode;
 
-public class BackNode extends SlogoNode {
+public class BackwardNode extends SlogoNode {
 
   private List<SlogoNode> parameters;
   private List<Double> values;
 
-  public BackNode(int numParameters){
+  public BackwardNode(int numParameters){
     super(numParameters);
     parameters = super.getParameters();
     values = new ArrayList<>();
