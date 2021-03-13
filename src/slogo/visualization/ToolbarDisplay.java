@@ -24,6 +24,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
+import slogo.controller.Controller;
 
 public class ToolbarDisplay {
 
@@ -41,6 +42,7 @@ public class ToolbarDisplay {
   private final Stage stage;
   private final GridPane gridPane;
   private final TurtleDisplay turtleDisplay;
+  private final Controller controller;
   private final ResourceBundle languageBundle;
   private final ResourceBundle resourceBundle;
   private final ResourceBundle idBundle;
@@ -50,7 +52,7 @@ public class ToolbarDisplay {
   private Color penColor;
 
   public ToolbarDisplay(GridPane pane, String resourcePackage, Stage stage,
-    TurtleDisplay turtleDisplay) {
+    TurtleDisplay turtleDisplay, Controller controller) {
     this.gridPane = pane;
     this.stage = stage;
     this.turtleDisplay = turtleDisplay;
@@ -61,6 +63,7 @@ public class ToolbarDisplay {
       .getBundle(String.format("%s/%s/%s", resourcePackage, "languages", language));
     this.idBundle = ResourceBundle
       .getBundle(String.format("%s/%s/%s", resourcePackage, "stylesheets", "CSS_IDs"));
+    this.controller = controller;
     backgroundColor = Color.web("#dedcdc");
     penColor = Color.BLACK;
     initializeGridPane();
@@ -120,6 +123,7 @@ public class ToolbarDisplay {
       comboBox.getItems().add(languageBundle.getString(language));
     }
     comboBox.setValue("English");
+    comboBox.setOnAction(event -> handleLanguageClick(comboBox.getValue()));
     gridPane.add(comboBox, 3, 0, 4, 1);
   }
 
@@ -181,6 +185,10 @@ public class ToolbarDisplay {
     if (file != null) {
       turtleDisplay.setTurtleImage(file);
     }
+  }
+
+  private void handleLanguageClick(String language) {
+    controller.setLanguage(language);
   }
 
   private void handleHelpClick(String command) {
