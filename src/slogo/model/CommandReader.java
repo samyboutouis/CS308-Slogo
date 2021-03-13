@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 import java.util.Stack;
 import slogo.Command;
 import slogo.model.nodes.ConstantNode;
+import slogo.model.nodes.VariableNode;
 
 // creates parser, reads commands, and creates nodes
 public class CommandReader {
@@ -76,8 +77,8 @@ public class CommandReader {
           // if stack is empty and we see a constant, it doesn't do anything to the program but
           // we still add it to the tree
         }
-        case "If" -> {
-          curr = new ConditionalNode(symbol);
+        case "Variable" -> {
+          curr = new VariableNode(0, variables, symbol);
         }
         default -> {
             curr = (SlogoNode) node.getDeclaredConstructor(Integer.class).newInstance(numParameters.getString(symbol));
