@@ -1,6 +1,9 @@
-package slogo;
+package slogo.turtlecommands;
 
-public class CoordinateDirectionCommand implements Command{
+import slogo.Command;
+import slogo.Turtle;
+
+public class CoordinateDirectionCommand implements Command {
 
     // deals with turtle call that sets direction to somewhere absolute using coordinates
     private double x;

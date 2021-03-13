@@ -3,7 +3,7 @@ package slogo.model;
 import java.util.ArrayList;
 import java.util.List;
 import slogo.Command;
-import slogo.MovementCommand;
+import slogo.turtlecommands.MovementCommand;
 
 public class TurtleNode extends SlogoNode{
   private List<SlogoNode> parameters;

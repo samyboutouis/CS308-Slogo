@@ -1,6 +1,9 @@
-package slogo;
+package slogo.turtlecommands;
 
-public class MovementCommand implements Command{
+import slogo.Command;
+import slogo.Turtle;
+
+public class MovementCommand implements Command {
   private double forward;
   private double directionChange;
 

@@ -3,7 +3,7 @@ package slogo.model.nodes;
 import java.util.ArrayList;
 import java.util.List;
 import slogo.Command;
-import slogo.MovementCommand;
+import slogo.turtlecommands.MovementCommand;
 import slogo.model.SlogoNode;
 
 public class ForwardNode extends SlogoNode {

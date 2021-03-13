@@ -3,7 +3,7 @@ package slogo.model.nodes;
 import java.util.ArrayList;
 import java.util.List;
 import slogo.Command;
-import slogo.DegreeDirectionCommand;
+import slogo.turtlecommands.DegreeDirectionCommand;
 import slogo.model.SlogoNode;
 
 public class SetHeadingNode extends SlogoNode {
