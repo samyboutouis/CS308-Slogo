@@ -1,5 +1,12 @@
 package slogo.turtlecommands;
 
-public class PenUpCommand {
+import slogo.Command;
+import slogo.Turtle;
 
+public class PenUpCommand implements Command {
+
+  @Override
+  public void doCommand(Turtle turtle) {
+    turtle.penUp();
+  }
 }
