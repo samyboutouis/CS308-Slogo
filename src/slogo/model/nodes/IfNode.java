@@ -1,7 +1,8 @@
-package slogo.model;
+package slogo.model.nodes;
 
 import java.util.List;
 import slogo.Command;
+import slogo.model.SlogoNode;
 import slogo.model.nodes.ListEndNode;
 import slogo.model.nodes.ListStartNode;
 
