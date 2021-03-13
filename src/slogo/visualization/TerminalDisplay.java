@@ -31,11 +31,15 @@ public class TerminalDisplay {
   private final VariablesDisplay variablesDisplay;
   private final Turtle turtle;
 
+  private final CommandReader commandReader;
+
   public TerminalDisplay(GridPane pane, String resourcePackage, HistoryDisplay historyDisplay, Turtle turtle, VariablesDisplay variablesDisplay){
     this.pane = pane;
     this.historyDisplay = historyDisplay;
     this.variablesDisplay = variablesDisplay;
     this.turtle = turtle;
+
+    commandReader = new CommandReader("English");
 
     pane.setMaxWidth(Double.MAX_VALUE);
     pane.setMaxHeight(Double.MAX_VALUE);
@@ -85,7 +89,6 @@ public class TerminalDisplay {
       String command = textBox.getText().trim();
       if(command.length() > 0){
         try {
-          CommandReader commandReader = new CommandReader("English");
           new AnimationManager(commandReader.parseInput(command), turtle);
 
           Button historyTag = historyDisplay.addNewHistoryTag(command);
