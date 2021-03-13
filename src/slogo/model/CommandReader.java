@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 import java.util.Stack;
 import slogo.Command;
 import slogo.model.nodes.control.ConstantNode;
+import slogo.model.nodes.control.ForNode;
 import slogo.model.nodes.control.VariableNode;
 
 // creates parser, reads commands, and creates nodes
