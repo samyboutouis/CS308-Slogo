@@ -16,7 +16,7 @@ import slogo.model.nodes.VariableNode;
 public class CommandReader {
   private static final String WHITESPACE = "\\s+";
   private static final String NEWLINE = "\n";
-  private static final String RESOURCES_PACKAGE ="resources.languages.";
+  private static final String RESOURCES_PACKAGE ="resources.parameters.";
   private static final String PARAMETERS_FILE = "Commands";
   private ProgramParser parser;
   private Map<String, Double> variables;
@@ -69,20 +69,21 @@ public class CommandReader {
       Class<?> node = Class.forName("slogo.model.nodes." + symbol + "Node");
 
       SlogoNode curr;
+      int parameters = Integer.parseInt(numParameters.getString(symbol));
       switch(symbol){
         // reflection to create the class
         // handle separately: Constant, Variable
         case "Constant" -> {
           // reflection but with the value in the constructor too
-          curr = new ConstantNode(0, Double.parseDouble(s));
+          curr = new ConstantNode(parameters, Double.parseDouble(s));
           // if stack is empty and we see a constant, it doesn't do anything to the program but
           // we still add it to the tree
         }
         case "Variable" -> {
-          curr = new VariableNode(0, variables, symbol);
+          curr = new VariableNode(parameters, variables, symbol);
         }
         default -> {
-            curr = (SlogoNode) node.getDeclaredConstructor(Integer.TYPE).newInstance(Integer.parseInt(numParameters.getString(symbol)));
+            curr = (SlogoNode) node.getDeclaredConstructor(Integer.TYPE).newInstance(parameters);
         }
       }
       // IF fd 50 [ fd 50 ]
