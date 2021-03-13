@@ -76,9 +76,6 @@ public class CommandReader {
           // if stack is empty and we see a constant, it doesn't do anything to the program but
           // we still add it to the tree
         }
-        case "ListStart", "ListEnd" -> {
-          curr = new BracketNode(symbol);
-        }
         case "If" -> {
           curr = new ConditionalNode(symbol);
         }
