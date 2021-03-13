@@ -1,10 +1,12 @@
 package slogo.model;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.ResourceBundle;
 import java.util.Stack;
 import slogo.Command;
 import slogo.model.nodes.ConstantNode;
@@ -13,16 +15,19 @@ import slogo.model.nodes.ConstantNode;
 public class CommandReader {
   private static final String WHITESPACE = "\\s+";
   private static final String NEWLINE = "\n";
+  private static final String RESOURCES_PACKAGE ="resources.languages.";
+  private static final String PARAMETERS_FILE = "Commands";
   private ProgramParser parser;
   private Map<String, Double> variables;
   private List<Double> forTests;
-
+  private ResourceBundle numParameters;
   private List<Command> commands;
 
   public CommandReader(String language) {
     parser = new ProgramParser();
     parser.addPatterns(language);
     parser.addPatterns("Syntax");
+    numParameters = ResourceBundle.getBundle(RESOURCES_PACKAGE + PARAMETERS_FILE);
 
     commands = new ArrayList<>();
     variables = new HashMap<>();
@@ -48,11 +53,14 @@ public class CommandReader {
     return forTests;
   }
 
-  private List<SlogoNode> buildTree(List<String> cleaned){
+  private List<SlogoNode> buildTree(List<String> cleaned)
+      throws NoSuchMethodException, ClassNotFoundException, IllegalAccessException, InvocationTargetException, InstantiationException {
     Stack<SlogoNode> st = new Stack<>();
     List<SlogoNode> roots = new ArrayList<>();
     for(String s : cleaned){
       String symbol = parser.getSymbol(s);
+      Class<?> node = Class.forName(symbol + "Node");
+
       SlogoNode curr;
       switch(symbol){
         // reflection to create the class
@@ -70,7 +78,7 @@ public class CommandReader {
           curr = new ConditionalNode(symbol);
         }
         default -> {
-
+            curr = (SlogoNode) node.getDeclaredConstructor(Integer.class).newInstance(numParameters.getString(symbol));
         }
       }
       if(curr.isFull()){ // only true if node has no parameters
