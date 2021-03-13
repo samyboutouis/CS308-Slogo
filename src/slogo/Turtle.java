@@ -85,6 +85,13 @@ public class Turtle {
     yCoordinate = yPosition;
   }
 
+  public void towards(double xPosition, double yPosition) {
+    double xChange = xPosition - xCoordinate;
+    double yChange = yPosition - yCoordinate;
+    double direction = Math.toDegrees(Math.atan2(xChange, yChange));
+    setDirection(direction);
+  }
+
   public void show() {
     imageView.setVisible(true);
   }
