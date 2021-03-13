@@ -96,8 +96,7 @@ public class ScreenManager {
     gridPane.add(variablesPane, 5, 6, 2, 4);
     gridPane.add(userCommandsPane, 7, 6, 3, 4);
 
-    new TerminalDisplay(terminalPane, RESOURCE_PACKAGE,
-      new HistoryDisplay(historyPane, RESOURCE_PACKAGE));
+    new TerminalDisplay(terminalPane, RESOURCE_PACKAGE, new HistoryDisplay(historyPane, RESOURCE_PACKAGE), turtle);
     new VariablesDisplay(variablesPane, RESOURCE_PACKAGE);
     new UserCommandsDisplay(userCommandsPane, RESOURCE_PACKAGE);
     new ToolbarDisplay(toolbarPane, RESOURCE_PACKAGE, stage, new TurtleDisplay(turtlePane, turtle),
