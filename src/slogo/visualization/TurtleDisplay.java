@@ -1,68 +1,46 @@
 package slogo.visualization;
 
 import java.io.File;
+import java.util.ResourceBundle;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import slogo.Turtle;
 
 public class TurtleDisplay {
-
+  private static final String ID_PROPERTY = "resources/stylesheets/CSS_IDs";
   private static final int BACKGROUND_RADIUS = 20;
+  private static final String ADD_TURTLE_BUTTON = "AddTurtleButton";
 
+  private final ResourceBundle idBundle;
   private final AnchorPane anchorPane;
   private final Turtle turtle;
 
   public TurtleDisplay(AnchorPane anchorPane, Turtle turtle) {
     this.anchorPane = anchorPane;
     this.turtle = turtle;
+    this.idBundle = ResourceBundle.getBundle(ID_PROPERTY);
     setScreen();
   }
 
   private void setScreen() {
-    testButtons();
+    addTurtle();
   }
 
-  private void testButtons() {
+  private void addTurtle() {
     Button addTurtle = new Button("Add Turtle");
     addTurtle.setOnAction(event -> {
       turtle.addToScreen(anchorPane, anchorPane.getHeight(), anchorPane.getWidth());
       addTurtle.setDisable(true);
     });
-    Button right = new Button("Right");
-    right.setOnAction(event -> turtle.rotate( 10));
-    Button left = new Button("Left");
-    left.setOnAction(event -> turtle.rotate( -10));
-    Button forward = new Button("Forward");
-    forward.setOnAction(event -> turtle.forward( 10));
-    Button back = new Button("Back");
-    back.setOnAction(event -> turtle.back( 10));
-    Button penUp = new Button("Pen Up");
-    penUp.setOnAction(event -> turtle.penUp());
-    Button penDown = new Button("Pen Down");
-    penDown.setOnAction(event -> turtle.penDown());
-    Button clear = new Button("Clear");
-    clear.setOnAction(event -> turtle.clearScreen());
-    Button toward = new Button("Toward");
-    toward.setOnAction(event -> turtle.towards(0, 0));
+    addTurtle.setId(idBundle.getString(ADD_TURTLE_BUTTON));
     VBox vBox = new VBox();
     vBox.getChildren().add(addTurtle);
-    vBox.getChildren().add(right);
-    vBox.getChildren().add(left);
-    vBox.getChildren().add(forward);
-    vBox.getChildren().add(back);
-    vBox.getChildren().add(penUp);
-    vBox.getChildren().add(penDown);
-    vBox.getChildren().add(clear);
-    vBox.getChildren().add(toward);
     anchorPane.getChildren().add(vBox);
   }
 

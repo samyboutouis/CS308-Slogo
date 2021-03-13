@@ -32,11 +32,13 @@ public class ToolbarDisplay {
   private static final int ICON_WIDTH = 30;
   private static final int ICON_HEIGHT = 30;
   private final static int COLUMN_COUNT = 10;
+  private static final String DEFAULT_LANGUAGE = "English";
   private static final String DEFAULT_RESOURCE_FOLDER = "resources/";
   private static final String REFERENCES_FOLDER = "src/resources/reference";
   private static final String IMAGE_PROPERTY = "stylesheets/Image";
   private static final String ID_PROPERTY = "stylesheets/CSS_IDs";
   private static final String METHODS_PROPERTY = "methods/Methods";
+  private static final String COLOR_PICKER_ID = "ColorPicker";
 
   private final Stage stage;
   private final GridPane gridPane;
@@ -54,7 +56,7 @@ public class ToolbarDisplay {
 
   public ToolbarDisplay(GridPane pane, String resourcePackage, Stage stage,
     TurtleDisplay turtleDisplay, Controller controller) {
-    String language = "English";
+    String language = DEFAULT_LANGUAGE;
     this.gridPane = pane;
     this.stage = stage;
     this.turtleDisplay = turtleDisplay;
@@ -122,7 +124,7 @@ public class ToolbarDisplay {
     for (String language : languageBundle.keySet()) {
       comboBox.getItems().add(languageBundle.getString(language));
     }
-    comboBox.setValue("English");
+    comboBox.setValue(DEFAULT_LANGUAGE);
     comboBox.setOnAction(event -> handleLanguageClick(comboBox.getValue()));
     gridPane.add(comboBox, 3, 0, 4, 1);
   }
@@ -147,6 +149,7 @@ public class ToolbarDisplay {
     penColorButton.setVisible(false);
     penColorButton.setDisable(true);
     ColorPicker colorPicker = new ColorPicker(penColor);
+    colorPicker.setId(COLOR_PICKER_ID);
     colorPicker.setOnAction(event -> handlePenColorPicker(penColorButton, colorPicker));
     gridPane.add(colorPicker, 0, 0, 1, 1);
   }
@@ -163,6 +166,7 @@ public class ToolbarDisplay {
     backgroundColorButton.setVisible(false);
     backgroundColorButton.setDisable(true);
     ColorPicker colorPicker = new ColorPicker(backgroundColor);
+    colorPicker.setId(COLOR_PICKER_ID);
     colorPicker
       .setOnAction(event -> handleBackgroundColorPicker(backgroundColorButton, colorPicker));
     gridPane.add(colorPicker, 1, 0, 1, 1);
