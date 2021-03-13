@@ -65,7 +65,7 @@ public class CommandReader {
     List<SlogoNode> roots = new ArrayList<>();
     for(String s : cleaned){
       String symbol = parser.getSymbol(s);
-      Class<?> node = Class.forName(symbol + "Node");
+      Class<?> node = Class.forName("slogo.model.nodes." + symbol + "Node");
 
       SlogoNode curr;
       switch(symbol){
@@ -81,7 +81,7 @@ public class CommandReader {
           curr = new VariableNode(0, variables, symbol);
         }
         default -> {
-            curr = (SlogoNode) node.getDeclaredConstructor(Integer.class).newInstance(numParameters.getString(symbol));
+            curr = (SlogoNode) node.getDeclaredConstructor(Integer.TYPE).newInstance(Integer.parseInt(numParameters.getString(symbol)));
         }
       }
       // IF fd 50 [ fd 50 ]
