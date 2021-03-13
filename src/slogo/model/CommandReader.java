@@ -32,6 +32,7 @@ public class CommandReader {
 
     commands = new ArrayList<>();
     variables = new HashMap<>();
+    forTests = new ArrayList<>();
   }
 
   public List<Command> parseInput(String input) throws IllegalArgumentException{
