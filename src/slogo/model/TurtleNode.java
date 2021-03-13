@@ -44,6 +44,8 @@ public class TurtleNode extends SlogoNode{
     }
   }
 
+  // gets values for all parameters of this node, needs commands list to create the commands when
+  // the parameters call getReturnValue
   private void getValues(List<Command> commands) {
     for(SlogoNode node : parameters) {
       values.add(node.getReturnValue(commands));
