@@ -36,7 +36,7 @@ public class ToolbarDisplay {
   private static final String REFERENCES_FOLDER = "src/resources/reference";
   private static final String IMAGE_PROPERTY = "stylesheets/Image";
   private static final String ID_PROPERTY = "stylesheets/CSS_IDs";
-  private static final String COMMAND_PROPERTY = "commands/Commands";
+  private static final String METHODS_PROPERTY = "methods/Methods";
 
   private final Stage stage;
   private final GridPane gridPane;
@@ -66,7 +66,7 @@ public class ToolbarDisplay {
       .getBundle(String.format("%s/%s/%s", resourcePackage, "languages", language));
     this.imageBundle = ResourceBundle.getBundle(DEFAULT_RESOURCE_FOLDER + IMAGE_PROPERTY);
     this.idBundle = ResourceBundle.getBundle(DEFAULT_RESOURCE_FOLDER + ID_PROPERTY);
-    this.commandBundle = ResourceBundle.getBundle(DEFAULT_RESOURCE_FOLDER + COMMAND_PROPERTY);
+    this.commandBundle = ResourceBundle.getBundle(DEFAULT_RESOURCE_FOLDER + METHODS_PROPERTY);
     backgroundColor = Color.web("#dedcdc");
     penColor = Color.BLACK;
     buttonList = List.of("PenColorButton", "BackgroundColorButton", "TurtleImageButton");
@@ -101,7 +101,6 @@ public class ToolbarDisplay {
     Button button = new Button();
     button.setId(idBundle.getString(property));
     String label = imageBundle.getString(property);
-    System.out.println(label);
     button.setGraphic(new ImageView(
       new Image(DEFAULT_RESOURCE_FOLDER + label, ICON_WIDTH,
         ICON_HEIGHT, false, false)));

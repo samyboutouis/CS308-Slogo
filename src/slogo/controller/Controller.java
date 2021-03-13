@@ -19,7 +19,7 @@ public class Controller {
     parser = new ProgramParser();
     translationBundle = ResourceBundle
       .getBundle(String.format("%s/%s/%s", "resources", "languages", "TranslateOptions"));
-    parseProgram("fd 50 rt 90 BACK :distance Left :angle");
+    //parseProgram("fd 50 rt 90 BACK :distance Left :angle");
   }
 
   public void parseProgram(String program) {
@@ -32,7 +32,7 @@ public class Controller {
   private void parseText (ProgramParser lang, List<String> lines) {
     for (String line : lines) {
       if (line.trim().length() > 0) {
-        System.out.printf("%s : %s%n", line, lang.getSymbol(line));
+        //System.out.printf("%s : %s%n", line, lang.getSymbol(line));
       }
     }
     System.out.println();
