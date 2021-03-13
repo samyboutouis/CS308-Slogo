@@ -83,6 +83,8 @@ public class CommandReader {
             curr = (SlogoNode) node.getDeclaredConstructor(Integer.class).newInstance(numParameters.getString(symbol));
         }
       }
+      // IF fd 50 [ fd 50 ]
+      // stack: IF
       if(curr.isFull()){ // only true if node has no parameters
         if(st.isEmpty()) {
           roots.add(curr);
