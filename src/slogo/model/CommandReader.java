@@ -36,7 +36,12 @@ public class CommandReader {
   public List<Command> parseInput(String input) throws IllegalArgumentException{
     commands.clear();
     List<String> cleaned = cleanInput(input);
-    List<SlogoNode> roots = buildTree(cleaned);
+    List<SlogoNode> roots = null;
+    try {
+      roots = buildTree(cleaned);
+    } catch (NoSuchMethodException | ClassNotFoundException | IllegalAccessException | InvocationTargetException | InstantiationException e) {
+      e.printStackTrace();
+    }
     makeCommands(roots);
 
     return commands;
