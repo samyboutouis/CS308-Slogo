@@ -18,9 +18,9 @@ public class TurtleDisplay {
   private final AnchorPane anchorPane;
   private final Turtle turtle;
 
-  public TurtleDisplay(AnchorPane anchorPane) {
+  public TurtleDisplay(AnchorPane anchorPane, Turtle turtle) {
     this.anchorPane = anchorPane;
-    this.turtle = new Turtle(anchorPane);
+    this.turtle = turtle;
     setScreen();
   }
 
