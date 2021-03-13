@@ -82,12 +82,12 @@ public class Turtle {
   }
 
   public void setXY(double xPosition, double yPosition) {
-    double xChange = xCoordinate - xPosition;
-    double yChange = yCoordinate - yPosition;
+    double xChange = xPosition - xCoordinate;
+    double yChange = yPosition - yCoordinate;
+    imageView.setTranslateX(imageView.getTranslateX() + xChange);
+    imageView.setTranslateY(imageView.getTranslateY() - yChange);
     xCoordinate = xPosition;
     yCoordinate = yPosition;
-    imageView.setTranslateX(xChange);
-    imageView.setTranslateY(yChange);
   }
 
   public void show() {
@@ -130,5 +130,15 @@ public class Turtle {
 
   public double getY() {
     return yCoordinate;
+  }
+
+  public void home() {
+    setXY(0, 0);
+  }
+
+  public void clearScreen() {
+    home();
+    pen.removeLines();
+    setDirection(0);
   }
 }

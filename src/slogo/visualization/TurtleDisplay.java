@@ -41,6 +41,8 @@ public class TurtleDisplay {
     penUp.setOnAction(event -> turtle.penUp());
     Button penDown = new Button("Pen Down");
     penDown.setOnAction(event -> turtle.penDown());
+    Button clear = new Button("Clear");
+    clear.setOnAction(event -> turtle.clearScreen());
     VBox vBox = new VBox();
     vBox.getChildren().add(button);
     vBox.getChildren().add(left);
@@ -48,6 +50,7 @@ public class TurtleDisplay {
     vBox.getChildren().add(back);
     vBox.getChildren().add(penUp);
     vBox.getChildren().add(penDown);
+    vBox.getChildren().add(clear);
     anchorPane.getChildren().add(vBox);
   }
 
