@@ -9,6 +9,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
+import slogo.controller.Controller;
 
 public class ScreenManager {
 
@@ -20,11 +21,13 @@ public class ScreenManager {
   private final Scene scene;
   private final GridPane gridPane;
   private final Stage stage;
+  private final Controller controller;
 
   public ScreenManager(Pane root, Scene scene, Stage stage) {
     this.scene = scene;
     this.stage = stage;
     gridPane = new GridPane();
+    controller = new Controller();
     root.getChildren().add(gridPane);
     setupGrid();
     setupDisplays();
@@ -82,6 +85,7 @@ public class ScreenManager {
     variablesPane.getStyleClass().add(DISPLAY_CLASS_NAME);
     userCommandsPane.getStyleClass().add(DISPLAY_CLASS_NAME);
     toolbarPane.getStyleClass().add(DISPLAY_CLASS_NAME);
+
     gridPane.add(toolbarPane, 0, 0, 10, 1);
     gridPane.add(turtlePane, 0, 1, 5, 7);
     gridPane.add(terminalPane, 0, 8, 5, 2);
@@ -89,11 +93,10 @@ public class ScreenManager {
     gridPane.add(variablesPane, 5, 6, 2, 4);
     gridPane.add(userCommandsPane, 7, 6, 3, 4);
 
-    //new TurtleDisplay(turtlePane);
     new TerminalDisplay(terminalPane, RESOURCE_PACKAGE, new HistoryDisplay(historyPane, RESOURCE_PACKAGE));
     new VariablesDisplay(variablesPane, RESOURCE_PACKAGE);
     new UserCommandsDisplay(userCommandsPane, RESOURCE_PACKAGE);
-    new ToolbarDisplay(toolbarPane, RESOURCE_PACKAGE, stage, new TurtleDisplay(turtlePane));
+    new ToolbarDisplay(toolbarPane, RESOURCE_PACKAGE, stage, new TurtleDisplay(turtlePane), controller);
   }
 
   private void setStyleSheet() {

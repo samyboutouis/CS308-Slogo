@@ -1,6 +1,7 @@
 package slogo;
 
 import java.io.File;
+import java.util.ResourceBundle;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -20,6 +21,7 @@ public class Turtle {
   private double yCoordinate;
   private double direction;
   private final Pen pen;
+  private final ResourceBundle idBundle;
 
   public Turtle(AnchorPane anchorPane) {
     this.anchorPane = anchorPane;
@@ -27,6 +29,8 @@ public class Turtle {
     yCoordinate = 0;
     direction = 0;
     pen = new Pen(anchorPane);
+    this.idBundle = ResourceBundle
+      .getBundle(String.format("%s/%s/%s", "resources", "stylesheets", "CSS_IDs"));
     setDefaultImage();
   }
 
@@ -62,14 +66,9 @@ public class Turtle {
     return Math.cos(Math.toRadians(direction)) * pixels;
   }
 
-  public void right(double directionChange) {
+  public void rotate(double directionChange) {
     direction += directionChange;
     imageView.setRotate(imageView.getRotate() + directionChange);
-  }
-
-  public void left(double directionChange) {
-    direction -= directionChange;
-    imageView.setRotate(imageView.getRotate() - directionChange);
   }
 
   public void setDirection(double direction) {
@@ -78,10 +77,12 @@ public class Turtle {
   }
 
   public void setXY(double xPosition, double yPosition) {
+    double xChange = xPosition - xCoordinate;
+    double yChange = yPosition - yCoordinate;
+    imageView.setTranslateX(imageView.getTranslateX() + xChange);
+    imageView.setTranslateY(imageView.getTranslateY() - yChange);
     xCoordinate = xPosition;
     yCoordinate = yPosition;
-    imageView.setTranslateX(xPosition);
-    imageView.setTranslateY(yPosition);
   }
 
   public void show() {
@@ -102,6 +103,7 @@ public class Turtle {
     imageView = new ImageView(image);
     imageView.setTranslateX(INITIAL_WIDTH);
     imageView.setTranslateY(INITIAL_HEIGHT);
+    imageView.setId(idBundle.getString("Turtle"));
     anchorPane.getChildren().add(imageView);
   }
 
@@ -123,5 +125,15 @@ public class Turtle {
 
   public double getY() {
     return yCoordinate;
+  }
+
+  public void home() {
+    setXY(0, 0);
+  }
+
+  public void clearScreen() {
+    home();
+    pen.removeLines();
+    setDirection(0);
   }
 }
