@@ -1,20 +1,20 @@
-package slogo.model.nodes;
+package slogo.model.nodes.math;
 
 import java.util.List;
 import slogo.Command;
 import slogo.model.SlogoNode;
 
-public class SumNode extends SlogoNode {
+public class DifferenceNode extends SlogoNode {
 
   private List<SlogoNode> parameters;
 
-  public SumNode(int numParameters){
+  public DifferenceNode(int numParameters){
     super(numParameters);
     parameters = super.getParameters();
   }
 
   @Override
   public double getReturnValue(List<Command> commands) {
-    return parameters.get(0).getReturnValue(commands) + parameters.get(1).getReturnValue(commands);
+    return parameters.get(0).getReturnValue(commands) - parameters.get(1).getReturnValue(commands);
   }
 }

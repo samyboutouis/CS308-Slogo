@@ -9,9 +9,8 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Stack;
 import slogo.Command;
-import slogo.model.nodes.ConstantNode;
-import slogo.model.nodes.MakeVariableNode;
-import slogo.model.nodes.VariableNode;
+import slogo.model.nodes.control.ConstantNode;
+import slogo.model.nodes.control.VariableNode;
 
 // creates parser, reads commands, and creates nodes
 public class CommandReader {

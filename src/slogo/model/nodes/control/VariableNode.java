@@ -1,4 +1,4 @@
-package slogo.model.nodes;
+package slogo.model.nodes.control;
 
 import java.util.List;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package slogo.model.nodes;
+package slogo.model.nodes.commands;
 
 import java.util.ArrayList;
 import java.util.List;
