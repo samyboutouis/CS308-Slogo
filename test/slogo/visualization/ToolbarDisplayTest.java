@@ -5,8 +5,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.Test;
 import util.DukeApplicationTest;
@@ -51,6 +53,13 @@ class ToolbarDisplayTest extends DukeApplicationTest {
     assertFalse(myPenColorButton.isVisible());
     ColorPicker colorPicker = lookup("#" + idBundle.getString("ColorPicker")).query();
     setValue(colorPicker, Color.RED);
+    TextArea terminalTextBox = lookup("#" + idBundle.getString("TerminalTextBoxID")).query();
+    Button terminalButton =  lookup("#" + idBundle.getString("TerminalButtonID")).query();
+    writeTo(terminalTextBox, "fd 50");
+    clickOn(terminalButton);
+    Line line = lookup("#" + idBundle.getString("LineID")).query();
+    Color lineColor = (Color) line.getStroke();
+    assertEquals(lineColor, Color.RED);
   }
 
   @Test
