@@ -37,6 +37,10 @@ public class CommandReader {
     return commands;
   }
 
+  public Map<String, Double> getVariables() {
+    return variables;
+  }
+
   // used to test return values
   public List<Double> testParseInput(String input) {
     forTests = new ArrayList<>();
@@ -59,19 +63,15 @@ public class CommandReader {
           // if stack is empty and we see a constant, it doesn't do anything to the program but
           // we still add it to the tree
         }
-        case "Forward", "Backward", "Left", "Right" -> {
-          curr = new TurtleNode(1, symbol);
-        }
-        case "Sum", "Difference" -> {
-          curr = new MathNode(2, symbol);
-        }
         case "ListStart", "ListEnd" -> {
           curr = new BracketNode(symbol);
         }
         case "If" -> {
           curr = new ConditionalNode(symbol);
         }
-        default -> throw new IllegalArgumentException();
+        default -> {
+
+        }
       }
       if(curr.isFull()){ // only true if node has no parameters
         if(st.isEmpty()) {
