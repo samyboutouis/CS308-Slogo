@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Stack;
 import slogo.Command;
+import slogo.model.nodes.ConstantNode;
 
 // creates parser, reads commands, and creates nodes
 public class CommandReader {
@@ -50,8 +51,10 @@ public class CommandReader {
       String symbol = parser.getSymbol(s);
       SlogoNode curr;
       switch(symbol){
+        // reflection to create the class
         case "Constant" -> {
-          curr = new ConstantNode(Double.parseDouble(s));
+          // reflection but with the value in the constructor too
+          curr = new ConstantNode(0, Double.parseDouble(s));
           // if stack is empty and we see a constant, it doesn't do anything to the program but
           // we still add it to the tree
         }
