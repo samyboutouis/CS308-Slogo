@@ -28,11 +28,13 @@ public class TerminalDisplay {
   private TextArea textBox;
   private Button button;
   private final HistoryDisplay historyDisplay;
+  private final VariablesDisplay variablesDisplay;
   private final Turtle turtle;
 
-  public TerminalDisplay(GridPane pane, String resourcePackage, HistoryDisplay historyDisplay, Turtle turtle){
+  public TerminalDisplay(GridPane pane, String resourcePackage, HistoryDisplay historyDisplay, Turtle turtle, VariablesDisplay variablesDisplay){
     this.pane = pane;
     this.historyDisplay = historyDisplay;
+    this.variablesDisplay = variablesDisplay;
     this.turtle = turtle;
 
     pane.setMaxWidth(Double.MAX_VALUE);
@@ -87,6 +89,7 @@ public class TerminalDisplay {
           new AnimationManager(commandReader.parseInput(command), turtle);
 
           Button historyTag = historyDisplay.addNewHistoryTag(command);
+          variablesDisplay.updateBox(commandReader.getVariables());
           applyHistoryTagLogic(historyTag);
         }
         catch (Exception error){

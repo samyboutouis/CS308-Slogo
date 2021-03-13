@@ -27,13 +27,6 @@ public class VariablesDisplay extends ScrollingDisplay {
     variablesBox = setupVBoxContainer(VARIABLES_TITLE, VARIABLES_BOX_ID);
     String language = "English";
     this.resourceBundle = ResourceBundle.getBundle(String.format("%s/%s/%s", resourcePackage, "languages", language));
-
-    // for testing
-    Map<String, Double> testMap = new HashMap<>();
-    testMap.put("test1", 1.0);
-    testMap.put("test2", 2.0);
-    testMap.put("test3", 3.0);
-    updateBox(testMap);
   }
 
   /**
