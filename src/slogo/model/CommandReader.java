@@ -81,7 +81,7 @@ public class CommandReader {
           // we still add it to the tree
         }
         case "Variable" -> {
-          curr = new VariableNode(parameters, variables, symbol);
+          curr = new VariableNode(parameters, variables, s);
         }
         case "MakeVariable" -> {
           curr = new MakeVariableNode(parameters, variables);
