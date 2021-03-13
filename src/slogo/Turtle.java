@@ -4,7 +4,6 @@ import java.io.File;
 import java.util.ResourceBundle;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
@@ -13,8 +12,6 @@ public class Turtle {
   private static final String DEFAULT_IMAGE = "resources/turtle.png";
   private static final int IMAGE_HEIGHT = 50;
   private static final int IMAGE_WIDTH = 50;
-  private static final int INITIAL_WIDTH = 320;
-  private static final int INITIAL_HEIGHT = 275;
 
   private ImageView imageView;
   private double xCoordinate;
@@ -114,17 +111,7 @@ public class Turtle {
     imageView.setTranslateY(height/2 - IMAGE_HEIGHT/2);
     turtlePane.getChildren().add(imageView);
     pen = new Pen(turtlePane);
-    //initializeGridResizeListeners(turtlePane);
   }
-
-//  private void initializeGridResizeListeners(Pane turtlePane) {
-//    turtlePane.heightProperty().addListener((observableValue, oldHeight, newHeight) -> {
-//      imageView.setTranslateY((Double) newHeight);
-//    });
-//    turtlePane.widthProperty().addListener((observableValue, oldWidth, newWidth) -> {
-//      imageView.setTranslateX((Double) newWidth);
-//    });
-//  }
 
   public void setPenColor(Color color) {
     pen.setColor(color);
