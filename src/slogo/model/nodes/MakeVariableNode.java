@@ -8,12 +8,10 @@ import slogo.model.SlogoNode;
 // implements make and set commands
 public class MakeVariableNode extends SlogoNode {
   private List<SlogoNode> parameters;
-  private Map<String, Double> variables;
 
-  public MakeVariableNode(int numParameters, Map<String, Double> variables){
+  public MakeVariableNode(int numParameters){
     super(numParameters);
     parameters = super.getParameters();
-    this.variables = variables;
   }
 
   @Override

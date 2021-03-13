@@ -83,9 +83,6 @@ public class CommandReader {
         case "Variable" -> {
           curr = new VariableNode(parameters, variables, s); // s is the value we read, symbol is the classification
         }
-        case "MakeVariable" -> {
-          curr = new MakeVariableNode(parameters, variables);
-        }
         default -> {
             curr = (SlogoNode) node.getDeclaredConstructor(Integer.TYPE).newInstance(parameters);
         }
