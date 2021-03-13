@@ -5,6 +5,7 @@ public class MovementCommand implements Command{
   private double directionChange;
 
   // forward and directionChange are relative values
+  // handles Forward, Backward, Right, Left
   public MovementCommand(double forward, double directionChange){
     this.forward = forward;
     this.directionChange = directionChange;
