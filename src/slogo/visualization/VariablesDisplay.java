@@ -1,5 +1,7 @@
 package slogo.visualization;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
@@ -26,23 +28,28 @@ public class VariablesDisplay extends ScrollingDisplay {
     String language = "English";
     this.resourceBundle = ResourceBundle.getBundle(String.format("%s/%s/%s", resourcePackage, "languages", language));
 
-    updateBox(new String[]{"yeet", "yolo", "test_example"}); //test
+    // for testing
+    Map<String, Double> testMap = new HashMap<>();
+    testMap.put("test1", 1.0);
+    testMap.put("test2", 2.0);
+    testMap.put("test3", 3.0);
+    updateBox(testMap);
   }
 
   /**
    *
-   * @param variablesList
+   * @param variablesMap
    */
-  public void updateBox(String[] variablesList){
+  public void updateBox(Map<String, Double> variablesMap){
     variablesBox.getChildren().clear();
 
-    for (String variableName : variablesList) {
-      addNewVariablesTab(variableName);
+    for(Map.Entry<String, Double> entry : variablesMap.entrySet()){
+      addNewVariablesTab(entry.getKey(), entry.getValue());
     }
   }
 
-  private void addNewVariablesTab(String variableName){
-    Button variablesTab = new Button(variableName);
+  private void addNewVariablesTab(String name, double value){
+    Button variablesTab = new Button(String.format("%s: %.2f", name, value));
     variablesTab.setMaxWidth(Double.MAX_VALUE);
     variablesTab.setMaxHeight(Double.MAX_VALUE);
     variablesTab.setId(resourceBundle.getString(VARIABLES_TAG_ID));
