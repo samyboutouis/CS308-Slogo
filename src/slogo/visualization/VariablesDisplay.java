@@ -42,7 +42,7 @@ public class VariablesDisplay extends ScrollingDisplay {
   }
 
   private void addNewVariablesTab(String name, double value){
-    Button variablesTab = new Button(String.format("%s: %.2f", name, value));
+    Button variablesTab = new Button(String.format("%s : %.2f", name.substring(1), value));
     variablesTab.setMaxWidth(Double.MAX_VALUE);
     variablesTab.setMaxHeight(Double.MAX_VALUE);
     variablesTab.setId(resourceBundle.getString(VARIABLES_TAG_ID));
