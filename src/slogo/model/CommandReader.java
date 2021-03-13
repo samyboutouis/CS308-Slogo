@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 import java.util.Stack;
 import slogo.Command;
 import slogo.model.nodes.ConstantNode;
+import slogo.model.nodes.MakeVariableNode;
 import slogo.model.nodes.VariableNode;
 
 // creates parser, reads commands, and creates nodes
@@ -81,6 +82,9 @@ public class CommandReader {
         }
         case "Variable" -> {
           curr = new VariableNode(parameters, variables, symbol);
+        }
+        case "MakeVariable" -> {
+          curr = new MakeVariableNode(parameters, variables);
         }
         default -> {
             curr = (SlogoNode) node.getDeclaredConstructor(Integer.TYPE).newInstance(parameters);
