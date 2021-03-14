@@ -70,18 +70,13 @@ public class CommandReader {
     List<SlogoNode> roots = new ArrayList<>();
     for(String s : cleaned){
       String symbol = parser.getSymbol(s);
-      System.out.println(symbol);
-      System.out.println(s);
-      System.out.println("Felix\n");
       Class<?> node = Class.forName("slogo.model.nodes." + packageName.getString(symbol) + "." + symbol + "Node");
 
       SlogoNode curr;
       int parameters = Integer.parseInt(numParameters.getString(symbol));
       switch(symbol){
-        // reflection to create the class
         // handle separately: Constant, Variable
         case "Constant" -> {
-          // reflection but with the value in the constructor too
           curr = new ConstantNode(parameters, Double.parseDouble(s));
           // if stack is empty and we see a constant, it doesn't do anything to the program but
           // we still add it to the tree
@@ -93,8 +88,6 @@ public class CommandReader {
             curr = (SlogoNode) node.getDeclaredConstructor(Integer.TYPE).newInstance(parameters);
         }
       }
-      // IF fd 50 [ fd 50 ]
-      // stack: IF
       if(curr.isFull()){ // only true if node has no parameters
         if(st.isEmpty()) {
           roots.add(curr);
