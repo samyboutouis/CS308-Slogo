@@ -1,5 +1,6 @@
 package slogo.model;
 
+import java.awt.event.KeyEvent;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,7 +11,6 @@ import java.util.ResourceBundle;
 import java.util.Stack;
 import slogo.Command;
 import slogo.model.nodes.control.ConstantNode;
-import slogo.model.nodes.control.ForNode;
 import slogo.model.nodes.control.RepeatNode;
 import slogo.model.nodes.control.VariableNode;
 
@@ -122,7 +122,6 @@ public class CommandReader {
   private void makeCommands(List<SlogoNode> roots){
     for(SlogoNode root : roots){
       double value = root.getReturnValue(commands);
-      System.out.println(value);
       forTests.add(value);
     }
   }
