@@ -11,6 +11,7 @@ import java.util.Stack;
 import slogo.Command;
 import slogo.model.nodes.control.ConstantNode;
 import slogo.model.nodes.control.ForNode;
+import slogo.model.nodes.control.RepeatNode;
 import slogo.model.nodes.control.VariableNode;
 
 // creates parser, reads commands, and creates nodes
@@ -81,6 +82,10 @@ public class CommandReader {
         }
         case "Variable" -> {
           curr = new VariableNode(parameters, variables, s); // s is the value we read, symbol is the classification
+        }
+        case "Repeat" -> {
+          // needs the map of variables in constructor to add repcount variable
+          curr = new RepeatNode(parameters, variables);
         }
         default -> {
             curr = (SlogoNode) node.getDeclaredConstructor(Integer.TYPE).newInstance(parameters);
