@@ -98,7 +98,6 @@ public class TerminalDisplay {
       if (command.length() > 0) {
         try {
           new AnimationManager(commandReader.parseInput(command), turtle);
-
           Button historyTag = historyDisplay.addNewHistoryTag(command);
           variablesDisplay.updateBox(commandReader.getVariables());
           applyHistoryTagLogic(historyTag);

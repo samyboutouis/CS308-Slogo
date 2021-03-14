@@ -30,20 +30,11 @@ public class TurtleDisplay {
   }
 
   private void setScreen() {
-    addTurtle();
     anchorPane.setId(idBundle.getString(TURTLE_PANE_ID));
   }
 
-  private void addTurtle() {
-    Button addTurtle = new Button("Add Turtle");
-    addTurtle.setOnAction(event -> {
-      turtle.addToScreen(anchorPane, anchorPane.getHeight(), anchorPane.getWidth());
-      addTurtle.setDisable(true);
-    });
-    addTurtle.setId(idBundle.getString(ADD_TURTLE_BUTTON_ID));
-    VBox vBox = new VBox();
-    vBox.getChildren().add(addTurtle);
-    anchorPane.getChildren().add(vBox);
+  public void addTurtle() {
+    turtle.addToScreen(anchorPane, anchorPane.getHeight(), anchorPane.getWidth());
   }
 
   public void setTurtleImage(File file) {

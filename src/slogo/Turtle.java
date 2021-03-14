@@ -104,13 +104,13 @@ public class Turtle {
   private void setDefaultImage() {
     Image image = new Image(DEFAULT_IMAGE, IMAGE_WIDTH, IMAGE_HEIGHT, false, false);
     imageView = new ImageView(image);
+    imageView.setId(idBundle.getString("Turtle"));
   }
 
   public void addToScreen(Pane turtlePane, double height, double width) {
     imageView.setTranslateX(width/2 - IMAGE_WIDTH/2);
     imageView.setTranslateY(height/2 - IMAGE_HEIGHT/2);
     turtlePane.getChildren().add(imageView);
-    imageView.setId(idBundle.getString("Turtle"));
     pen = new Pen(turtlePane, idBundle);
   }
 

@@ -71,7 +71,7 @@ public class ToolbarDisplay {
     this.commandBundle = ResourceBundle.getBundle(DEFAULT_RESOURCE_FOLDER + METHODS_PROPERTY);
     backgroundColor = Color.web("#dedcdc");
     penColor = Color.BLACK;
-    buttonList = List.of("PenColorButton", "BackgroundColorButton", "TurtleImageButton");
+    buttonList = List.of("AddTurtleButton", "PenColorButton", "BackgroundColorButton", "TurtleImageButton");
     initializeGridPane();
     makeToolbar();
   }
@@ -126,7 +126,7 @@ public class ToolbarDisplay {
     }
     comboBox.setValue(DEFAULT_LANGUAGE);
     comboBox.setOnAction(event -> handleLanguageClick(comboBox.getValue()));
-    gridPane.add(comboBox, 3, 0, 4, 1);
+    gridPane.add(comboBox, 4, 0, 4, 1);
   }
 
   private void addHelpDropdown() {
@@ -143,6 +143,10 @@ public class ToolbarDisplay {
     comboBox.setValue(resourceBundle.getString("HelpButton"));
     comboBox.setOnAction(event -> handleHelpClick(comboBox.getValue()));
     gridPane.add(comboBox, 9, 0, 2, 1);
+  }
+
+  private void handleAddTurtleClick(Button addTurtleButton) {
+    turtleDisplay.addTurtle();
   }
 
   private void handlePenColorClick(Button penColorButton) {
