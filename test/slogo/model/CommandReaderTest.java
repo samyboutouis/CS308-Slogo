@@ -31,6 +31,25 @@ public class CommandReaderTest {
     assertEquals(correct, myReader.testParseInput("sum 50 sum 50 50"));
   }
 
+  @Test
+  void testBooleans () {
+    assertEquals(List.of(1.0), myReader.testParseInput("less? 30 50"));
+    assertEquals(List.of(0.0), myReader.testParseInput("less? 50 30"));
+    assertEquals(List.of(0.0), myReader.testParseInput("greater? 30 50"));
+    assertEquals(List.of(1.0), myReader.testParseInput("greater? 50 30"));
+    assertEquals(List.of(1.0), myReader.testParseInput("equal? 50 50"));
+    assertEquals(List.of(0.0), myReader.testParseInput("equal? 50 30"));
+    assertEquals(List.of(0.0), myReader.testParseInput("notequal? 50 50"));
+    assertEquals(List.of(1.0), myReader.testParseInput("notequal? 50 30"));
+
+    assertEquals(List.of(0.0), myReader.testParseInput("and 0 50"));
+    assertEquals(List.of(1.0), myReader.testParseInput("and 20 30"));
+    assertEquals(List.of(1.0), myReader.testParseInput("or 20 0"));
+    assertEquals(List.of(0.0), myReader.testParseInput("or 0 0"));
+    assertEquals(List.of(0.0), myReader.testParseInput("not 24"));
+    assertEquals(List.of(1.0), myReader.testParseInput("not 0"));
+  }
+
   // test that command objects created are correct
   @Test
   void testHomeCommand () {
