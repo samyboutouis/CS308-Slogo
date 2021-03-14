@@ -36,4 +36,14 @@ public class CommandReaderTest {
   void testHomeCommand () {
     assertTrue(myReader.parseInput("home").get(0) instanceof HomeCommand);
   }
+
+  // test exceptions/errors are handled correctly
+  @Test
+  void testBadInput () {
+    try{
+      myReader.parseInput("::"); // invalid syntax
+    } catch(IllegalArgumentException e){
+      assertEquals(e.getMessage(), "Input syntax is incorrect");
+    }
+  }
 }
