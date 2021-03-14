@@ -28,7 +28,7 @@ public class ForNode extends SlogoNode {
   @Override
   public double getReturnValue(List<Command> commands) {
     setFirstEnd();
-    getIndexing();
+    getIndexing(commands);
     double ret = 0;
     for(double i = forStart; i <= forEnd; i = i + forIncrement){
       variable.setValue(i);
@@ -42,14 +42,13 @@ public class ForNode extends SlogoNode {
   }
 
   // get start, end, and increment
-  private void getIndexing(){
+  private void getIndexing(List<Command> commands){
     // for [ :var 1 5 1 ]
     // i = 0 is left bracket
     variable = (VariableNode) parameters.get(1);
-    // if values can be other commands, pass in commands instead of null
-    forStart = parameters.get(2).getReturnValue(null);
-    forEnd = parameters.get(3).getReturnValue(null);
-    forIncrement = parameters.get(4).getReturnValue(null);
+    forStart = parameters.get(2).getReturnValue(commands);
+    forEnd = parameters.get(3).getReturnValue(commands);
+    forIncrement = parameters.get(4).getReturnValue(commands);
   }
 
   private void setFirstEnd() {
