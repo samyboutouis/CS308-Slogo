@@ -1,7 +1,6 @@
 package slogo.model.nodes.control;
 
 import java.util.List;
-import java.util.Map;
 import slogo.Command;
 import slogo.model.SlogoNode;
 
@@ -45,8 +44,9 @@ public class ForNode extends SlogoNode {
   // get start, end, and increment
   private void getIndexing(){
     // for [ :var 1 5 1 ]
-    // i = 1 is left bracket
+    // i = 0 is left bracket
     variable = (VariableNode) parameters.get(1);
+    // if values can be other commands, pass in commands instead of null
     forStart = parameters.get(2).getReturnValue(null);
     forEnd = parameters.get(3).getReturnValue(null);
     forIncrement = parameters.get(4).getReturnValue(null);
