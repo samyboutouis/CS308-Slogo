@@ -69,6 +69,9 @@ public class CommandReader {
     List<SlogoNode> roots = new ArrayList<>();
     for(String s : cleaned){
       String symbol = parser.getSymbol(s);
+      if(symbol.equals("NO MATCH")){
+        throw new IllegalArgumentException("Input syntax is incorrect");
+      }
       Class<?> node = Class.forName("slogo.model.nodes." + packageName.getString(symbol) + "." + symbol + "Node");
 
       SlogoNode curr;
@@ -124,13 +127,11 @@ public class CommandReader {
     }
   }
 
+  // removes comments from input and white space between values
   private List<String> cleanInput(String input) throws IllegalArgumentException{
     String[] preCleaned = input.split(NEWLINE);
     List<String> cleaned = new ArrayList<>();
     for(String line : preCleaned){
-      if(parser.getSymbol(line).equals("NO MATCH")){
-        throw new IllegalArgumentException("Input syntax is incorrect");
-      }
       if (!parser.getSymbol(line).equals("Comment")){
         cleaned.addAll(Arrays.asList(line.trim().split(WHITESPACE)));
       }
