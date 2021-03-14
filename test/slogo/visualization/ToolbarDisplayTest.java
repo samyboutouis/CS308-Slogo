@@ -6,6 +6,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
@@ -76,6 +78,8 @@ class ToolbarDisplayTest extends DukeApplicationTest {
 
   @Test
   void testChangeTurtleImage() {
+    ImageView turtleImageView = lookup("#" + idBundle.getString("Turtle")).query();
+    Image originalImage = turtleImageView.getImage();
     assertTrue(myTurtleImageButton.isVisible());
     clickOn(myTurtleImageButton);
   }
@@ -84,14 +88,14 @@ class ToolbarDisplayTest extends DukeApplicationTest {
   void testChangeLanguage() {
     assertTrue(myLanguageDropdown.isVisible());
     assertEquals(myLanguageDropdown.getValue(), LANGUAGE);
-//    select(myLanguageDropdown, "Français");
-//    assertEquals(myLanguageDropdown.getValue(), "Français");
+    select(myLanguageDropdown, "Français");
+    assertEquals(myLanguageDropdown.getValue(), "Français");
   }
 
   @Test
   void testSelectHelp() {
     assertTrue(myHelpDropdown.isVisible());
-//    select(myLanguageDropdown, "atan");
+    select(myLanguageDropdown, "atan");
   }
 
   private void addTurtle() {

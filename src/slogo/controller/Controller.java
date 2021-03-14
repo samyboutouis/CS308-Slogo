@@ -39,7 +39,7 @@ public class Controller {
   }
 
   public void setLanguage (String language) {
-    this.language = translationBundle.getString(language);
-    parser.addPatterns(this.language);
+//    this.language = translationBundle.getString(language);
+//    parser.addPatterns(this.language);
   }
 }
