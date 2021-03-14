@@ -10,18 +10,25 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class CommandReaderTest {
   private CommandReader myReader;
+  private List<Double> correct;
 
   @BeforeEach
   void setUp() {
     myReader = new CommandReader("English");
+    correct = new ArrayList<>();
   }
 
   // test that values are correct based on Logo code
   @Test
   void testIf () {
-    List<Double> correct = new ArrayList<>();
     correct.add(0.0);
     assertEquals(correct, myReader.testParseInput("if 0 [ if fd 0 [ fd 20 ] sum 50 50 ]"));
+  }
+
+  @Test
+  void testSum () {
+    correct.add(150.0);
+    assertEquals(correct, myReader.testParseInput("sum 50 sum 50 50"));
   }
 
   // test that command objects created are correct
