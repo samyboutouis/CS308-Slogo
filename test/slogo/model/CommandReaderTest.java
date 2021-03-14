@@ -1,10 +1,11 @@
 package slogo.model;
 
-import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import slogo.Command;
 import slogo.turtlecommands.HomeCommand;
+import slogo.turtlecommands.MovementCommand;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -16,6 +17,7 @@ public class CommandReaderTest {
     myReader = new CommandReader("English");
   }
 
+  // SECTION
   // test that values are correct based on Logo code
   @Test
   void testIf () {
@@ -56,12 +58,23 @@ public class CommandReaderTest {
     assertEquals(List.of(1.0), myReader.testParseInput("not 0"));
   }
 
+  // SECTION
   // test that command objects created are correct
   @Test
   void testHomeCommand () {
     assertTrue(myReader.parseInput("home").get(0) instanceof HomeCommand);
   }
 
+  @Test
+  void testLoopCommand () {
+    List<Command> loop = myReader.parseInput("for [ :a 1 5 1 ] [ fd 1 bk 2 ]");
+    assertEquals(10, loop.size());
+    for(Command c : loop){
+      assertTrue(c instanceof MovementCommand);
+    }
+  }
+
+  // SECTION
   // test exceptions/errors are handled correctly
   @Test
   void testBadInput () {
