@@ -41,15 +41,13 @@ public class CommandReader {
 
   public List<Command> parseInput(String input) throws IllegalArgumentException{
     commands.clear();
-    List<String> cleaned = cleanInput(input);
-    List<SlogoNode> roots = null;
     try {
-      roots = buildTree(cleaned);
+      List<String> cleaned = cleanInput(input);
+      List<SlogoNode> roots = buildTree(cleaned);
+      makeCommands(roots);
     } catch (NoSuchMethodException | ClassNotFoundException | IllegalAccessException | InvocationTargetException | InstantiationException e) {
       e.printStackTrace();
     }
-    makeCommands(roots);
-
     return commands;
   }
 
@@ -121,12 +119,12 @@ public class CommandReader {
     }
   }
 
-  private List<String> cleanInput(String input) {
+  private List<String> cleanInput(String input) throws IllegalArgumentException{
     String[] preCleaned = input.split(NEWLINE);
     List<String> cleaned = new ArrayList<>();
     for(String line : preCleaned){
-      if(!parser.getSymbol(line).equals("NO MATCH")){
-        // System.out.println(line);
+      if(parser.getSymbol(line).equals("NO MATCH")){
+        throw new IllegalArgumentException("Input syntax is incorrect");
       }
       if (!parser.getSymbol(line).equals("Comment")){
         cleaned.addAll(Arrays.asList(line.trim().split(WHITESPACE)));
