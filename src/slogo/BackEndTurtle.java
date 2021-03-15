@@ -17,6 +17,8 @@ public interface BackEndTurtle {
 
   double getY();
 
+  double getDirection();
+
   void home();
 
   void clearScreen();

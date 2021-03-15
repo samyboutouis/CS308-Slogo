@@ -11,6 +11,7 @@ import java.util.ResourceBundle;
 import java.util.Stack;
 import slogo.BackEndTurtle;
 import slogo.Command;
+import slogo.FrontEndTurtle;
 import slogo.model.nodes.control.ConstantNode;
 import slogo.model.nodes.control.RepeatNode;
 import slogo.model.nodes.control.VariableNode;
@@ -40,7 +41,7 @@ public class CommandReader {
     forTests = new ArrayList<>();
   }
 
-  public List<Command> parseInput(String input) throws IllegalArgumentException{
+  public List<Command> parseInput(String input, BackEndTurtle backEndTurtle) throws IllegalArgumentException{
     commands.clear();
     try {
       List<String> cleaned = cleanInput(input);
@@ -65,7 +66,7 @@ public class CommandReader {
   // used to test return values
   public List<Double> testParseInput(String input) {
     forTests = new ArrayList<>();
-    parseInput(input);
+    parseInput(input, new FrontEndTurtle(0, 0, 0));
     return forTests;
   }
 
