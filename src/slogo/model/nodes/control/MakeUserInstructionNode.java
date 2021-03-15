@@ -1,5 +1,6 @@
 package slogo.model.nodes.control;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import slogo.Command;
@@ -8,9 +9,11 @@ import slogo.model.SlogoNode;
 public class MakeUserInstructionNode extends SlogoNode {
 
   private List<SlogoNode> parameters;
+  private List<SlogoNode> myCommands;
+  private List<VariableNode> variableNames;
   private int brackets;
   private int firstEnd;
-  private UserDefinedNode definedNode;
+  private int ret;
 
   // this node creates the user defined node and adds it to the map of commands
   // that node needs a list of string to represent the variable names
@@ -19,6 +22,22 @@ public class MakeUserInstructionNode extends SlogoNode {
     super(numParameters); // dummy value since isFull is overridden
     brackets = numParameters;
     parameters = super.getParameters();
+    myCommands = new ArrayList<>();
+    variableNames = new ArrayList<>();
+  }
+
+  public CommandNode createNode() {
+    try{
+      getFirstEnd(); // index of first end bracket
+      getVariables();
+      getCommands();
+      ret = 1;
+      return new CommandNode(variableNames.size(), myCommands, variableNames);
+    } catch( ClassCastException e) {
+      // if variable wasn't a variable node
+      ret = 0;
+      return null;
+    }
   }
 
   @Override
@@ -28,38 +47,33 @@ public class MakeUserInstructionNode extends SlogoNode {
 
   @Override
   public double getReturnValue(List<Command> commands) {
-    try{
-      getFirstEnd(); // index of first end bracket
-      getVariables();
-      for(int i = firstEnd; i < parameters.size(); i++){ // technically could do i = firstEnd + 2 but our code handles i = firstEnd
-        if(!(parameters.get(i) instanceof ListStartNode) && !(parameters.get(i) instanceof ListEndNode)){
-          definedNode.addCommand(parameters.get(i));
-        }
+    return ret;
+  }
+
+  private void getCommands() {
+    for(int i = firstEnd; i < parameters.size(); i++){ // technically could do i = firstEnd + 2 but our code handles i = firstEnd
+      if(!(parameters.get(i) instanceof ListStartNode) && !(parameters.get(i) instanceof ListEndNode)){
+        myCommands.add(parameters.get(i));
       }
-      return 1;
-    } catch (ClassCastException c) {
-      // if name wasn't a user defined node (already exists)
-      return 0;
     }
   }
 
   private void getVariables() {
     // to arc [ :incr :degrees ]
     // to arc [ ]
-    definedNode = (UserDefinedNode) parameters.get(0);
-    for(int i = 2; i < firstEnd; i++){
-      definedNode.addVariableName((VariableNode) parameters.get(i));
+    // i = 0 is left bracket since arc not added as a child
+    for(int i = 1; i < firstEnd; i++){
+      variableNames.add((VariableNode) parameters.get(i));
     }
   }
 
-  private int getFirstEnd() {
+  private void getFirstEnd() {
     for(int i = 0; i < parameters.size(); i++){
       if(parameters.get(i) instanceof ListEndNode){
         firstEnd = i;
         break;
       }
     }
-    return firstEnd;
   }
 
   // check to see if we've seen brackets number of list end nodes

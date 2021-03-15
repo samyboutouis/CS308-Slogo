@@ -5,13 +5,13 @@ import slogo.Command;
 import slogo.model.SlogoNode;
 
 // represents the actual node when a user calls the command they defined, so return value is not just 1 or 0
-public class UserDefinedNode extends SlogoNode {
+public class CommandNode extends SlogoNode {
 
   private List<SlogoNode> myCommands;
   private List<SlogoNode> parameters;
   private List<VariableNode> variables;
 
-  public UserDefinedNode(int numParameters, List<SlogoNode> myCommands, List<VariableNode> variables) {
+  public CommandNode(int numParameters, List<SlogoNode> myCommands, List<VariableNode> variables) {
     super(numParameters);
     parameters = super.getParameters();
     this.myCommands = myCommands;
