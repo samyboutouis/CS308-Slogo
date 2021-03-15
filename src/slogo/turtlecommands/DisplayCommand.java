@@ -12,6 +12,6 @@ public class DisplayCommand implements Command {
 
   @Override
   public void doCommand(FrontEndTurtle frontEndTurtle) {
-
+    // frontEndTurtle.print(info);
   }
 }
