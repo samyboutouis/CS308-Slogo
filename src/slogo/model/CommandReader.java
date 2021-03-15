@@ -1,6 +1,5 @@
 package slogo.model;
 
-import java.awt.event.KeyEvent;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,6 +29,7 @@ public class CommandReader {
   private ResourceBundle numParameters;
   private ResourceBundle packageName;
   private List<Command> commands;
+  private BackEndTurtle turtle;
 
   public CommandReader(String language) {
     setLanguage(language);
@@ -44,6 +44,7 @@ public class CommandReader {
   public List<Command> parseInput(String input, BackEndTurtle backEndTurtle) throws IllegalArgumentException{
     commands.clear();
     try {
+      turtle = backEndTurtle;
       List<String> cleaned = cleanInput(input);
       List<SlogoNode> roots = buildTree(cleaned);
       makeCommands(roots);
@@ -97,8 +98,8 @@ public class CommandReader {
           // needs the map of variables in constructor to add repcount variable
           curr = new RepeatNode(parameters, variables);
         }
-        case "Home", "ClearScreen", "SetTowards", "SetPosition", "" -> {
-          // curr = (SlogoNode) node.getDeclaredConstructor(Integer.TYPE, turtle).newInstance(parameters, turtle);
+        case "Home", "ClearScreen", "SetTowards", "SetPosition" -> {
+          curr = (SlogoNode) node.getDeclaredConstructor(Integer.TYPE, turtle.getClass()).newInstance(parameters, turtle);
         }
         default -> {
           curr = (SlogoNode) node.getDeclaredConstructor(Integer.TYPE).newInstance(parameters);
