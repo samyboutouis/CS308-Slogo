@@ -67,8 +67,13 @@ public class CommandReaderTest {
   @Test
   void testMath (){
     assertEquals(List.of(3.0), myReader.testParseInput("sum 1 2"));
-    //assertEquals(List.of(6.0), myReader.testParseInput("product 2 3"));
+    assertEquals(List.of(6.0), myReader.testParseInput("product 2 3"));
     assertEquals(List.of(1.0), myReader.testParseInput("difference 2 1"));
+    assertEquals(List.of(1.5), myReader.testParseInput("quotient 3 2"));
+    assertEquals(List.of(1.0), myReader.testParseInput("remainder 3 2"));
+    assertEquals(List.of(-3.0), myReader.testParseInput("minus 3"));
+    assertEquals(List.of(1.0), myReader.testParseInput("sin 90"));
+    assertEquals(List.of(Math.cos(Math.toRadians(90))), myReader.testParseInput("cos 90"));
   }
 
   // SECTION

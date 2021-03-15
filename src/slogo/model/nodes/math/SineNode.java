@@ -15,6 +15,6 @@ public class SineNode extends SlogoNode {
 
   @Override
   public double getReturnValue(List<Command> commands) {
-    return Math.sin(parameters.get(0).getReturnValue(commands));
+    return Math.sin(Math.toRadians(parameters.get(0).getReturnValue(commands)));
   }
 }

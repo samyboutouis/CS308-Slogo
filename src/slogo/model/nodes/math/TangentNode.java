@@ -15,7 +15,7 @@ public class TangentNode extends SlogoNode {
 
   @Override
   public double getReturnValue(List<Command> commands) {
-    return Math.tan(parameters.get(0).getReturnValue(commands));
+    return Math.tan(Math.toRadians( parameters.get(0).getReturnValue(commands)));
   }
 }
 
