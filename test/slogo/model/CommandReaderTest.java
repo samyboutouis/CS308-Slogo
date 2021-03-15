@@ -35,6 +35,11 @@ public class CommandReaderTest {
   }
 
   @Test
+  void testTurtleMovements () {
+    assertEquals(List.of(100.0), myReader.testParseInput("fd 100 home"));
+  }
+
+  @Test
   void testForward () {
     assertEquals(List.of(5.0), myReader.testParseInput("fd 5.0"));
   }
