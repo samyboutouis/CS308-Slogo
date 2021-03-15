@@ -9,7 +9,9 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
+import slogo.BackEndTurtle;
 import slogo.FrontEndTurtle;
+import slogo.controller.Controller;
 import slogo.model.CommandReader;
 
 public class TerminalDisplay {
@@ -31,17 +33,15 @@ public class TerminalDisplay {
   private final HistoryDisplay historyDisplay;
   private final VariablesDisplay variablesDisplay;
   private final FrontEndTurtle frontEndTurtle;
-
-  private final CommandReader commandReader;
+  private final Controller controller;
 
   public TerminalDisplay(GridPane pane, String resourcePackage, HistoryDisplay historyDisplay,
-    FrontEndTurtle frontEndTurtle, VariablesDisplay variablesDisplay) {
+    FrontEndTurtle frontEndTurtle, VariablesDisplay variablesDisplay, Controller controller) {
     this.pane = pane;
     this.historyDisplay = historyDisplay;
     this.variablesDisplay = variablesDisplay;
     this.frontEndTurtle = frontEndTurtle;
-
-    commandReader = new CommandReader("English");
+    this.controller = controller;
 
     pane.setMaxWidth(Double.MAX_VALUE);
     pane.setMaxHeight(Double.MAX_VALUE);
@@ -96,9 +96,11 @@ public class TerminalDisplay {
       String command = textBox.getText().trim();
       if (command.length() > 0) {
         try {
-          new AnimationManager(commandReader.parseInput(command), frontEndTurtle);
+          BackEndTurtle b = new FrontEndTurtle(frontEndTurtle.getX(), frontEndTurtle.getY(),
+            frontEndTurtle.getDirection());
+          new AnimationManager(controller.parseProgram(command, b), frontEndTurtle);
           Button historyTag = historyDisplay.addNewHistoryTag(command);
-          variablesDisplay.updateBox(commandReader.getVariables());
+          variablesDisplay.updateBox(controller.getVariables());
           applyHistoryTagLogic(historyTag);
         } catch (Exception error) {
           createErrorDialog(error); // backend throws new exception with specific error message

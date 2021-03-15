@@ -4,6 +4,7 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import slogo.Command;
+import slogo.FrontEndTurtle;
 import slogo.turtlecommands.HomeCommand;
 import slogo.turtlecommands.MovementCommand;
 
@@ -80,12 +81,12 @@ public class CommandReaderTest {
   // test that command objects created are correct
   @Test
   void testHomeCommand () {
-    assertTrue(myReader.parseInput("home").get(0) instanceof HomeCommand);
+    assertTrue(myReader.parseInput("home", new FrontEndTurtle(0, 0, 0)).get(0) instanceof HomeCommand);
   }
 
   @Test
   void testLoopCommand () {
-    List<Command> loop = myReader.parseInput("for [ :a 1 5 1 ] [ fd 1 bk 2 ]");
+    List<Command> loop = myReader.parseInput("for [ :a 1 5 1 ] [ fd 1 bk 2 ]", new FrontEndTurtle(0, 0, 0));
     assertEquals(10, loop.size());
     for(Command c : loop){
       assertTrue(c instanceof MovementCommand);
@@ -97,7 +98,7 @@ public class CommandReaderTest {
   @Test
   void testBadInput () {
     try{
-      myReader.parseInput("::"); // invalid syntax
+      myReader.testParseInput("::"); // invalid syntax
     } catch(IllegalArgumentException e){
       assertEquals(e.getMessage(), "Input syntax is incorrect");
     }
