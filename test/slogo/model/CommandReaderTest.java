@@ -82,6 +82,15 @@ public class CommandReaderTest {
     assertEquals(List.of(Math.cos(Math.toRadians(90))), myReader.testParseInput("cos 90"));
   }
 
+  @Test
+  void testUserDefined () {
+    assertEquals(List.of(1.0, 50.0), myReader.testParseInput("to arc [ :a ]\n"
+        + "[\n"
+        + "  fd :a\n"
+        + "]\n"
+        + "arc 50"));
+  }
+
   // SECTION
   // test that command objects created are correct
   @Test
