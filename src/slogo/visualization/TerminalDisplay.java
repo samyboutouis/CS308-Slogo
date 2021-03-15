@@ -24,6 +24,8 @@ public class TerminalDisplay {
   private final static int COLUMN_COUNT = 4;
 
   private final ResourceBundle resourceBundle;
+  private final ResourceBundle idBundle;
+  private final ResourceBundle errorBundle;
   private final GridPane pane;
   private TextArea textBox;
   private Button button;
@@ -33,7 +35,8 @@ public class TerminalDisplay {
 
   private final CommandReader commandReader;
 
-  public TerminalDisplay(GridPane pane, String resourcePackage, HistoryDisplay historyDisplay, Turtle turtle, VariablesDisplay variablesDisplay){
+  public TerminalDisplay(GridPane pane, String resourcePackage, HistoryDisplay historyDisplay,
+    Turtle turtle, VariablesDisplay variablesDisplay) {
     this.pane = pane;
     this.historyDisplay = historyDisplay;
     this.variablesDisplay = variablesDisplay;
@@ -48,9 +51,14 @@ public class TerminalDisplay {
     pane.setPadding(new Insets(PADDING_LENGTH, PADDING_LENGTH, PADDING_LENGTH, PADDING_LENGTH));
 
     String language = "English";
-    this.resourceBundle = ResourceBundle.getBundle(String.format("%s/%s/%s", resourcePackage, "languages", language));
+    this.resourceBundle = ResourceBundle
+      .getBundle(String.format("%s/%s/%s", resourcePackage, "languages", language));
+    this.idBundle = ResourceBundle
+      .getBundle(String.format("%s/%s/%s", resourcePackage, "stylesheets", "CSS_IDs"));
+    this.errorBundle = ResourceBundle
+      .getBundle(String.format("%s/%s/%s", resourcePackage, "languages", language + "Errors"));
 
-    for(int i = 0; i < COLUMN_COUNT; i++){
+    for (int i = 0; i < COLUMN_COUNT; i++) {
       ColumnConstraints col = new ColumnConstraints();
       col.setHgrow(Priority.ALWAYS);
       col.setPercentWidth(100.0 / COLUMN_COUNT);
@@ -63,39 +71,37 @@ public class TerminalDisplay {
     applyButtonLogic();
   }
 
-  private void initializeTextField(){
+  private void initializeTextField() {
     textBox = new TextArea();
     textBox.setPrefColumnCount(COLUMN_COUNT);
     textBox.setWrapText(true);
     textBox.setFocusTraversable(false);
     textBox.setPromptText(resourceBundle.getString(TERMINAL_PROMPT));
-    textBox.setId(resourceBundle.getString(TERMINAL_TEXT_BOX_ID));
+    textBox.setId(idBundle.getString(TERMINAL_TEXT_BOX_ID));
 
     pane.add(textBox, 0, 0, 3, 1);
   }
 
-  private void initializeButton(){
+  private void initializeButton() {
     button = new Button(resourceBundle.getString(TERMINAL_BUTTON));
     button.setMaxWidth(Double.MAX_VALUE);
     button.setMaxHeight(Double.MAX_VALUE);
     button.setWrapText(true);
-    button.setId(resourceBundle.getString(TERMINAL_BUTTON_ID));
+    button.setId(idBundle.getString(TERMINAL_BUTTON_ID));
 
     pane.add(button, 3, 0, 1, 1);
   }
 
-  private void applyButtonLogic(){
+  private void applyButtonLogic() {
     button.setOnAction(e -> {
       String command = textBox.getText().trim();
-      if(command.length() > 0){
+      if (command.length() > 0) {
         try {
           new AnimationManager(commandReader.parseInput(command), turtle);
-
           Button historyTag = historyDisplay.addNewHistoryTag(command);
           variablesDisplay.updateBox(commandReader.getVariables());
           applyHistoryTagLogic(historyTag);
-        }
-        catch (Exception error){
+        } catch (Exception error) {
           createErrorDialog(error); // backend throws new exception with specific error message
         }
       }
@@ -103,16 +109,16 @@ public class TerminalDisplay {
     });
   }
 
-  private void applyHistoryTagLogic(Button historyTab){
+  private void applyHistoryTagLogic(Button historyTab) {
     historyTab.setOnAction(e -> {
       String command = historyTab.getText();
       textBox.setText(command);
     });
   }
 
-  private void createErrorDialog(Exception error){
+  private void createErrorDialog(Exception error) {
     Alert newAlert = new Alert(AlertType.ERROR);
-    newAlert.setTitle(resourceBundle.getString(ERROR_TITLE_PROPERTY));
+    newAlert.setTitle(errorBundle.getString(ERROR_TITLE_PROPERTY));
     newAlert.setHeaderText(null);
     newAlert.setContentText(error.getMessage());
     newAlert.showAndWait();
