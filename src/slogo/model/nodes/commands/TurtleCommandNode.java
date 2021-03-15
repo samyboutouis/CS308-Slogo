@@ -6,9 +6,9 @@ import slogo.Command;
 import slogo.model.SlogoNode;
 
 // second level of abstraction for all command nodes that may need getValues
-public abstract class CommandNode extends SlogoNode {
+public abstract class TurtleCommandNode extends SlogoNode {
 
-  public CommandNode(int numParameters) {
+  public TurtleCommandNode(int numParameters) {
     super(numParameters);
   }
 
