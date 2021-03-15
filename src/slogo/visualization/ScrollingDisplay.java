@@ -16,6 +16,7 @@ public class ScrollingDisplay {
   private final static int ROW_COUNT = 10;
 
   private final ResourceBundle resourceBundle;
+  private final ResourceBundle idBundle;
   private final GridPane pane;
 
   /**
@@ -27,6 +28,7 @@ public class ScrollingDisplay {
     this.pane = pane;
     String language = "English";
     this.resourceBundle = ResourceBundle.getBundle(String.format("%s/%s/%s", resourcePackage, "languages", language));
+    this.idBundle = ResourceBundle.getBundle(String.format("%s/%s/%s", resourcePackage, "stylesheets", "CSS_IDs"));
   }
 
   /**
@@ -65,7 +67,7 @@ public class ScrollingDisplay {
     scrollPane.setFitToWidth(true);
     scrollPane.setPrefViewportHeight(1);
 
-    scrollPane.setId(resourceBundle.getString(vBoxID));
+    scrollPane.setId(idBundle.getString(vBoxID));
     pane.add(scrollPane, 0, 1, 1, 9);
 
     VBox vBox = new VBox();
