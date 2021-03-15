@@ -15,6 +15,6 @@ public class CosineNode extends SlogoNode {
 
   @Override
   public double getReturnValue(List<Command> commands) {
-    return Math.cos(parameters.get(0).getReturnValue(commands));
+    return Math.cos(Math.toRadians( parameters.get(0).getReturnValue(commands)));
   }
 }

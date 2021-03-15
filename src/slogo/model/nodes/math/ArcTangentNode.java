@@ -15,6 +15,6 @@ public class ArcTangentNode extends SlogoNode {
 
   @Override
   public double getReturnValue(List<Command> commands) {
-    return Math.atan(parameters.get(0).getReturnValue(commands));
+    return Math.atan(Math.toRadians( parameters.get(0).getReturnValue(commands)));
   }
 }
