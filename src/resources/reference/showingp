@@ -3,10 +3,10 @@ SHOWING?
 SHOWINGP
 
 Description:
-Reports whether or not the turtle is visible
+Reports whether or not the frontEndTurtle is visible
 
 Parameters:
 None
 
 Returns:
-1 if turtle is showing; 0 if it is hiding
+1 if frontEndTurtle is showing; 0 if it is hiding

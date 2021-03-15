@@ -1,7 +1,7 @@
 package slogo.turtlecommands;
 
 import slogo.Command;
-import slogo.Turtle;
+import slogo.FrontEndTurtle;
 
 public class MovementCommand implements Command {
   private double forward;
@@ -15,9 +15,9 @@ public class MovementCommand implements Command {
   }
 
   @Override
-  public void doCommand(Turtle turtle) {
-    turtle.forward(forward);
-    turtle.rotate(directionChange);
+  public void doCommand(FrontEndTurtle frontEndTurtle) {
+    frontEndTurtle.forward(forward);
+    frontEndTurtle.rotate(directionChange);
   }
 }
 

@@ -9,7 +9,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Stack;
+import slogo.BackEndTurtle;
 import slogo.Command;
+import slogo.FrontEndTurtle;
 import slogo.model.nodes.control.ConstantNode;
 import slogo.model.nodes.control.RepeatNode;
 import slogo.model.nodes.control.VariableNode;
@@ -39,7 +41,7 @@ public class CommandReader {
     forTests = new ArrayList<>();
   }
 
-  public List<Command> parseInput(String input) throws IllegalArgumentException{
+  public List<Command> parseInput(String input, BackEndTurtle backEndTurtle) throws IllegalArgumentException{
     commands.clear();
     try {
       List<String> cleaned = cleanInput(input);
@@ -64,7 +66,7 @@ public class CommandReader {
   // used to test return values
   public List<Double> testParseInput(String input) {
     forTests = new ArrayList<>();
-    parseInput(input);
+    parseInput(input, new FrontEndTurtle(0, 0, 0));
     return forTests;
   }
 
@@ -136,6 +138,9 @@ public class CommandReader {
     String[] preCleaned = input.split(NEWLINE);
     List<String> cleaned = new ArrayList<>();
     for(String line : preCleaned){
+      if(line.trim().equals("")){
+        continue; // ignores lines that are only new lines
+      }
       if (!parser.getSymbol(line).equals("Comment")){
         cleaned.addAll(Arrays.asList(line.trim().split(WHITESPACE)));
       }

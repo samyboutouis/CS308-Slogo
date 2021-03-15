@@ -1,7 +1,7 @@
 package slogo.turtlecommands;
 
 import slogo.Command;
-import slogo.Turtle;
+import slogo.FrontEndTurtle;
 
 // used to display information from backend to frontend
 public class DisplayCommand implements Command {
@@ -11,7 +11,7 @@ public class DisplayCommand implements Command {
   }
 
   @Override
-  public void doCommand(Turtle turtle) {
+  public void doCommand(FrontEndTurtle frontEndTurtle) {
 
   }
 }

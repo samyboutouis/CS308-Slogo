@@ -1,7 +1,7 @@
 package slogo.turtlecommands;
 
 import slogo.Command;
-import slogo.Turtle;
+import slogo.FrontEndTurtle;
 
 // handles SETHEADING
 public class SetHeadingCommand implements Command {
@@ -13,7 +13,7 @@ public class SetHeadingCommand implements Command {
   }
 
   @Override
-  public void doCommand(Turtle turtle) {
-    turtle.setDirection(degrees);
+  public void doCommand(FrontEndTurtle frontEndTurtle) {
+    frontEndTurtle.setDirection(degrees);
   }
 }

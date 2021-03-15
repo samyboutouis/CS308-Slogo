@@ -1,7 +1,7 @@
 # Use Cases
 
 
-1. The user types 'fd 50' in the command window, and sees the turtle move in the display window leaving a trail, and the command is added to the environment's history.
+1. The user types 'fd 50' in the command window, and sees the frontEndTurtle move in the display window leaving a trail, and the command is added to the environment's history.
 ```java
 // private method used to handle user input takes in the string of the command box and sets it as userInput
 turtleInfo = createMovement(x, y, angle, isPenDown);
@@ -29,7 +29,7 @@ map.put(String variableName, int value);
 updateVariable(map);
 ```
 
-4. The user sets the pen's color using the UI so subsequent lines drawn when the turtle moves use that color.
+4. The user sets the pen's color using the UI so subsequent lines drawn when the frontEndTurtle moves use that color.
 ```java
 try {
   Color penColor = Color.web(receivePenColor());
@@ -50,7 +50,7 @@ try {
 }
 ```
 
-6. The user sets the turtle display area's background color.
+6. The user sets the frontEndTurtle display area's background color.
 ```java
 try {
   Color backgroundColor = Color.web(receiveBackgroundColor());
@@ -60,7 +60,7 @@ try {
 }
 ```
 
-7. The user uploads an image to represent the turtle.
+7. The user uploads an image to represent the frontEndTurtle.
 ```java
 try {
   Image image = getImage(FileChooser fileChooser);
@@ -119,7 +119,7 @@ try {
 }
 ```
 
-13. The user chooses to clear the turtle's display area for a new drawing.
+13. The user chooses to clear the frontEndTurtle's display area for a new drawing.
 ```java
 clearScreen();
 ```

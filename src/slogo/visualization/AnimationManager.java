@@ -1,26 +1,23 @@
 package slogo.visualization;
 
-import java.sql.Time;
 import java.util.List;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.util.Duration;
 import slogo.Command;
-import slogo.Turtle;
+import slogo.FrontEndTurtle;
 
 public class AnimationManager {
 
   private final List<Command> commands;
-  private final Turtle turtle;
+  private final FrontEndTurtle frontEndTurtle;
   private int frameIndex;
 
   private Timeline animation;
 
-  public AnimationManager(List<Command> commands, Turtle turtle){
+  public AnimationManager(List<Command> commands, FrontEndTurtle frontEndTurtle){
     this.commands = commands;
-    this.turtle = turtle;
+    this.frontEndTurtle = frontEndTurtle;
 
     setupTimeline();
   }
@@ -42,8 +39,8 @@ public class AnimationManager {
   }
 
   private void stepAnimation(){
-    if(turtle != null){
-      commands.get(frameIndex).doCommand(turtle);
+    if(frontEndTurtle != null){
+      commands.get(frameIndex).doCommand(frontEndTurtle);
       frameIndex++;
       if (frameIndex >= commands.size()){
         animation.stop();
@@ -51,6 +48,5 @@ public class AnimationManager {
     } else {
       animation.stop();
     }
-
   }
 }

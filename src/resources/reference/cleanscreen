@@ -3,10 +3,10 @@ CLEANSCREEN
 CS
 
 Description:
-Erases turtle's trail and returns it to the home position
+Erases frontEndTurtle's trail and returns it to the home position
 
 Parameters:
 None
 
 Returns:
-Distance the turtle moved
+Distance the frontEndTurtle moved

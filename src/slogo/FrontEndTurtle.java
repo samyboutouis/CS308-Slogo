@@ -8,7 +8,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import slogo.visualization.Pen;
 
-public class Turtle {
+public class FrontEndTurtle implements BackEndTurtle {
 
   private static final String DEFAULT_IMAGE = "resources/turtle.png";
   private static final int IMAGE_HEIGHT = 50;
@@ -21,13 +21,21 @@ public class Turtle {
   private Pen pen;
   private final ResourceBundle idBundle;
 
-  public Turtle() {
+  public FrontEndTurtle() {
     xCoordinate = 0;
     yCoordinate = 0;
     direction = 0;
     this.idBundle = ResourceBundle
       .getBundle(String.format("%s/%s/%s", "resources", "stylesheets", "CSS_IDs"));
     setDefaultImage();
+  }
+
+  public FrontEndTurtle(double xCoordinate, double yCoordinate, double direction) {
+    this.xCoordinate = xCoordinate;
+    this.yCoordinate = yCoordinate;
+    this.direction = direction;
+    this.idBundle = ResourceBundle
+      .getBundle(String.format("%s/%s/%s", "resources", "stylesheets", "CSS_IDs"));
   }
 
   public void forward(double pixels) {
@@ -133,6 +141,8 @@ public class Turtle {
   public double getY() {
     return yCoordinate;
   }
+
+  public double getDirection() { return direction; }
 
   public void home() {
     setXY(0, 0);

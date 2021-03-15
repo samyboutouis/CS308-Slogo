@@ -1,7 +1,7 @@
 SLogo
 ====
 
-This project implements a development environment that helps users write programs to draw using a turtle.
+This project implements a development environment that helps users write programs to draw using a frontEndTurtle.
 
 Names: Andre Wang (jw542), Donghan Park (dp239), Samy Boutouis (sb590), Felix Jiang (fj32)
 

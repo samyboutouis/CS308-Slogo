@@ -3,7 +3,7 @@ PENCOLOR
 PC
 
 Description:
-Reports turtle's current pen color
+Reports frontEndTurtle's current pen color
 
 Parameters:
 None
