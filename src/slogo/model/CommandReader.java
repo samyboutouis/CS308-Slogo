@@ -23,6 +23,7 @@ public class CommandReader {
   private static final String PACKAGES_FILE = "packages.Packages";
   private ProgramParser parser;
   private Map<String, Double> variables;
+  private Map<String, List<SlogoNode>> userDefinedCommands;
   private List<Double> forTests;
   private ResourceBundle numParameters;
   private ResourceBundle packageName;
