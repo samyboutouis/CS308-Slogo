@@ -23,7 +23,7 @@ public class AnimationManager {
   }
 
   private void setupTimeline(){
-    int FPS = 10;
+    int FPS = 100;
     double secondDelay = 1.0 / FPS;
 
     frameIndex = 0;
