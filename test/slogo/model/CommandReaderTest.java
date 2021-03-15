@@ -64,6 +64,13 @@ public class CommandReaderTest {
     assertEquals(List.of(1.0), myReader.testParseInput("not 0"));
   }
 
+  @Test
+  void testMath (){
+    assertEquals(List.of(3.0), myReader.testParseInput("sum 1 2"));
+    //assertEquals(List.of(6.0), myReader.testParseInput("product 2 3"));
+    assertEquals(List.of(1.0), myReader.testParseInput("difference 2 1"));
+  }
+
   // SECTION
   // test that command objects created are correct
   @Test
