@@ -29,7 +29,7 @@ public class Controller {
 
   public void setLanguage (String language) {
     this.language = translationBundle.getString(language);
-    commandReader.setLanguage(language);
+    commandReader.setLanguage(this.language);
   }
 
   public Map<String, Double> getVariables() {
