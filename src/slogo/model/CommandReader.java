@@ -1,6 +1,5 @@
 package slogo.model;
 
-import java.awt.event.KeyEvent;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,9 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Stack;
-import slogo.BackEndTurtle;
 import slogo.Command;
-import slogo.FrontEndTurtle;
+import slogo.BackEndTurtle;
 import slogo.model.nodes.control.ConstantNode;
 import slogo.model.nodes.control.RepeatNode;
 import slogo.model.nodes.control.VariableNode;
@@ -66,7 +64,7 @@ public class CommandReader {
   // used to test return values
   public List<Double> testParseInput(String input) {
     forTests = new ArrayList<>();
-    parseInput(input, new FrontEndTurtle(0, 0, 0));
+    parseInput(input, new BackEndTurtle(0, 0, 0));
     return forTests;
   }
 

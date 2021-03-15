@@ -1,25 +1,75 @@
 package slogo;
 
-public interface BackEndTurtle {
-  void forward(double pixels);
+public class BackEndTurtle implements Turtle {
 
-  void back(double pixels);
+  private double xCoordinate;
+  private double yCoordinate;
+  private double direction;
 
-  void rotate(double directionChange);
+  public BackEndTurtle(double xCoordinate, double yCoordinate, double direction) {
+    this.xCoordinate = xCoordinate;
+    this.yCoordinate = yCoordinate;
+    this.direction = direction;
+  }
 
-  void setDirection(double direction);
+  public void forward(double pixels) {
+    double xChange = calculateComponentX(pixels);
+    double yChange = calculateComponentY(pixels);
+    xCoordinate += xChange;
+    yCoordinate += yChange;
+  }
 
-  void setXY(double xPosition, double yPosition);
+  public void back(double pixels) {
+    double xChange = calculateComponentX(pixels);
+    double yChange = calculateComponentY(pixels);
+    xCoordinate -= xChange;
+    yCoordinate -= yChange;
+  }
 
-  void towards(double xPosition, double yPosition);
+  private double calculateComponentX(double pixels) {
+    return Math.sin(Math.toRadians(direction)) * pixels;
+  }
 
-  double getX();
+  private double calculateComponentY(double pixels) {
+    return Math.cos(Math.toRadians(direction)) * pixels;
+  }
 
-  double getY();
+  public void rotate(double directionChange) {
+    direction += directionChange;
+  }
 
-  double getDirection();
+  public void setDirection(double direction) {
+    this.direction = direction;
+  }
 
-  void home();
+  public void setXY(double xPosition, double yPosition) {
+    xCoordinate = xPosition;
+    yCoordinate = yPosition;
+  }
 
-  void clearScreen();
+  public void towards(double xPosition, double yPosition) {
+    double xChange = xPosition - xCoordinate;
+    double yChange = yPosition - yCoordinate;
+    double direction = Math.toDegrees(Math.atan2(xChange, yChange));
+    setDirection(direction);
+  }
+
+  public double getX() {
+    return xCoordinate;
+  }
+
+  public double getY() {
+    return yCoordinate;
+  }
+
+  public double getDirection() { return direction; }
+
+  public void home() {
+    setXY(0, 0);
+  }
+
+  public void clearScreen() {
+    home();
+    setDirection(0);
+  }
 }

@@ -3,8 +3,8 @@ package slogo.controller;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
-import slogo.BackEndTurtle;
 import slogo.Command;
+import slogo.BackEndTurtle;
 import slogo.model.CommandReader;
 
 public class Controller {

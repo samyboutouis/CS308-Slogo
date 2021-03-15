@@ -10,14 +10,14 @@ import slogo.FrontEndTurtle;
 public class AnimationManager {
 
   private final List<Command> commands;
-  private final FrontEndTurtle frontEndTurtle;
+  private final FrontEndTurtle turtle;
   private int frameIndex;
 
   private Timeline animation;
 
-  public AnimationManager(List<Command> commands, FrontEndTurtle frontEndTurtle){
+  public AnimationManager(List<Command> commands, FrontEndTurtle turtle){
     this.commands = commands;
-    this.frontEndTurtle = frontEndTurtle;
+    this.turtle = turtle;
 
     setupTimeline();
   }
@@ -39,8 +39,8 @@ public class AnimationManager {
   }
 
   private void stepAnimation(){
-    if(frontEndTurtle != null){
-      commands.get(frameIndex).doCommand(frontEndTurtle);
+    if(turtle != null){
+      commands.get(frameIndex).doCommand(turtle);
       frameIndex++;
       if (frameIndex >= commands.size()){
         animation.stop();
