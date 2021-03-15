@@ -9,10 +9,10 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
-import slogo.BackEndTurtle;
 import slogo.FrontEndTurtle;
+import slogo.BackEndTurtle;
+import slogo.Turtle;
 import slogo.controller.Controller;
-import slogo.model.CommandReader;
 
 public class TerminalDisplay {
 
@@ -96,9 +96,9 @@ public class TerminalDisplay {
       String command = textBox.getText().trim();
       if (command.length() > 0) {
         try {
-          BackEndTurtle b = new FrontEndTurtle(frontEndTurtle.getX(), frontEndTurtle.getY(),
-            frontEndTurtle.getDirection());
-          new AnimationManager(controller.parseProgram(command, b), frontEndTurtle);
+          BackEndTurtle backendTurtle = new BackEndTurtle(frontEndTurtle.getX(), frontEndTurtle.getY(),
+              frontEndTurtle.getDirection());
+          new AnimationManager(controller.parseProgram(command, backendTurtle), frontEndTurtle);
           Button historyTag = historyDisplay.addNewHistoryTag(command);
           variablesDisplay.updateBox(controller.getVariables());
           applyHistoryTagLogic(historyTag);

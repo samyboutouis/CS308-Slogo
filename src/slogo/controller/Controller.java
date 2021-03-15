@@ -3,8 +3,8 @@ package slogo.controller;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
-import slogo.BackEndTurtle;
 import slogo.Command;
+import slogo.BackEndTurtle;
 import slogo.model.CommandReader;
 
 public class Controller {
@@ -29,7 +29,7 @@ public class Controller {
 
   public void setLanguage (String language) {
     this.language = translationBundle.getString(language);
-    commandReader.setLanguage(language);
+    commandReader.setLanguage(this.language);
   }
 
   public Map<String, Double> getVariables() {
