@@ -9,10 +9,10 @@ Felix Jiang (fj32)
 
 ### Planning Questions
 
-* What behaviors (methods) should the turtle have?
+* What behaviors (methods) should the frontEndTurtle have?
     * Ability to be shown/hidden
     * Ability to rotate by a set amount (either by absolute or relative degree)
-    * Ability to move by a set amount in a certain direction (turtle may be able to move in all cardinal directions, or only forward--with direction changed by rotation)
+    * Ability to move by a set amount in a certain direction (frontEndTurtle may be able to move in all cardinal directions, or only forward--with direction changed by rotation)
     * Ability to toggle drawing (i.e., lift/drop the pen)
 
 * When does parsing need to take place and what does it need to start properly?
@@ -21,8 +21,8 @@ Felix Jiang (fj32)
     * Parsing also needs to know the string input that the user types in
 
 * What is the result of parsing and who receives it?
-    * The result of parsing is the program now knows what the user wants to do to the turtle
-    * The part of the program that is responsible for calling the methods that move the turtle
+    * The result of parsing is the program now knows what the user wants to do to the frontEndTurtle
+    * The part of the program that is responsible for calling the methods that move the frontEndTurtle
 
 * When are errors detected and how are they reported?
     * Errors occur based on unrecognized commands from the user
@@ -30,16 +30,16 @@ Felix Jiang (fj32)
     * They should report to the command window to let the user know their command did not work
 
 * What do commands know, when do they know it, and how do they get it?
-    * How to call the turtle
+    * How to call the frontEndTurtle
     * They know it when the programmer programs the command, but more importantly they should know it when the user types it in the program
     * Commands know when to be executed, and that is recieved from the user typing
 
 * How is the GUI updated after a command has completed execution?
     * The GUI should update after receiving the response from an API that is called
-    * For example, when a user sends a command, the GUI should be continually updated to respond the changes to the turtle
+    * For example, when a user sends a command, the GUI should be continually updated to respond the changes to the frontEndTurtle
 
 * What behaviors does the result of a command need to have to be used by the front end?
-    * Result of a command needs to know how to move the turtle, where to move it, and what direction the turtle is facing
+    * Result of a command needs to know how to move the frontEndTurtle, where to move it, and what direction the frontEndTurtle is facing
 
 ### APIs
 
@@ -49,7 +49,7 @@ Returns a big list that represents all the movement steps that correspond to the
 ```java
 public <Collection> getMovementArray(String command){
   // uses the command (code from frontend) to return a list of 
-  // all the moves (including coordinates) that the turtle makes
+  // all the moves (including coordinates) that the frontEndTurtle makes
 }
 ```
 
@@ -71,11 +71,11 @@ public <Collection> parseCode(String command){
 
 
 #### Frontend Internal API
-The frontend would be able to update the position of the turtle through internal APIs. For example, after receiving the new coordinates and orientation from the back-end, the front-end would be in charge of actually moving the turtle and creating pen marks on the screen.
+The frontend would be able to update the position of the frontEndTurtle through internal APIs. For example, after receiving the new coordinates and orientation from the back-end, the front-end would be in charge of actually moving the frontEndTurtle and creating pen marks on the screen.
 
 ```java
 public void updateTurtleMovement movement){
-  // updates the position of the turtle for each movement step
+  // updates the position of the frontEndTurtle for each movement step
 }
 ```
 ```java
@@ -129,10 +129,10 @@ public void display(List<Movement> movements){
 
 #### Use Cases
 
-* The user types 'fd 50' in the command window, sees the turtle move in the display window leaving a trail, and has the command added to the environment's history.
+* The user types 'fd 50' in the command window, sees the frontEndTurtle move in the display window leaving a trail, and has the command added to the environment's history.
     * Console passes the 'fd 50' to the backend parser.
     * Parser returns a list of Movement objects that represent the position, direction, and pen up/down. Between each item in the list, only one of these fields should be changed.
-    * Returned list from parser is then used to update the turtle movements by calling Turtle methods
+    * Returned list from parser is then used to update the frontEndTurtle movements by calling Turtle methods
     * The text in the console is passed to the history display
 
 * The user types '50 fd' in the command window and sees an error message that the command was not formatted correctly.
@@ -140,10 +140,10 @@ public void display(List<Movement> movements){
     * Console passes the '50 fd' string to the backend parser.
     * Backend throws an exception; frontend displays error message instead of updating the view
 
-* The user types 'pu fd 50 pd fd 50' in the command window and sees the turtle move twice (once without a trail and once with a trail)
+* The user types 'pu fd 50 pd fd 50' in the command window and sees the frontEndTurtle move twice (once without a trail and once with a trail)
     * The command is given to the parser
     * The parser returns a list of 4 elements, each one being a Movement object
-    * the frontend uses each movement object to call a method in the turtle class
+    * the frontend uses each movement object to call a method in the frontEndTurtle class
 
 * The user changes the color of the environment's background.
     * The front-end calls the controller to update the environment's background

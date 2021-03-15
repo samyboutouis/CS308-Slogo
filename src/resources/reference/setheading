@@ -3,10 +3,10 @@ SETHEADING degrees
 SETH degrees
 
 Description:
-Turns turtle to an absolute heading
+Turns frontEndTurtle to an absolute heading
 
 Parameters:
 degrees - any expression
 
 Returns:
-Number of degrees turtle turned
+Number of degrees frontEndTurtle turned

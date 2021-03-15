@@ -1,12 +1,12 @@
 package slogo.turtlecommands;
 
 import slogo.Command;
-import slogo.Turtle;
+import slogo.FrontEndTurtle;
 
 public class PenDownCommand implements Command {
 
   @Override
-  public void doCommand(Turtle turtle) {
-    turtle.penDown();
+  public void doCommand(FrontEndTurtle frontEndTurtle) {
+    frontEndTurtle.penDown();
   }
 }

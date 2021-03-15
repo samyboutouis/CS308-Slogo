@@ -3,14 +3,12 @@ package slogo.visualization;
 import java.io.File;
 import java.util.ResourceBundle;
 import javafx.geometry.Insets;
-import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import slogo.Turtle;
+import slogo.FrontEndTurtle;
 
 public class TurtleDisplay {
   private static final String ID_PROPERTY = "resources/stylesheets/CSS_IDs";
@@ -20,11 +18,11 @@ public class TurtleDisplay {
 
   private final ResourceBundle idBundle;
   private final AnchorPane anchorPane;
-  private final Turtle turtle;
+  private final FrontEndTurtle frontEndTurtle;
 
-  public TurtleDisplay(AnchorPane anchorPane, Turtle turtle) {
+  public TurtleDisplay(AnchorPane anchorPane, FrontEndTurtle frontEndTurtle) {
     this.anchorPane = anchorPane;
-    this.turtle = turtle;
+    this.frontEndTurtle = frontEndTurtle;
     this.idBundle = ResourceBundle.getBundle(ID_PROPERTY);
     setScreen();
   }
@@ -34,11 +32,11 @@ public class TurtleDisplay {
   }
 
   public void addTurtle() {
-    turtle.addToScreen(anchorPane, anchorPane.getHeight(), anchorPane.getWidth());
+    frontEndTurtle.addToScreen(anchorPane, anchorPane.getHeight(), anchorPane.getWidth());
   }
 
   public void setTurtleImage(File file) {
-    turtle.setImage(file);
+    frontEndTurtle.setImage(file);
   }
 
   public void setBackgroundColor(Color color) {
@@ -48,6 +46,6 @@ public class TurtleDisplay {
   }
 
   public void setPenColor(Color color) {
-    turtle.setPenColor(color);
+    frontEndTurtle.setPenColor(color);
   }
 }

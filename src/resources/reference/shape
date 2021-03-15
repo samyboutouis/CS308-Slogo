@@ -3,7 +3,7 @@ SHAPE
 SH
 
 Description:
-Reports turtle's current shape
+Reports frontEndTurtle's current shape
 
 Parameters:
 None

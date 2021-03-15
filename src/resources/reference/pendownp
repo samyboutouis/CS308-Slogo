@@ -3,10 +3,10 @@ PENDOWN?
 PENDOWNP
 
 Description:
-Reports whether or not the turtle's pen is down
+Reports whether or not the frontEndTurtle's pen is down
 
 Parameters:
 None
 
 Returns:
-1 if turtle's pen is down; 0 if pen is up
+1 if frontEndTurtle's pen is down; 0 if pen is up
