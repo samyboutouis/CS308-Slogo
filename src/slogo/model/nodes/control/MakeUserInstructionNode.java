@@ -42,7 +42,7 @@ public class MakeUserInstructionNode extends SlogoNode {
         ret = parameters.get(i).getReturnValue(commands); // ret is value of last command executed
       }
     }
-    return ret;
+    return 1;
   }
 
   private int getFirstEnd() {
