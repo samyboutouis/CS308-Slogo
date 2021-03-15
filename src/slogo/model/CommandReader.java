@@ -30,9 +30,7 @@ public class CommandReader {
   private List<Command> commands;
 
   public CommandReader(String language) {
-    parser = new ProgramParser();
-    parser.addPatterns(language);
-    parser.addPatterns("Syntax");
+    setLanguage(language);
     numParameters = ResourceBundle.getBundle(RESOURCES_PACKAGE + PARAMETERS_FILE);
     packageName = ResourceBundle.getBundle(RESOURCES_PACKAGE + PACKAGES_FILE);
 
@@ -55,6 +53,12 @@ public class CommandReader {
 
   public Map<String, Double> getVariables() {
     return variables;
+  }
+
+  public void setLanguage(String language) {
+    parser = new ProgramParser();
+    parser.addPatterns(language);
+    parser.addPatterns("Syntax");
   }
 
   // used to test return values
