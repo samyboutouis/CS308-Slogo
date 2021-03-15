@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Stack;
+import slogo.BackEndTurtle;
 import slogo.Command;
 import slogo.model.nodes.control.ConstantNode;
 import slogo.model.nodes.control.RepeatNode;
@@ -95,8 +96,11 @@ public class CommandReader {
           // needs the map of variables in constructor to add repcount variable
           curr = new RepeatNode(parameters, variables);
         }
+        case "Home", "ClearScreen", "SetTowards", "SetPosition", "" -> {
+          // curr = (SlogoNode) node.getDeclaredConstructor(Integer.TYPE, turtle).newInstance(parameters, turtle);
+        }
         default -> {
-            curr = (SlogoNode) node.getDeclaredConstructor(Integer.TYPE).newInstance(parameters);
+          curr = (SlogoNode) node.getDeclaredConstructor(Integer.TYPE).newInstance(parameters);
         }
       }
       if(curr.isFull()){ // only true if node has no parameters
