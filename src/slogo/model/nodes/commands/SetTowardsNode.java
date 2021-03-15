@@ -3,15 +3,15 @@ package slogo.model.nodes.commands;
 import java.util.ArrayList;
 import java.util.List;
 import slogo.Command;
-import slogo.turtlecommands.SetHeadingCommand;
+import slogo.turtlecommands.SetTowardsCommand;
 import slogo.model.SlogoNode;
 
-public class SetHeadingNode extends SlogoNode {
+public class SetTowardsNode extends SlogoNode {
 
   private List<SlogoNode> parameters;
   private List<Double> values;
 
-  public SetHeadingNode(int numParameters){
+  public SetTowardsNode(int numParameters){
     super(numParameters);
     parameters = super.getParameters();
     values = new ArrayList<>();
@@ -21,11 +21,11 @@ public class SetHeadingNode extends SlogoNode {
   public double getReturnValue(List<Command> commands) {
     getValues(commands);
     createMovement(commands);
-    return values.get(0);
+    return values.get(0); // FIX
   }
 
   private void createMovement(List<Command> commands) {
-    commands.add(new SetHeadingCommand(values.get(0)));
+    commands.add(new SetTowardsCommand(values.get(0), values.get(1)));
   }
 
   private void getValues(List<Command> commands) {

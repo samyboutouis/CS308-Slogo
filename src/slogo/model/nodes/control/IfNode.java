@@ -3,16 +3,12 @@ package slogo.model.nodes.control;
 import java.util.List;
 import slogo.Command;
 import slogo.model.SlogoNode;
-import slogo.model.nodes.control.ListEndNode;
-import slogo.model.nodes.control.ListStartNode;
 
 public class IfNode extends SlogoNode{
   private List<SlogoNode> parameters;
-  private int brackets; // how many pairs of brackets to expect
 
   public IfNode(int numParameters) {
     super(numParameters); // dummy value since isFull is overridden
-    brackets = numParameters;
     parameters = super.getParameters();
   }
 

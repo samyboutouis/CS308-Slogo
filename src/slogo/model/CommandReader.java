@@ -1,5 +1,6 @@
 package slogo.model;
 
+import java.awt.event.KeyEvent;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,7 +11,7 @@ import java.util.ResourceBundle;
 import java.util.Stack;
 import slogo.Command;
 import slogo.model.nodes.control.ConstantNode;
-import slogo.model.nodes.control.ForNode;
+import slogo.model.nodes.control.RepeatNode;
 import slogo.model.nodes.control.VariableNode;
 
 // creates parser, reads commands, and creates nodes
@@ -41,15 +42,13 @@ public class CommandReader {
 
   public List<Command> parseInput(String input) throws IllegalArgumentException{
     commands.clear();
-    List<String> cleaned = cleanInput(input);
-    List<SlogoNode> roots = null;
     try {
-      roots = buildTree(cleaned);
+      List<String> cleaned = cleanInput(input);
+      List<SlogoNode> roots = buildTree(cleaned);
+      makeCommands(roots);
     } catch (NoSuchMethodException | ClassNotFoundException | IllegalAccessException | InvocationTargetException | InstantiationException e) {
       e.printStackTrace();
     }
-    makeCommands(roots);
-
     return commands;
   }
 
@@ -70,18 +69,16 @@ public class CommandReader {
     List<SlogoNode> roots = new ArrayList<>();
     for(String s : cleaned){
       String symbol = parser.getSymbol(s);
-      System.out.println(symbol);
-      System.out.println(s);
-      System.out.println("Felix\n");
+      if(symbol.equals("NO MATCH")){
+        throw new IllegalArgumentException("Input syntax is incorrect");
+      }
       Class<?> node = Class.forName("slogo.model.nodes." + packageName.getString(symbol) + "." + symbol + "Node");
 
       SlogoNode curr;
       int parameters = Integer.parseInt(numParameters.getString(symbol));
       switch(symbol){
-        // reflection to create the class
         // handle separately: Constant, Variable
         case "Constant" -> {
-          // reflection but with the value in the constructor too
           curr = new ConstantNode(parameters, Double.parseDouble(s));
           // if stack is empty and we see a constant, it doesn't do anything to the program but
           // we still add it to the tree
@@ -89,12 +86,14 @@ public class CommandReader {
         case "Variable" -> {
           curr = new VariableNode(parameters, variables, s); // s is the value we read, symbol is the classification
         }
+        case "Repeat" -> {
+          // needs the map of variables in constructor to add repcount variable
+          curr = new RepeatNode(parameters, variables);
+        }
         default -> {
             curr = (SlogoNode) node.getDeclaredConstructor(Integer.TYPE).newInstance(parameters);
         }
       }
-      // IF fd 50 [ fd 50 ]
-      // stack: IF
       if(curr.isFull()){ // only true if node has no parameters
         if(st.isEmpty()) {
           roots.add(curr);
@@ -123,18 +122,15 @@ public class CommandReader {
   private void makeCommands(List<SlogoNode> roots){
     for(SlogoNode root : roots){
       double value = root.getReturnValue(commands);
-      System.out.println(value);
       forTests.add(value);
     }
   }
 
-  private List<String> cleanInput(String input) {
+  // removes comments from input and white space between values
+  private List<String> cleanInput(String input) throws IllegalArgumentException{
     String[] preCleaned = input.split(NEWLINE);
     List<String> cleaned = new ArrayList<>();
     for(String line : preCleaned){
-      if(!parser.getSymbol(line).equals("NO MATCH")){
-        // System.out.println(line);
-      }
       if (!parser.getSymbol(line).equals("Comment")){
         cleaned.addAll(Arrays.asList(line.trim().split(WHITESPACE)));
       }

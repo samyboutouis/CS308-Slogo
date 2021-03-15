@@ -3,13 +3,14 @@ package slogo.turtlecommands;
 import slogo.Command;
 import slogo.Turtle;
 
-public class CoordinateDirectionCommand implements Command {
+// handles TOWARDS
+public class SetTowardsCommand implements Command {
 
     // deals with turtle call that sets direction to somewhere absolute using coordinates
     private double x;
     private double y;
 
-    public CoordinateDirectionCommand(double x, double y){
+    public SetTowardsCommand(double x, double y){
       this.x = x;
       this.y = y;
     }

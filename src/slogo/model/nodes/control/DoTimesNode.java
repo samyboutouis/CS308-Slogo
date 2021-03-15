@@ -4,17 +4,15 @@ import java.util.List;
 import slogo.Command;
 import slogo.model.SlogoNode;
 
-public class ForNode extends SlogoNode {
+public class DoTimesNode extends SlogoNode {
 
   private List<SlogoNode> parameters;
   private VariableNode variable;
   private int brackets;
-  private double forStart;
-  private double forEnd;
-  private double forIncrement;
+  private double doTimesEnd;
   private int firstEnd;
 
-  public ForNode(int numParameters) {
+  public DoTimesNode(int numParameters) {
     super(numParameters); // parameters being full determined by bracket, just like conditional node, so this is a dummy value
     brackets = numParameters;
     parameters = super.getParameters();
@@ -30,7 +28,7 @@ public class ForNode extends SlogoNode {
     setFirstEnd();
     getIndexing(commands);
     double ret = 0;
-    for(double i = forStart; i <= forEnd; i = i + forIncrement){
+    for(double i = 1; i <= doTimesEnd; i++){
       variable.setValue(i);
       for(int j = firstEnd; j < parameters.size(); j++){ // runs through all the commands in the loop
         if(!(parameters.get(j) instanceof ListStartNode) && !(parameters.get(j) instanceof ListEndNode)){
@@ -41,14 +39,12 @@ public class ForNode extends SlogoNode {
     return ret;
   }
 
-  // get start, end, and increment
+  // get limit
   private void getIndexing(List<Command> commands){
-    // for [ :var 1 5 1 ]
+    // dotimes [ :a fd 50 ] [ fd 50 ]
     // i = 0 is left bracket
     variable = (VariableNode) parameters.get(1);
-    forStart = parameters.get(2).getReturnValue(commands);
-    forEnd = parameters.get(3).getReturnValue(commands);
-    forIncrement = parameters.get(4).getReturnValue(commands);
+    doTimesEnd = parameters.get(2).getReturnValue(commands);
   }
 
   private void setFirstEnd() {
