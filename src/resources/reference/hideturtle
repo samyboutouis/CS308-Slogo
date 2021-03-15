@@ -3,7 +3,7 @@ HIDETURTLE
 HT
 
 Description:
-Makes turtle invisible
+Makes frontEndTurtle invisible
 
 Parameters:
 None

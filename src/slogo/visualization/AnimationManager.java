@@ -2,23 +2,23 @@ package slogo.visualization;
 
 import java.util.List;
 import slogo.Command;
-import slogo.Turtle;
+import slogo.FrontEndTurtle;
 
 public class AnimationManager {
 
   private final List<Command> commands;
-  private final Turtle turtle;
+  private final FrontEndTurtle frontEndTurtle;
 
-  public AnimationManager(List<Command> commands, Turtle turtle){
+  public AnimationManager(List<Command> commands, FrontEndTurtle frontEndTurtle){
     this.commands = commands;
-    this.turtle = turtle;
+    this.frontEndTurtle = frontEndTurtle;
 
     playAnimation();
   }
 
   private void playAnimation(){
     for(Command c : commands) {
-      c.doCommand(turtle);
+      c.doCommand(frontEndTurtle);
     }
   }
 }

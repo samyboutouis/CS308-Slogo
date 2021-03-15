@@ -3,10 +3,10 @@ BACK pixels
 BK pixels
 
 Description:
-Moves turtle backward in its current heading by pixels distance
+Moves frontEndTurtle backward in its current heading by pixels distance
 
 Parameters:
 pixels - any expression
 
 Returns:
-Distance the turtle moved
+Distance the frontEndTurtle moved

@@ -3,7 +3,7 @@ PENUP
 PU
 
 Description:
-Puts pen up such that when the turtle moves, it does not leave a trail
+Puts pen up such that when the frontEndTurtle moves, it does not leave a trail
 
 Parameters:
 None

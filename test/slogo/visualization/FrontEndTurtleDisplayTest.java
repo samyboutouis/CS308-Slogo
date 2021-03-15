@@ -12,7 +12,7 @@ import util.DukeApplicationTest;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class TurtleDisplayTest extends DukeApplicationTest {
+public class FrontEndTurtleDisplayTest extends DukeApplicationTest {
   private final static String RESOURCE_PACKAGE = "resources";
 
   private ResourceBundle idBundle;

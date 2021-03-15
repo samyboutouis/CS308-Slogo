@@ -3,10 +3,10 @@ RIGHT degrees
 RT degrees
 
 Description:
-Turns turtle clockwise by given angle
+Turns frontEndTurtle clockwise by given angle
 
 Parameters:
 degrees - any expression
 
 Returns:
-Number of degress turtle turned
+Number of degress frontEndTurtle turned

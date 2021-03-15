@@ -1,7 +1,7 @@
 package slogo.turtlecommands;
 
 import slogo.Command;
-import slogo.Turtle;
+import slogo.FrontEndTurtle;
 
 // handles TOWARDS
 public class SetTowardsCommand implements Command {
@@ -16,7 +16,7 @@ public class SetTowardsCommand implements Command {
     }
 
     @Override
-    public void doCommand(Turtle turtle) {
-      turtle.towards(x, y);
+    public void doCommand(FrontEndTurtle frontEndTurtle) {
+      frontEndTurtle.towards(x, y);
     }
 }

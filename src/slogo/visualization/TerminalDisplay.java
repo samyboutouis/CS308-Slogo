@@ -8,9 +8,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
-import slogo.Turtle;
+import slogo.FrontEndTurtle;
 import slogo.model.CommandReader;
 
 public class TerminalDisplay {
@@ -31,16 +30,16 @@ public class TerminalDisplay {
   private Button button;
   private final HistoryDisplay historyDisplay;
   private final VariablesDisplay variablesDisplay;
-  private final Turtle turtle;
+  private final FrontEndTurtle frontEndTurtle;
 
   private final CommandReader commandReader;
 
   public TerminalDisplay(GridPane pane, String resourcePackage, HistoryDisplay historyDisplay,
-    Turtle turtle, VariablesDisplay variablesDisplay) {
+    FrontEndTurtle frontEndTurtle, VariablesDisplay variablesDisplay) {
     this.pane = pane;
     this.historyDisplay = historyDisplay;
     this.variablesDisplay = variablesDisplay;
-    this.turtle = turtle;
+    this.frontEndTurtle = frontEndTurtle;
 
     commandReader = new CommandReader("English");
 
@@ -97,7 +96,7 @@ public class TerminalDisplay {
       String command = textBox.getText().trim();
       if (command.length() > 0) {
         try {
-          new AnimationManager(commandReader.parseInput(command), turtle);
+          new AnimationManager(commandReader.parseInput(command), frontEndTurtle);
           Button historyTag = historyDisplay.addNewHistoryTag(command);
           variablesDisplay.updateBox(commandReader.getVariables());
           applyHistoryTagLogic(historyTag);
