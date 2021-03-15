@@ -136,6 +136,9 @@ public class CommandReader {
     String[] preCleaned = input.split(NEWLINE);
     List<String> cleaned = new ArrayList<>();
     for(String line : preCleaned){
+      if(line.trim().equals("")){
+        continue; // ignores lines that are only new lines
+      }
       if (!parser.getSymbol(line).equals("Comment")){
         cleaned.addAll(Arrays.asList(line.trim().split(WHITESPACE)));
       }
