@@ -44,7 +44,6 @@ public class ToolbarDisplay {
   private final GridPane gridPane;
   private final TurtleDisplay turtleDisplay;
   private final Controller controller;
-  private final String resourcePackage;
   private final ResourceBundle languageBundle;
   private final ResourceBundle resourceBundle;
   private final ResourceBundle imageBundle;
@@ -52,7 +51,6 @@ public class ToolbarDisplay {
   private final ResourceBundle commandBundle;
   private Color backgroundColor;
   private Color penColor;
-  private List<String> buttonList;
 
   public ToolbarDisplay(GridPane pane, String resourcePackage, Stage stage,
     TurtleDisplay turtleDisplay, Controller controller) {
@@ -61,7 +59,6 @@ public class ToolbarDisplay {
     this.stage = stage;
     this.turtleDisplay = turtleDisplay;
     this.controller = controller;
-    this.resourcePackage = resourcePackage;
     this.languageBundle = ResourceBundle
       .getBundle(String.format("%s/%s/%s", resourcePackage, "languages", "LanguageOptions"));
     this.resourceBundle = ResourceBundle
@@ -71,7 +68,6 @@ public class ToolbarDisplay {
     this.commandBundle = ResourceBundle.getBundle(DEFAULT_RESOURCE_FOLDER + METHODS_PROPERTY);
     backgroundColor = Color.web("#dedcdc");
     penColor = Color.BLACK;
-    buttonList = List.of("AddTurtleButton", "PenColorButton", "BackgroundColorButton", "TurtleImageButton");
     initializeGridPane();
     makeToolbar();
   }
@@ -92,7 +88,7 @@ public class ToolbarDisplay {
 
   private void makeToolbar() {
     int colIndex = 0;
-    for(String label : buttonList) {
+    for(String label : commandBundle.keySet()) {
       gridPane.add(makeButton(label), colIndex++, 0, 1, 1);
     }
     addLanguageDropdown();
