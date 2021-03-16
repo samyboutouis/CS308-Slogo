@@ -62,7 +62,7 @@ public class Controller {
     ColorPicker colorPicker = new ColorPicker(penColor);
     colorPicker.setId(COLOR_PICKER_ID);
     colorPicker.setOnAction(event -> handlePenColorPicker(penColorButton, colorPicker));
-    toolbarDisplay.getGridPane().add(colorPicker, 0, 0, 1, 1);
+    toolbarDisplay.getGridPane().add(colorPicker, 3, 0, 1, 1);
   }
 
   private void handlePenColorPicker(Button penColorButton, ColorPicker colorPicker) {

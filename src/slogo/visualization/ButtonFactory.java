@@ -13,7 +13,7 @@ public class ButtonFactory {
   private static final String DEFAULT_RESOURCE_FOLDER = "resources/";
   private static final String IMAGE_PROPERTY = "stylesheets/Image";
   private static final String ID_PROPERTY = "stylesheets/CSS_IDs";
-  private static final String METHODS_PROPERTY = "methods/Methods";
+  private static final String METHODS_PROPERTY = "methods/ButtonMethods";
 
   private final ResourceBundle imageBundle;
   private final ResourceBundle idBundle;
