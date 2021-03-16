@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 import slogo.FrontEndTurtle;
 import slogo.controller.Controller;
 
-public class ScreenManager {
+public class Workspace {
 
   private final static int GRID_LENGTH = 10;
   private final static int PADDING_LENGTH = 10;
@@ -21,15 +21,13 @@ public class ScreenManager {
 
   private final Scene scene;
   private final GridPane gridPane;
-  private final Stage stage;
   private final Controller controller;
   private FrontEndTurtle frontEndTurtle;
 
-  public ScreenManager(Pane root, Scene scene, Stage stage) {
+  public Workspace(Pane root, Scene scene, Stage stage) {
     this.scene = scene;
-    this.stage = stage;
     gridPane = new GridPane();
-    controller = new Controller();
+    controller = new Controller(stage);
     root.getChildren().add(gridPane);
     setupGrid();
     setupDisplays();
@@ -99,9 +97,10 @@ public class ScreenManager {
     new TerminalDisplay(terminalPane, RESOURCE_PACKAGE, new HistoryDisplay(historyPane, RESOURCE_PACKAGE),
       frontEndTurtle, new VariablesDisplay(variablesPane, RESOURCE_PACKAGE), controller);
     new UserCommandsDisplay(userCommandsPane, RESOURCE_PACKAGE);
-    new ToolbarDisplay(toolbarPane, RESOURCE_PACKAGE, stage, new TurtleDisplay(turtlePane,
-      frontEndTurtle),
-      controller);
+    TurtleDisplay turtleDisplay = new TurtleDisplay(turtlePane, frontEndTurtle);
+    ToolbarDisplay toolbarDisplay = new ToolbarDisplay(toolbarPane, RESOURCE_PACKAGE, controller);
+    controller.setToolbarDisplay(toolbarDisplay);
+    controller.setTurtleDisplay(turtleDisplay);
   }
 
   private void setStyleSheet() {
