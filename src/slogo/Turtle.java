@@ -25,6 +25,12 @@ public interface Turtle {
 
   void penUp();
 
+  boolean isShowing();
+
+  void show();
+
+  void hide();
+
   void home();
 
   void clearScreen();
