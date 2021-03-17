@@ -31,6 +31,12 @@ public class TurtleTracker {
     return allCommands;
   }
 
+  public void deletaAllData(){
+    allTurtles = new HashMap<>();
+    activeTurtles = new ArrayList<>();
+    currTurtle = 0;
+  }
+
   // add a backend turtle to turtle tracker to both allTurtles and list of activeTurtles
   public void addTurtle(BackEndTurtle turtle){
     allTurtles.put(turtle.getIndex(), turtle);
