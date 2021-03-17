@@ -3,6 +3,7 @@ package slogo.model.nodes.commands;
 import java.util.ArrayList;
 import java.util.List;
 import slogo.Command;
+import slogo.Turtle;
 import slogo.turtlecommands.SetTowardsCommand;
 import slogo.model.SlogoNode;
 
@@ -10,26 +11,24 @@ public class SetTowardsNode extends TurtleCommandNode {
 
   private List<SlogoNode> parameters;
   private List<Double> values;
+  private Turtle turtle;
 
-  public SetTowardsNode(int numParameters){
+  public SetTowardsNode(int numParameters, Turtle turtle){
     super(numParameters);
     parameters = super.getParameters();
+    this.turtle = turtle;
   }
 
   @Override
   public double getReturnValue(List<Command> commands) {
-    getValues(commands);
+    values = super.getValues(commands, parameters);
     createMovement(commands);
-    return values.get(0); // FIX
+    double prevHeading = turtle.getDirection();
+    turtle.towards(values.get(0), values.get(1));
+    return Math.abs(prevHeading - turtle.getDirection());
   }
 
   private void createMovement(List<Command> commands) {
     commands.add(new SetTowardsCommand(values.get(0), values.get(1)));
-  }
-
-  private void getValues(List<Command> commands) {
-    for(SlogoNode node : parameters) {
-      values.add(node.getReturnValue(commands));
-    }
   }
 }
