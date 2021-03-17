@@ -21,10 +21,6 @@ public class BackEndTurtle implements Turtle {
     commands = new ArrayList<>();
   }
 
-  public List<Command> getCommands() {
-    return commands;
-  }
-
   public void clearCommands(){
     commands.clear();
   }
