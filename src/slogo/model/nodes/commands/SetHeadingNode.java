@@ -1,9 +1,11 @@
 package slogo.model.nodes.commands;
 
+import java.util.ArrayList;
 import java.util.List;
 import slogo.BackEndTurtle;
 import slogo.Command;
 import slogo.Turtle;
+import slogo.model.TurtleTracker;
 import slogo.turtlecommands.SetHeadingCommand;
 import slogo.model.SlogoNode;
 
@@ -18,7 +20,7 @@ public class SetHeadingNode extends TurtleCommandNode {
     this.turtle = turtle;
   }
 
-  @Override
+ /* @Override
   public double getReturnValue(List<Command> commands) {
     values = super.getValues(commands, parameters);
     // only one value so not entirely necessary, could just do value = parameters.get(0).getReturnValue(commands)
@@ -30,5 +32,16 @@ public class SetHeadingNode extends TurtleCommandNode {
 
   private void createMovement(List<Command> commands) {
     commands.add(new SetHeadingCommand(values.get(0)));
+  }*/
+
+
+  @Override
+  public double getReturnValue(TurtleTracker tracker) {
+    return super.loopThroughTurtles(tracker,parameters, (currTurtle, values)->{
+      currTurtle.addCommand(new SetHeadingCommand(values.get(0)));
+      double prevHeading = currTurtle.getDirection();
+      currTurtle.setDirection(values.get(0));
+      return Math.abs(prevHeading - currTurtle.getDirection());
+    });
   }
 }
