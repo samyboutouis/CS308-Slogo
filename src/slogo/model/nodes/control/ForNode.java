@@ -3,6 +3,7 @@ package slogo.model.nodes.control;
 import java.util.List;
 import slogo.Command;
 import slogo.model.SlogoNode;
+import slogo.model.TurtleTracker;
 
 public class ForNode extends SlogoNode {
 
@@ -26,15 +27,15 @@ public class ForNode extends SlogoNode {
   }
 
   @Override
-  public double getReturnValue(List<Command> commands) {
+  public double getReturnValue(TurtleTracker tracker) {
     setFirstEnd();
-    getIndexing(commands);
+    getIndexing(tracker);
     double ret = 0;
     for(double i = forStart; i <= forEnd; i = i + forIncrement){
       variable.setValue(i);
       for(int j = firstEnd; j < parameters.size(); j++){ // runs through all the commands in the loop
         if(!(parameters.get(j) instanceof ListStartNode) && !(parameters.get(j) instanceof ListEndNode)){
-          ret = parameters.get(j).getReturnValue(commands); // ret is value of last command executed
+          ret = parameters.get(j).getReturnValue(tracker); // ret is value of last command executed
         }
       }
     }
@@ -42,13 +43,13 @@ public class ForNode extends SlogoNode {
   }
 
   // get start, end, and increment
-  private void getIndexing(List<Command> commands){
+  private void getIndexing(TurtleTracker tracker){
     // for [ :var 1 5 1 ]
     // i = 0 is left bracket
     variable = (VariableNode) parameters.get(1);
-    forStart = parameters.get(2).getReturnValue(commands);
-    forEnd = parameters.get(3).getReturnValue(commands);
-    forIncrement = parameters.get(4).getReturnValue(commands);
+    forStart = parameters.get(2).getReturnValue(tracker);
+    forEnd = parameters.get(3).getReturnValue(tracker);
+    forIncrement = parameters.get(4).getReturnValue(tracker);
   }
 
   private void setFirstEnd() {

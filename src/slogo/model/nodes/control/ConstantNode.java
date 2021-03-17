@@ -3,6 +3,7 @@ package slogo.model.nodes.control;
 import java.util.List;
 import slogo.Command;
 import slogo.model.SlogoNode;
+import slogo.model.TurtleTracker;
 
 public class ConstantNode extends SlogoNode {
   private double value;
@@ -13,7 +14,7 @@ public class ConstantNode extends SlogoNode {
   }
 
   @Override
-  public double getReturnValue(List<Command> commands) {
+  public double getReturnValue(TurtleTracker tracker) {
     return value;
   }
 

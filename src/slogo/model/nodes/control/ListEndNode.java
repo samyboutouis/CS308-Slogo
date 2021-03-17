@@ -3,6 +3,7 @@ package slogo.model.nodes.control;
 import java.util.List;
 import slogo.Command;
 import slogo.model.SlogoNode;
+import slogo.model.TurtleTracker;
 
 public class ListEndNode extends SlogoNode {
 
@@ -11,7 +12,7 @@ public class ListEndNode extends SlogoNode {
   }
 
   @Override
-  public double getReturnValue(List<Command> commands) {
+  public double getReturnValue(TurtleTracker tracker) {
     // nodes that use bracket node will know to ignore the bracket return value
     return 0;
   }

@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import slogo.BackEndTurtle;
+import slogo.Command;
 
 // manages all turtles in the backend,
 public class TurtleTracker {
@@ -19,6 +20,44 @@ public class TurtleTracker {
     allTurtles = new HashMap<>();
     activeTurtles = new ArrayList<>();
     currTurtle = 0;
+  }
+
+  public List<Command> getAllCommands(){
+    List<Command> allCommands = new ArrayList<>();
+    Iterator<Integer> itrn = getIterator();
+    while (itrn.hasNext()){
+      allCommands.addAll(getTurtle(itrn.next()).getCommands());
+    }
+    return allCommands;
+  }
+
+  public void deletaAllData(){
+    allTurtles = new HashMap<>();
+    activeTurtles = new ArrayList<>();
+    currTurtle = 0;
+  }
+
+  // add a backend turtle to turtle tracker to both allTurtles and list of activeTurtles
+  public void addTurtle(BackEndTurtle turtle){
+    if (allTurtles.containsKey(turtle.getIndex())){
+      if (!activeTurtles.contains(turtle.getIndex())){
+        activeTurtles.add(turtle.getIndex());
+      }
+    } else {
+    allTurtles.put(turtle.getIndex(), turtle);
+    activeTurtles.add(turtle.getIndex());}
+  }
+
+  // clear the list of activeTurtles
+  public void clearActiveTurtles(){
+    activeTurtles.clear();
+  }
+
+  public void clearAllCommands(){
+    Iterator<Integer> itrn = getIterator();
+    while (itrn.hasNext()){
+      getTurtle(itrn.next()).clearCommands();
+    }
   }
 
   // loops through active turtles for one node, will have many iterator instances out for nested commands e.g. fd fd 50

@@ -30,6 +30,12 @@ public class CommandReaderTest {
   }
 
   @Test
+  void testMultiTurtle(){
+    assertEquals(List.of(5.0), myReader.testParseInput("tell [ 2 5 ]")); // note testParseInput adds a index 0 turtle by default
+    assertEquals(List.of(5.0, 90.0, 50.0, 50.0), myReader.testParseInput(" tell [ 0 2 5 ] rt 90 fd 50 xcor"));
+  }
+
+  @Test
   void testSum () {
     assertEquals(List.of(150.0), myReader.testParseInput("sum 50 sum 50 50"));
   }
@@ -130,12 +136,16 @@ public class CommandReaderTest {
   // test that command objects created are correct
   @Test
   void testHomeCommand () {
-    assertTrue(myReader.parseInput("home", new BackEndTurtle(0, 0, 0, true, true)).get(0) instanceof HomeCommand);
+    TurtleTracker tracker = new TurtleTracker();
+    tracker.addTurtle(new BackEndTurtle(0, 0, 0, true, true,0));
+    assertTrue(myReader.parseInput("home", tracker).getAllCommands().get(0) instanceof HomeCommand);
   }
 
   @Test
   void testLoopCommand () {
-    List<Command> loop = myReader.parseInput("for [ :a 1 5 1 ] [ fd 1 bk 2 ]", new BackEndTurtle(0, 0, 0, true, true));
+    TurtleTracker tracker = new TurtleTracker();
+    tracker.addTurtle(new BackEndTurtle(0, 0, 0, true, true,0));
+    List<Command> loop = myReader.parseInput("for [ :a 1 5 1 ] [ fd 1 bk 2 ]", tracker).getAllCommands();
     assertEquals(10, loop.size());
     for(Command c : loop){
       assertTrue(c instanceof MovementCommand);

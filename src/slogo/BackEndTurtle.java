@@ -6,13 +6,15 @@ import java.util.List;
 public class BackEndTurtle implements Turtle {
 
   private double xCoordinate;
+  private final int ID;
   private double yCoordinate;
   private double direction;
   private boolean isPenDown;
   private boolean isShowing;
   private List<Command> commands;
 
-  public BackEndTurtle(double xCoordinate, double yCoordinate, double direction, boolean isPenDown, boolean isShowing) {
+  public BackEndTurtle(double xCoordinate, double yCoordinate, double direction, boolean isPenDown, boolean isShowing, int ID) {
+    this.ID = ID;
     this.xCoordinate = xCoordinate;
     this.yCoordinate = yCoordinate;
     this.direction = direction;
@@ -20,6 +22,12 @@ public class BackEndTurtle implements Turtle {
     this.isShowing = isShowing;
     commands = new ArrayList<>();
   }
+
+  public List<Command> getCommands(){
+    return commands;
+  }
+
+  public int getIndex(){return this.ID;}
 
   public void clearCommands(){
     commands.clear();

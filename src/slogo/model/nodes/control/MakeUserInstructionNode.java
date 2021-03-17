@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import slogo.Command;
 import slogo.model.SlogoNode;
+import slogo.model.TurtleTracker;
 
 public class MakeUserInstructionNode extends SlogoNode {
 
@@ -47,7 +48,7 @@ public class MakeUserInstructionNode extends SlogoNode {
   }
 
   @Override
-  public double getReturnValue(List<Command> commands) {
+  public double getReturnValue(TurtleTracker tracker) {
     getCommands(); // builds all the commands of this method, which could be recursive
     // if it were recursive, this is called after the entire method has been read, but we also handle
     // if it is called more than once because of the myCommands.clear() call

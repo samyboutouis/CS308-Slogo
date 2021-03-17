@@ -3,6 +3,7 @@ package slogo.model.nodes.control;
 import java.util.List;
 import slogo.Command;
 import slogo.model.SlogoNode;
+import slogo.model.TurtleTracker;
 
 public class DoTimesNode extends SlogoNode {
 
@@ -24,15 +25,15 @@ public class DoTimesNode extends SlogoNode {
   }
 
   @Override
-  public double getReturnValue(List<Command> commands) {
+  public double getReturnValue(TurtleTracker tracker) {
     setFirstEnd();
-    getIndexing(commands);
+    getIndexing(tracker);
     double ret = 0;
     for(double i = 1; i <= doTimesEnd; i++){
       variable.setValue(i);
       for(int j = firstEnd; j < parameters.size(); j++){ // runs through all the commands in the loop
         if(!(parameters.get(j) instanceof ListStartNode) && !(parameters.get(j) instanceof ListEndNode)){
-          ret = parameters.get(j).getReturnValue(commands); // ret is value of last command executed
+          ret = parameters.get(j).getReturnValue(tracker); // ret is value of last command executed
         }
       }
     }
@@ -40,11 +41,11 @@ public class DoTimesNode extends SlogoNode {
   }
 
   // get limit
-  private void getIndexing(List<Command> commands){
+  private void getIndexing(TurtleTracker tracker){
     // dotimes [ :a fd 50 ] [ fd 50 ]
     // i = 0 is left bracket
     variable = (VariableNode) parameters.get(1);
-    doTimesEnd = parameters.get(2).getReturnValue(commands);
+    doTimesEnd = parameters.get(2).getReturnValue(tracker);
   }
 
   private void setFirstEnd() {

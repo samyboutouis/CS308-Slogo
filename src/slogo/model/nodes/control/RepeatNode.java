@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import slogo.Command;
 import slogo.model.SlogoNode;
+import slogo.model.TurtleTracker;
 
 public class RepeatNode extends SlogoNode {
 
@@ -24,15 +25,15 @@ public class RepeatNode extends SlogoNode {
   }
 
   @Override
-  public double getReturnValue(List<Command> commands) {
+  public double getReturnValue(TurtleTracker tracker) {
     // assume expr only results in one value, so parameters.get(1) is start bracket
-    getIndexing(commands);
+    getIndexing(tracker);
     double ret = 0;
     for(double i = 1; i <= repeatEnd; i++){
       variable.setValue(i);
       for(int j = 1; j < parameters.size(); j++){ // starts at j = 1 to avoid initial expression
         if(!(parameters.get(j) instanceof ListStartNode) && !(parameters.get(j) instanceof ListEndNode)){
-          ret = parameters.get(j).getReturnValue(commands); // ret is value of last command executed
+          ret = parameters.get(j).getReturnValue(tracker); // ret is value of last command executed
         }
       }
     }
@@ -40,10 +41,10 @@ public class RepeatNode extends SlogoNode {
   }
 
   // get how many times we repeat
-  private void getIndexing(List<Command> commands){
+  private void getIndexing(TurtleTracker tracker){
     // repeat fd 50 [ fd 50 ]
     // i = 1 is left bracket
     variable = new VariableNode(0, variables, ":repcount");
-    repeatEnd = parameters.get(0).getReturnValue(commands);
+    repeatEnd = parameters.get(0).getReturnValue(tracker);
   }
 }

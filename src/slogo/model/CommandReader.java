@@ -4,6 +4,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -16,6 +17,7 @@ import slogo.model.nodes.control.ConstantNode;
 import slogo.model.nodes.control.MakeUserInstructionNode;
 import slogo.model.nodes.control.RepeatNode;
 import slogo.model.nodes.control.VariableNode;
+import slogo.model.nodes.multi.TellNode;
 
 // creates parser, reads commands, and creates nodes
 public class CommandReader {
@@ -31,8 +33,8 @@ public class CommandReader {
   private List<Double> forTests;
   private ResourceBundle numParameters;
   private ResourceBundle packageName;
-  private List<Command> commands;
-  private Turtle turtle;
+  //private List<Command> commands;
+  //private Turtle turtle;
   private TurtleTracker tracker;
 
   public CommandReader(String language) {
@@ -40,25 +42,28 @@ public class CommandReader {
     numParameters = ResourceBundle.getBundle(RESOURCES_PACKAGE + PARAMETERS_FILE);
     packageName = ResourceBundle.getBundle(RESOURCES_PACKAGE + PACKAGES_FILE);
 
-    commands = new ArrayList<>();
+    //commands = new ArrayList<>();
     variables = new HashMap<>();
     forTests = new ArrayList<>();
     userDefinedCommands = new HashMap<>();
     userDefinedCommandsInString = new HashMap<>();
-    tracker = new TurtleTracker();
+    tracker = new TurtleTracker(); // tracker doesn't have a turtle yet
+
   }
 
-  public List<Command> parseInput(String input, Turtle turtle) throws IllegalArgumentException{
-    commands.clear();
+  public TurtleTracker parseInput(String input, TurtleTracker tracker) throws IllegalArgumentException{
+    //commands.clear();
+    tracker.clearAllCommands();
     try {
-      this.turtle = turtle;
+      //this.turtle = turtle;
+      this.tracker = tracker;
       List<String> cleaned = cleanInput(input);
       List<SlogoNode> roots = buildTree(cleaned);
       makeCommands(roots);
     } catch (NoSuchMethodException | ClassNotFoundException | IllegalAccessException | InvocationTargetException | InstantiationException e) {
       e.printStackTrace();
     }
-    return commands;
+    return tracker;
   }
 
   public Map<String, Double> getVariables() {
@@ -78,7 +83,10 @@ public class CommandReader {
   // used to test return values
   public List<Double> testParseInput(String input) {
     forTests = new ArrayList<>();
-    parseInput(input, new BackEndTurtle(0, 0, 0, true, true));
+    tracker.deletaAllData();
+    tracker.addTurtle(new BackEndTurtle(0, 0, 0, true, true, 0));
+    //parseInput(input, new BackEndTurtle(0, 0, 0, true, true, 0));
+    parseInput(input, tracker);
     return forTests;
   }
 
@@ -97,6 +105,11 @@ public class CommandReader {
       int parameters = Integer.parseInt(numParameters.getString(symbol));
       switch(symbol){
         // handle separately: Constant, Variable
+        case "Tell" ->{
+          curr = new TellNode(parameters);
+          tracker.clearActiveTurtles(); // clear the previous active list of turtles, to prepare room for new list of active turtles.
+        }
+
         case "Constant" -> {
           curr = new ConstantNode(parameters, Double.parseDouble(s));
           // if stack is empty and we see a constant, it doesn't do anything to the program but
@@ -129,7 +142,7 @@ public class CommandReader {
 
         default -> {
           try{
-            curr = (SlogoNode) node.getDeclaredConstructor(Integer.TYPE, turtle.getClass()).newInstance(parameters, turtle);
+            curr = (SlogoNode) node.getDeclaredConstructor(Integer.TYPE, tracker.getTurtle(tracker.getCurr()).getClass()).newInstance(parameters);
           } catch(NoSuchMethodException e) {
             // constructor of this type doesn't exist
             //System.out.println("Felix: method doesn't exist");
@@ -164,7 +177,7 @@ public class CommandReader {
 
   private void makeCommands(List<SlogoNode> roots){
     for(SlogoNode root : roots){
-      double value = root.getReturnValue(commands);
+      double value = root.getReturnValue(tracker);
       forTests.add(value);
     }
   }

@@ -2,7 +2,6 @@ package slogo.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import slogo.Command;
 
 public abstract class SlogoNode {
     private List<SlogoNode> parameters;
