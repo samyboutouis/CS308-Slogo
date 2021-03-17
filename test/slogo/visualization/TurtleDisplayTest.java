@@ -12,7 +12,7 @@ import util.DukeApplicationTest;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class FrontEndTurtleDisplayTest extends DukeApplicationTest {
+public class TurtleDisplayTest extends DukeApplicationTest {
   private final static String RESOURCE_PACKAGE = "resources";
 
   private ResourceBundle idBundle;
@@ -24,7 +24,7 @@ public class FrontEndTurtleDisplayTest extends DukeApplicationTest {
     Scene scene = new Scene(root);
     stage.setScene(scene);
     stage.show();
-    new ScreenManager(root, scene, stage);
+    new Workspace(root, scene, stage);
     idBundle = ResourceBundle
       .getBundle(String.format("%s/%s/%s", RESOURCE_PACKAGE, "stylesheets", "CSS_IDs"));
     addTurtle();

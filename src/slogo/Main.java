@@ -4,7 +4,7 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import slogo.visualization.ScreenManager;
+import slogo.visualization.Workspace;
 
 public class Main extends Application  {
     /**
@@ -29,6 +29,6 @@ public class Main extends Application  {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-        new ScreenManager(root, scene, stage);
+        new Workspace(root, scene, stage);
     }
 }

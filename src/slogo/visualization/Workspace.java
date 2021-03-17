@@ -11,21 +11,23 @@ import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
 import slogo.FrontEndTurtle;
 import slogo.controller.Controller;
+import slogo.controller.FrontEndController;
 
-public class ScreenManager {
+public class Workspace {
 
   private final static int GRID_LENGTH = 10;
   private final static int PADDING_LENGTH = 10;
   private final static String RESOURCE_PACKAGE = "resources";
   private final static String DISPLAY_CLASS_NAME = "displayWindow";
 
+  private final Stage stage;
   private final Scene scene;
   private final GridPane gridPane;
-  private final Stage stage;
   private final Controller controller;
+  private FrontEndController frontEndController;
   private FrontEndTurtle frontEndTurtle;
 
-  public ScreenManager(Pane root, Scene scene, Stage stage) {
+  public Workspace(Pane root, Scene scene, Stage stage) {
     this.scene = scene;
     this.stage = stage;
     gridPane = new GridPane();
@@ -96,12 +98,14 @@ public class ScreenManager {
     gridPane.add(variablesPane, 5, 6, 2, 4);
     gridPane.add(userCommandsPane, 7, 6, 3, 4);
 
+    frontEndController = new FrontEndController(stage);
     new TerminalDisplay(terminalPane, RESOURCE_PACKAGE, new HistoryDisplay(historyPane, RESOURCE_PACKAGE),
       frontEndTurtle, new VariablesDisplay(variablesPane, RESOURCE_PACKAGE), controller);
     new UserCommandsDisplay(userCommandsPane, RESOURCE_PACKAGE);
-    new ToolbarDisplay(toolbarPane, RESOURCE_PACKAGE, stage, new TurtleDisplay(turtlePane,
-      frontEndTurtle),
-      controller);
+    TurtleDisplay turtleDisplay = new TurtleDisplay(turtlePane, frontEndTurtle);
+    ToolbarDisplay toolbarDisplay = new ToolbarDisplay(toolbarPane, RESOURCE_PACKAGE, controller, frontEndController);
+    frontEndController.setToolbarDisplay(toolbarDisplay);
+    frontEndController.setTurtleDisplay(turtleDisplay);
   }
 
   private void setStyleSheet() {

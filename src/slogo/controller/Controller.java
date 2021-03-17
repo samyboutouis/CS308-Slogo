@@ -8,8 +8,6 @@ import slogo.BackEndTurtle;
 import slogo.model.CommandReader;
 
 public class Controller {
-  // regular expression representing one or more whitespace characters (space, tab, or newline)
-  public static final String WHITESPACE = "\\s+";
   private static final String INITIAL_LANGUAGE = "English";
 
   private String language;
@@ -31,6 +29,7 @@ public class Controller {
     this.language = translationBundle.getString(language);
     commandReader.setLanguage(this.language);
   }
+
 
   public Map<String, Double> getVariables() {
     return commandReader.getVariables();
