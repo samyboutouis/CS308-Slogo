@@ -67,6 +67,14 @@ public class CommandReaderTest {
   }
 
   @Test
+  void testQueries(){
+    assertEquals(List.of(50.0,90.0,60.0,50.0), myReader.testParseInput("fd 50 rt 90 fd 50 xcor"));
+    assertEquals(List.of(50.0,90.0,60.0,60.0), myReader.testParseInput("fd 50 rt 90 fd 60 ycor"));
+    assertEquals(List.of(50.0,90.0,60.0,90.0), myReader.testParseInput("fd 50 rt 90 fd 60 heading"));
+    assertEquals(List.of(1.0,0.0), myReader.testParseInput("penup pendown?"));
+  }
+
+  @Test
   void testMath (){
     assertEquals(List.of(3.0), myReader.testParseInput("sum 1 2"));
     assertEquals(List.of(6.0), myReader.testParseInput("product 2 3"));

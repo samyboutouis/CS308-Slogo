@@ -121,19 +121,18 @@ public class CommandReader {
             }
           }
         }
-        case "Home", "ClearScreen", "SetTowards", "SetPosition", "SetHeading", "Forward" -> {
+        case "MakeUserInstruction" -> {
+          curr = new MakeUserInstructionNode(parameters);
+        }
+
+        default -> {
           try{
             curr = (SlogoNode) node.getDeclaredConstructor(Integer.TYPE, turtle.getClass()).newInstance(parameters, turtle);
           } catch(NoSuchMethodException e) {
             // constructor of this type doesn't exist
-            System.out.println("Felix: method doesn't exist");
+            //System.out.println("Felix: method doesn't exist");
+            curr = (SlogoNode) node.getDeclaredConstructor(Integer.TYPE).newInstance(parameters);
           }
-        }
-        case "MakeUserInstruction" -> {
-          curr = new MakeUserInstructionNode(parameters);
-        }
-        default -> {
-          curr = (SlogoNode) node.getDeclaredConstructor(Integer.TYPE).newInstance(parameters);
         }
       }
       if(curr.isFull()){ // only true if node has no parameters
