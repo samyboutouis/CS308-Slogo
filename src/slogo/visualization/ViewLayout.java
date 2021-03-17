@@ -3,7 +3,6 @@ package slogo.visualization;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.geometry.Insets;
-import javafx.scene.control.ComboBox;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
@@ -14,6 +13,7 @@ public class ViewLayout {
   private final static int GRID_COLUMN_COUNT = 3;
   private final static int PADDING_LENGTH = 10;
   private final static String DISPLAY_CLASS_NAME = "displayWindow";
+  private final List<ViewContainer> viewContainers = new ArrayList<>();
 
   private final GridPane pane;
 
@@ -69,7 +69,6 @@ public class ViewLayout {
     userCommandsPane.getStyleClass().add(DISPLAY_CLASS_NAME);
   }
 
-  private List<ViewContainer> viewContainers = new ArrayList<>();
 
   private void setupViewContainers(){
     for(int row = 0; row < GRID_ROW_COUNT; row++){
