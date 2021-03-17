@@ -25,6 +25,12 @@ public class Main extends Application  {
      */
     @Override
     public void start(Stage stage) {
+        createNewWorkspace();
+    }
+
+    public void createNewWorkspace(){
+        Stage stage = new Stage();
+
         stage.setTitle(STAGE_TITLE);
 
         Pane root = new Pane();
