@@ -1,5 +1,8 @@
 package slogo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class BackEndTurtle implements Turtle {
 
   private double xCoordinate;
@@ -7,6 +10,7 @@ public class BackEndTurtle implements Turtle {
   private double direction;
   private boolean isPenDown;
   private boolean isShowing;
+  private List<Command> commands;
 
   public BackEndTurtle(double xCoordinate, double yCoordinate, double direction, boolean isPenDown, boolean isShowing) {
     this.xCoordinate = xCoordinate;
@@ -14,6 +18,19 @@ public class BackEndTurtle implements Turtle {
     this.direction = direction;
     this.isPenDown = isPenDown;
     this.isShowing = isShowing;
+    commands = new ArrayList<>();
+  }
+
+  public List<Command> getCommands() {
+    return commands;
+  }
+
+  public void clearCommands(){
+    commands.clear();
+  }
+
+  public void addCommand(Command n) {
+    commands.add(n);
   }
 
   public void forward(double pixels) {
