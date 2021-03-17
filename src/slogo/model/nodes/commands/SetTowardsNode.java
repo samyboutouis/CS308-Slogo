@@ -11,12 +11,10 @@ public class SetTowardsNode extends TurtleCommandNode {
 
   private List<SlogoNode> parameters;
   private List<Double> values;
-  private Turtle turtle;
 
-  public SetTowardsNode(int numParameters, BackEndTurtle turtle){
+  public SetTowardsNode(int numParameters){
     super(numParameters);
     parameters = super.getParameters();
-    this.turtle = turtle;
   }
 
   @Override

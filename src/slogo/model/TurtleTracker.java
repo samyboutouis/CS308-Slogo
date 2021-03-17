@@ -19,6 +19,26 @@ public class TurtleTracker {
     allTurtles = new HashMap<>();
     activeTurtles = new ArrayList<>();
     currTurtle = 0;
+    // add a default turtle to start the program
+    addTurtle(new BackEndTurtle(0,0,0,true,true,0));
+  }
+
+  // add a backend turtle to turtle tracker to both allTurtles and list of activeTurtles
+  public void addTurtle(BackEndTurtle turtle){
+    allTurtles.put(turtle.getIndex(), turtle);
+    activeTurtles.add(turtle.getIndex());
+  }
+
+  // clear the list of activeTurtles
+  public void clearActiveTurtles(){
+    activeTurtles.clear();
+  }
+
+  public void clearAllCommands(){
+    Iterator<Integer> itrn = getIterator();
+    while (itrn.hasNext()){
+      getTurtle(itrn.next()).clearCommands();
+    }
   }
 
   // loops through active turtles for one node, will have many iterator instances out for nested commands e.g. fd fd 50

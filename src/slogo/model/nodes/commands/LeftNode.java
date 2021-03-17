@@ -11,12 +11,10 @@ public class LeftNode extends TurtleCommandNode {
 
   private List<SlogoNode> parameters;
   private List<Double> values;
-  private Turtle turtle;
 
-  public LeftNode(int numParameters, BackEndTurtle turtle){
+  public LeftNode(int numParameters){
     super(numParameters);
     parameters = super.getParameters();
-    this.turtle = turtle;
   }
 /*
   @Override

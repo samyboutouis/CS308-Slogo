@@ -8,14 +8,12 @@ import slogo.turtlecommands.SetHeadingCommand;
 import slogo.model.SlogoNode;
 
 public class SetHeadingNode extends TurtleCommandNode {
-  private Turtle turtle;
   private List<SlogoNode> parameters;
   private List<Double> values;
 
-  public SetHeadingNode(int numParameters, BackEndTurtle turtle){
+  public SetHeadingNode(int numParameters){
     super(numParameters);
     parameters = super.getParameters();
-    this.turtle = turtle;
   }
 
  /* @Override

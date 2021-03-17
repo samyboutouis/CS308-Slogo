@@ -11,10 +11,8 @@ import slogo.model.nodes.commands.TurtleCommandNode;
 import slogo.turtlecommands.DisplayCommand;
 
 public class XCoordinateNode extends TurtleCommandNode {
-  private Turtle turtle;
-  public XCoordinateNode(int parameter, BackEndTurtle turtle){
+  public XCoordinateNode(int parameter){
     super(parameter);
-    this.turtle = turtle;
   }
 
   /*@Override

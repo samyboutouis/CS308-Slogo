@@ -11,10 +11,8 @@ import slogo.model.nodes.commands.TurtleCommandNode;
 import slogo.turtlecommands.DisplayCommand;
 
 public class HeadingNode extends TurtleCommandNode {
-  private Turtle turtle;
-  public HeadingNode(int parameter, BackEndTurtle turtle){
+  public HeadingNode(int parameter){
     super(parameter);
-    this.turtle = turtle;
   }
 
   /*@Override

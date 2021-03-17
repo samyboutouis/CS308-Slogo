@@ -4,6 +4,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -31,8 +32,8 @@ public class CommandReader {
   private List<Double> forTests;
   private ResourceBundle numParameters;
   private ResourceBundle packageName;
-  private List<Command> commands;
-  private Turtle turtle;
+  //private List<Command> commands;
+  //private Turtle turtle;
   private TurtleTracker tracker;
 
   public CommandReader(String language) {
@@ -40,25 +41,27 @@ public class CommandReader {
     numParameters = ResourceBundle.getBundle(RESOURCES_PACKAGE + PARAMETERS_FILE);
     packageName = ResourceBundle.getBundle(RESOURCES_PACKAGE + PACKAGES_FILE);
 
-    commands = new ArrayList<>();
+    //commands = new ArrayList<>();
     variables = new HashMap<>();
     forTests = new ArrayList<>();
     userDefinedCommands = new HashMap<>();
     userDefinedCommandsInString = new HashMap<>();
-    tracker = new TurtleTracker();
+    tracker = new TurtleTracker(); // a default turtle is already added, from center of the screen, ID =0;
   }
 
-  public List<Command> parseInput(String input, Turtle turtle) throws IllegalArgumentException{
-    commands.clear();
+  public TurtleTracker parseInput(String input, TurtleTracker tracker) throws IllegalArgumentException{
+    //commands.clear();
+    tracker.clearAllCommands();
     try {
-      this.turtle = turtle;
+      //this.turtle = turtle;
+      this.tracker = tracker;
       List<String> cleaned = cleanInput(input);
       List<SlogoNode> roots = buildTree(cleaned);
       makeCommands(roots);
     } catch (NoSuchMethodException | ClassNotFoundException | IllegalAccessException | InvocationTargetException | InstantiationException e) {
       e.printStackTrace();
     }
-    return commands;
+    return tracker;
   }
 
   public Map<String, Double> getVariables() {
@@ -78,7 +81,8 @@ public class CommandReader {
   // used to test return values
   public List<Double> testParseInput(String input) {
     forTests = new ArrayList<>();
-    parseInput(input, new BackEndTurtle(0, 0, 0, true, true));
+    //parseInput(input, new BackEndTurtle(0, 0, 0, true, true, 0));
+    parseInput(input, tracker);
     return forTests;
   }
 

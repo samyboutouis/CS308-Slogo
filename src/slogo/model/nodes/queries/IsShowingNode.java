@@ -11,12 +11,10 @@ import slogo.model.nodes.commands.TurtleCommandNode;
 import slogo.turtlecommands.DisplayCommand;
 
 public class IsShowingNode extends TurtleCommandNode {
-  private Turtle turtle;
   private String mesg;
   private int ret;
-  public IsShowingNode(int parameter, BackEndTurtle turtle){
+  public IsShowingNode(int parameter){
     super(parameter);
-    this.turtle = turtle;
   }
 
   /*@Override

@@ -8,14 +8,12 @@ import slogo.model.TurtleTracker;
 import slogo.turtlecommands.SetPositionCommand;
 
 public class SetPositionNode extends TurtleCommandNode{
-  private Turtle turtle;
   private List<SlogoNode> parameters;
   private List<Double> values;
 
-  public SetPositionNode(int numParameters, BackEndTurtle turtle){
+  public SetPositionNode(int numParameters){
     super(numParameters);
     parameters = super.getParameters();
-    this.turtle = turtle;
   }
 
   @Override

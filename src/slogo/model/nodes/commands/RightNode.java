@@ -9,14 +9,12 @@ import slogo.model.SlogoNode;
 
 public class RightNode extends TurtleCommandNode {
 
-  private Turtle turtle;
   private List<SlogoNode> parameters;
   private List<Double> values;
 
-  public RightNode(int numParameters, BackEndTurtle turtle){
+  public RightNode(int numParameters){
     super(numParameters);
     parameters = super.getParameters();
-    this.turtle = turtle;
   }
 /* old getReturnValue method.
   @Override

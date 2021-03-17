@@ -8,11 +8,9 @@ import slogo.turtlecommands.ShowTurtleCommand;
 
 public class ShowTurtleNode extends TurtleCommandNode {
 
-  private Turtle turtle;
 
-  public ShowTurtleNode(int numParameters, BackEndTurtle turtle) {
+  public ShowTurtleNode(int numParameters) {
     super(numParameters);
-    this.turtle = turtle;
   }
 
   /*@Override

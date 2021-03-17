@@ -7,11 +7,9 @@ import slogo.model.TurtleTracker;
 import slogo.turtlecommands.PenDownCommand;
 
 public class PenDownNode extends TurtleCommandNode {
-  private Turtle turtle;
 
-  public PenDownNode(int numParameters, BackEndTurtle turtle) {
+  public PenDownNode(int numParameters) {
     super(numParameters);
-    this.turtle = turtle;
   }
 
   /*@Override

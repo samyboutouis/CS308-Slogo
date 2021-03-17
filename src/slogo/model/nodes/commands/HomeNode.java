@@ -7,11 +7,9 @@ import slogo.model.TurtleTracker;
 import slogo.turtlecommands.HomeCommand;
 
 public class HomeNode extends TurtleCommandNode {
-  private Turtle turtle;
 
-  public HomeNode(int numParameters, BackEndTurtle turtle) {
+  public HomeNode(int numParameters) {
     super(numParameters);
-    this.turtle = turtle;
   }
 /*
   @Override

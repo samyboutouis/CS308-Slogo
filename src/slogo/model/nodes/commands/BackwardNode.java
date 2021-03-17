@@ -11,12 +11,10 @@ public class BackwardNode extends TurtleCommandNode {
 
   private List<SlogoNode> parameters;
   private List<Double> values;
-  private Turtle turtle;
 
-  public BackwardNode(int numParameters, BackEndTurtle turtle){
+  public BackwardNode(int numParameters){
     super(numParameters);
     parameters = super.getParameters();
-    this.turtle = turtle;
   }
 
   @Override

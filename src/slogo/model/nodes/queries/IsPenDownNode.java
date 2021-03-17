@@ -11,12 +11,10 @@ import slogo.model.nodes.commands.TurtleCommandNode;
 import slogo.turtlecommands.DisplayCommand;
 
 public class IsPenDownNode extends TurtleCommandNode {
-  private Turtle turtle;
   private String mesg;
   private int ret;
-  public IsPenDownNode(int parameter, BackEndTurtle turtle){
+  public IsPenDownNode(int parameter){
     super(parameter);
-    this.turtle = turtle;
   }
 
  /* @Override

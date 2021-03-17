@@ -7,11 +7,9 @@ import slogo.model.TurtleTracker;
 import slogo.turtlecommands.HideTurtleCommand;
 
 public class HideTurtleNode extends TurtleCommandNode {
-  private Turtle turtle;
 
-  public HideTurtleNode(int numParameters, BackEndTurtle turtle) {
+  public HideTurtleNode(int numParameters) {
     super(numParameters);
-    this.turtle = turtle;
   }
 /*
   @Override

@@ -7,11 +7,9 @@ import slogo.model.TurtleTracker;
 import slogo.turtlecommands.ClearScreenCommand;
 
 public class ClearScreenNode extends TurtleCommandNode {
-  private Turtle turtle;
 
-  public ClearScreenNode(int numParameters, BackEndTurtle turtle){
+  public ClearScreenNode(int numParameters){
     super(numParameters);
-    this.turtle = turtle;
   }
 /*
   @Override
