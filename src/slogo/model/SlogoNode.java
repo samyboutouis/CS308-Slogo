@@ -25,6 +25,6 @@ public abstract class SlogoNode {
       return parameters;
     }
 
-    public abstract double getReturnValue(List<Command> commands);
+    public abstract double getReturnValue(TurtleTracker tracker);
 }
 
