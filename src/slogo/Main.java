@@ -7,6 +7,11 @@ import javafx.stage.Stage;
 import slogo.visualization.Workspace;
 
 public class Main extends Application  {
+
+    private final static int SCREEN_WIDTH = 1600;
+    private final static int SCREEN_HEIGHT = 1000;
+    private final static String STAGE_TITLE = "SLogo Application";
+
     /**
      * A method to test (and a joke :).
      */
@@ -20,13 +25,10 @@ public class Main extends Application  {
      */
     @Override
     public void start(Stage stage) {
-        final String STAGE_TITLE = "SLogo Application";
-
-        stage.setMaximized(true);
         stage.setTitle(STAGE_TITLE);
 
         Pane root = new Pane();
-        Scene scene = new Scene(root);
+        Scene scene = new Scene(root, SCREEN_WIDTH, SCREEN_HEIGHT);
         stage.setScene(scene);
         stage.show();
         new Workspace(root, scene, stage);
