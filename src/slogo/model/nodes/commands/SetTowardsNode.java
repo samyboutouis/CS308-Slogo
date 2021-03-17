@@ -6,7 +6,7 @@ import slogo.Command;
 import slogo.turtlecommands.SetTowardsCommand;
 import slogo.model.SlogoNode;
 
-public class SetTowardsNode extends SlogoNode {
+public class SetTowardsNode extends TurtleCommandNode {
 
   private List<SlogoNode> parameters;
   private List<Double> values;
@@ -14,7 +14,6 @@ public class SetTowardsNode extends SlogoNode {
   public SetTowardsNode(int numParameters){
     super(numParameters);
     parameters = super.getParameters();
-    values = new ArrayList<>();
   }
 
   @Override
