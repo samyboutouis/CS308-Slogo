@@ -27,6 +27,7 @@ public class ViewContainer {
     pane.add(closeButton, 0, 1);
 
     initializeComboBox();
+    initializeCloseButton();
   }
 
   private void initializeComboBox(){
@@ -36,8 +37,16 @@ public class ViewContainer {
     comboBox.setOnAction(event -> handleClick(comboBox.getValue()));
   }
 
+  private void initializeCloseButton(){
+    closeButton.setOnAction(e -> handleCloseButton());
+  }
+
   private void handleClick(String viewName){
     viewLayout.updateViewLayouts(containerIndex, viewName);
+  }
+
+  private void handleCloseButton(){
+    viewLayout.updateViewLayouts(containerIndex, null);
   }
 
   public void updateComboBox(String title){
