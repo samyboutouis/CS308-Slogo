@@ -11,6 +11,7 @@ import java.util.Stack;
 import slogo.BackEndTurtle;
 import slogo.Command;
 import slogo.Turtle;
+import slogo.model.nodes.commands.TurtleCommandNode;
 import slogo.model.nodes.control.ConstantNode;
 import slogo.model.nodes.control.MakeUserInstructionNode;
 import slogo.model.nodes.control.RepeatNode;
@@ -120,8 +121,13 @@ public class CommandReader {
             }
           }
         }
-        case "Home", "ClearScreen", "SetTowards", "SetPosition", "SetHeading" -> {
-          curr = (SlogoNode) node.getDeclaredConstructor(Integer.TYPE, turtle.getClass()).newInstance(parameters, turtle);
+        case "Home", "ClearScreen", "SetTowards", "SetPosition", "SetHeading", "Forward" -> {
+          try{
+            curr = (SlogoNode) node.getDeclaredConstructor(Integer.TYPE, turtle.getClass()).newInstance(parameters, turtle);
+          } catch(NoSuchMethodException e) {
+            // constructor of this type doesn't exist
+            System.out.println("Felix: method doesn't exist");
+          }
         }
         case "MakeUserInstruction" -> {
           curr = new MakeUserInstructionNode(parameters);
