@@ -2,6 +2,7 @@ package slogo.model.nodes.commands;
 
 import java.util.ArrayList;
 import java.util.List;
+import slogo.BackEndTurtle;
 import slogo.Command;
 import slogo.Turtle;
 import slogo.turtlecommands.SetTowardsCommand;
@@ -13,7 +14,7 @@ public class SetTowardsNode extends TurtleCommandNode {
   private List<Double> values;
   private Turtle turtle;
 
-  public SetTowardsNode(int numParameters, Turtle turtle){
+  public SetTowardsNode(int numParameters, BackEndTurtle turtle){
     super(numParameters);
     parameters = super.getParameters();
     this.turtle = turtle;

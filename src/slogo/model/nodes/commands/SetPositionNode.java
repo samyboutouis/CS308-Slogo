@@ -1,6 +1,7 @@
 package slogo.model.nodes.commands;
 
 import java.util.List;
+import slogo.BackEndTurtle;
 import slogo.Command;
 import slogo.Turtle;
 import slogo.model.SlogoNode;
@@ -11,7 +12,7 @@ public class SetPositionNode extends TurtleCommandNode{
   private List<SlogoNode> parameters;
   private List<Double> values;
 
-  public SetPositionNode(int numParameters, Turtle turtle){
+  public SetPositionNode(int numParameters, BackEndTurtle turtle){
     super(numParameters);
     parameters = super.getParameters();
     this.turtle = turtle;
