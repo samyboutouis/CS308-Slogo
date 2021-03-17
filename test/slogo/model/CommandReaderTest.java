@@ -74,6 +74,9 @@ public class CommandReaderTest {
     assertEquals(List.of(-3.0), myReader.testParseInput("minus 3"));
     assertEquals(List.of(1.0), myReader.testParseInput("sin 90"));
     assertEquals(List.of(Math.cos(Math.toRadians(90))), myReader.testParseInput("cos 90"));
+    assertEquals(List.of(Math.tan(Math.toRadians(68))), myReader.testParseInput("tan 68"));
+    assertEquals(List.of(-90.0), myReader.testParseInput("minus 90"));
+    assertEquals(List.of(8.0), myReader.testParseInput("pow 2 3"));
   }
 
   // SECTION
