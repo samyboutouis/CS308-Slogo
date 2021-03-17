@@ -50,6 +50,7 @@ public class MakeUserInstructionNode extends SlogoNode {
   }
 
   private void getCommands() {
+    myCommands.clear();
     for(int i = firstEnd; i < parameters.size(); i++){ // technically could do i = firstEnd + 2 but our code handles i = firstEnd
       if(!(parameters.get(i) instanceof ListStartNode) && !(parameters.get(i) instanceof ListEndNode)){
         myCommands.add(parameters.get(i));
@@ -61,6 +62,7 @@ public class MakeUserInstructionNode extends SlogoNode {
     // to arc [ :incr :degrees ]
     // to arc [ ]
     // i = 0 is left bracket since arc not added as a child
+    variableNames.clear();
     for(int i = 1; i < firstEnd; i++){
       variableNames.add((VariableNode) parameters.get(i));
     }
