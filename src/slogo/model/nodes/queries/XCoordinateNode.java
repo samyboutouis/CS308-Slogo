@@ -25,6 +25,7 @@ public class XCoordinateNode extends TurtleCommandNode {
   public double getReturnValue(TurtleTracker tracker) {
     return super.loopThroughTurtles(tracker, new ArrayList<>(), (currTurtle, values)->{
       String mesg = String.format("Turtle %d X Coordinate is %.2f", currTurtle.getIndex(), currTurtle.getX());
+      System.out.println(mesg);
       currTurtle.addCommand(new DisplayCommand(mesg));
       return currTurtle.getX();
     });

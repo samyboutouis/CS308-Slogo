@@ -39,8 +39,13 @@ public class TurtleTracker {
 
   // add a backend turtle to turtle tracker to both allTurtles and list of activeTurtles
   public void addTurtle(BackEndTurtle turtle){
+    if (allTurtles.containsKey(turtle.getIndex())){
+      if (!activeTurtles.contains(turtle.getIndex())){
+        activeTurtles.add(turtle.getIndex());
+      }
+    } else {
     allTurtles.put(turtle.getIndex(), turtle);
-    activeTurtles.add(turtle.getIndex());
+    activeTurtles.add(turtle.getIndex());}
   }
 
   // clear the list of activeTurtles

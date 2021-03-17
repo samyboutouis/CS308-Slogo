@@ -30,6 +30,12 @@ public class CommandReaderTest {
   }
 
   @Test
+  void testMultiTurtle(){
+    assertEquals(List.of(5.0), myReader.testParseInput("tell [ 2 5 ]")); // note testParseInput adds a index 0 turtle by default
+    assertEquals(List.of(5.0, 90.0, 50.0, 50.0), myReader.testParseInput(" tell [ 0 2 5 ] rt 90 fd 50 xcor"));
+  }
+
+  @Test
   void testSum () {
     assertEquals(List.of(150.0), myReader.testParseInput("sum 50 sum 50 50"));
   }
