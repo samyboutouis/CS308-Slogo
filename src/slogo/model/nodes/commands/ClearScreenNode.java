@@ -1,2 +1,5 @@
-package slogo.model.nodes.commands;public class ClearScreenNode {
+package slogo.model.nodes.commands;
+
+public class ClearScreenNode {
+
 }
