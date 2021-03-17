@@ -120,7 +120,7 @@ public class CommandReader {
             }
           }
         }
-        case "Home", "ClearScreen", "SetTowards", "SetPosition" -> {
+        case "Home", "ClearScreen", "SetTowards", "SetPosition", "SetHeading" -> {
           curr = (SlogoNode) node.getDeclaredConstructor(Integer.TYPE, turtle.getClass()).newInstance(parameters, turtle);
         }
         case "MakeUserInstruction" -> {

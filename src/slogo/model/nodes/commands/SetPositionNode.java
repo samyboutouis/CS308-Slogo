@@ -1,20 +1,18 @@
 package slogo.model.nodes.commands;
 
-import java.util.ArrayList;
 import java.util.List;
 import slogo.BackEndTurtle;
 import slogo.Command;
 import slogo.Turtle;
-import slogo.turtlecommands.SetTowardsCommand;
 import slogo.model.SlogoNode;
+import slogo.turtlecommands.SetPositionCommand;
 
-public class SetTowardsNode extends TurtleCommandNode {
-
+public class SetPositionNode extends TurtleCommandNode{
+  private Turtle turtle;
   private List<SlogoNode> parameters;
   private List<Double> values;
-  private Turtle turtle;
 
-  public SetTowardsNode(int numParameters, BackEndTurtle turtle){
+  public SetPositionNode(int numParameters, BackEndTurtle turtle){
     super(numParameters);
     parameters = super.getParameters();
     this.turtle = turtle;
@@ -24,12 +22,13 @@ public class SetTowardsNode extends TurtleCommandNode {
   public double getReturnValue(List<Command> commands) {
     values = super.getValues(commands, parameters);
     createMovement(commands);
-    double prevHeading = turtle.getDirection();
-    turtle.towards(values.get(0), values.get(1));
-    return Math.abs(prevHeading - turtle.getDirection());
+    double prevX = turtle.getX();
+    double prevY = turtle.getY();
+    turtle.setXY(values.get(0), values.get(1));
+    return Math.sqrt(Math.pow(prevX - turtle.getX(), 2) +  Math.pow(prevY - turtle.getY(), 2));
   }
 
   private void createMovement(List<Command> commands) {
-    commands.add(new SetTowardsCommand(values.get(0), values.get(1)));
+    commands.add(new SetPositionCommand(values.get(0), values.get(1)));
   }
 }

@@ -3,7 +3,6 @@ package slogo.turtlecommands;
 import slogo.Command;
 import slogo.FrontEndTurtle;
 
-// handles SETHEADING
 public class SetHeadingCommand implements Command {
   // deals with turtle call that sets direction to somewhere absolute using angle
   private double degrees;

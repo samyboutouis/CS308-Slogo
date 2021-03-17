@@ -28,7 +28,7 @@ public class CommandNode extends SlogoNode {
     return ret;
   }
 
-  // size of parameters must be equal to size of variableNames
+  // size of parameters must be equal to size of variables
   private void setParameters(List<Command> commands) {
     for(int i = 0; i < variables.size(); i++){
       variables.get(i).setValue(parameters.get(i).getReturnValue(commands));
