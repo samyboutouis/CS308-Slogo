@@ -17,6 +17,7 @@ import slogo.model.nodes.control.ConstantNode;
 import slogo.model.nodes.control.MakeUserInstructionNode;
 import slogo.model.nodes.control.RepeatNode;
 import slogo.model.nodes.control.VariableNode;
+import slogo.model.nodes.multi.TellNode;
 
 // creates parser, reads commands, and creates nodes
 public class CommandReader {
@@ -104,6 +105,11 @@ public class CommandReader {
       int parameters = Integer.parseInt(numParameters.getString(symbol));
       switch(symbol){
         // handle separately: Constant, Variable
+        case "Tell" ->{
+          curr = new TellNode(parameters);
+          tracker.clearActiveTurtles(); // clear the previous active list of turtles, to prepare room for new list of active turtles.
+        }
+
         case "Constant" -> {
           curr = new ConstantNode(parameters, Double.parseDouble(s));
           // if stack is empty and we see a constant, it doesn't do anything to the program but
