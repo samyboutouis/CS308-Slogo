@@ -6,7 +6,7 @@ import slogo.Command;
 import slogo.turtlecommands.SetHeadingCommand;
 import slogo.model.SlogoNode;
 
-public class SetHeadingNode extends SlogoNode {
+public class SetHeadingNode extends TurtleCommandNode {
 
   private List<SlogoNode> parameters;
   private List<Double> values;
@@ -19,18 +19,12 @@ public class SetHeadingNode extends SlogoNode {
 
   @Override
   public double getReturnValue(List<Command> commands) {
-    getValues(commands);
+    values = super.getValues(commands, parameters);
     createMovement(commands);
     return values.get(0);
   }
 
   private void createMovement(List<Command> commands) {
     commands.add(new SetHeadingCommand(values.get(0)));
-  }
-
-  private void getValues(List<Command> commands) {
-    for(SlogoNode node : parameters) {
-      values.add(node.getReturnValue(commands));
-    }
   }
 }
