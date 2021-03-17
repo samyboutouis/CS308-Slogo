@@ -93,6 +93,10 @@ public class FrontEndTurtle implements Turtle {
     imageView.setVisible(false);
   }
 
+  public boolean isShowing() {
+    return imageView.isVisible();
+  }
+
   public void setImage(File file) {
     Image image = new Image(file.toURI().toString(), IMAGE_WIDTH, IMAGE_HEIGHT, true, false);
     imageView.setImage(image);
