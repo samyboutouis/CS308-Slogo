@@ -20,10 +20,10 @@ public class IsShowingNode extends SlogoNode {
   public double getReturnValue(List<Command> commands) {
 
     if (turtle.isShowing()){
-      mesg = "Turtle is showing";
+      mesg = "Turtle is shown";
       ret  =1;
     } else {
-      mesg = "Turtle is not showing";
+      mesg = "Turtle is hidden";
       ret = 0;
     }
     commands.add(new DisplayCommand(mesg));
