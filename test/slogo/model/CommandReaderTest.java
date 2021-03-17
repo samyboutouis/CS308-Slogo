@@ -72,6 +72,7 @@ public class CommandReaderTest {
     assertEquals(List.of(50.0,90.0,60.0,60.0), myReader.testParseInput("fd 50 rt 90 fd 60 ycor"));
     assertEquals(List.of(50.0,90.0,60.0,90.0), myReader.testParseInput("fd 50 rt 90 fd 60 heading"));
     assertEquals(List.of(1.0,0.0), myReader.testParseInput("penup pendown?"));
+    assertEquals(List.of(1.0,1.0), myReader.testParseInput("st showing?"));
   }
 
   @Test
