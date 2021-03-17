@@ -76,7 +76,7 @@ public class CommandReader {
   // used to test return values
   public List<Double> testParseInput(String input) {
     forTests = new ArrayList<>();
-    parseInput(input, new BackEndTurtle(0, 0, 0));
+    parseInput(input, new BackEndTurtle(0, 0, 0, true, true));
     return forTests;
   }
 
