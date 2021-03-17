@@ -8,7 +8,6 @@ import slogo.model.SlogoNode;
 
 public class SetHeadingNode extends TurtleCommandNode {
   private Turtle turtle;
-
   private List<SlogoNode> parameters;
   private List<Double> values;
 
