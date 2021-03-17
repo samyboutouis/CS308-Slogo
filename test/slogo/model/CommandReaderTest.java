@@ -105,6 +105,21 @@ public class CommandReaderTest {
         + "arc 50"));
   }
 
+  @Test
+  void testRecursion () {
+    assertEquals(List.of(1.0, 50.0, 100.0), myReader.testParseInput("to example [ :x ]\n"
+        + "[\n"
+        + "  if greater? :x 10\n"
+        + "  [\n"
+        + "    example difference :x 10\n"
+        + "    fd 50\n"
+        + "  ]\n"
+        + "]\n"
+        + "\n"
+        + "example 30 ycor\n"));
+    assertEquals(List.of(0.0), myReader.testParseInput("to felix [ sum 50 50 ] [ fd 50 ]")); // unable to define method, variables are wrong
+  }
+
   // SECTION
   // test that command objects created are correct
   @Test
