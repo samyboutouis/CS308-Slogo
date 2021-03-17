@@ -19,6 +19,6 @@ public class HideTurtleNode extends SlogoNode {
   public double getReturnValue(List<Command> commands) {
     commands.add(new HideTurtleCommand());
     turtle.hide();
-    return 1;
+    return 0;
   }
 }
