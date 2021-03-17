@@ -8,8 +8,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Stack;
-import slogo.Command;
 import slogo.BackEndTurtle;
+import slogo.Command;
+import slogo.Turtle;
 import slogo.model.nodes.control.ConstantNode;
 import slogo.model.nodes.control.MakeUserInstructionNode;
 import slogo.model.nodes.control.RepeatNode;
@@ -30,7 +31,7 @@ public class CommandReader {
   private ResourceBundle numParameters;
   private ResourceBundle packageName;
   private List<Command> commands;
-  private BackEndTurtle turtle;
+  private Turtle turtle;
 
   public CommandReader(String language) {
     setLanguage(language);
@@ -44,10 +45,10 @@ public class CommandReader {
     userDefinedCommandsInString = new HashMap<>();
   }
 
-  public List<Command> parseInput(String input, BackEndTurtle backEndTurtle) throws IllegalArgumentException{
+  public List<Command> parseInput(String input, Turtle turtle) throws IllegalArgumentException{
     commands.clear();
     try {
-      turtle = backEndTurtle;
+      this.turtle = turtle;
       List<String> cleaned = cleanInput(input);
       List<SlogoNode> roots = buildTree(cleaned);
       makeCommands(roots);
