@@ -33,6 +33,7 @@ public class CommandReader {
   private ResourceBundle packageName;
   private List<Command> commands;
   private Turtle turtle;
+  private TurtleTracker tracker;
 
   public CommandReader(String language) {
     setLanguage(language);
@@ -44,6 +45,7 @@ public class CommandReader {
     forTests = new ArrayList<>();
     userDefinedCommands = new HashMap<>();
     userDefinedCommandsInString = new HashMap<>();
+    tracker = new TurtleTracker();
   }
 
   public List<Command> parseInput(String input, Turtle turtle) throws IllegalArgumentException{
