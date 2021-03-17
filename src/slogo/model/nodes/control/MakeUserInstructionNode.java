@@ -2,7 +2,6 @@ package slogo.model.nodes.control;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import slogo.Command;
 import slogo.model.SlogoNode;
 
