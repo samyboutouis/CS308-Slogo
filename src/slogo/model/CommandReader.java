@@ -133,7 +133,7 @@ public class CommandReader {
 
         default -> {
           try{
-            curr = (SlogoNode) node.getDeclaredConstructor(Integer.TYPE, turtle.getClass()).newInstance(parameters, turtle);
+            curr = (SlogoNode) node.getDeclaredConstructor(Integer.TYPE, tracker.getTurtle(tracker.getCurr()).getClass()).newInstance(parameters);
           } catch(NoSuchMethodException e) {
             // constructor of this type doesn't exist
             //System.out.println("Felix: method doesn't exist");
@@ -168,7 +168,7 @@ public class CommandReader {
 
   private void makeCommands(List<SlogoNode> roots){
     for(SlogoNode root : roots){
-      double value = root.getReturnValue(commands);
+      double value = root.getReturnValue(tracker);
       forTests.add(value);
     }
   }

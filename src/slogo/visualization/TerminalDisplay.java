@@ -97,7 +97,7 @@ public class TerminalDisplay {
       if (command.length() > 0) {
         try {
           BackEndTurtle backendTurtle = new BackEndTurtle(frontEndTurtle.getX(), frontEndTurtle.getY(),
-              frontEndTurtle.getDirection(), frontEndTurtle.isPenDown(), frontEndTurtle.isShowing());
+              frontEndTurtle.getDirection(), frontEndTurtle.isPenDown(), frontEndTurtle.isShowing(),0); // assuming it has index 0
           new AnimationManager(controller.parseProgram(command, backendTurtle), frontEndTurtle);
           Button historyTag = historyDisplay.addNewHistoryTag(command);
           variablesDisplay.updateBox(controller.getVariables());
