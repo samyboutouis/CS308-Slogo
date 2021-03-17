@@ -1,9 +1,13 @@
 package slogo.model.nodes.commands;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import slogo.BackEndTurtle;
 import slogo.Command;
 import slogo.model.SlogoNode;
+import slogo.model.TurtleTracker;
+import slogo.turtlecommands.MovementCommand;
 
 // second level of abstraction for all command nodes that may need getValues
 public abstract class TurtleCommandNode extends SlogoNode {
@@ -12,6 +16,27 @@ public abstract class TurtleCommandNode extends SlogoNode {
     super(numParameters);
   }
 
+  protected double loopThroughTurtles(TurtleTracker tracker, List<SlogoNode> parameters, TurtleAction action) {
+    Iterator<Integer> itr = tracker.getIterator();
+    double ret = 0.0;
+    while(itr.hasNext()){
+      int index = itr.next();
+      tracker.setCurr(index);
+      BackEndTurtle currTurtle = tracker.getTurtle(index);
+      ret = action.turtleAction(currTurtle, getValues(tracker, parameters));
+    }
+    return ret;
+  }
+
+  private List<Double> getValues(TurtleTracker tracker, List<SlogoNode> parameters) {
+    List<Double> values = new ArrayList<>();
+    for(SlogoNode node : parameters) {
+      values.add(node.getReturnValue(tracker));
+    }
+    return values;
+  }
+
+  // OLD getValues Method
   // for subclasses to get their parameter values
   // gets values for all parameters of node that calls this method, needs commands list to
   // create the commands when the parameters call getReturnValue
