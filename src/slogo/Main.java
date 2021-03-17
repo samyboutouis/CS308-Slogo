@@ -4,9 +4,14 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import slogo.visualization.ScreenManager;
+import slogo.visualization.Workspace;
 
 public class Main extends Application  {
+
+    private final static int SCREEN_WIDTH = 1600;
+    private final static int SCREEN_HEIGHT = 1000;
+    private final static String STAGE_TITLE = "SLogo Application";
+
     /**
      * A method to test (and a joke :).
      */
@@ -20,15 +25,18 @@ public class Main extends Application  {
      */
     @Override
     public void start(Stage stage) {
-        final String STAGE_TITLE = "SLogo Application";
+        createNewWorkspace();
+    }
 
-        stage.setMaximized(true);
+    public void createNewWorkspace(){
+        Stage stage = new Stage();
+
         stage.setTitle(STAGE_TITLE);
 
         Pane root = new Pane();
-        Scene scene = new Scene(root);
+        Scene scene = new Scene(root, SCREEN_WIDTH, SCREEN_HEIGHT);
         stage.setScene(scene);
         stage.show();
-        new ScreenManager(root, scene, stage);
+        new Workspace(root, scene, stage);
     }
 }

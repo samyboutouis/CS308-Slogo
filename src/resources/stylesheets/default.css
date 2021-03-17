@@ -37,6 +37,11 @@
   -fx-background-radius: 20px;
 }
 
+.yeetBox{
+  -fx-background-color: #000000;
+  -fx-background-radius: 20px;
+}
+
 #HistoryBox, #VariablesBox, #UserCommandsBox {
   -fx-background-radius: 20px;
   -fx-border-radius: 20px;

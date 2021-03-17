@@ -1,12 +1,12 @@
 package slogo.turtlecommands;
 
 import slogo.Command;
-import slogo.Turtle;
+import slogo.FrontEndTurtle;
 
 public class HomeCommand implements Command {
 
   @Override
-  public void doCommand(Turtle turtle) {
-    turtle.home();
+  public void doCommand(FrontEndTurtle frontEndTurtle) {
+    frontEndTurtle.home();
   }
 }

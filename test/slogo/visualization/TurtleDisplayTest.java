@@ -24,7 +24,7 @@ public class TurtleDisplayTest extends DukeApplicationTest {
     Scene scene = new Scene(root);
     stage.setScene(scene);
     stage.show();
-    new ScreenManager(root, scene, stage);
+    new Workspace(root, scene, stage);
     idBundle = ResourceBundle
       .getBundle(String.format("%s/%s/%s", RESOURCE_PACKAGE, "stylesheets", "CSS_IDs"));
     addTurtle();

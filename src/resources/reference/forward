@@ -3,10 +3,10 @@ FORWARD pixels
 FD pixels
 
 Description:
-Moves turtle forward in its current heading by pixels distance
+Moves frontEndTurtle forward in its current heading by pixels distance
 
 Parameters:
 pixels - any expression
 
 Returns:
-Distance the turtle moved
+Distance the frontEndTurtle moved

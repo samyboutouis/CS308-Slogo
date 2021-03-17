@@ -1,12 +1,12 @@
 Multiple Turtle Commands:
-ASK [ turtle(s) ] [  command(s) ]
+ASK [ frontEndTurtle(s) ] [  command(s) ]
 
 Description:
 Turtles given in first list all run commands given in the second list.
-After commands are run, currently active list of turtles returns to that set by the last TELL command (or default active turtle if TELL never given).
+After commands are run, currently active list of turtles returns to that set by the last TELL command (or default active frontEndTurtle if TELL never given).
 
 Parameters:
-turtle(s) - any expression
+frontEndTurtle(s) - any expression
 command(s) - any command
 
 Returns:

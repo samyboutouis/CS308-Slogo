@@ -1,15 +1,15 @@
 # turtles 1, 2, and 3 go forward
 tell [ 1 2 3 ]
 fd 50
-# turtle 4 is now the only one to go forward
+# frontEndTurtle 4 is now the only one to go forward
 tell [ 4 ]    
 fd 50
 
 
 # iteration 1: turtles 1, 2, and 3 go forward
-# iteration 2: turtle 4 goes forward
-# iteration 3: turtle 5 goes forward
-# after the loop: turtle 6 goes forward
+# iteration 2: frontEndTurtle 4 goes forward
+# iteration 3: frontEndTurtle 5 goes forward
+# after the loop: frontEndTurtle 6 goes forward
 tell [ 1 2 3 ]
 set :t 4
 repeat 3 [

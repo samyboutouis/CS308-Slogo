@@ -5,7 +5,7 @@ import slogo.Command;
 import slogo.turtlecommands.MovementCommand;
 import slogo.model.SlogoNode;
 
-public class RightNode extends CommandNode {
+public class RightNode extends TurtleCommandNode {
 
   private List<SlogoNode> parameters;
   private List<Double> values;

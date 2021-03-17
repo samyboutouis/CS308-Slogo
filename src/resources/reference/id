@@ -2,7 +2,7 @@ Multiple Turtle Commands:
 ID
 
 Description:
-Reports active turtle's unique number.
+Reports active frontEndTurtle's unique number.
 
 Parameters:
 None

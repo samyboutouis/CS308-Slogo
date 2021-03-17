@@ -1,9 +1,8 @@
 package slogo.turtlecommands;
 
 import slogo.Command;
-import slogo.Turtle;
+import slogo.FrontEndTurtle;
 
-// handles SETHEADING
 public class SetHeadingCommand implements Command {
   // deals with turtle call that sets direction to somewhere absolute using angle
   private double degrees;
@@ -13,7 +12,7 @@ public class SetHeadingCommand implements Command {
   }
 
   @Override
-  public void doCommand(Turtle turtle) {
-    turtle.setDirection(degrees);
+  public void doCommand(FrontEndTurtle frontEndTurtle) {
+    frontEndTurtle.setDirection(degrees);
   }
 }

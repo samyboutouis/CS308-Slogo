@@ -3,7 +3,7 @@ PENDOWN
 PD
 
 Description:
-Puts pen down such that when the turtle moves, it leaves a trail
+Puts pen down such that when the frontEndTurtle moves, it leaves a trail
 
 Parameters:
 None

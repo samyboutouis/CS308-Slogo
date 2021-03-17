@@ -1,6 +1,5 @@
 package slogo.model;
 
-import java.awt.event.KeyEvent;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,8 +8,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Stack;
+import slogo.BackEndTurtle;
 import slogo.Command;
+import slogo.Turtle;
 import slogo.model.nodes.control.ConstantNode;
+import slogo.model.nodes.control.MakeUserInstructionNode;
 import slogo.model.nodes.control.RepeatNode;
 import slogo.model.nodes.control.VariableNode;
 
@@ -23,11 +25,13 @@ public class CommandReader {
   private static final String PACKAGES_FILE = "packages.Packages";
   private ProgramParser parser;
   private Map<String, Double> variables;
-  private Map<String, List<SlogoNode>> userDefinedCommands;
+  private Map<String, MakeUserInstructionNode> userDefinedCommands;
+  private Map<String, String> userDefinedCommandsInString;
   private List<Double> forTests;
   private ResourceBundle numParameters;
   private ResourceBundle packageName;
   private List<Command> commands;
+  private Turtle turtle;
 
   public CommandReader(String language) {
     setLanguage(language);
@@ -37,11 +41,14 @@ public class CommandReader {
     commands = new ArrayList<>();
     variables = new HashMap<>();
     forTests = new ArrayList<>();
+    userDefinedCommands = new HashMap<>();
+    userDefinedCommandsInString = new HashMap<>();
   }
 
-  public List<Command> parseInput(String input) throws IllegalArgumentException{
+  public List<Command> parseInput(String input, Turtle turtle) throws IllegalArgumentException{
     commands.clear();
     try {
+      this.turtle = turtle;
       List<String> cleaned = cleanInput(input);
       List<SlogoNode> roots = buildTree(cleaned);
       makeCommands(roots);
@@ -55,6 +62,10 @@ public class CommandReader {
     return variables;
   }
 
+  public Map<String, String> getCommands() {
+    return userDefinedCommandsInString;
+  }
+
   public void setLanguage(String language) {
     parser = new ProgramParser();
     parser.addPatterns(language);
@@ -64,7 +75,7 @@ public class CommandReader {
   // used to test return values
   public List<Double> testParseInput(String input) {
     forTests = new ArrayList<>();
-    parseInput(input);
+    parseInput(input, new BackEndTurtle(0, 0, 0));
     return forTests;
   }
 
@@ -72,6 +83,7 @@ public class CommandReader {
       throws NoSuchMethodException, ClassNotFoundException, IllegalAccessException, InvocationTargetException, InstantiationException {
     Stack<SlogoNode> st = new Stack<>();
     List<SlogoNode> roots = new ArrayList<>();
+    SlogoNode curr = null;
     for(String s : cleaned){
       String symbol = parser.getSymbol(s);
       if(symbol.equals("NO MATCH")){
@@ -79,7 +91,6 @@ public class CommandReader {
       }
       Class<?> node = Class.forName("slogo.model.nodes." + packageName.getString(symbol) + "." + symbol + "Node");
 
-      SlogoNode curr;
       int parameters = Integer.parseInt(numParameters.getString(symbol));
       switch(symbol){
         // handle separately: Constant, Variable
@@ -95,8 +106,28 @@ public class CommandReader {
           // needs the map of variables in constructor to add repcount variable
           curr = new RepeatNode(parameters, variables);
         }
+        case "Command" -> {
+          if(curr instanceof MakeUserInstructionNode){
+            userDefinedCommands.put(s, (MakeUserInstructionNode) curr);
+            continue;
+          }
+          else {
+            if(!userDefinedCommands.containsKey(s)){
+              throw new IllegalArgumentException("Command " + s + " undefined!");
+            }
+            else{
+              curr = userDefinedCommands.get(s).createNode();
+            }
+          }
+        }
+        case "Home", "ClearScreen", "SetTowards", "SetPosition", "SetHeading" -> {
+          curr = (SlogoNode) node.getDeclaredConstructor(Integer.TYPE, turtle.getClass()).newInstance(parameters, turtle);
+        }
+        case "MakeUserInstruction" -> {
+          curr = new MakeUserInstructionNode(parameters);
+        }
         default -> {
-            curr = (SlogoNode) node.getDeclaredConstructor(Integer.TYPE).newInstance(parameters);
+          curr = (SlogoNode) node.getDeclaredConstructor(Integer.TYPE).newInstance(parameters);
         }
       }
       if(curr.isFull()){ // only true if node has no parameters
@@ -136,6 +167,9 @@ public class CommandReader {
     String[] preCleaned = input.split(NEWLINE);
     List<String> cleaned = new ArrayList<>();
     for(String line : preCleaned){
+      if(line.trim().equals("")){
+        continue; // ignores lines that are only new lines
+      }
       if (!parser.getSymbol(line).equals("Comment")){
         cleaned.addAll(Arrays.asList(line.trim().split(WHITESPACE)));
       }

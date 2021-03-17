@@ -4,6 +4,7 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import slogo.Command;
+import slogo.BackEndTurtle;
 import slogo.turtlecommands.HomeCommand;
 import slogo.turtlecommands.MovementCommand;
 
@@ -34,8 +35,9 @@ public class CommandReaderTest {
   }
 
   @Test
-  void testForward () {
+  void testTurtleMovements () {
     assertEquals(List.of(5.0), myReader.testParseInput("fd 5.0"));
+    assertEquals(List.of(100.0), myReader.testParseInput("fd 100 home"));
   }
 
   @Test
@@ -79,16 +81,25 @@ public class CommandReaderTest {
     assertEquals(List.of(8.0), myReader.testParseInput("pow 2 3"));
   }
 
+  @Test
+  void testUserDefined () {
+    assertEquals(List.of(1.0, 50.0), myReader.testParseInput("to arc [ :a ]\n"
+        + "[\n"
+        + "  fd :a\n"
+        + "]\n"
+        + "arc 50"));
+  }
+
   // SECTION
   // test that command objects created are correct
   @Test
   void testHomeCommand () {
-    assertTrue(myReader.parseInput("home").get(0) instanceof HomeCommand);
+    assertTrue(myReader.parseInput("home", new BackEndTurtle(0, 0, 0)).get(0) instanceof HomeCommand);
   }
 
   @Test
   void testLoopCommand () {
-    List<Command> loop = myReader.parseInput("for [ :a 1 5 1 ] [ fd 1 bk 2 ]");
+    List<Command> loop = myReader.parseInput("for [ :a 1 5 1 ] [ fd 1 bk 2 ]", new BackEndTurtle(0, 0, 0));
     assertEquals(10, loop.size());
     for(Command c : loop){
       assertTrue(c instanceof MovementCommand);
@@ -100,7 +111,7 @@ public class CommandReaderTest {
   @Test
   void testBadInput () {
     try{
-      myReader.parseInput("::"); // invalid syntax
+      myReader.testParseInput("::"); // invalid syntax
     } catch(IllegalArgumentException e){
       assertEquals(e.getMessage(), "Input syntax is incorrect");
     }

@@ -2,7 +2,7 @@ Turtle Queries:
 HEADING
 
 Description:
-Reports turtle's current heading
+Reports frontEndTurtle's current heading
 
 Parameters:
 None

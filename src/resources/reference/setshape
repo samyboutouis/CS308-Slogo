@@ -3,7 +3,7 @@ SETSHAPE index
 SETSH index
 
 Description:
-Sets shape of turtle to that represented by index
+Sets shape of frontEndTurtle to that represented by index
 
 Parameters:
 index - any expression

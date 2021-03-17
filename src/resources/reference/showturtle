@@ -3,7 +3,7 @@ SHOWTURTLE
 ST
 
 Description:
-Makes turtle visible
+Makes frontEndTurtle visible
 
 Parameters:
 None
