@@ -5,11 +5,13 @@ public class BackEndTurtle implements Turtle {
   private double xCoordinate;
   private double yCoordinate;
   private double direction;
+  private boolean isPenDown;
 
   public BackEndTurtle(double xCoordinate, double yCoordinate, double direction) {
     this.xCoordinate = xCoordinate;
     this.yCoordinate = yCoordinate;
     this.direction = direction;
+    this.isPenDown = true;
   }
 
   public void forward(double pixels) {
@@ -63,6 +65,12 @@ public class BackEndTurtle implements Turtle {
   }
 
   public double getDirection() { return direction; }
+
+  public boolean isPenDown() { return isPenDown; }
+
+  public void penDown() { isPenDown = true; }
+
+  public void penUp() { isPenDown = false; }
 
   public void home() {
     setXY(0, 0);

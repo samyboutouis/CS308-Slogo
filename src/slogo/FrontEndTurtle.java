@@ -133,11 +133,12 @@ public class FrontEndTurtle implements Turtle {
 
   public double getDirection() { return direction; }
 
+  public boolean isPenDown() { return false; }
+
   public void home() {
     setXY(0, 0);
   }
 
-  @Override
   public void clearScreen() {
     home();
     pen.removeLines();

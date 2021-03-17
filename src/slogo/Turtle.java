@@ -19,6 +19,12 @@ public interface Turtle {
 
   double getDirection();
 
+  boolean isPenDown();
+
+  void penDown();
+
+  void penUp();
+
   void home();
 
   void clearScreen();
