@@ -10,7 +10,7 @@ import slogo.turtlecommands.HomeCommand;
 public class HomeNode extends SlogoNode {
   private BackEndTurtle turtle;
 
-  public HomeNode(int numParameters, FrontEndTurtle turtle) {
+  public HomeNode(int numParameters, BackEndTurtle turtle) {
     super(numParameters);
     this.turtle = turtle;
   }
