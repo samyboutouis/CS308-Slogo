@@ -35,6 +35,12 @@ public class CommandReaderTest {
   }
 
   @Test
+  void testVariables () {
+    assertEquals(List.of(10.0, 10.0), myReader.testParseInput("set :x 10 fd :x"));
+    assertEquals(List.of(10.0, 20.0, 20.0), myReader.testParseInput("set :x 10 set :x sum :x :x fd :x"));
+  }
+
+  @Test
   void testTurtleMovements () {
     assertEquals(List.of(5.0), myReader.testParseInput("fd 5.0"));
     assertEquals(List.of(100.0, 100.0), myReader.testParseInput("fd 100 home"));
