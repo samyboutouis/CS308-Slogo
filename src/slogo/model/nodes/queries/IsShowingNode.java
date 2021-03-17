@@ -19,11 +19,11 @@ public class IsShowingNode extends SlogoNode {
   @Override
   public double getReturnValue(List<Command> commands) {
 
-    if (turtle.isPenDown()){
-      mesg = "Pen is down";
+    if (turtle.isShowing()){
+      mesg = "Turtle is shown";
       ret  =1;
     } else {
-      mesg = "Pen is up";
+      mesg = "Turtle is hidden";
       ret = 0;
     }
     commands.add(new DisplayCommand(mesg));
