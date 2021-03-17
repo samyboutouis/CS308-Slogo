@@ -5,7 +5,7 @@ import java.util.ResourceBundle;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import slogo.controller.Controller;
+import slogo.controller.FrontEndController;
 
 public class ButtonFactory {
   private static final int ICON_WIDTH = 30;
@@ -18,9 +18,9 @@ public class ButtonFactory {
   private final ResourceBundle imageBundle;
   private final ResourceBundle idBundle;
   private final ResourceBundle commandBundle;
-  private final Controller controller;
+  private final FrontEndController controller;
 
-  public ButtonFactory(Controller controller) {
+  public ButtonFactory(FrontEndController controller) {
     this.imageBundle = ResourceBundle.getBundle(DEFAULT_RESOURCE_FOLDER + IMAGE_PROPERTY);
     this.idBundle = ResourceBundle.getBundle(DEFAULT_RESOURCE_FOLDER + ID_PROPERTY);
     this.commandBundle = ResourceBundle.getBundle(DEFAULT_RESOURCE_FOLDER + METHODS_PROPERTY);

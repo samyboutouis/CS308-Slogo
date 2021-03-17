@@ -17,6 +17,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 import slogo.controller.Controller;
+import slogo.controller.FrontEndController;
 
 public class ToolbarDisplay {
   private final static int PADDING_LENGTH = 10;
@@ -29,12 +30,13 @@ public class ToolbarDisplay {
 
   private final GridPane gridPane;
   private final Controller controller;
+  private final FrontEndController frontEndController;
   private final ResourceBundle languageBundle;
   private final ResourceBundle resourceBundle;
   private final ResourceBundle idBundle;
   private final ResourceBundle commandBundle;
 
-  public ToolbarDisplay(GridPane pane, String resourcePackage, Controller controller) {
+  public ToolbarDisplay(GridPane pane, String resourcePackage, Controller controller, FrontEndController frontEndController) {
     String language = DEFAULT_LANGUAGE;
     this.gridPane = pane;
     this.controller = controller;
@@ -44,6 +46,7 @@ public class ToolbarDisplay {
       .getBundle(String.format("%s/%s/%s", resourcePackage, "languages", language));
     this.idBundle = ResourceBundle.getBundle(DEFAULT_RESOURCE_FOLDER + ID_PROPERTY);
     this.commandBundle = ResourceBundle.getBundle(DEFAULT_RESOURCE_FOLDER + METHODS_PROPERTY);
+    this.frontEndController = frontEndController;
     initializeGridPane();
     makeToolbar();
   }
@@ -64,7 +67,7 @@ public class ToolbarDisplay {
 
   private void makeToolbar() {
     int colIndex = 0;
-    ButtonFactory buttonFactory = new ButtonFactory(controller);
+    ButtonFactory buttonFactory = new ButtonFactory(frontEndController);
     for(String label : commandBundle.keySet()) {
       gridPane.add(buttonFactory.createButton(label), colIndex++, 0, 1, 1);
     }
