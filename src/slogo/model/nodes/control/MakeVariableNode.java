@@ -3,6 +3,7 @@ package slogo.model.nodes.control;
 import java.util.List;
 import slogo.Command;
 import slogo.model.SlogoNode;
+import slogo.model.TurtleTracker;
 
 // implements make and set commands
 public class MakeVariableNode extends SlogoNode {
@@ -14,8 +15,8 @@ public class MakeVariableNode extends SlogoNode {
   }
 
   @Override
-  public double getReturnValue(List<Command> commands) {
-    double value = parameters.get(1).getReturnValue(commands);
+  public double getReturnValue(TurtleTracker tracker) {
+    double value = parameters.get(1).getReturnValue(tracker);
     SlogoNode leftChild = parameters.get(0);
     if(leftChild instanceof VariableNode){
       ((VariableNode) leftChild).setValue(value);

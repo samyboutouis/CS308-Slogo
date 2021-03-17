@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import slogo.Command;
 import slogo.model.SlogoNode;
+import slogo.model.TurtleTracker;
 
 public class VariableNode extends SlogoNode {
   private Map<String, Double> variables;
@@ -20,7 +21,7 @@ public class VariableNode extends SlogoNode {
   }
 
   @Override
-  public double getReturnValue(List<Command> commands) {
+  public double getReturnValue(TurtleTracker tracker) {
     if(!variables.containsKey(name)){
       return 0;
     }

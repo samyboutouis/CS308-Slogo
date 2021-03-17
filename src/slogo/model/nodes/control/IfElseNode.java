@@ -3,6 +3,7 @@ package slogo.model.nodes.control;
 import java.util.List;
 import slogo.Command;
 import slogo.model.SlogoNode;
+import slogo.model.TurtleTracker;
 
 public class IfElseNode extends SlogoNode{
   private List<SlogoNode> parameters;
@@ -20,13 +21,13 @@ public class IfElseNode extends SlogoNode{
   }
 
   @Override
-  public double getReturnValue(List<Command> commands) {
+  public double getReturnValue(TurtleTracker tracker) {
     // assume expr is just one tree
     int firstEnd = getFirstEnd(); // index of first end bracket
     int start = 0;
     int end = 0;
     double ret = 0;
-    if(parameters.get(0).getReturnValue(commands) != 0.0) { // does the expression part
+    if(parameters.get(0).getReturnValue(tracker) != 0.0) { // does the expression part
       start = 1; // i = 1 should be list start (hop over expr)
       end = firstEnd;
     }
@@ -36,7 +37,7 @@ public class IfElseNode extends SlogoNode{
     }
     for(int i = start; i < end; i++){
       if(!(parameters.get(i) instanceof ListStartNode) && !(parameters.get(i) instanceof ListEndNode)){
-        ret = parameters.get(i).getReturnValue(commands); // ret is value of last command executed
+        ret = parameters.get(i).getReturnValue(tracker); // ret is value of last command executed
       }
     }
     return ret;
