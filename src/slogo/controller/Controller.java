@@ -1,11 +1,10 @@
 package slogo.controller;
 
-import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
-import slogo.Command;
 import slogo.BackEndTurtle;
 import slogo.model.CommandReader;
+import slogo.model.TurtleTracker;
 
 public class Controller {
   private static final String INITIAL_LANGUAGE = "English";
@@ -21,8 +20,10 @@ public class Controller {
       .getBundle(String.format("%s/%s/%s", "resources", "languages", "TranslateOptions"));
   }
 
-  public List<Command> parseProgram(String program, BackEndTurtle backEndTurtle) {
-    return commandReader.parseInput(program, backEndTurtle);
+  public TurtleTracker parseProgram(String program, BackEndTurtle backEndTurtle) {
+    TurtleTracker tracker = new TurtleTracker();
+    tracker.addTurtle(backEndTurtle);
+    return commandReader.parseInput(program, tracker);
   }
 
   public void setLanguage (String language) {

@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import slogo.BackEndTurtle;
+import slogo.Command;
 
 // manages all turtles in the backend,
 public class TurtleTracker {
@@ -19,8 +20,15 @@ public class TurtleTracker {
     allTurtles = new HashMap<>();
     activeTurtles = new ArrayList<>();
     currTurtle = 0;
-    // add a default turtle to start the program
-    addTurtle(new BackEndTurtle(0,0,0,true,true,0));
+  }
+
+  public List<Command> getAllCommands(){
+    List<Command> allCommands = new ArrayList<>();
+    Iterator<Integer> itrn = getIterator();
+    while (itrn.hasNext()){
+      allCommands.addAll(getTurtle(itrn.next()).getCommands());
+    }
+    return allCommands;
   }
 
   // add a backend turtle to turtle tracker to both allTurtles and list of activeTurtles

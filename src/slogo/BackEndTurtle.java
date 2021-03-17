@@ -23,6 +23,10 @@ public class BackEndTurtle implements Turtle {
     commands = new ArrayList<>();
   }
 
+  public List<Command> getCommands(){
+    return commands;
+  }
+
   public int getIndex(){return this.ID;}
 
   public void clearCommands(){

@@ -13,6 +13,7 @@ import slogo.FrontEndTurtle;
 import slogo.BackEndTurtle;
 import slogo.Turtle;
 import slogo.controller.Controller;
+import slogo.model.TurtleTracker;
 
 public class TerminalDisplay {
 
@@ -98,7 +99,7 @@ public class TerminalDisplay {
         try {
           BackEndTurtle backendTurtle = new BackEndTurtle(frontEndTurtle.getX(), frontEndTurtle.getY(),
               frontEndTurtle.getDirection(), frontEndTurtle.isPenDown(), frontEndTurtle.isShowing(),0); // assuming it has index 0
-          new AnimationManager(controller.parseProgram(command, backendTurtle), frontEndTurtle);
+          new AnimationManager(controller.parseProgram(command, backendTurtle).getAllCommands(), frontEndTurtle);
           Button historyTag = historyDisplay.addNewHistoryTag(command);
           variablesDisplay.updateBox(controller.getVariables());
           applyHistoryTagLogic(historyTag);

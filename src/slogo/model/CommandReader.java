@@ -46,7 +46,8 @@ public class CommandReader {
     forTests = new ArrayList<>();
     userDefinedCommands = new HashMap<>();
     userDefinedCommandsInString = new HashMap<>();
-    tracker = new TurtleTracker(); // a default turtle is already added, from center of the screen, ID =0;
+    tracker = new TurtleTracker(); // tracker doesn't have a turtle yet
+
   }
 
   public TurtleTracker parseInput(String input, TurtleTracker tracker) throws IllegalArgumentException{
@@ -81,6 +82,7 @@ public class CommandReader {
   // used to test return values
   public List<Double> testParseInput(String input) {
     forTests = new ArrayList<>();
+    tracker.addTurtle(new BackEndTurtle(0, 0, 0, true, true, 0));
     //parseInput(input, new BackEndTurtle(0, 0, 0, true, true, 0));
     parseInput(input, tracker);
     return forTests;
