@@ -29,7 +29,6 @@ public class MakeUserInstructionNode extends SlogoNode {
     try{
       getFirstEnd(); // index of first end bracket
       getVariables();
-      getCommands();
       ret = 1;
       return new CommandNode(variableNames.size(), myCommands, variableNames);
     } catch( ClassCastException e) {
@@ -37,6 +36,9 @@ public class MakeUserInstructionNode extends SlogoNode {
       ret = 0;
       return null;
     }
+    // create node creates an object with a reference to the variable and command lists
+    // basically gives it the same commands to run, except their parameters will be different
+    // last recursive node has parameters that make it not call the recursive part again
   }
 
   @Override
@@ -46,6 +48,9 @@ public class MakeUserInstructionNode extends SlogoNode {
 
   @Override
   public double getReturnValue(List<Command> commands) {
+    getCommands(); // builds all the commands of this method, which could be recursive
+    // if it were recursive, this is called after the entire method has been read, but we also handle
+    // if it is called more than once because of the myCommands.clear() call
     return ret;
   }
 
