@@ -3,6 +3,7 @@ package slogo.model.nodes.math;
 import java.util.List;
 import slogo.Command;
 import slogo.model.SlogoNode;
+import slogo.model.TurtleTracker;
 
 public class PiNode extends SlogoNode {
 
@@ -14,7 +15,7 @@ public class PiNode extends SlogoNode {
   }
 
   @Override
-  public double getReturnValue(List<Command> commands) {
+  public double getReturnValue(TurtleTracker tracker) {
     return Math.PI;
   }
 }
