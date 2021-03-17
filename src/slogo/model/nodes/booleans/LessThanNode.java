@@ -3,6 +3,7 @@ package slogo.model.nodes.booleans;
 import java.util.List;
 import slogo.Command;
 import slogo.model.SlogoNode;
+import slogo.model.TurtleTracker;
 
 public class LessThanNode extends SlogoNode {
 
@@ -14,8 +15,8 @@ public class LessThanNode extends SlogoNode {
   }
 
   @Override
-  public double getReturnValue(List<Command> commands) {
-    if(parameters.get(0).getReturnValue(commands) < parameters.get(1).getReturnValue(commands)){
+  public double getReturnValue(TurtleTracker tracker) {
+    if(parameters.get(0).getReturnValue(tracker) < parameters.get(1).getReturnValue(tracker)){
       return 1;
     }
     return 0;

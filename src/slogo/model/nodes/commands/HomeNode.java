@@ -1,11 +1,8 @@
 package slogo.model.nodes.commands;
 
 import java.util.ArrayList;
-import java.util.List;
 import slogo.BackEndTurtle;
-import slogo.Command;
 import slogo.Turtle;
-import slogo.model.SlogoNode;
 import slogo.model.TurtleTracker;
 import slogo.turtlecommands.HomeCommand;
 
