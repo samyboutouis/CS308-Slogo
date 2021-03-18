@@ -70,7 +70,6 @@ public class MakeUserInstructionNode extends SlogoNode {
   private String getStringCommands(){
     String stringCommands="";
     for (int i=0; i<parameters.size();i++){
-      System.out.print(parameters.get(i).getClass()+"\n");
       stringCommands= stringCommands+ " "+parameters.get(i).getMyString();
     }
     return stringCommands;
