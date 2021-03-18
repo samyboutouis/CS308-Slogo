@@ -40,7 +40,7 @@ public class TellNode extends SlogoNode {
   public double getReturnValue(TurtleTracker tracker) {
     int ret=0;
     for (int i=1; i<parameters.size()-1;i++){
-      ret= (int) parameters.get(i).getReturnValue(tracker);
+      ret= (int) parameters.get(i).getReturnValue(tracker); // should all be constant nodes
       tracker.addTurtle(new BackEndTurtle(0,0,0,true,true, ret));
     }
     return ret;
