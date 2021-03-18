@@ -32,7 +32,7 @@ public class TurtleTracker {
     return allCommands;
   }
 
-  public void deletaAllData(){
+  public void deleteAllData(){
     allTurtles = new HashMap<>();
     activeTurtles = new ArrayList<>();
     currTurtle = 0;
