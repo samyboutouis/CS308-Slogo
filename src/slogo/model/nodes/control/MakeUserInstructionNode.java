@@ -2,6 +2,7 @@ package slogo.model.nodes.control;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import slogo.Command;
 import slogo.model.SlogoNode;
 import slogo.model.TurtleTracker;
@@ -14,16 +15,19 @@ public class MakeUserInstructionNode extends SlogoNode {
   private int brackets;
   private int firstEnd;
   private int ret;
+  private String methodName;
+  private Map<String, String> userDefinedCommandsInString;
 
   // this node creates the user defined node and adds it to the map of commands
   // that node needs a list of string to represent the variable names
 
-  public MakeUserInstructionNode(int numParameters) {
+  public MakeUserInstructionNode(int numParameters, Map<String, String> map) {
     super(numParameters); // dummy value since isFull is overridden
     brackets = numParameters;
     parameters = super.getParameters();
     myCommands = new ArrayList<>();
     variableNames = new ArrayList<>();
+    userDefinedCommandsInString = map;
   }
 
   public CommandNode createNode() {
@@ -52,7 +56,23 @@ public class MakeUserInstructionNode extends SlogoNode {
     getCommands(); // builds all the commands of this method, which could be recursive
     // if it were recursive, this is called after the entire method has been read, but we also handle
     // if it is called more than once because of the myCommands.clear() call
+
+    userDefinedCommandsInString.put(methodName, getStringCommands());
     return ret;
+  }
+
+
+  public void setMethodName(String name){
+    methodName = name;
+  }
+
+  // the method which will return the string of commands used in the userdefined instruction Node
+  private String getStringCommands(){
+    String stringCommands="";
+    for (int i=0; i<parameters.size();i++){
+      stringCommands= stringCommands+ " "+parameters.get(i).getMyString();
+    }
+    return stringCommands;
   }
 
   private void getCommands() {
