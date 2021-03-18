@@ -6,10 +6,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
-import slogo.FrontEndTurtle;
 import slogo.controller.Controller;
 import slogo.controller.FrontEndController;
 
@@ -73,8 +71,9 @@ public class Workspace {
     GridPane toolbarPane = new GridPane();
     frontEndTurtle = new FrontEndTurtle();
     GridPane viewLayoutPane = new GridPane();
-
-
+    //FIXME: Delete later
+    GridPane historyPane = new GridPane();
+    GridPane variablesPane = new GridPane();
 
     turtlePane.getStyleClass().add(DISPLAY_CLASS_NAME);
     terminalPane.getStyleClass().add(DISPLAY_CLASS_NAME);
@@ -87,8 +86,8 @@ public class Workspace {
     gridPane.add(viewLayoutPane, 2, 1, 3, 9);
 
     frontEndController = new FrontEndController(stage);
-//    new TerminalDisplay(terminalPane, RESOURCE_PACKAGE, new HistoryDisplay(historyPane, RESOURCE_PACKAGE),
-//      frontEndTurtle, new VariablesDisplay(variablesPane, RESOURCE_PACKAGE), controller);
+    new TerminalDisplay(terminalPane, RESOURCE_PACKAGE, new HistoryDisplay(historyPane, RESOURCE_PACKAGE),
+      frontEndTurtle, new VariablesDisplay(variablesPane, RESOURCE_PACKAGE), controller);
 //    new UserCommandsDisplay(userCommandsPane, RESOURCE_PACKAGE);
     TurtleDisplay turtleDisplay = new TurtleDisplay(turtlePane, frontEndTurtle);
     ToolbarDisplay toolbarDisplay = new ToolbarDisplay(toolbarPane, RESOURCE_PACKAGE, controller, frontEndController);

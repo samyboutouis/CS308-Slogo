@@ -8,7 +8,6 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Color;
-import slogo.FrontEndTurtle;
 
 public class TurtleDisplay {
   private static final String ID_PROPERTY = "resources/stylesheets/CSS_IDs";
