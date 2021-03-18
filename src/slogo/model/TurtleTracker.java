@@ -84,6 +84,10 @@ public class TurtleTracker {
     // tell [ 1 2 3 ] fd ID
   }
 
+  public int turtles() {
+    return allTurtles.keySet().size();
+  }
+
 //  tell [ 1 2 3 ]
 //  set :x 10
 //  fd * id :x
