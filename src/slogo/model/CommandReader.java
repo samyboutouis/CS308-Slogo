@@ -83,7 +83,7 @@ public class CommandReader {
   // used to test return values
   public List<Double> testParseInput(String input) {
     forTests = new ArrayList<>();
-    tracker.deletaAllData();
+    tracker.deleteAllData();
     tracker.addTurtle(new BackEndTurtle(0, 0, 0, true, true, 0));
     //parseInput(input, new BackEndTurtle(0, 0, 0, true, true, 0));
     parseInput(input, tracker);
@@ -139,15 +139,8 @@ public class CommandReader {
         case "MakeUserInstruction" -> {
           curr = new MakeUserInstructionNode(parameters);
         }
-
         default -> {
-          try{
-            curr = (SlogoNode) node.getDeclaredConstructor(Integer.TYPE, tracker.getTurtle(tracker.getCurr()).getClass()).newInstance(parameters);
-          } catch(NoSuchMethodException e) {
-            // constructor of this type doesn't exist
-            //System.out.println("Felix: method doesn't exist");
-            curr = (SlogoNode) node.getDeclaredConstructor(Integer.TYPE).newInstance(parameters);
-          }
+          curr = (SlogoNode) node.getDeclaredConstructor(Integer.TYPE).newInstance(parameters);
         }
       }
       if(curr.isFull()){ // only true if node has no parameters
