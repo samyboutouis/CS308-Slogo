@@ -22,6 +22,7 @@ public class TerminalDisplay {
   private final static String TERMINAL_TEXT_BOX_ID = "TerminalTextBoxID";
   private final static String TERMINAL_BUTTON_ID = "TerminalButtonID";
   private final static String ERROR_TITLE_PROPERTY = "ErrorTitle";
+  private final static String DISPLAY_CLASS_NAME = "displayWindow";
   private final static int COLUMN_COUNT = 4;
 
   private final ResourceBundle resourceBundle;
@@ -35,9 +36,10 @@ public class TerminalDisplay {
   private final FrontEndTurtle frontEndTurtle;
   private final Controller controller;
 
-  public TerminalDisplay(GridPane pane, String resourcePackage, HistoryDisplay historyDisplay,
+  public TerminalDisplay(String resourcePackage, HistoryDisplay historyDisplay,
     FrontEndTurtle frontEndTurtle, VariablesDisplay variablesDisplay, Controller controller) {
-    this.pane = pane;
+    pane = new GridPane();
+    pane.getStyleClass().add(DISPLAY_CLASS_NAME);
     this.historyDisplay = historyDisplay;
     this.variablesDisplay = variablesDisplay;
     this.frontEndTurtle = frontEndTurtle;
@@ -123,5 +125,9 @@ public class TerminalDisplay {
     newAlert.setHeaderText(null);
     newAlert.setContentText(error.getMessage());
     newAlert.showAndWait();
+  }
+
+  public GridPane getPane(){
+    return pane;
   }
 }
