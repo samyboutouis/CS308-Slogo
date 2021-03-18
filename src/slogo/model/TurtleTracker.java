@@ -22,7 +22,8 @@ public class TurtleTracker {
     currTurtle = 0;
   }
 
-  // FIX: front end needs to know which turtle to run each list of commands on
+  // FIX: front end needs to know which turtle to run each list of commands on, so we can't
+  // just concatenate all command lists
   public List<Command> getAllCommands(){
     List<Command> allCommands = new ArrayList<>();
     Iterator<Integer> itrn = getIterator();
@@ -39,15 +40,20 @@ public class TurtleTracker {
   }
 
   // FIX: does this make sure last turtle is last in the activeTurtles list?
+  // If activeTurtles contains the last turtle, its position won't be moved to the back
   // add a backend turtle to turtle tracker to both allTurtles and list of activeTurtles
   public void addTurtle(BackEndTurtle turtle){
+    // I (felix) edited the code so that if the turtle was already active, it would be put at the end of the list
+    // then extracted common parts in the if else statements
     if (allTurtles.containsKey(turtle.getIndex())){
-      if (!activeTurtles.contains(turtle.getIndex())){
-        activeTurtles.add(turtle.getIndex());
+      if (activeTurtles.contains(turtle.getIndex())){
+        activeTurtles.remove(Integer.valueOf(turtle.getIndex())); // remove object Integer, not at index
       }
-    } else {
-    allTurtles.put(turtle.getIndex(), turtle);
-    activeTurtles.add(turtle.getIndex());}
+    }
+    else {
+      allTurtles.put(turtle.getIndex(), turtle);
+    }
+    activeTurtles.add(turtle.getIndex());
   }
 
   // clear the list of activeTurtles
