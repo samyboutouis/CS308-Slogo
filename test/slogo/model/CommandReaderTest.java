@@ -12,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class CommandReaderTest {
   private CommandReader myReader;
+  private TurtleTracker tracker;
 
   @BeforeEach
   void setUp() {
@@ -134,17 +135,21 @@ public class CommandReaderTest {
 
   // SECTION
   // test that command objects created are correct
+
+  void setUpTracker() {
+    tracker = new TurtleTracker();
+    tracker.addTurtle(new BackEndTurtle(0, 0, 0, true, true,0));
+  }
+
   @Test
   void testHomeCommand () {
-    TurtleTracker tracker = new TurtleTracker();
-    tracker.addTurtle(new BackEndTurtle(0, 0, 0, true, true,0));
+    setUpTracker();
     assertTrue(myReader.parseInput("home", tracker).getAllCommands().get(0) instanceof HomeCommand);
   }
 
   @Test
   void testLoopCommand () {
-    TurtleTracker tracker = new TurtleTracker();
-    tracker.addTurtle(new BackEndTurtle(0, 0, 0, true, true,0));
+    setUpTracker();
     List<Command> loop = myReader.parseInput("for [ :a 1 5 1 ] [ fd 1 bk 2 ]", tracker).getAllCommands();
     assertEquals(10, loop.size());
     for(Command c : loop){
