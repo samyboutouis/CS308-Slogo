@@ -168,4 +168,8 @@ public class FrontEndTurtle implements Turtle {
     isActive = false;
     activeCircle.toggle();
   }
+
+  public boolean isActive() {
+    return isActive;
+  }
 }

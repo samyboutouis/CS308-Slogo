@@ -26,7 +26,7 @@ public class ToolbarDisplay {
   private static final String DEFAULT_RESOURCE_FOLDER = "resources/";
   private static final String REFERENCES_FOLDER = "src/resources/reference";
   private static final String ID_PROPERTY = "stylesheets/CSS_IDs";
-  private static final String METHODS_PROPERTY = "methods/ButtonMethods";
+  private static final String METHODS_PROPERTY = "reflection/ButtonMethods";
 
   private final GridPane gridPane;
   private final Controller controller;

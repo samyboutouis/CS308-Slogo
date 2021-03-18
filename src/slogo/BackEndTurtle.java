@@ -11,15 +11,17 @@ public class BackEndTurtle implements Turtle {
   private double direction;
   private boolean isPenDown;
   private boolean isShowing;
+  private boolean isActive;
   private List<Command> commands;
 
-  public BackEndTurtle(double xCoordinate, double yCoordinate, double direction, boolean isPenDown, boolean isShowing, int ID) {
+  public BackEndTurtle(double xCoordinate, double yCoordinate, double direction, boolean isPenDown, boolean isShowing, boolean isActive, int ID) {
     this.ID = ID;
     this.xCoordinate = xCoordinate;
     this.yCoordinate = yCoordinate;
     this.direction = direction;
     this.isPenDown = isPenDown;
     this.isShowing = isShowing;
+    this.isActive = isActive;
     commands = new ArrayList<>();
   }
 
@@ -114,5 +116,9 @@ public class BackEndTurtle implements Turtle {
   public void clearScreen() {
     home();
     setDirection(0);
+  }
+
+  public boolean isActive() {
+    return isActive;
   }
 }
