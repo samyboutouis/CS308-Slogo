@@ -12,7 +12,6 @@ import javafx.scene.paint.Color;
 public class TurtleDisplay {
   private static final String ID_PROPERTY = "resources/stylesheets/CSS_IDs";
   private static final int BACKGROUND_RADIUS = 20;
-  private static final String ADD_TURTLE_BUTTON_ID = "AddTurtleButton";
   private static final String TURTLE_PANE_ID = "TurtlePaneID";
 
   private final ResourceBundle idBundle;

@@ -24,7 +24,7 @@ public class ViewContainer {
     closeButton = new Button();
 
     pane.add(comboBox, 0, 0);
-    pane.add(closeButton, 0, 1);
+    pane.add(closeButton, 1, 0);
 
     initializeComboBox();
     initializeCloseButton();
