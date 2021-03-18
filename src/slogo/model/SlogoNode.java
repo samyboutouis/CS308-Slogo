@@ -6,6 +6,7 @@ import java.util.List;
 public abstract class SlogoNode {
     private List<SlogoNode> parameters;
     private int numParameters;
+    private String myString;
 
     public SlogoNode(int numParameters) {
       this.numParameters = numParameters;
@@ -14,6 +15,18 @@ public abstract class SlogoNode {
 
     public void addNode(SlogoNode node) {
       parameters.add(node);
+    }
+
+    public String getMyString(){
+      String ret = myString;
+      for (SlogoNode s : parameters){
+        ret = ret + " " + s.getMyString();
+      }
+      return ret;
+      }
+
+    public void setString(String s){
+      myString = s;
     }
 
     public boolean isFull() {

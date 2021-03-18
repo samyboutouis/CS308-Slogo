@@ -129,7 +129,16 @@ public class CommandReaderTest {
         + "]\n"
         + "\n"
         + "example 30 ycor\n"));
-    assertEquals(List.of(0.0), myReader.testParseInput("to felix [ sum 50 50 ] [ fd 50 ]")); // unable to define method, variables are wrong
+    assertEquals(List.of(0.0), myReader.testParseInput("to felix [ sum 50 50 ] [ fd 50 ]"));// unable to define method, variables are wrong
+
+
+    // the last test is to test that the getUserDefinedCommandsinString returns the map correctly
+    String ret = "";
+    for (String key: myReader.getUserDefinedCommandsInString().keySet()){
+      ret += key+": "+myReader.getUserDefinedCommandsInString().get(key)+"\n";
+    }
+    assertEquals("felix:  [ sum 50 50 ] [ fd 50 ]\n"
+        + "example:  [ :x ] [ if greater? :x 10 [ example difference :x 10 fd 50 ] ]\n", ret);
   }
 
   // SECTION

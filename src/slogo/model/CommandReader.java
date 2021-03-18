@@ -29,7 +29,7 @@ public class CommandReader {
   private ProgramParser parser;
   private Map<String, Double> variables;
   private Map<String, MakeUserInstructionNode> userDefinedCommands;
-  private Map<String, String> userDefinedCommandsInString;
+  private Map<String, String> userDefinedCommandsInString; // where you get the user specified functions to appear in UI.
   private List<Double> forTests;
   private ResourceBundle numParameters;
   private ResourceBundle packageName;
@@ -69,6 +69,10 @@ public class CommandReader {
   public Map<String, Double> getVariables() {
     return variables;
   }
+
+
+  // where you get the user specified functions to appear in UI.
+  public Map<String, String> getUserDefinedCommandsInString(){return userDefinedCommandsInString;}
 
   public Map<String, String> getCommands() {
     return userDefinedCommandsInString;
@@ -124,6 +128,7 @@ public class CommandReader {
         }
         case "Command" -> {
           if(curr instanceof MakeUserInstructionNode){
+            ((MakeUserInstructionNode) curr).setMethodName(s);
             userDefinedCommands.put(s, (MakeUserInstructionNode) curr);
             continue;
           }
@@ -137,7 +142,7 @@ public class CommandReader {
           }
         }
         case "MakeUserInstruction" -> {
-          curr = new MakeUserInstructionNode(parameters);
+          curr = new MakeUserInstructionNode(parameters, userDefinedCommandsInString);
         }
 
         default -> {
@@ -150,6 +155,9 @@ public class CommandReader {
           }
         }
       }
+      // set the string for curr Node
+      curr.setString(s);
+
       if(curr.isFull()){ // only true if node has no parameters
         if(st.isEmpty()) {
           roots.add(curr);
@@ -174,6 +182,7 @@ public class CommandReader {
     }
     return roots;
   }
+
 
   private void makeCommands(List<SlogoNode> roots){
     for(SlogoNode root : roots){
