@@ -22,6 +22,7 @@ public class TurtleTracker {
     currTurtle = 0;
   }
 
+  // FIX: front end needs to know which turtle to run each list of commands on
   public List<Command> getAllCommands(){
     List<Command> allCommands = new ArrayList<>();
     Iterator<Integer> itrn = getIterator();
@@ -37,6 +38,7 @@ public class TurtleTracker {
     currTurtle = 0;
   }
 
+  // FIX: does this make sure last turtle is last in the activeTurtles list?
   // add a backend turtle to turtle tracker to both allTurtles and list of activeTurtles
   public void addTurtle(BackEndTurtle turtle){
     if (allTurtles.containsKey(turtle.getIndex())){
