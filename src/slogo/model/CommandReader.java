@@ -108,6 +108,8 @@ public class CommandReader {
         case "Tell" ->{
           curr = new TellNode(parameters);
           tracker.clearActiveTurtles(); // clear the previous active list of turtles, to prepare room for new list of active turtles.
+          // FIX: clearing active turtles now has no effect since none of the getReturnValues have been called
+          // should clear activeTurtles when we are doing getReturnValue of a TellNode
         }
 
         case "Constant" -> {
