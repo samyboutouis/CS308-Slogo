@@ -165,7 +165,7 @@ public class FrontEndTurtle implements Turtle {
   }
 
   private void toggleActive() {
-    isActive = false;
+    isActive = !isActive;
     activeCircle.toggle();
   }
 
