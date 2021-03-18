@@ -11,6 +11,6 @@ public class IDNode extends SlogoNode {
 
   @Override
   public double getReturnValue(TurtleTracker tracker) {
-    return 0;
+    return tracker.getCurr();
   }
 }
