@@ -47,7 +47,7 @@ public class NodeFactory {
           }
         }
         case "MakeUserInstruction" -> {
-          curr = new MakeUserInstructionNode(parameters);
+          // curr = new MakeUserInstructionNode(parameters, userDefinedCommandsInString);
         }
         default -> {
           curr = (SlogoNode) node.getDeclaredConstructor(Integer.TYPE).newInstance(parameters);
