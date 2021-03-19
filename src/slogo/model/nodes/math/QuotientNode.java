@@ -2,9 +2,8 @@ package slogo.model.nodes.math;
 
 
 import java.util.List;
-import slogo.Command;
 import slogo.model.SlogoNode;
-import slogo.model.TurtleTracker;
+import slogo.model.BackEndTurtleTracker;
 
 public class QuotientNode extends SlogoNode {
 
@@ -16,7 +15,7 @@ public class QuotientNode extends SlogoNode {
   }
 
   @Override
-  public double getReturnValue(TurtleTracker tracker) {
+  public double getReturnValue(BackEndTurtleTracker tracker) {
     return parameters.get(0).getReturnValue(tracker) / parameters.get(1).getReturnValue(tracker);
   }
 }

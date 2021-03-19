@@ -10,7 +10,7 @@ import slogo.model.nodes.multi.TellNode;
 
 public class NodeFactory {
     public SlogoNode getNode(String symbol, String value, Class<?> node, int parameters,
-        TurtleTracker tracker, Map<String, Double> variables, Map<String,
+        BackEndTurtleTracker tracker, Map<String, Double> variables, Map<String,
         MakeUserInstructionNode> userDefinedCommands, SlogoNode prev)
         throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
       SlogoNode curr = prev;

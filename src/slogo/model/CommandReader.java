@@ -4,15 +4,11 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Stack;
 import slogo.BackEndTurtle;
-import slogo.Command;
-import slogo.Turtle;
-import slogo.model.nodes.commands.TurtleCommandNode;
 import slogo.model.nodes.control.ConstantNode;
 import slogo.model.nodes.control.MakeUserInstructionNode;
 import slogo.model.nodes.control.RepeatNode;
@@ -35,7 +31,7 @@ public class CommandReader {
   private ResourceBundle packageName;
   //private List<Command> commands;
   //private Turtle turtle;
-  private TurtleTracker tracker;
+  private BackEndTurtleTracker tracker;
 
   public CommandReader(String language) {
     setLanguage(language);
@@ -47,11 +43,11 @@ public class CommandReader {
     forTests = new ArrayList<>();
     userDefinedCommands = new HashMap<>();
     userDefinedCommandsInString = new HashMap<>();
-    tracker = new TurtleTracker(); // tracker doesn't have a turtle yet
+    tracker = new BackEndTurtleTracker(); // tracker doesn't have a turtle yet
 
   }
 
-  public TurtleTracker parseInput(String input, TurtleTracker tracker) throws IllegalArgumentException{
+  public BackEndTurtleTracker parseInput(String input, BackEndTurtleTracker tracker) throws IllegalArgumentException{
     //commands.clear();
     tracker.clearAllCommands();
     try {

@@ -1,9 +1,8 @@
 package slogo.model.nodes.control;
 
 import java.util.List;
-import slogo.Command;
 import slogo.model.SlogoNode;
-import slogo.model.TurtleTracker;
+import slogo.model.BackEndTurtleTracker;
 
 public class ForNode extends SlogoNode {
 
@@ -27,7 +26,7 @@ public class ForNode extends SlogoNode {
   }
 
   @Override
-  public double getReturnValue(TurtleTracker tracker) {
+  public double getReturnValue(BackEndTurtleTracker tracker) {
     setFirstEnd();
     getIndexing(tracker);
     double ret = 0;
@@ -43,7 +42,7 @@ public class ForNode extends SlogoNode {
   }
 
   // get start, end, and increment
-  private void getIndexing(TurtleTracker tracker){
+  private void getIndexing(BackEndTurtleTracker tracker){
     // for [ :var 1 5 1 ]
     // i = 0 is left bracket
     variable = (VariableNode) parameters.get(1);

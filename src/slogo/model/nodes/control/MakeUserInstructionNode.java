@@ -3,9 +3,8 @@ package slogo.model.nodes.control;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import slogo.Command;
 import slogo.model.SlogoNode;
-import slogo.model.TurtleTracker;
+import slogo.model.BackEndTurtleTracker;
 
 public class MakeUserInstructionNode extends SlogoNode {
 
@@ -52,7 +51,7 @@ public class MakeUserInstructionNode extends SlogoNode {
   }
 
   @Override
-  public double getReturnValue(TurtleTracker tracker) {
+  public double getReturnValue(BackEndTurtleTracker tracker) {
     getCommands(); // builds all the commands of this method, which could be recursive
     // if it were recursive, this is called after the entire method has been read, but we also handle
     // if it is called more than once because of the myCommands.clear() call

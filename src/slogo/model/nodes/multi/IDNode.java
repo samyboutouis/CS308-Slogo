@@ -1,7 +1,7 @@
 package slogo.model.nodes.multi;
 
 import slogo.model.SlogoNode;
-import slogo.model.TurtleTracker;
+import slogo.model.BackEndTurtleTracker;
 
 public class IDNode extends SlogoNode {
 
@@ -10,7 +10,7 @@ public class IDNode extends SlogoNode {
   }
 
   @Override
-  public double getReturnValue(TurtleTracker tracker) {
+  public double getReturnValue(BackEndTurtleTracker tracker) {
     return tracker.getCurr();
   }
 }

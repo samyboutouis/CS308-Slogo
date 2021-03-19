@@ -9,14 +9,14 @@ import slogo.BackEndTurtle;
 import slogo.Command;
 
 // manages all turtles in the backend,
-public class TurtleTracker {
+public class BackEndTurtleTracker {
 
   // assume each new Tell overrides previous Tell
   private Map<Integer, BackEndTurtle> allTurtles;
   private List<Integer> activeTurtles;
   private int currTurtle;
 
-  public TurtleTracker() {
+  public BackEndTurtleTracker() {
     allTurtles = new HashMap<>();
     activeTurtles = new ArrayList<>();
     currTurtle = 0;
