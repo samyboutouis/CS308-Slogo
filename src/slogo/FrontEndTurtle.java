@@ -8,7 +8,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import slogo.visualization.Pen;
 
-public class FrontEndTurtle implements Turtle {
+public class FrontEndTurtle implements Turtle, SafeTurtle {
 
   private static final String DEFAULT_IMAGE = "resources/turtle.png";
   private static final int IMAGE_HEIGHT = 50;
