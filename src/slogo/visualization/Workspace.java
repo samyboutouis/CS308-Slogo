@@ -69,33 +69,37 @@ public class Workspace {
 
   private void setupDisplays() {
     AnchorPane turtlePane = new AnchorPane();
-    GridPane terminalPane = new GridPane();
     GridPane toolbarPane = new GridPane();
-    frontEndTurtle = new FrontEndTurtle();
     GridPane viewLayoutPane = new GridPane();
-
-
+    frontEndTurtle = new FrontEndTurtle();
 
     turtlePane.getStyleClass().add(DISPLAY_CLASS_NAME);
-    terminalPane.getStyleClass().add(DISPLAY_CLASS_NAME);
     toolbarPane.getStyleClass().add(DISPLAY_CLASS_NAME);
     viewLayoutPane.getStyleClass().add(DISPLAY_CLASS_NAME);
 
-    gridPane.add(toolbarPane, 0, 0, 5, 1);
-    gridPane.add(turtlePane, 0, 1, 2, 7);
-    gridPane.add(terminalPane, 0, 8, 2, 2);
-    gridPane.add(viewLayoutPane, 2, 1, 3, 9);
+
 
     frontEndController = new FrontEndController(stage);
-//    new TerminalDisplay(terminalPane, RESOURCE_PACKAGE, new HistoryDisplay(historyPane, RESOURCE_PACKAGE),
-//      frontEndTurtle, new VariablesDisplay(variablesPane, RESOURCE_PACKAGE), controller);
+
+    HistoryDisplay historyDisplay = new HistoryDisplay(RESOURCE_PACKAGE);
+    VariablesDisplay variablesDisplay = new VariablesDisplay(RESOURCE_PACKAGE);
+    UserCommandsDisplay userCommandsDisplay = new UserCommandsDisplay(RESOURCE_PACKAGE);
+
+    TerminalDisplay terminalDisplay = new TerminalDisplay(RESOURCE_PACKAGE, historyDisplay, frontEndTurtle, variablesDisplay, controller);
 //    new UserCommandsDisplay(userCommandsPane, RESOURCE_PACKAGE);
+
     TurtleDisplay turtleDisplay = new TurtleDisplay(turtlePane, frontEndTurtle);
     ToolbarDisplay toolbarDisplay = new ToolbarDisplay(toolbarPane, RESOURCE_PACKAGE, controller, frontEndController);
     frontEndController.setToolbarDisplay(toolbarDisplay);
     frontEndController.setTurtleDisplay(turtleDisplay);
 
-    new ViewLayout(viewLayoutPane);
+    new ViewLayout(viewLayoutPane, historyDisplay, variablesDisplay, userCommandsDisplay);
+
+
+    gridPane.add(toolbarPane, 0, 0, 5, 1);
+    gridPane.add(turtlePane, 0, 1, 2, 7);
+    gridPane.add(terminalDisplay.getPane(), 0, 8, 2, 2);
+    gridPane.add(viewLayoutPane, 2, 1, 3, 9);
   }
 
   private void setStyleSheet() {
