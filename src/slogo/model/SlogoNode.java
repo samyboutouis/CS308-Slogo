@@ -18,11 +18,11 @@ public abstract class SlogoNode {
     }
 
     public String getMyString(){
-      String ret = myString;
+      StringBuilder ret = new StringBuilder(myString);
       for (SlogoNode s : parameters){
-        ret = ret + " " + s.getMyString();
+        ret.append(" ").append(s.getMyString());
       }
-      return ret;
+      return ret.toString();
       }
 
     public void setString(String s){
