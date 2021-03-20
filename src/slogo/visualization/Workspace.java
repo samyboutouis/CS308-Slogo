@@ -76,10 +76,6 @@ public class Workspace {
     viewLayoutPane.getStyleClass().add(DISPLAY_CLASS_NAME);
 
     frontEndController = new FrontEndController(stage, frontEndTurtle);
-    new TerminalDisplay(terminalPane, RESOURCE_PACKAGE, new HistoryDisplay(historyPane, RESOURCE_PACKAGE),
-      frontEndTurtle, new VariablesDisplay(variablesPane, RESOURCE_PACKAGE), controller);
-
-    frontEndController = new FrontEndController(stage);
 
     HistoryDisplay historyDisplay = new HistoryDisplay(RESOURCE_PACKAGE);
     VariablesDisplay variablesDisplay = new VariablesDisplay(RESOURCE_PACKAGE);

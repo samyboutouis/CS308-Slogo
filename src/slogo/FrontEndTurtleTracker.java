@@ -5,10 +5,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import slogo.model.BackEndTurtleTracker;
+import slogo.visualization.FrontEndTurtle;
 
 public class FrontEndTurtleTracker implements SafeFrontEndTurtleTracker{
   // keep track of all the turtles in the front end
-  private Map<Integer,FrontEndTurtle> allTurtles;
+  private Map<Integer, FrontEndTurtle> allTurtles;
   private List<Integer> activeTurtles; // is this active turtles list needed? Where should be the "truth" of this information?
 
   public FrontEndTurtleTracker() {
