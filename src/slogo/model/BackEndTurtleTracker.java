@@ -28,6 +28,8 @@ public class BackEndTurtleTracker {
     this.allTurtles = allTurtles;
     this.activeTurtles = activeTurtles;
     this.safeTurtleTracker = safeTurtleTracker;
+    askActiveTurtles = new Stack<>();
+    tellActiveTurtles = new ArrayList<>(activeTurtles);
     currTurtle = activeTurtles.get(0); // assumes at least one turtle is on the screen
   }
 
