@@ -9,26 +9,19 @@ import slogo.model.nodes.control.VariableNode;
 import slogo.model.nodes.multi.TellNode;
 
 public class NodeFactory {
-    public SlogoNode getNode(String symbol, String value, Class<?> node, int parameters,
-        BackEndTurtleTracker tracker, Map<String, Double> variables, Map<String,
-        MakeUserInstructionNode> userDefinedCommands, SlogoNode prev)
+    public SlogoNode getNode(String symbol, String value, Class<?> node, int parameters, Map<String, Double> variables, Map<String,
+        MakeUserInstructionNode> userDefinedCommands, SlogoNode prev, Map<String, String> userDefinedCommandsInString)
         throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
       SlogoNode curr = prev;
       switch(symbol) {
-        // handle separately: Constant, Variable
-        case "Tell" -> {
-          curr = new TellNode(parameters);
-          tracker
-              .clearActiveTurtles(); // clear the previous active list of turtles, to prepare room for new list of active turtles.
-        }
         case "Constant" -> {
           curr = new ConstantNode(parameters, Double.parseDouble(value));
           // if stack is empty and we see a constant, it doesn't do anything to the program but
           // we still add it to the tree
         }
         case "Variable" -> {
-          curr = new VariableNode(parameters, variables,
-              value); // s is the value we read, symbol is the classification
+          curr = new VariableNode(parameters, variables, value);
+          // s is the value we read, symbol is the classification
         }
         case "Repeat" -> {
           // needs the map of variables in constructor to add repcount variable
@@ -47,12 +40,14 @@ public class NodeFactory {
           }
         }
         case "MakeUserInstruction" -> {
-          // curr = new MakeUserInstructionNode(parameters, userDefinedCommandsInString);
+          curr = new MakeUserInstructionNode(parameters, userDefinedCommandsInString);
         }
         default -> {
           curr = (SlogoNode) node.getDeclaredConstructor(Integer.TYPE).newInstance(parameters);
         }
       }
+      // set the string for curr Node
+      curr.setString(value);
       return curr;
     }
 }
