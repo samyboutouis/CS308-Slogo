@@ -121,4 +121,12 @@ public class BackEndTurtle implements Turtle {
   public boolean isActive() {
     return isActive;
   }
+
+  public void setActive() {
+    isActive = true;
+  }
+
+  public void setInactive() {
+    isActive = false;
+  }
 }

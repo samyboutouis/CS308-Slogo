@@ -31,7 +31,11 @@ public class ActiveCircle {
     return imageView;
   }
 
-  public void toggle() {
-    imageView.setVisible(!imageView.isVisible());
+  public void show() {
+    imageView.setVisible(true);
+  }
+
+  public void hide() {
+    imageView.setVisible(false);
   }
 }
