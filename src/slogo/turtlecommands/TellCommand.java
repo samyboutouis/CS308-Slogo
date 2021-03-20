@@ -21,10 +21,10 @@ public class TellCommand implements Command {
   public void doCommand(FrontEndTurtle frontEndTurtle) {
     // assume frontend already created the turtle, we just need to call the tracker methods, not the individual turtle method
     if(setActive) {
-      // safe.setActive(id);
+      safe.setActive(id); // these commands also set the turtle to be active or not
     }
     else{
-      // safe.setInactive(id);
+      safe.setInactive(id);
     }
   }
 }
