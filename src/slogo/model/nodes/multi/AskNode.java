@@ -7,6 +7,7 @@ import slogo.model.SlogoNode;
 import slogo.model.nodes.commands.TurtleCommandNode;
 import slogo.model.nodes.control.ConstantNode;
 import slogo.model.nodes.control.ListEndNode;
+import slogo.turtlecommands.TellCommand;
 
 public class AskNode extends TurtleCommandNode {
 
@@ -64,8 +65,10 @@ public class AskNode extends TurtleCommandNode {
     setFirstEnd();
     List<Integer> askTurtleList = getAskTurtles(tracker);
     tracker.setAskList(askTurtleList);
-    // create AskCommand that sets turtles active
-
+    // create TellCommand that sets turtles active
+    tracker.findActiveAndInactiveTurtles(((currTurtle, id, isActive) -> {
+      currTurtle.addCommand(new TellCommand(tracker.getSafe(), id, isActive));
+    }));
     double ret = 0;
     for(int i = firstEnd + 2; i < parameters.size() - 1; i++) {
       ret = parameters.get(i).getReturnValue(tracker);
@@ -73,6 +76,10 @@ public class AskNode extends TurtleCommandNode {
 
     // create TellCommand that sets old values to be active
     tracker.revertAskList();
+    // create TellCommand that sets old values to be active
+    tracker.findActiveAndInactiveTurtles(((currTurtle, id, isActive) -> {
+      currTurtle.addCommand(new TellCommand(tracker.getSafe(), id, isActive));
+    }));
     return ret;
   }
 }
