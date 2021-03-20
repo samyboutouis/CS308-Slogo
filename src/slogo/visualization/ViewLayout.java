@@ -68,9 +68,6 @@ public class ViewLayout {
     userCommandsDisplay.getPane().setVisible(false);
   }
 
-  //clickedOn,   currentINdex
-  //commands -> variables
-
   public void updateViewLayouts(int clickedIndex, String viewName){
     int currentIndex = findIndexOf(viewName);
 
