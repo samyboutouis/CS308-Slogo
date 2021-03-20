@@ -45,6 +45,8 @@ public class AskWithNode extends TurtleCommandNode {
   }
 
   // gets all the turtles that the ask command wants
+  // can't use existing lambdas since we want to ONLY have one active turtle when checking the condition
+  // tellList should hold values already so we can wipe out active list each time
   private List<Integer> getAskTurtles(BackEndTurtleTracker tracker) {
     List<Integer> ret = new ArrayList<>();
     try{
