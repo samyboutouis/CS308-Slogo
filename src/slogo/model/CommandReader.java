@@ -47,6 +47,7 @@ public class CommandReader {
 
   }
 
+  // need to eventually change this to be returning a map of Id to list<command>
   public BackEndTurtleTracker parseInput(String input, BackEndTurtleTracker tracker) throws IllegalArgumentException{
     //commands.clear();
     tracker.clearAllCommands();
