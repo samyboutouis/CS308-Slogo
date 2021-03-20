@@ -39,6 +39,15 @@ Known Bugs:
 
 Extra credit:
 
+### Code Design Decisions
+
+#### Ask
+```
+tell [ 1 2 3 ]
+ask [ 1 3 ] [ fd 50 ]
+```
+1 2 3 should be active after code is run
+
 
 ### Impressions
 
