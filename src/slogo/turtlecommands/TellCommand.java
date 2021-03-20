@@ -8,22 +8,23 @@ import slogo.SafeFrontEndTurtleTracker;
 public class TellCommand implements Command {
 
   private SafeFrontEndTurtleTracker safe;
+  private boolean setActive;
+  private int id;
 
-  public TellCommand(SafeFrontEndTurtleTracker safe, int id, boolean exists){
+  public TellCommand(SafeFrontEndTurtleTracker safe, int id, boolean setActive){
     this.safe = safe;
+    this.setActive = setActive;
+    this.id = id;
   }
 
   @Override
   public void doCommand(FrontEndTurtle frontEndTurtle) {
-//    if(isActive){
-//      // solves circle issues
-//      frontEndTurtle.setActive();
-//      safe.removeActive(id);
-//    } else{
-//      frontEndTurtle.setInactive();
-//      // have internal call to FrontEndTurtleTracker
-//      // or we can call using safeTracker
-//      safe.setActive(id);
-//    }
+    // assume frontend already created the turtle, we just need to call the tracker methods, not the individual turtle method
+    if(setActive) {
+      // safe.setActive(id);
+    }
+    else{
+      // safe.setInactive(id);
+    }
   }
 }
