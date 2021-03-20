@@ -9,7 +9,7 @@ import slogo.model.nodes.control.ConstantNode;
 import slogo.model.nodes.control.ListEndNode;
 import slogo.turtlecommands.TellCommand;
 
-public class AskWithNode extends TurtleCommandNode {
+public class AskWithNode extends SlogoNode {
 
   private List<SlogoNode> parameters;
   private int brackets;

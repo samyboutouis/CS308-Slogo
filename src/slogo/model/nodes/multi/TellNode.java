@@ -5,7 +5,6 @@ import java.util.List;
 import slogo.model.SlogoNode;
 import slogo.model.BackEndTurtleTracker;
 import slogo.model.nodes.control.ListEndNode;
-import slogo.turtlecommands.TellCommand;
 
 public class TellNode extends SlogoNode {
   private List<SlogoNode> parameters;

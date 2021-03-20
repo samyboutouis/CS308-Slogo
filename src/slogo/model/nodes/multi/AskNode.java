@@ -4,12 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import slogo.model.BackEndTurtleTracker;
 import slogo.model.SlogoNode;
-import slogo.model.nodes.commands.TurtleCommandNode;
 import slogo.model.nodes.control.ConstantNode;
 import slogo.model.nodes.control.ListEndNode;
-import slogo.turtlecommands.TellCommand;
 
-public class AskNode extends TurtleCommandNode {
+public class AskNode extends SlogoNode {
 
   private List<SlogoNode> parameters;
   private int brackets;
@@ -46,7 +44,7 @@ public class AskNode extends TurtleCommandNode {
   }
 
   // gets all the turtles that the ask command wants
-  private List<Integer> getAskTurtles(BackEndTurtleTracker tracker) {
+  protected List<Integer> getAskTurtles(BackEndTurtleTracker tracker) {
     List<Integer> ret = new ArrayList<>();
     for(int i = 1; i < firstEnd; i++) {
       try{
