@@ -41,7 +41,7 @@ public class TellNode extends SlogoNode {
     int ret=0;
     for (int i=1; i<parameters.size()-1;i++){
       ret= (int) parameters.get(i).getReturnValue(tracker); // should all be constant nodes
-      tracker.addTurtle(new BackEndTurtle(0,0,0,true,true, ret));
+      tracker.addTurtle(new BackEndTurtle(0,0,0,true,true, true, 0));
     }
     return ret;
   }

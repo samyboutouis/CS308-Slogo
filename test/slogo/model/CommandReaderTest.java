@@ -138,7 +138,7 @@ public class CommandReaderTest {
 
   void setUpTracker() {
     tracker = new TurtleTracker();
-    tracker.addTurtle(new BackEndTurtle(0, 0, 0, true, true,0));
+    tracker.addTurtle(new BackEndTurtle(0, 0, 0, true, true, true,0));
   }
 
   @Test
