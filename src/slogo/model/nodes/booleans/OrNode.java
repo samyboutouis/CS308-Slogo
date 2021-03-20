@@ -10,6 +10,7 @@ public class OrNode extends SlogoNode{
   public OrNode(int numParameters){
     super(numParameters);
     parameters = super.getParameters();
+    setBooleanNode(true);
   }
 
   @Override
