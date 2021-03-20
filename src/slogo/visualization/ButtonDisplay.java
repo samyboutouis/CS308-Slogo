@@ -10,17 +10,17 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import slogo.controller.FrontEndController;
 
-public class ButtonView implements View {
+public class ButtonDisplay {
   private VBox vbox;
   private ButtonFactory buttonFactory;
   private final List<String> buttonList;
   private final GridPane pane;
 
-  public ButtonView(GridPane gridPane, FrontEndController frontEndController) {
+  public ButtonDisplay(FrontEndController frontEndController) {
     vbox = new VBox();
     buttonFactory = new ButtonFactory(frontEndController);
     buttonList = List.of("UpButton", "DownButton", "RightButton", "LeftButton");
-    pane = gridPane;
+    pane = new GridPane();
     addFields();
     pane.add(vbox, 0, 0);
   }
@@ -49,15 +49,7 @@ public class ButtonView implements View {
     return textField;
   }
 
-  public void hide() {
-    vbox.setVisible(false);
-  }
-
-  public void show() {
-    vbox.setVisible(true);
-  }
-
-  public void setPosition(double xPosition, double yPosition) {
-
+  public GridPane getPane() {
+    return pane;
   }
 }

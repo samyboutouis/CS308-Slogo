@@ -29,7 +29,7 @@ public abstract class TurtleCommandNode extends SlogoNode {
   private List<Double> getValues(BackEndTurtleTracker tracker, List<SlogoNode> parameters) {
     List<Double> values = new ArrayList<>();
     for(SlogoNode node : parameters) {
-      values.add(node.getReturnValue(tracker));
+      values.add(node.getReturnValue(tracker)); // runs on current turtle that was just set in while loop
     }
     return values;
   }

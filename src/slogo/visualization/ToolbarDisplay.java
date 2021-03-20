@@ -27,6 +27,7 @@ public class ToolbarDisplay {
   private static final String REFERENCES_FOLDER = "src/resources/reference";
   private static final String ID_PROPERTY = "stylesheets/CSS_IDs";
   private static final String METHODS_PROPERTY = "reflection/ButtonMethods";
+  private final static String DISPLAY_CLASS_NAME = "displayWindow";
 
   private final GridPane gridPane;
   private final Controller controller;
@@ -37,9 +38,9 @@ public class ToolbarDisplay {
   private final ResourceBundle commandBundle;
   private final List<String> buttonList;
 
-  public ToolbarDisplay(GridPane pane, String resourcePackage, Controller controller, FrontEndController frontEndController) {
+  public ToolbarDisplay(String resourcePackage, Controller controller, FrontEndController frontEndController) {
     String language = DEFAULT_LANGUAGE;
-    this.gridPane = pane;
+    this.gridPane = new GridPane();
     this.controller = controller;
     this.languageBundle = ResourceBundle
       .getBundle(String.format("%s/%s/%s", resourcePackage, "languages", "LanguageOptions"));
@@ -65,6 +66,7 @@ public class ToolbarDisplay {
     row.setVgrow(Priority.ALWAYS);
     row.setPercentHeight(100.0);
     gridPane.getRowConstraints().add(row);
+    gridPane.getStyleClass().add(DISPLAY_CLASS_NAME);
   }
 
   private void makeToolbar() {
@@ -120,7 +122,7 @@ public class ToolbarDisplay {
     }
   }
 
-  public GridPane getGridPane() {
+  public GridPane getPane() {
     return gridPane;
   }
 }

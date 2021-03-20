@@ -18,7 +18,7 @@ import javafx.stage.Stage;
 import org.junit.jupiter.api.Test;
 import util.DukeApplicationTest;
 
-class ButtonViewTest extends DukeApplicationTest {
+class ButtonDisplayTest extends DukeApplicationTest {
   public static final String LANGUAGE = "English";
   private final static String RESOURCE_PACKAGE = "resources";
 

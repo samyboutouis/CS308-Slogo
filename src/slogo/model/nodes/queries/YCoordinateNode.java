@@ -20,6 +20,7 @@ public class YCoordinateNode extends TurtleCommandNode {
   public double getReturnValue(BackEndTurtleTracker tracker) {
     return super.loopThroughTurtles(tracker, new ArrayList<>(), (currTurtle, values)->{
       String mesg = String.format("Turtle %d Y Coordinate is %.2f", currTurtle.getIndex(), currTurtle.getY());
+      System.out.println(mesg);
       currTurtle.addCommand(new DisplayCommand(mesg));
       return currTurtle.getY();
     });
