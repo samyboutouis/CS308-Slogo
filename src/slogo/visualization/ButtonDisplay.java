@@ -10,13 +10,13 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import slogo.controller.FrontEndController;
 
-public class ButtonView implements View {
+public class ButtonDisplay implements View {
   private VBox vbox;
   private ButtonFactory buttonFactory;
   private final List<String> buttonList;
   private final GridPane pane;
 
-  public ButtonView(GridPane gridPane, FrontEndController frontEndController) {
+  public ButtonDisplay(GridPane gridPane, FrontEndController frontEndController) {
     vbox = new VBox();
     buttonFactory = new ButtonFactory(frontEndController);
     buttonList = List.of("UpButton", "DownButton", "RightButton", "LeftButton");
