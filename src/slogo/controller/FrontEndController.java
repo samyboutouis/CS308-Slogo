@@ -90,17 +90,21 @@ public class FrontEndController {
 
   public void handleRightClick(TextField textField) {
     turtle.rotate(Double.parseDouble(textField.getText()));
+    textField.clear();
   }
 
   public void handleLeftClick(TextField textField) {
     turtle.rotate(-Double.parseDouble(textField.getText()));
+    textField.clear();
   }
 
   public void handleUpClick(TextField textField) {
     turtle.forward(Double.parseDouble(textField.getText()));
+    textField.clear();
   }
 
   public void handleDownClick(TextField textField) {
     turtle.back(Double.parseDouble(textField.getText()));
+    textField.clear();
   }
 }
