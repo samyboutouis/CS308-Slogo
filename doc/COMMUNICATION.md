@@ -7,6 +7,8 @@ FrontEnd will pass us their tracker, but the backendTurtleTracker version
 BackEnd will pass a Map of turtle id (integer) and List<Command> corresponding to each turtle
   * For future: hide implementation of map by passing a class to the frontend that represents what we parsed
     * For now, we don't see the front end needing anything else besides the map of id and list of commands
+    
+Frontend will read the map and if any ID doesn't exist already, it first creates that turtle before calling each list of commands
 
 ## Edge Stuff Handled
 Circle around turtle
