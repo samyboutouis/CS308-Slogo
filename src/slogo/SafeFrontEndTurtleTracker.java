@@ -5,4 +5,5 @@ public interface SafeFrontEndTurtleTracker {
   void addTurtle(int id);
 
   // can probably but methods that change global color in here as well
+  void changeColor();
 }
