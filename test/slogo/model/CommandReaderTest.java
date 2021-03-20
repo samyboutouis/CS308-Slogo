@@ -197,9 +197,6 @@ public class CommandReaderTest {
     // can't test for instanceof by having a list of classes
     List<Integer> correctNumberOfCommands = List.of(3, 3, 3, 3, 2);
     Map<Integer, List<Command>> output = myReader.parseInput("tell [ 1 2 3 ] ask [ 1 4 ] [ ]", tracker).getAllTurtleCommands();
-    for(Integer id : output.keySet()) {
-      System.out.println(id);
-    }
     for(int i = 0; i < output.size(); i++){
       assertTrue(output.get(i).size() == correctNumberOfCommands.get(i));
     }
