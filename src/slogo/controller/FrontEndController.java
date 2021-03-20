@@ -32,8 +32,9 @@ public class FrontEndController {
   }
 
   public void handleAddTurtleClick(Button addTurtleButton) {
-    turtle = new FrontEndTurtle();
+    turtle = new FrontEndTurtle(frontEndTurtleTracker);
     turtleDisplay.addTurtle(turtle);
+    frontEndTurtleTracker.addTurtle(turtle);
   }
 
   public void handlePenColorClick(Button penColorButton) {
@@ -92,22 +93,22 @@ public class FrontEndController {
   }
 
   public void handleRightClick(TextField textField) {
-    turtle.rotate(Double.parseDouble(textField.getText()));
+    frontEndTurtleTracker.rotate(Double.parseDouble(textField.getText()));
     textField.clear();
   }
 
   public void handleLeftClick(TextField textField) {
-    turtle.rotate(-Double.parseDouble(textField.getText()));
+    frontEndTurtleTracker.rotate(-Double.parseDouble(textField.getText()));
     textField.clear();
   }
 
   public void handleUpClick(TextField textField) {
-    turtle.forward(Double.parseDouble(textField.getText()));
+    frontEndTurtleTracker.forward(Double.parseDouble(textField.getText()));
     textField.clear();
   }
 
   public void handleDownClick(TextField textField) {
-    turtle.back(Double.parseDouble(textField.getText()));
+    frontEndTurtleTracker.back(Double.parseDouble(textField.getText()));
     textField.clear();
   }
 }

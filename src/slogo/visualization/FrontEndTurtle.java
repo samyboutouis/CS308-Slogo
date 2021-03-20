@@ -6,6 +6,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import slogo.FrontEndTurtleTracker;
 import slogo.SafeTurtle;
 import slogo.Turtle;
 import slogo.visualization.Pen;
@@ -24,14 +25,16 @@ public class FrontEndTurtle implements Turtle, SafeTurtle {
   private double direction;
   private Pen pen;
   private final ResourceBundle idBundle;
+  private final FrontEndTurtleTracker turtleTracker;
   private ActiveCircle activeCircle;
   private boolean isActive;
 
-  public FrontEndTurtle() {
+  public FrontEndTurtle(FrontEndTurtleTracker frontEndTurtleTracker) {
     this.idBundle = ResourceBundle
       .getBundle(String.format("%s/%s/%s", "resources", "stylesheets", "CSS_IDs"));
     setDefaultImage();
     isActive = true;
+    turtleTracker = frontEndTurtleTracker;
   }
 
   public void forward(double pixels) {
@@ -167,11 +170,10 @@ public class FrontEndTurtle implements Turtle, SafeTurtle {
 
   private void toggleActive() {
     if(isActive) {
-      activeCircle.hide();
+      setInactive();
     } else {
-      activeCircle.show();
+      setActive();
     }
-    isActive = !isActive;
   }
 
   public boolean isActive() {
@@ -181,10 +183,12 @@ public class FrontEndTurtle implements Turtle, SafeTurtle {
   public void setActive() {
     activeCircle.show();
     isActive = true;
+    turtleTracker.setActive(this);
   }
 
   public void setInactive() {
     activeCircle.hide();
     isActive = false;
+    turtleTracker.setInactive(this);
   }
 }

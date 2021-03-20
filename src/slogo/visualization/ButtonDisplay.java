@@ -11,8 +11,8 @@ import javafx.scene.layout.VBox;
 import slogo.controller.FrontEndController;
 
 public class ButtonDisplay {
-  private VBox vbox;
-  private ButtonFactory buttonFactory;
+  private final VBox vbox;
+  private final ButtonFactory buttonFactory;
   private final List<String> buttonList;
   private final GridPane pane;
 
@@ -38,7 +38,7 @@ public class ButtonDisplay {
   private TextField makeTextField() {
     UnaryOperator<Change> filter = change -> {
       String text = change.getText();
-      if (text.matches("-?([1-9][0-9]*)?")) {
+      if (text.matches("[0-9]*")) {
         return change;
       }
       return null;
