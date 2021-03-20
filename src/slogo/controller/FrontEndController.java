@@ -37,23 +37,6 @@ public class FrontEndController {
     frontEndTurtleTracker.addTurtle(turtle);
   }
 
-  public void handlePenColorClick(Button penColorButton) {
-    penColorButton.setVisible(false);
-    penColorButton.setDisable(true);
-    ColorPicker colorPicker = new ColorPicker(penColor);
-    colorPicker.setId(COLOR_PICKER_ID);
-    colorPicker.setOnAction(event -> handlePenColorPicker(penColorButton, colorPicker));
-    toolbarDisplay.getPane().add(colorPicker, 3, 0, 1, 1);
-  }
-
-  private void handlePenColorPicker(Button penColorButton, ColorPicker colorPicker) {
-    penColor = colorPicker.getValue();
-    turtle.setPenColor(penColor);
-    toolbarDisplay.getPane().getChildren().remove(colorPicker);
-    penColorButton.setVisible(true);
-    penColorButton.setDisable(false);
-  }
-
   public void handleBackgroundColorClick(Button backgroundColorButton) {
     backgroundColorButton.setVisible(false);
     backgroundColorButton.setDisable(true);

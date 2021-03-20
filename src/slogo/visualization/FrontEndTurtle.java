@@ -110,6 +110,10 @@ public class FrontEndTurtle implements Turtle, SafeTurtle {
     return imageView.isVisible();
   }
 
+  public Color getPenColor() {
+    return pen.getPenColor();
+  }
+
   public void setImage(File file) {
     Image image = new Image(file.toURI().toString(), IMAGE_WIDTH, IMAGE_HEIGHT, true, false);
     imageView.setImage(image);
@@ -156,7 +160,7 @@ public class FrontEndTurtle implements Turtle, SafeTurtle {
 
   public double getDirection() { return direction; }
 
-  public boolean isPenDown() { return false; }
+  public boolean isPenDown() { return pen.isPenDown(); }
 
   public void home() {
     setXY(0, 0);

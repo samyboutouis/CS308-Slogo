@@ -1,5 +1,7 @@
 package slogo;
 
+import javafx.scene.paint.Color;
+
 public interface SafeTurtle {
   
   double getX();
@@ -11,4 +13,6 @@ public interface SafeTurtle {
   boolean isPenDown();
   
   boolean isShowing();
+
+  Color getPenColor();
 }

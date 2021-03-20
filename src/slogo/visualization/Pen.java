@@ -53,4 +53,12 @@ public class Pen {
       pane.getChildren().remove(line);
     }
   }
+
+  public boolean isPenDown() {
+    return isPenDown;
+  }
+
+  public Color getPenColor() {
+    return lineColor;
+  }
 }
