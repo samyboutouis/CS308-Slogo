@@ -62,12 +62,12 @@ public class AskNode extends SlogoNode {
   public double getReturnValue(BackEndTurtleTracker tracker) {
     setFirstEnd();
     List<Integer> askTurtleList = getAskTurtles(tracker);
-    tracker.setAskList(askTurtleList);
+    tracker.setAskList(askTurtleList); // creates the tellCommand
     double ret = 0;
     for(int i = firstEnd + 2; i < parameters.size() - 1; i++) {
       ret = parameters.get(i).getReturnValue(tracker);
     }
-    tracker.revertAskList();
+    tracker.revertAskList(); // creates the tellCommand
     return ret;
   }
 }
