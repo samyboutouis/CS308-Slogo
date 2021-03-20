@@ -38,6 +38,9 @@ public class CommandReaderTest {
 
     // testing multi turtle different movement and home and cs commands
     assertEquals(List.of(3.0, 30.0, 1.0, 10.0, 2.0, 20.0, 3.0, 30.0), myReader.testParseInput("tell [ 1 2 3 ] fd product ID 10 tell [ 1 ] home tell [ 2 ] cs tell [ 3 ] home"));
+
+    // testing ask command
+    assertEquals(List.of(3.0, 50.0, 50.0, 50.0), myReader.testParseInput("tell [ 1 2 3 ] ask [ 1 4 ] [ fd 50 ycor ] fd 50 ycor "));
   }
 
   @Test
