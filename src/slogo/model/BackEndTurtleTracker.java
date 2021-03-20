@@ -52,6 +52,14 @@ public class BackEndTurtleTracker {
     return allCommands;
   }
 
+  public Map<Integer, List<Command>> getAllTurtleCommands() {
+    Map<Integer, List<Command>> ret = new HashMap<>();
+    for(Integer id : allTurtles.keySet()) {
+      ret.put(id, allTurtles.get(id).getCommands());
+    }
+    return ret;
+  }
+
   public Set<Integer> getAllTurtles(){
     return allTurtles.keySet();
   }
