@@ -23,8 +23,8 @@ public class ViewLayout {
   private final UserCommandsDisplay userCommandsDisplay;
   private String[] viewOrder;
 
-  public ViewLayout(GridPane pane, HistoryDisplay historyDisplay, VariablesDisplay variablesDisplay, UserCommandsDisplay userCommandsDisplay, FrontEndController frontEndController){
-    this.pane = pane;
+  public ViewLayout(HistoryDisplay historyDisplay, VariablesDisplay variablesDisplay, UserCommandsDisplay userCommandsDisplay, FrontEndController frontEndController){
+    this.pane = new GridPane();
     this.frontEndController = frontEndController;
     this.historyDisplay = historyDisplay;
     this.variablesDisplay = variablesDisplay;
@@ -64,6 +64,7 @@ public class ViewLayout {
       col.setPercentWidth(100.0 / GRID_COLUMN_COUNT);
       pane.getColumnConstraints().add(col);
     }
+    pane.getStyleClass().add(DISPLAY_CLASS_NAME);
   }
 
   private void setupViews(){
@@ -117,5 +118,9 @@ public class ViewLayout {
       }
     }
     return -1;
+  }
+
+  public GridPane getPane() {
+    return pane;
   }
 }

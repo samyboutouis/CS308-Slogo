@@ -39,13 +39,13 @@ public class FrontEndController {
     ColorPicker colorPicker = new ColorPicker(penColor);
     colorPicker.setId(COLOR_PICKER_ID);
     colorPicker.setOnAction(event -> handlePenColorPicker(penColorButton, colorPicker));
-    toolbarDisplay.getGridPane().add(colorPicker, 3, 0, 1, 1);
+    toolbarDisplay.getPane().add(colorPicker, 3, 0, 1, 1);
   }
 
   private void handlePenColorPicker(Button penColorButton, ColorPicker colorPicker) {
     penColor = colorPicker.getValue();
     turtleDisplay.setPenColor(penColor);
-    toolbarDisplay.getGridPane().getChildren().remove(colorPicker);
+    toolbarDisplay.getPane().getChildren().remove(colorPicker);
     penColorButton.setVisible(true);
     penColorButton.setDisable(false);
   }
@@ -57,13 +57,13 @@ public class FrontEndController {
     colorPicker.setId(COLOR_PICKER_ID);
     colorPicker
       .setOnAction(event -> handleBackgroundColorPicker(backgroundColorButton, colorPicker));
-    toolbarDisplay.getGridPane().add(colorPicker, 1, 0, 1, 1);
+    toolbarDisplay.getPane().add(colorPicker, 1, 0, 1, 1);
   }
 
   private void handleBackgroundColorPicker(Button backgroundColorButton, ColorPicker colorPicker) {
     backgroundColor = colorPicker.getValue();
     turtleDisplay.setBackgroundColor(backgroundColor);
-    toolbarDisplay.getGridPane().getChildren().remove(colorPicker);
+    toolbarDisplay.getPane().getChildren().remove(colorPicker);
     backgroundColorButton.setVisible(true);
     backgroundColorButton.setDisable(false);
   }
