@@ -1,9 +1,8 @@
 package slogo.model.nodes.math;
 
 import java.util.List;
-import slogo.Command;
 import slogo.model.SlogoNode;
-import slogo.model.TurtleTracker;
+import slogo.model.BackEndTurtleTracker;
 
 public class SineNode extends SlogoNode {
 
@@ -15,7 +14,7 @@ public class SineNode extends SlogoNode {
   }
 
   @Override
-  public double getReturnValue(TurtleTracker tracker) {
+  public double getReturnValue(BackEndTurtleTracker tracker) {
     return Math.sin(Math.toRadians(parameters.get(0).getReturnValue(tracker)));
   }
 }

@@ -1,9 +1,8 @@
 package slogo.model.nodes.booleans;
 
 import java.util.List;
-import slogo.Command;
 import slogo.model.SlogoNode;
-import slogo.model.TurtleTracker;
+import slogo.model.BackEndTurtleTracker;
 
 public class OrNode extends SlogoNode{
   private List<SlogoNode> parameters;
@@ -14,7 +13,7 @@ public class OrNode extends SlogoNode{
   }
 
   @Override
-  public double getReturnValue(TurtleTracker tracker) {
+  public double getReturnValue(BackEndTurtleTracker tracker) {
     if(parameters.get(0).getReturnValue(tracker) != 0.0 || parameters.get(1).getReturnValue(tracker) != 0.0){
       return 1;
     }

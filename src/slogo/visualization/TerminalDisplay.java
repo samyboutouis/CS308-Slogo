@@ -11,9 +11,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import slogo.FrontEndTurtle;
 import slogo.BackEndTurtle;
-import slogo.Turtle;
 import slogo.controller.Controller;
-import slogo.model.TurtleTracker;
 
 public class TerminalDisplay {
 

@@ -37,6 +37,6 @@ public abstract class SlogoNode {
       return parameters;
     }
 
-    public abstract double getReturnValue(TurtleTracker tracker);
+    public abstract double getReturnValue(BackEndTurtleTracker tracker);
 }
 

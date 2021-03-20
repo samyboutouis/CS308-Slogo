@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class CommandReaderTest {
   private CommandReader myReader;
-  private TurtleTracker tracker;
+  private BackEndTurtleTracker tracker;
 
   @BeforeEach
   void setUp() {
@@ -146,7 +146,7 @@ public class CommandReaderTest {
   // test that command objects created are correct
 
   void setUpTracker() {
-    tracker = new TurtleTracker();
+    tracker = new BackEndTurtleTracker();
     tracker.addTurtle(new BackEndTurtle(0, 0, 0, true, true,0));
   }
 

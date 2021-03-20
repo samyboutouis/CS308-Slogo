@@ -1,9 +1,8 @@
 package slogo.model.nodes.control;
 
 import java.util.List;
-import slogo.Command;
 import slogo.model.SlogoNode;
-import slogo.model.TurtleTracker;
+import slogo.model.BackEndTurtleTracker;
 
 // represents the actual node when a user calls the command they defined, so return value is not just 1 or 0
 public class CommandNode extends SlogoNode {
@@ -20,7 +19,7 @@ public class CommandNode extends SlogoNode {
   }
 
   @Override
-  public double getReturnValue(TurtleTracker tracker) {
+  public double getReturnValue(BackEndTurtleTracker tracker) {
     double ret = 0;
     setParameters(tracker);
     for(SlogoNode node : myCommands) {
@@ -30,7 +29,7 @@ public class CommandNode extends SlogoNode {
   }
 
   // size of parameters must be equal to size of variables
-  private void setParameters(TurtleTracker tracker) {
+  private void setParameters(BackEndTurtleTracker tracker) {
     for(int i = 0; i < variables.size(); i++){
       variables.get(i).setValue(parameters.get(i).getReturnValue(tracker));
     }
