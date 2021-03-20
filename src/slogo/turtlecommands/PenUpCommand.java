@@ -1,7 +1,7 @@
 package slogo.turtlecommands;
 
 import slogo.Command;
-import slogo.FrontEndTurtle;
+import slogo.visualization.FrontEndTurtle;
 
 public class PenUpCommand implements Command {
 

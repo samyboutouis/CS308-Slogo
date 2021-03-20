@@ -1,8 +1,7 @@
 package slogo.turtlecommands;
 
 import slogo.Command;
-import slogo.FrontEndTurtle;
-import slogo.model.nodes.commands.SetPositionNode;
+import slogo.visualization.FrontEndTurtle;
 
 // handles SETXY and GOTO
 public class SetPositionCommand implements Command {

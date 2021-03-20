@@ -1,4 +1,4 @@
-package slogo;
+package slogo.visualization;
 
 import java.io.File;
 import java.util.ResourceBundle;
@@ -6,6 +6,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import slogo.SafeTurtle;
+import slogo.Turtle;
 import slogo.visualization.Pen;
 
 public class FrontEndTurtle implements Turtle, SafeTurtle {
@@ -13,6 +15,8 @@ public class FrontEndTurtle implements Turtle, SafeTurtle {
   private static final String DEFAULT_IMAGE = "resources/turtle.png";
   private static final int IMAGE_HEIGHT = 50;
   private static final int IMAGE_WIDTH = 50;
+  private static final int ACTIVE_IMAGE_HEIGHT = 70;
+  private static final int ACTIVE_IMAGE_WIDTH = 70;
 
   private ImageView imageView;
   private double xCoordinate;
@@ -20,11 +24,14 @@ public class FrontEndTurtle implements Turtle, SafeTurtle {
   private double direction;
   private Pen pen;
   private final ResourceBundle idBundle;
+  private ActiveCircle activeCircle;
+  private boolean isActive;
 
   public FrontEndTurtle() {
     this.idBundle = ResourceBundle
       .getBundle(String.format("%s/%s/%s", "resources", "stylesheets", "CSS_IDs"));
     setDefaultImage();
+    isActive = true;
   }
 
   public void forward(double pixels) {
@@ -37,6 +44,7 @@ public class FrontEndTurtle implements Turtle, SafeTurtle {
     imageView.setTranslateY(imageView.getTranslateY() - yChange);
     xCoordinate += xChange;
     yCoordinate += yChange;
+    activeCircle.updatePosition(xChange, -yChange);
   }
 
   public void back(double pixels) {
@@ -49,6 +57,7 @@ public class FrontEndTurtle implements Turtle, SafeTurtle {
     imageView.setTranslateY(imageView.getTranslateY() + yChange);
     xCoordinate -= xChange;
     yCoordinate -= yChange;
+    activeCircle.updatePosition(-xChange, yChange);
   }
 
   private double calculateComponentX(double pixels) {
@@ -76,6 +85,7 @@ public class FrontEndTurtle implements Turtle, SafeTurtle {
     imageView.setTranslateY(imageView.getTranslateY() - yChange);
     xCoordinate = xPosition;
     yCoordinate = yPosition;
+    activeCircle.updatePosition(xChange, yChange);
   }
 
   public void towards(double xPosition, double yPosition) {
@@ -106,12 +116,18 @@ public class FrontEndTurtle implements Turtle, SafeTurtle {
     Image image = new Image(DEFAULT_IMAGE, IMAGE_WIDTH, IMAGE_HEIGHT, false, false);
     imageView = new ImageView(image);
     imageView.setId(idBundle.getString("Turtle"));
+    activeCircle = new ActiveCircle(ACTIVE_IMAGE_WIDTH, ACTIVE_IMAGE_HEIGHT);
+    imageView.setOnMouseClicked(event -> toggleActive());
   }
 
   public void addToScreen(Pane turtlePane, double height, double width) {
     imageView.setTranslateX(width/2 - IMAGE_WIDTH/2);
     imageView.setTranslateY(height/2 - IMAGE_HEIGHT/2);
+    ImageView activeCircleView = activeCircle.getImageView();
+    activeCircleView.setTranslateX(width/2 - ACTIVE_IMAGE_WIDTH/2);
+    activeCircleView.setTranslateY(height/2 - ACTIVE_IMAGE_HEIGHT/2);
     turtlePane.getChildren().add(imageView);
+    turtlePane.getChildren().add(activeCircleView);
     pen = new Pen(turtlePane, idBundle);
   }
 
@@ -147,5 +163,28 @@ public class FrontEndTurtle implements Turtle, SafeTurtle {
     home();
     pen.removeLines();
     setDirection(0);
+  }
+
+  private void toggleActive() {
+    if(isActive) {
+      activeCircle.hide();
+    } else {
+      activeCircle.show();
+    }
+    isActive = !isActive;
+  }
+
+  public boolean isActive() {
+    return isActive;
+  }
+
+  public void setActive() {
+    activeCircle.show();
+    isActive = true;
+  }
+
+  public void setInactive() {
+    activeCircle.hide();
+    isActive = false;
   }
 }

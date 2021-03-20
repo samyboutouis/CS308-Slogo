@@ -2,8 +2,8 @@ package slogo.turtlecommands;
 
 import java.util.Map;
 import slogo.Command;
-import slogo.FrontEndTurtle;
 import slogo.SafeFrontEndTurtleTracker;
+import slogo.visualization.FrontEndTurtle;
 
 public class TellCommand implements Command {
 
