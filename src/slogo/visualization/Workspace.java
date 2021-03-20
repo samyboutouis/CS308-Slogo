@@ -85,7 +85,7 @@ public class Workspace {
     gridPane.add(terminalPane, 0, 8, 2, 2);
     gridPane.add(viewLayoutPane, 2, 1, 3, 9);
 
-    frontEndController = new FrontEndController(stage);
+    frontEndController = new FrontEndController(stage, frontEndTurtle);
     new TerminalDisplay(terminalPane, RESOURCE_PACKAGE, new HistoryDisplay(historyPane, RESOURCE_PACKAGE),
       frontEndTurtle, new VariablesDisplay(variablesPane, RESOURCE_PACKAGE), controller);
 //    new UserCommandsDisplay(userCommandsPane, RESOURCE_PACKAGE);
@@ -94,7 +94,7 @@ public class Workspace {
     frontEndController.setToolbarDisplay(toolbarDisplay);
     frontEndController.setTurtleDisplay(turtleDisplay);
 
-    new ViewLayout(viewLayoutPane);
+    new ViewLayout(viewLayoutPane, frontEndController);
   }
 
   private void setStyleSheet() {

@@ -35,6 +35,7 @@ public class ToolbarDisplay {
   private final ResourceBundle resourceBundle;
   private final ResourceBundle idBundle;
   private final ResourceBundle commandBundle;
+  private final List<String> buttonList;
 
   public ToolbarDisplay(GridPane pane, String resourcePackage, Controller controller, FrontEndController frontEndController) {
     String language = DEFAULT_LANGUAGE;
@@ -47,6 +48,7 @@ public class ToolbarDisplay {
     this.idBundle = ResourceBundle.getBundle(DEFAULT_RESOURCE_FOLDER + ID_PROPERTY);
     this.commandBundle = ResourceBundle.getBundle(DEFAULT_RESOURCE_FOLDER + METHODS_PROPERTY);
     this.frontEndController = frontEndController;
+    this.buttonList = List.of("AddTurtleButton", "BackgroundColorButton", "TurtleImageButton", "PenColorButton");
     initializeGridPane();
     makeToolbar();
   }
@@ -68,8 +70,8 @@ public class ToolbarDisplay {
   private void makeToolbar() {
     int colIndex = 0;
     ButtonFactory buttonFactory = new ButtonFactory(frontEndController);
-    for(String label : commandBundle.keySet()) {
-      gridPane.add(buttonFactory.createButton(label), colIndex++, 0, 1, 1);
+    for(String label : buttonList) {
+      gridPane.add(buttonFactory.createDisableableButton(label), colIndex++, 0, 1, 1);
     }
     addLanguageDropdown();
     addHelpDropdown();
