@@ -3,6 +3,7 @@ package slogo.visualization;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import slogo.FrontEndTurtleTracker;
 import slogo.controller.Controller;
 import slogo.controller.FrontEndController;
 
@@ -19,16 +20,13 @@ public class Workspace {
   private final CustomGridPane pane;
   private final Controller controller;
   private FrontEndController frontEndController;
-  private FrontEndTurtle frontEndTurtle;
 
   public Workspace(Pane root, Scene scene, Stage stage) {
     this.scene = scene;
     this.stage = stage;
-
     controller = new Controller();
     pane = new CustomGridPane(GRID_ROW_COUNT, GRID_COLUMN_COUNT, PADDING_LENGTH);
     root.getChildren().add(pane);
-
     pane.setPrefSize(scene);
     setupDisplays();
     setStyleSheet();
@@ -36,8 +34,8 @@ public class Workspace {
 
 
   private void setupDisplays() {
-    frontEndTurtle = new FrontEndTurtle();
-    frontEndController = new FrontEndController(stage, frontEndTurtle);
+    FrontEndTurtleTracker frontEndTurtleTracker = new FrontEndTurtleTracker();
+    frontEndController = new FrontEndController(stage, frontEndTurtleTracker);
 
     HistoryDisplay historyDisplay = new HistoryDisplay(RESOURCE_PACKAGE);
     VariablesDisplay variablesDisplay = new VariablesDisplay(RESOURCE_PACKAGE);
@@ -46,8 +44,9 @@ public class Workspace {
     //paletteDisplay
     //turtleStatesDisplay
 
-    TerminalDisplay terminalDisplay = new TerminalDisplay(RESOURCE_PACKAGE, historyDisplay, frontEndTurtle, variablesDisplay, controller);
-    TurtleDisplay turtleDisplay = new TurtleDisplay(frontEndTurtle);
+    //FIXME: Implement turtle tracker
+    TerminalDisplay terminalDisplay = new TerminalDisplay(RESOURCE_PACKAGE, historyDisplay, new FrontEndTurtle(), variablesDisplay, controller);
+    TurtleDisplay turtleDisplay = new TurtleDisplay();
     ToolbarDisplay toolbarDisplay = new ToolbarDisplay(RESOURCE_PACKAGE, controller, frontEndController);
     ViewLayout viewLayout = new ViewLayout(historyDisplay, variablesDisplay, userCommandsDisplay, buttonDisplay, frontEndController);
 

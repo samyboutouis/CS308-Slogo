@@ -17,11 +17,9 @@ public class TurtleDisplay {
 
   private final ResourceBundle idBundle;
   private final AnchorPane anchorPane;
-  private final FrontEndTurtle frontEndTurtle;
 
-  public TurtleDisplay(FrontEndTurtle frontEndTurtle) {
+  public TurtleDisplay() {
     this.anchorPane = new AnchorPane();
-    this.frontEndTurtle = frontEndTurtle;
     this.idBundle = ResourceBundle.getBundle(ID_PROPERTY);
     setScreen();
   }
@@ -31,22 +29,14 @@ public class TurtleDisplay {
     anchorPane.setId(idBundle.getString(TURTLE_PANE_ID));
   }
 
-  public void addTurtle() {
-    frontEndTurtle.addToScreen(anchorPane, anchorPane.getHeight(), anchorPane.getWidth());
-  }
-
-  public void setTurtleImage(File file) {
-    frontEndTurtle.setImage(file);
+  public void addTurtle(FrontEndTurtle turtle) {
+    turtle.addToScreen(anchorPane, anchorPane.getHeight(), anchorPane.getWidth());
   }
 
   public void setBackgroundColor(Color color) {
     anchorPane
       .setBackground(new Background(
         new BackgroundFill(color, new CornerRadii(BACKGROUND_RADIUS), Insets.EMPTY)));
-  }
-
-  public void setPenColor(Color color) {
-    frontEndTurtle.setPenColor(color);
   }
 
   public AnchorPane getPane() {

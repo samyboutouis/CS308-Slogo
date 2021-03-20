@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 import slogo.model.BackEndTurtleTracker;
 import slogo.visualization.FrontEndTurtle;
 
@@ -40,8 +42,17 @@ public class FrontEndTurtleTracker implements SafeFrontEndTurtleTracker{
     allTurtles.get(id).setInactive();
   }
 
-  public void addTurtle(FrontEndTurtle frontEndTurtle) {
-    // find available id
+  public void addTurtle(FrontEndTurtle turtle) {
+    int turtleID = 1;
+    Set<Integer> allIDs = (TreeSet<Integer>) allTurtles.keySet();
+    for(int id : allIDs) {
+      if(turtleID == id) {
+        turtleID++;
+      } else {
+        break;
+      }
+    }
+    allTurtles.put(turtleID, turtle);
   }
 
   public void changeColor() {

@@ -8,6 +8,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
+import slogo.FrontEndTurtleTracker;
 import slogo.visualization.FrontEndTurtle;
 import slogo.visualization.ToolbarDisplay;
 import slogo.visualization.TurtleDisplay;
@@ -20,17 +21,19 @@ public class FrontEndController {
   private Color penColor;
   private TurtleDisplay turtleDisplay;
   private ToolbarDisplay toolbarDisplay;
+  private FrontEndTurtleTracker frontEndTurtleTracker;
   private FrontEndTurtle turtle;
 
-  public FrontEndController(Stage stage, FrontEndTurtle frontEndTurtle) {
+  public FrontEndController(Stage stage, FrontEndTurtleTracker frontEndTurtleTracker) {
     this.stage = stage;
+    this.frontEndTurtleTracker = frontEndTurtleTracker;
     backgroundColor = Color.web("#dedcdc");
     penColor = Color.BLACK;
-    turtle = frontEndTurtle;
   }
 
   public void handleAddTurtleClick(Button addTurtleButton) {
-    turtleDisplay.addTurtle();
+    turtle = new FrontEndTurtle();
+    turtleDisplay.addTurtle(turtle);
   }
 
   public void handlePenColorClick(Button penColorButton) {
@@ -44,7 +47,7 @@ public class FrontEndController {
 
   private void handlePenColorPicker(Button penColorButton, ColorPicker colorPicker) {
     penColor = colorPicker.getValue();
-    turtleDisplay.setPenColor(penColor);
+    turtle.setPenColor(penColor);
     toolbarDisplay.getPane().getChildren().remove(colorPicker);
     penColorButton.setVisible(true);
     penColorButton.setDisable(false);
@@ -76,7 +79,7 @@ public class FrontEndController {
       .setAll(new ExtensionFilter("Image File", "*.png", "*.jpg", "*.svg"));
     File file = fileChooser.showOpenDialog(stage);
     if (file != null) {
-      turtleDisplay.setTurtleImage(file);
+      turtle.setImage(file);
     }
   }
 
