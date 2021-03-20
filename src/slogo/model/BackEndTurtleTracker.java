@@ -11,6 +11,7 @@ import slogo.BackEndTurtle;
 import slogo.Command;
 import slogo.SafeFrontEndTurtleTracker;
 import slogo.model.nodes.commands.TurtleActivate;
+import slogo.turtlecommands.TellCommand;
 
 // manages all turtles in the backend,
 public class BackEndTurtleTracker {
@@ -113,6 +114,7 @@ public class BackEndTurtleTracker {
     for(Integer i : tellList) {
       addTurtle(getBasicTurtle(i));
     }
+    addTellCommands();
     tellActiveTurtles = new ArrayList<>(activeTurtles);
   }
 
@@ -121,6 +123,7 @@ public class BackEndTurtleTracker {
     for(Integer i : askList) {
       addTurtle(getBasicTurtle(i));
     }
+    addTellCommands();
     askActiveTurtles.push(new ArrayList<>(activeTurtles));
     // at this point, top of askActiveTurtles == activeTurtles
   }
@@ -136,6 +139,7 @@ public class BackEndTurtleTracker {
     else {
       activeTurtles = new ArrayList<>(askActiveTurtles.peek());
     }
+    addTellCommands();
   }
 
   // loops through active turtles for one node, will have many iterator instances out for nested commands e.g. fd fd 50
@@ -167,6 +171,13 @@ public class BackEndTurtleTracker {
   public void findActiveAndInactiveTurtles(TurtleActivate activate) {
     for(Integer i : allTurtles.keySet()){
       activate.activate(allTurtles.get(i), i, activeTurtles.contains(i));
+    }
+  }
+
+  // add tellCommands to each turtle whenever tell, ask, and askWith are created
+  private void addTellCommands () {
+    for(Integer i : allTurtles.keySet()) {
+      allTurtles.get(i).addCommand(new TellCommand(getSafe(), i, activeTurtles.contains(i)));
     }
   }
 
