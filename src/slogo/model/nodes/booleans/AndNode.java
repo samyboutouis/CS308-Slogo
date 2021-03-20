@@ -10,6 +10,7 @@ public class AndNode extends SlogoNode{
   public AndNode(int numParameters){
     super(numParameters);
     parameters = super.getParameters();
+    setBooleanNode(true);
   }
 
   @Override

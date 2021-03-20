@@ -11,6 +11,7 @@ public class GreaterThanNode extends SlogoNode {
   public GreaterThanNode(int numParameters){
     super(numParameters);
     parameters = super.getParameters();
+    setBooleanNode(true);
   }
 
   @Override

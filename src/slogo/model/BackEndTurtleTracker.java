@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.Stack;
 import slogo.BackEndTurtle;
 import slogo.Command;
@@ -49,6 +50,10 @@ public class BackEndTurtleTracker {
     return allCommands;
   }
 
+  public Set<Integer> getAllTurtles(){
+    return allTurtles.keySet();
+  }
+
   public SafeFrontEndTurtleTracker getSafe() {
     return safeTurtleTracker;
   }
@@ -70,6 +75,13 @@ public class BackEndTurtleTracker {
       allTurtles.put(turtle.getIndex(), turtle);
     }
     activeTurtles.add(turtle.getIndex());
+  }
+
+  // only used in AskWithNode, to temporarily set the active turtle list to a specific turtle, and run
+  // the logic expression to see if that specific turtle satisfies the requirement in AskWith.
+  public void checkOneTurtle(int id){
+    clearActiveTurtles();
+    activeTurtles.add(id);
   }
 
   // clear the list of activeTurtles
