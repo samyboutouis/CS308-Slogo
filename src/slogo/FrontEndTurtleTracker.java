@@ -1,9 +1,7 @@
 package slogo;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -12,15 +10,31 @@ import java.util.TreeMap;
 import java.util.stream.Collectors;
 import slogo.model.BackEndTurtleTracker;
 import slogo.visualization.FrontEndTurtle;
+import slogo.visualization.TurtleObserver;
 
 public class FrontEndTurtleTracker implements SafeFrontEndTurtleTracker{
-  // keep track of all the turtles in the front end
   private Map<Integer, FrontEndTurtle> allTurtles;
-  private List<Integer> activeTurtles; // is this active turtles list needed? Where should be the "truth" of this information?
+  private List<Integer> activeTurtles;
+  private List<TurtleObserver> turtleObservers;
 
   public FrontEndTurtleTracker() {
     allTurtles = new TreeMap<>();
     activeTurtles = new ArrayList<>();
+    turtleObservers = new ArrayList<>();
+  }
+
+  public void addObserver(TurtleObserver turtleObserver) {
+    turtleObservers.add(turtleObserver);
+  }
+
+  public void removeObserver(TurtleObserver turtleObserver) {
+    turtleObservers.remove(turtleObserver);
+  }
+
+  public void notifyObservers(List<Integer> list) {
+    for(TurtleObserver turtleObserver : turtleObservers) {
+      turtleObserver.update(list);
+    }
   }
 
   public BackEndTurtleTracker passToBackEnd() {
@@ -75,6 +89,7 @@ public class FrontEndTurtleTracker implements SafeFrontEndTurtleTracker{
     }
     allTurtles.put(turtleID, turtle);
     if(turtle.isActive()) activeTurtles.add(turtleID);
+    notifyObservers(getTurtleIDs());
   }
 
   public void changeColor() {
@@ -105,5 +120,19 @@ public class FrontEndTurtleTracker implements SafeFrontEndTurtleTracker{
       .filter(entry -> Objects.equals(entry.getValue(), value))
       .map(Map.Entry::getKey)
       .collect(Collectors.toSet());
+  }
+
+  public List<SafeTurtle> getSafeFrontEndTurtles() {
+    return allTurtles.entrySet()
+      .stream()
+      .map(Map.Entry::getValue)
+      .collect(Collectors.toUnmodifiableList());
+  }
+
+  private List<Integer> getTurtleIDs() {
+    return allTurtles.entrySet()
+      .stream()
+      .map(Map.Entry::getKey)
+      .collect(Collectors.toUnmodifiableList());
   }
 }

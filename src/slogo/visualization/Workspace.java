@@ -42,13 +42,14 @@ public class Workspace {
     UserCommandsDisplay userCommandsDisplay = new UserCommandsDisplay(RESOURCE_PACKAGE);
     ButtonDisplay buttonDisplay = new ButtonDisplay(frontEndController);
     //paletteDisplay
-    //turtleStatesDisplay
+    TurtleStateDisplay turtleStateDisplay = new TurtleStateDisplay(frontEndController, frontEndTurtleTracker);
+    frontEndTurtleTracker.addObserver(turtleStateDisplay);
 
     //FIXME: Implement turtle tracker
     TerminalDisplay terminalDisplay = new TerminalDisplay(RESOURCE_PACKAGE, historyDisplay, new FrontEndTurtle(frontEndTurtleTracker), variablesDisplay, controller);
     TurtleDisplay turtleDisplay = new TurtleDisplay();
     ToolbarDisplay toolbarDisplay = new ToolbarDisplay(RESOURCE_PACKAGE, controller, frontEndController);
-    ViewLayout viewLayout = new ViewLayout(historyDisplay, variablesDisplay, userCommandsDisplay, buttonDisplay, frontEndController);
+    ViewLayout viewLayout = new ViewLayout(historyDisplay, variablesDisplay, userCommandsDisplay, buttonDisplay, turtleStateDisplay, frontEndController);
 
     frontEndController.setToolbarDisplay(toolbarDisplay);
     frontEndController.setTurtleDisplay(turtleDisplay);
