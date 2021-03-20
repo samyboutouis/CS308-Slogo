@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import slogo.model.BackEndTurtleTracker;
 import slogo.model.nodes.commands.TurtleCommandNode;
 
-public class SetBackground extends TurtleCommandNode {
+public class SetBackgroundNode extends TurtleCommandNode {
 
-  public SetBackground(int numParameters) {
+  public SetBackgroundNode(int numParameters) {
     super(numParameters);
   }
 
