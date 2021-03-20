@@ -18,15 +18,30 @@ public class FrontEndTurtleTracker implements SafeFrontEndTurtleTracker{
 
   public BackEndTurtleTracker passToBackEnd() {
     Map<Integer, BackEndTurtle> backEndAllTurtles = new HashMap<>();
-    for(Integer i : allTurtles.keySet()){
+    for(int i = 1; i <= allTurtles.size(); i++){
       backEndAllTurtles.put(i, new BackEndTurtle(allTurtles.get(i)));
     }
    return new BackEndTurtleTracker(backEndAllTurtles, new ArrayList<>(activeTurtles), this);
   }
 
   @Override
-  public void addTurtle(int id) {
+  public void setActive(int id) {
+    if(!activeTurtles.contains(id)){
+      activeTurtles.add(id);
+    }
+    allTurtles.get(id).setActive();
+  }
 
+  @Override
+  public void setInactive(int id) {
+    if(activeTurtles.contains(id)){
+      activeTurtles.remove(Integer.valueOf(id));
+    }
+    allTurtles.get(id).setInactive();
+  }
+
+  public void addTurtle(FrontEndTurtle frontEndTurtle) {
+    // find available id
   }
 
   public void changeColor() {
