@@ -2,7 +2,6 @@ package slogo.visualization;
 
 import java.util.ResourceBundle;
 import javafx.scene.control.Button;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
 public class UserCommandsDisplay extends ScrollingDisplay {
@@ -15,8 +14,8 @@ public class UserCommandsDisplay extends ScrollingDisplay {
   private final ResourceBundle idBundle;
   private final VBox userCommandsBox;
 
-  public UserCommandsDisplay(GridPane pane, String resourcePackage){
-    super(pane, resourcePackage);
+  public UserCommandsDisplay(String resourcePackage){
+    super(resourcePackage);
 
     userCommandsBox = setupVBoxContainer(USER_COMMANDS_TITLE, USER_COMMANDS_BOX_ID);
     String language = "English";

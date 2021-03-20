@@ -1,9 +1,7 @@
 package slogo.model.nodes.commands;
 
 import java.util.ArrayList;
-import slogo.BackEndTurtle;
-import slogo.Turtle;
-import slogo.model.TurtleTracker;
+import slogo.model.BackEndTurtleTracker;
 import slogo.turtlecommands.ShowTurtleCommand;
 
 public class ShowTurtleNode extends TurtleCommandNode {
@@ -21,7 +19,7 @@ public class ShowTurtleNode extends TurtleCommandNode {
   }*/
 
   @Override
-  public double getReturnValue(TurtleTracker tracker) {
+  public double getReturnValue(BackEndTurtleTracker tracker) {
     return super.loopThroughTurtles(tracker,new ArrayList<>(), (currTurtle, values)->{
       currTurtle.addCommand(new ShowTurtleCommand());
       currTurtle.show();

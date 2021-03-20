@@ -4,7 +4,7 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import slogo.BackEndTurtle;
 import slogo.model.CommandReader;
-import slogo.model.TurtleTracker;
+import slogo.model.BackEndTurtleTracker;
 
 public class Controller {
   private static final String INITIAL_LANGUAGE = "English";
@@ -20,8 +20,8 @@ public class Controller {
       .getBundle(String.format("%s/%s/%s", "resources", "languages", "TranslateOptions"));
   }
 
-  public TurtleTracker parseProgram(String program, BackEndTurtle backEndTurtle) {
-    TurtleTracker tracker = new TurtleTracker();
+  public BackEndTurtleTracker parseProgram(String program, BackEndTurtle backEndTurtle) {
+    BackEndTurtleTracker tracker = new BackEndTurtleTracker();
     tracker.addTurtle(backEndTurtle);
     return commandReader.parseInput(program, tracker);
   }

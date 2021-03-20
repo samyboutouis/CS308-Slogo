@@ -1,12 +1,7 @@
 package slogo.model.nodes.queries;
 
 import java.util.ArrayList;
-import java.util.List;
-import slogo.BackEndTurtle;
-import slogo.Command;
-import slogo.Turtle;
-import slogo.model.SlogoNode;
-import slogo.model.TurtleTracker;
+import slogo.model.BackEndTurtleTracker;
 import slogo.model.nodes.commands.TurtleCommandNode;
 import slogo.turtlecommands.DisplayCommand;
 
@@ -32,7 +27,7 @@ public class IsShowingNode extends TurtleCommandNode {
   }*/
 
   @Override
-  public double getReturnValue(TurtleTracker tracker) {
+  public double getReturnValue(BackEndTurtleTracker tracker) {
     return super.loopThroughTurtles(tracker, new ArrayList<>(), (currTurtle, values)->{
       if (currTurtle.isShowing()){
         //mesg = "Turtle is shown";

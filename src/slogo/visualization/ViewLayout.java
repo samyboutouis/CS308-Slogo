@@ -18,11 +18,17 @@ public class ViewLayout {
   private final List<ViewContainer> viewContainers = new ArrayList<>();
   private final GridPane pane;
   private final FrontEndController frontEndController;
+  private final HistoryDisplay historyDisplay;
+  private final VariablesDisplay variablesDisplay;
+  private final UserCommandsDisplay userCommandsDisplay;
   private String[] viewOrder;
 
-  public ViewLayout(GridPane pane, FrontEndController frontEndController){
+  public ViewLayout(GridPane pane, HistoryDisplay historyDisplay, VariablesDisplay variablesDisplay, UserCommandsDisplay userCommandsDisplay, FrontEndController frontEndController){
     this.pane = pane;
     this.frontEndController = frontEndController;
+    this.historyDisplay = historyDisplay;
+    this.variablesDisplay = variablesDisplay;
+    this.userCommandsDisplay = userCommandsDisplay;
     setupGrid();
     setupViews();
     setupViewContainers();
@@ -72,7 +78,6 @@ public class ViewLayout {
     buttonsPane.getStyleClass().add(DISPLAY_CLASS_NAME);
 
   }
-
 
   private void setupViewContainers(){
     for(int row = 0; row < GRID_ROW_COUNT; row++){

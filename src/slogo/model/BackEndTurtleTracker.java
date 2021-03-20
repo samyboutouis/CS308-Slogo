@@ -7,16 +7,26 @@ import java.util.List;
 import java.util.Map;
 import slogo.BackEndTurtle;
 import slogo.Command;
+import slogo.SafeFrontEndTurtleTracker;
 
 // manages all turtles in the backend,
-public class TurtleTracker {
+public class BackEndTurtleTracker {
 
   // assume each new Tell overrides previous Tell
   private Map<Integer, BackEndTurtle> allTurtles;
   private List<Integer> activeTurtles;
   private int currTurtle;
+  private SafeFrontEndTurtleTracker safeTurtleTracker;
 
-  public TurtleTracker() {
+  // frontend would pass these in so we can create a back end turtle
+  public BackEndTurtleTracker(Map<Integer, BackEndTurtle> allTurtles, List<Integer> activeTurtles, SafeFrontEndTurtleTracker safeTurtleTracker) {
+    this.allTurtles = allTurtles;
+    this.activeTurtles = activeTurtles;
+    this.safeTurtleTracker = safeTurtleTracker;
+    currTurtle = activeTurtles.get(0); // assumes at least one turtle is on the screen
+  }
+
+  public BackEndTurtleTracker() {
     allTurtles = new HashMap<>();
     activeTurtles = new ArrayList<>();
     currTurtle = 0;

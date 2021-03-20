@@ -1,9 +1,8 @@
 package slogo.model.nodes.control;
 
 import java.util.List;
-import slogo.Command;
 import slogo.model.SlogoNode;
-import slogo.model.TurtleTracker;
+import slogo.model.BackEndTurtleTracker;
 
 public class IfNode extends SlogoNode{
   private List<SlogoNode> parameters;
@@ -19,7 +18,7 @@ public class IfNode extends SlogoNode{
   }
 
   @Override
-  public double getReturnValue(TurtleTracker tracker) {
+  public double getReturnValue(BackEndTurtleTracker tracker) {
       // assume expr is just one tree
       double ret = 0;
       if(parameters.get(0).getReturnValue(tracker) != 0.0) { // does the expression part

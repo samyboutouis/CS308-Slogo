@@ -1,9 +1,7 @@
 package slogo.model.nodes.commands;
 
 import java.util.List;
-import slogo.BackEndTurtle;
-import slogo.Turtle;
-import slogo.model.TurtleTracker;
+import slogo.model.BackEndTurtleTracker;
 import slogo.turtlecommands.SetTowardsCommand;
 import slogo.model.SlogoNode;
 
@@ -18,7 +16,7 @@ public class SetTowardsNode extends TurtleCommandNode {
   }
 
   @Override
-  public double getReturnValue(TurtleTracker tracker) {
+  public double getReturnValue(BackEndTurtleTracker tracker) {
     return super.loopThroughTurtles(tracker,parameters, (currTurtle, values)->{
       currTurtle.addCommand(new SetTowardsCommand(values.get(0),values.get(1)));
       double prevHeading = currTurtle.getDirection();

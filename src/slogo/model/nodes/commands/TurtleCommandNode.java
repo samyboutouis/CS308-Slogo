@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 import slogo.BackEndTurtle;
 import slogo.model.SlogoNode;
-import slogo.model.TurtleTracker;
+import slogo.model.BackEndTurtleTracker;
 
 // second level of abstraction for all command nodes that may need getValues
 public abstract class TurtleCommandNode extends SlogoNode {
@@ -14,7 +14,7 @@ public abstract class TurtleCommandNode extends SlogoNode {
     super(numParameters);
   }
 
-  protected double loopThroughTurtles(TurtleTracker tracker, List<SlogoNode> parameters, TurtleAction action) {
+  protected double loopThroughTurtles(BackEndTurtleTracker tracker, List<SlogoNode> parameters, TurtleAction action) {
     Iterator<Integer> itr = tracker.getIterator();
     double ret = 0.0;
     while(itr.hasNext()){
@@ -26,7 +26,7 @@ public abstract class TurtleCommandNode extends SlogoNode {
     return ret;
   }
 
-  private List<Double> getValues(TurtleTracker tracker, List<SlogoNode> parameters) {
+  private List<Double> getValues(BackEndTurtleTracker tracker, List<SlogoNode> parameters) {
     List<Double> values = new ArrayList<>();
     for(SlogoNode node : parameters) {
       values.add(node.getReturnValue(tracker));

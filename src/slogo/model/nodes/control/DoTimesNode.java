@@ -1,9 +1,8 @@
 package slogo.model.nodes.control;
 
 import java.util.List;
-import slogo.Command;
 import slogo.model.SlogoNode;
-import slogo.model.TurtleTracker;
+import slogo.model.BackEndTurtleTracker;
 
 public class DoTimesNode extends SlogoNode {
 
@@ -25,7 +24,7 @@ public class DoTimesNode extends SlogoNode {
   }
 
   @Override
-  public double getReturnValue(TurtleTracker tracker) {
+  public double getReturnValue(BackEndTurtleTracker tracker) {
     setFirstEnd();
     getIndexing(tracker);
     double ret = 0;
@@ -41,7 +40,7 @@ public class DoTimesNode extends SlogoNode {
   }
 
   // get limit
-  private void getIndexing(TurtleTracker tracker){
+  private void getIndexing(BackEndTurtleTracker tracker){
     // dotimes [ :a fd 50 ] [ fd 50 ]
     // i = 0 is left bracket
     variable = (VariableNode) parameters.get(1);

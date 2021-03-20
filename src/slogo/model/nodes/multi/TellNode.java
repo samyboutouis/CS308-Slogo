@@ -1,12 +1,9 @@
 package slogo.model.nodes.multi;
 
-import java.util.ArrayList;
 import java.util.List;
 import slogo.BackEndTurtle;
 import slogo.model.SlogoNode;
-import slogo.model.TurtleTracker;
-import slogo.model.nodes.commands.TurtleCommandNode;
-import slogo.model.nodes.control.ConstantNode;
+import slogo.model.BackEndTurtleTracker;
 import slogo.model.nodes.control.ListEndNode;
 
 public class TellNode extends SlogoNode {
@@ -37,11 +34,12 @@ public class TellNode extends SlogoNode {
 
 
   @Override
-  public double getReturnValue(TurtleTracker tracker) {
+  public double getReturnValue(BackEndTurtleTracker tracker) {
     int ret=0;
     for (int i=1; i<parameters.size()-1;i++){
       ret= (int) parameters.get(i).getReturnValue(tracker); // should all be constant nodes
-      tracker.addTurtle(new BackEndTurtle(0,0,0,true,true, true, 0));
+      tracker.addTurtle(new BackEndTurtle(0,0,0,true,true, ret));
+      // create a tellCommand object here that calls a frontend method to make turtle look active
     }
     return ret;
   }

@@ -14,7 +14,17 @@ public class BackEndTurtle implements Turtle {
   private boolean isActive;
   private List<Command> commands;
 
-  public BackEndTurtle(double xCoordinate, double yCoordinate, double direction, boolean isPenDown, boolean isShowing, boolean isActive, int ID) {
+  public BackEndTurtle(SafeTurtle transfer) {
+    this.ID = 0; // talk about where ID should be stored
+    this.xCoordinate = transfer.getX();
+    this.yCoordinate = transfer.getY();
+    this.direction = transfer.getDirection();
+    this.isPenDown = transfer.isPenDown();
+    this.isShowing = transfer.isShowing();
+    commands = new ArrayList<>();
+  }
+
+  public BackEndTurtle(double xCoordinate, double yCoordinate, double direction, boolean isPenDown, boolean isShowing, int ID) {
     this.ID = ID;
     this.xCoordinate = xCoordinate;
     this.yCoordinate = yCoordinate;

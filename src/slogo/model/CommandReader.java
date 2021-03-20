@@ -4,15 +4,11 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Stack;
 import slogo.BackEndTurtle;
-import slogo.Command;
-import slogo.Turtle;
-import slogo.model.nodes.commands.TurtleCommandNode;
 import slogo.model.nodes.control.ConstantNode;
 import slogo.model.nodes.control.MakeUserInstructionNode;
 import slogo.model.nodes.control.RepeatNode;
@@ -29,13 +25,13 @@ public class CommandReader {
   private ProgramParser parser;
   private Map<String, Double> variables;
   private Map<String, MakeUserInstructionNode> userDefinedCommands;
-  private Map<String, String> userDefinedCommandsInString;
+  private Map<String, String> userDefinedCommandsInString; // where you get the user specified functions to appear in UI.
   private List<Double> forTests;
   private ResourceBundle numParameters;
   private ResourceBundle packageName;
   //private List<Command> commands;
   //private Turtle turtle;
-  private TurtleTracker tracker;
+  private BackEndTurtleTracker tracker;
 
   public CommandReader(String language) {
     setLanguage(language);
@@ -47,11 +43,11 @@ public class CommandReader {
     forTests = new ArrayList<>();
     userDefinedCommands = new HashMap<>();
     userDefinedCommandsInString = new HashMap<>();
-    tracker = new TurtleTracker(); // tracker doesn't have a turtle yet
+    tracker = new BackEndTurtleTracker(); // tracker doesn't have a turtle yet
 
   }
 
-  public TurtleTracker parseInput(String input, TurtleTracker tracker) throws IllegalArgumentException{
+  public BackEndTurtleTracker parseInput(String input, BackEndTurtleTracker tracker) throws IllegalArgumentException{
     //commands.clear();
     tracker.clearAllCommands();
     try {
@@ -69,6 +65,10 @@ public class CommandReader {
   public Map<String, Double> getVariables() {
     return variables;
   }
+
+
+  // where you get the user specified functions to appear in UI.
+  public Map<String, String> getUserDefinedCommandsInString(){return userDefinedCommandsInString;}
 
   public Map<String, String> getCommands() {
     return userDefinedCommandsInString;
@@ -108,6 +108,8 @@ public class CommandReader {
         case "Tell" ->{
           curr = new TellNode(parameters);
           tracker.clearActiveTurtles(); // clear the previous active list of turtles, to prepare room for new list of active turtles.
+          // FIX: clearing active turtles now has no effect since none of the getReturnValues have been called
+          // should clear activeTurtles when we are doing getReturnValue of a TellNode
         }
 
         case "Constant" -> {
@@ -124,6 +126,7 @@ public class CommandReader {
         }
         case "Command" -> {
           if(curr instanceof MakeUserInstructionNode){
+            ((MakeUserInstructionNode) curr).setMethodName(s);
             userDefinedCommands.put(s, (MakeUserInstructionNode) curr);
             continue;
           }
@@ -137,12 +140,15 @@ public class CommandReader {
           }
         }
         case "MakeUserInstruction" -> {
-          curr = new MakeUserInstructionNode(parameters);
+          curr = new MakeUserInstructionNode(parameters, userDefinedCommandsInString);
         }
         default -> {
           curr = (SlogoNode) node.getDeclaredConstructor(Integer.TYPE).newInstance(parameters);
         }
       }
+      // set the string for curr Node
+      curr.setString(s);
+
       if(curr.isFull()){ // only true if node has no parameters
         if(st.isEmpty()) {
           roots.add(curr);
@@ -167,6 +173,7 @@ public class CommandReader {
     }
     return roots;
   }
+
 
   private void makeCommands(List<SlogoNode> roots){
     for(SlogoNode root : roots){

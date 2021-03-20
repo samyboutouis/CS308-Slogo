@@ -2,9 +2,8 @@ package slogo.model.nodes.control;
 
 import java.util.List;
 import java.util.Map;
-import slogo.Command;
 import slogo.model.SlogoNode;
-import slogo.model.TurtleTracker;
+import slogo.model.BackEndTurtleTracker;
 
 public class RepeatNode extends SlogoNode {
 
@@ -25,7 +24,7 @@ public class RepeatNode extends SlogoNode {
   }
 
   @Override
-  public double getReturnValue(TurtleTracker tracker) {
+  public double getReturnValue(BackEndTurtleTracker tracker) {
     // assume expr only results in one value, so parameters.get(1) is start bracket
     getIndexing(tracker);
     double ret = 0;
@@ -41,7 +40,7 @@ public class RepeatNode extends SlogoNode {
   }
 
   // get how many times we repeat
-  private void getIndexing(TurtleTracker tracker){
+  private void getIndexing(BackEndTurtleTracker tracker){
     // repeat fd 50 [ fd 50 ]
     // i = 1 is left bracket
     variable = new VariableNode(0, variables, ":repcount");

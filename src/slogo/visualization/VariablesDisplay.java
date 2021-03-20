@@ -1,10 +1,8 @@
 package slogo.visualization;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.scene.control.Button;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
 public class VariablesDisplay extends ScrollingDisplay {
@@ -19,11 +17,10 @@ public class VariablesDisplay extends ScrollingDisplay {
 
   /**
    *
-   * @param pane
    * @param resourcePackage
    */
-  public VariablesDisplay(GridPane pane, String resourcePackage){
-    super(pane, resourcePackage);
+  public VariablesDisplay(String resourcePackage){
+    super(resourcePackage);
 
     variablesBox = setupVBoxContainer(VARIABLES_TITLE, VARIABLES_BOX_ID);
     String language = "English";
