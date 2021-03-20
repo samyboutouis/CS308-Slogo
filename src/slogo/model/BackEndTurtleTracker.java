@@ -61,6 +61,8 @@ public class BackEndTurtleTracker {
   public void deleteAllData(){
     allTurtles = new HashMap<>();
     activeTurtles = new ArrayList<>();
+    askActiveTurtles = new Stack<>();
+    tellActiveTurtles = new ArrayList<>();
     currTurtle = 0;
   }
 
