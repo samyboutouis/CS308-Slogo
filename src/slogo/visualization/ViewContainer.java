@@ -12,7 +12,7 @@ public class ViewContainer {
   private final Button closeButton;
   private final int containerIndex;
 
-  private final static String[] viewNames = {"variables", "commands", "history", "palette", "states", "buttons"};
+  private final static String[] viewNames = {"Variables Display", "commands", "history", "palette", "states", "buttons"};
 
   public ViewContainer(ViewLayout viewLayout, GridPane pane, int containerIndex){
     this.viewLayout = viewLayout;

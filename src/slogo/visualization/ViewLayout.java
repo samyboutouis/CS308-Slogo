@@ -3,6 +3,7 @@ package slogo.visualization;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import slogo.controller.FrontEndController;
 
 public class ViewLayout {
@@ -18,6 +19,9 @@ public class ViewLayout {
   private final VariablesDisplay variablesDisplay;
   private final UserCommandsDisplay userCommandsDisplay;
   private String[] viewOrder;
+
+  private final static int[] viewContainerXPositions = {};
+  private final static int[] viewContainerYPositions = {};
 
   public ViewLayout(HistoryDisplay historyDisplay, VariablesDisplay variablesDisplay, UserCommandsDisplay userCommandsDisplay, FrontEndController frontEndController){
     this.pane = new CustomGridPane(GRID_ROW_COUNT, GRID_COLUMN_COUNT, PADDING_LENGTH);
@@ -40,12 +44,13 @@ public class ViewLayout {
         GridPane viewContainerPane = new GridPane();
         pane.add(viewContainerPane, col, row);
         viewContainers.add(new ViewContainer(this, viewContainerPane, GRID_COLUMN_COUNT * row + col));
-        // FIXME: CHANGE LATER
-        if(col == 0 && row == 0) {
-          new ButtonDisplay(pane, frontEndController);
-        }
       }
     }
+
+    //initially set all panes invisible
+    historyDisplay.getPane().setVisible(false);
+    variablesDisplay.getPane().setVisible(false);
+    userCommandsDisplay.getPane().setVisible(false);
   }
 
   public void updateViewLayouts(int containerIndex, String viewName){
@@ -63,6 +68,16 @@ public class ViewLayout {
       System.out.printf("%s, ", name);
     }
     System.out.println();
+  }
+
+  private void turnOnView(Pane targetPane, int index){
+    targetPane.setLayoutX(viewContainerXPositions[index]);
+    targetPane.setLayoutY(viewContainerYPositions[index]);
+    targetPane.setVisible(true);
+  }
+
+  private void turnOffView(Pane targetPane){
+    targetPane.setVisible(false);
   }
 
   private int findIndexOf(String desiredView){
