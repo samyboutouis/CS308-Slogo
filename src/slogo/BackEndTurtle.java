@@ -125,16 +125,4 @@ public class BackEndTurtle implements Turtle {
     home();
     setDirection(0);
   }
-
-  public boolean isActive() {
-    return isActive;
-  }
-
-  public void setActive() {
-    isActive = true;
-  }
-
-  public void setInactive() {
-    isActive = false;
-  }
 }
