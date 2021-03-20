@@ -6,10 +6,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
-import slogo.FrontEndTurtle;
 import slogo.controller.Controller;
 import slogo.controller.FrontEndController;
 
@@ -77,7 +75,9 @@ public class Workspace {
     toolbarPane.getStyleClass().add(DISPLAY_CLASS_NAME);
     viewLayoutPane.getStyleClass().add(DISPLAY_CLASS_NAME);
 
-
+    frontEndController = new FrontEndController(stage, frontEndTurtle);
+    new TerminalDisplay(terminalPane, RESOURCE_PACKAGE, new HistoryDisplay(historyPane, RESOURCE_PACKAGE),
+      frontEndTurtle, new VariablesDisplay(variablesPane, RESOURCE_PACKAGE), controller);
 
     frontEndController = new FrontEndController(stage);
 
@@ -86,16 +86,13 @@ public class Workspace {
     UserCommandsDisplay userCommandsDisplay = new UserCommandsDisplay(RESOURCE_PACKAGE);
 
     TerminalDisplay terminalDisplay = new TerminalDisplay(RESOURCE_PACKAGE, historyDisplay, frontEndTurtle, variablesDisplay, controller);
-//    new UserCommandsDisplay(userCommandsPane, RESOURCE_PACKAGE);
 
     TurtleDisplay turtleDisplay = new TurtleDisplay(turtlePane, frontEndTurtle);
     ToolbarDisplay toolbarDisplay = new ToolbarDisplay(toolbarPane, RESOURCE_PACKAGE, controller, frontEndController);
     frontEndController.setToolbarDisplay(toolbarDisplay);
     frontEndController.setTurtleDisplay(turtleDisplay);
 
-    new ViewLayout(viewLayoutPane, historyDisplay, variablesDisplay, userCommandsDisplay);
-
-
+    new ViewLayout(viewLayoutPane, historyDisplay, variablesDisplay, userCommandsDisplay, frontEndController);
     gridPane.add(toolbarPane, 0, 0, 5, 1);
     gridPane.add(turtlePane, 0, 1, 2, 7);
     gridPane.add(terminalDisplay.getPane(), 0, 8, 2, 2);

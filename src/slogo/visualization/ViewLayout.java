@@ -6,6 +6,7 @@ import javafx.geometry.Insets;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
+import slogo.controller.FrontEndController;
 
 public class ViewLayout {
 
@@ -13,21 +14,21 @@ public class ViewLayout {
   private final static int GRID_COLUMN_COUNT = 3;
   private final static int PADDING_LENGTH = 10;
   private final static String DISPLAY_CLASS_NAME = "displayWindow";
-  private final List<ViewContainer> viewContainers = new ArrayList<>();
 
+  private final List<ViewContainer> viewContainers = new ArrayList<>();
   private final GridPane pane;
+  private final FrontEndController frontEndController;
   private final HistoryDisplay historyDisplay;
   private final VariablesDisplay variablesDisplay;
   private final UserCommandsDisplay userCommandsDisplay;
-
   private String[] viewOrder;
 
-  public ViewLayout(GridPane pane, HistoryDisplay historyDisplay, VariablesDisplay variablesDisplay, UserCommandsDisplay userCommandsDisplay){
+  public ViewLayout(GridPane pane, HistoryDisplay historyDisplay, VariablesDisplay variablesDisplay, UserCommandsDisplay userCommandsDisplay, FrontEndController frontEndController){
     this.pane = pane;
+    this.frontEndController = frontEndController;
     this.historyDisplay = historyDisplay;
     this.variablesDisplay = variablesDisplay;
     this.userCommandsDisplay = userCommandsDisplay;
-
     setupGrid();
     setupViews();
     setupViewContainers();
@@ -69,10 +70,13 @@ public class ViewLayout {
     GridPane historyPane = new GridPane();
     GridPane variablesPane = new GridPane();
     GridPane userCommandsPane = new GridPane();
+    GridPane buttonsPane = new GridPane();
 
     historyPane.getStyleClass().add(DISPLAY_CLASS_NAME);
     variablesPane.getStyleClass().add(DISPLAY_CLASS_NAME);
     userCommandsPane.getStyleClass().add(DISPLAY_CLASS_NAME);
+    buttonsPane.getStyleClass().add(DISPLAY_CLASS_NAME);
+
   }
 
   private void setupViewContainers(){
@@ -81,6 +85,10 @@ public class ViewLayout {
         GridPane viewContainerPane = new GridPane();
         pane.add(viewContainerPane, col, row);
         viewContainers.add(new ViewContainer(this, viewContainerPane, GRID_COLUMN_COUNT * row + col));
+        // FIXME: CHANGE LATER
+        if(col == 0 && row == 0) {
+          new ButtonView(pane, frontEndController);
+        }
       }
     }
   }

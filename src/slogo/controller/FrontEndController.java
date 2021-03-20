@@ -3,10 +3,12 @@ package slogo.controller;
 import java.io.File;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
+import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
+import slogo.visualization.FrontEndTurtle;
 import slogo.visualization.ToolbarDisplay;
 import slogo.visualization.TurtleDisplay;
 
@@ -18,11 +20,13 @@ public class FrontEndController {
   private Color penColor;
   private TurtleDisplay turtleDisplay;
   private ToolbarDisplay toolbarDisplay;
+  private FrontEndTurtle turtle;
 
-  public FrontEndController(Stage stage) {
+  public FrontEndController(Stage stage, FrontEndTurtle frontEndTurtle) {
     this.stage = stage;
     backgroundColor = Color.web("#dedcdc");
     penColor = Color.BLACK;
+    turtle = frontEndTurtle;
   }
 
   public void handleAddTurtleClick(Button addTurtleButton) {
@@ -82,5 +86,25 @@ public class FrontEndController {
 
   public void setTurtleDisplay(TurtleDisplay turtleDisplay) {
     this.turtleDisplay = turtleDisplay;
+  }
+
+  public void handleRightClick(TextField textField) {
+    turtle.rotate(Double.parseDouble(textField.getText()));
+    textField.clear();
+  }
+
+  public void handleLeftClick(TextField textField) {
+    turtle.rotate(-Double.parseDouble(textField.getText()));
+    textField.clear();
+  }
+
+  public void handleUpClick(TextField textField) {
+    turtle.forward(Double.parseDouble(textField.getText()));
+    textField.clear();
+  }
+
+  public void handleDownClick(TextField textField) {
+    turtle.back(Double.parseDouble(textField.getText()));
+    textField.clear();
   }
 }

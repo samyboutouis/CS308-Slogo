@@ -1,7 +1,7 @@
 package slogo.turtlecommands;
 
 import slogo.Command;
-import slogo.FrontEndTurtle;
+import slogo.visualization.FrontEndTurtle;
 
 // used to display information from backend to frontend
 public class DisplayCommand implements Command {
