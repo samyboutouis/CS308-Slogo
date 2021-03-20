@@ -3,6 +3,7 @@ package slogo.visualization;
 import java.lang.reflect.Method;
 import java.util.ResourceBundle;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import slogo.controller.FrontEndController;
@@ -11,9 +12,9 @@ public class ButtonFactory {
   private static final int ICON_WIDTH = 30;
   private static final int ICON_HEIGHT = 30;
   private static final String DEFAULT_RESOURCE_FOLDER = "resources/";
-  private static final String IMAGE_PROPERTY = "stylesheets/Image";
+  private static final String IMAGE_PROPERTY = "reflection/Image";
   private static final String ID_PROPERTY = "stylesheets/CSS_IDs";
-  private static final String METHODS_PROPERTY = "methods/ButtonMethods";
+  private static final String METHODS_PROPERTY = "reflection/ButtonMethods";
 
   private final ResourceBundle imageBundle;
   private final ResourceBundle idBundle;
@@ -27,13 +28,8 @@ public class ButtonFactory {
     this.controller = controller;
   }
 
-  public Button createButton(String property) {
-    Button button = new Button();
-    button.setId(idBundle.getString(property));
-    String label = imageBundle.getString(property);
-    button.setGraphic(new ImageView(
-      new Image(DEFAULT_RESOURCE_FOLDER + label, ICON_WIDTH,
-        ICON_HEIGHT, false, false)));
+  public Button createDisableableButton(String property) {
+    Button button = makeButton(property);
     button.setOnAction(handler -> {
       try {
         Method m = controller.getClass()
@@ -43,6 +39,30 @@ public class ButtonFactory {
         throw new RuntimeException("Improper configuration", e);
       }
     });
+    return button;
+  }
+
+  public Button createTextButton(String property, TextField textField) {
+    Button button = makeButton(property);
+    button.setOnAction(handler -> {
+      try {
+        Method m = controller.getClass()
+          .getDeclaredMethod(commandBundle.getString(property), TextField.class);
+        m.invoke(controller, textField);
+      } catch (Exception e) {
+        throw new RuntimeException("Improper configuration", e);
+      }
+    });
+    return button;
+  }
+
+  private Button makeButton(String property) {
+    Button button = new Button();
+    button.setId(idBundle.getString(property));
+    String label = imageBundle.getString(property);
+    button.setGraphic(new ImageView(
+      new Image(DEFAULT_RESOURCE_FOLDER + label, ICON_WIDTH,
+        ICON_HEIGHT, false, false)));
     return button;
   }
 }

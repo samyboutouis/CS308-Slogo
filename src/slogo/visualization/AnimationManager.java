@@ -5,7 +5,6 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.util.Duration;
 import slogo.Command;
-import slogo.FrontEndTurtle;
 
 public class AnimationManager {
 

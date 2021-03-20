@@ -9,7 +9,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
-import slogo.FrontEndTurtle;
 import slogo.BackEndTurtle;
 import slogo.controller.Controller;
 

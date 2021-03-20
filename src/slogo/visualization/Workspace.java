@@ -1,15 +1,8 @@
 package slogo.visualization;
 
-import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
-import slogo.FrontEndTurtle;
 import slogo.controller.Controller;
 import slogo.controller.FrontEndController;
 
@@ -19,11 +12,11 @@ public class Workspace {
   private final static int GRID_COLUMN_COUNT = 5;
   private final static int PADDING_LENGTH = 10;
   private final static String RESOURCE_PACKAGE = "resources";
-  private final static String DISPLAY_CLASS_NAME = "displayWindow";
+  private final static int[] paneIndexes = {0, 0, 5, 1, 0, 1, 2, 7, 0, 8, 2, 2, 2, 1, 3, 9};
 
   private final Stage stage;
   private final Scene scene;
-  private final GridPane gridPane;
+  private final CustomGridPane pane;
   private final Controller controller;
   private FrontEndController frontEndController;
   private FrontEndTurtle frontEndTurtle;
@@ -31,75 +24,42 @@ public class Workspace {
   public Workspace(Pane root, Scene scene, Stage stage) {
     this.scene = scene;
     this.stage = stage;
-    gridPane = new GridPane();
+
     controller = new Controller();
-    root.getChildren().add(gridPane);
-    setupGrid();
+    pane = new CustomGridPane(GRID_ROW_COUNT, GRID_COLUMN_COUNT, PADDING_LENGTH);
+    root.getChildren().add(pane);
+
+    pane.setPrefSize(scene);
     setupDisplays();
     setStyleSheet();
   }
 
-  private void setupGrid() {
-    initializeGridSize();
-    initializeGridRowsAndCols();
-  }
-
-  private void initializeGridSize() {
-    gridPane.setMinSize(0, 0);
-    gridPane.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-    gridPane.setPrefSize(scene.getWidth(), scene.getHeight());
-    gridPane.setVgap(PADDING_LENGTH);
-    gridPane.setHgap(PADDING_LENGTH);
-    gridPane.setPadding(new Insets(PADDING_LENGTH));
-  }
-
-  private void initializeGridRowsAndCols() {
-    for (int i = 0; i < GRID_ROW_COUNT; i++) {
-      RowConstraints row = new RowConstraints();
-      row.setPercentHeight(100.0 / GRID_ROW_COUNT);
-      gridPane.getRowConstraints().add(row);
-    }
-
-    for (int i = 0; i < GRID_COLUMN_COUNT; i++) {
-      ColumnConstraints col = new ColumnConstraints();
-      col.setPercentWidth(100.0 / GRID_COLUMN_COUNT);
-      gridPane.getColumnConstraints().add(col);
-    }
-  }
 
   private void setupDisplays() {
-    AnchorPane turtlePane = new AnchorPane();
-    GridPane toolbarPane = new GridPane();
-    GridPane viewLayoutPane = new GridPane();
     frontEndTurtle = new FrontEndTurtle();
-
-    turtlePane.getStyleClass().add(DISPLAY_CLASS_NAME);
-    toolbarPane.getStyleClass().add(DISPLAY_CLASS_NAME);
-    viewLayoutPane.getStyleClass().add(DISPLAY_CLASS_NAME);
-
-
-
-    frontEndController = new FrontEndController(stage);
+    frontEndController = new FrontEndController(stage, frontEndTurtle);
 
     HistoryDisplay historyDisplay = new HistoryDisplay(RESOURCE_PACKAGE);
     VariablesDisplay variablesDisplay = new VariablesDisplay(RESOURCE_PACKAGE);
     UserCommandsDisplay userCommandsDisplay = new UserCommandsDisplay(RESOURCE_PACKAGE);
+    ButtonDisplay buttonDisplay = new ButtonDisplay(frontEndController);
+    //paletteDisplay
+    //turtleStatesDisplay
 
     TerminalDisplay terminalDisplay = new TerminalDisplay(RESOURCE_PACKAGE, historyDisplay, frontEndTurtle, variablesDisplay, controller);
-//    new UserCommandsDisplay(userCommandsPane, RESOURCE_PACKAGE);
+    TurtleDisplay turtleDisplay = new TurtleDisplay(frontEndTurtle);
+    ToolbarDisplay toolbarDisplay = new ToolbarDisplay(RESOURCE_PACKAGE, controller, frontEndController);
+    ViewLayout viewLayout = new ViewLayout(historyDisplay, variablesDisplay, userCommandsDisplay, buttonDisplay, frontEndController);
 
-    TurtleDisplay turtleDisplay = new TurtleDisplay(turtlePane, frontEndTurtle);
-    ToolbarDisplay toolbarDisplay = new ToolbarDisplay(toolbarPane, RESOURCE_PACKAGE, controller, frontEndController);
     frontEndController.setToolbarDisplay(toolbarDisplay);
     frontEndController.setTurtleDisplay(turtleDisplay);
 
-    new ViewLayout(viewLayoutPane, historyDisplay, variablesDisplay, userCommandsDisplay);
+    pane.add(toolbarDisplay.getPane(), paneIndexes[0], paneIndexes[1], paneIndexes[2], paneIndexes[3]);
+    pane.add(turtleDisplay.getPane(), paneIndexes[4], paneIndexes[5], paneIndexes[6], paneIndexes[7]);
+    pane.add(terminalDisplay.getPane(), paneIndexes[8], paneIndexes[9], paneIndexes[10], paneIndexes[11]);
+    pane.add(viewLayout.getPane(), paneIndexes[12], paneIndexes[13], paneIndexes[14], paneIndexes[15]);
 
-
-    gridPane.add(toolbarPane, 0, 0, 5, 1);
-    gridPane.add(turtlePane, 0, 1, 2, 7);
-    gridPane.add(terminalDisplay.getPane(), 0, 8, 2, 2);
-    gridPane.add(viewLayoutPane, 2, 1, 3, 9);
+    pane.add(historyDisplay.getPane(), 0, 0, 1, 1);
   }
 
   private void setStyleSheet() {

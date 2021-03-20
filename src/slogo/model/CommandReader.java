@@ -84,7 +84,7 @@ public class CommandReader {
   public List<Double> testParseInput(String input) {
     forTests = new ArrayList<>();
     tracker.deleteAllData();
-    tracker.addTurtle(new BackEndTurtle(0, 0, 0, true, true, 0));
+    tracker.addTurtle(new BackEndTurtle(0.0, 0.0, 0.0, true, true, 0));
     //parseInput(input, new BackEndTurtle(0, 0, 0, true, true, 0));
     parseInput(input, tracker);
     return forTests;

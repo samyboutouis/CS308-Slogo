@@ -1,78 +1,56 @@
 package slogo.visualization;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import javafx.geometry.Insets;
-import javafx.scene.layout.ColumnConstraints;
+import java.util.Map;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.RowConstraints;
+import javafx.scene.layout.Pane;
+import slogo.controller.FrontEndController;
 
 public class ViewLayout {
 
   private final static int GRID_ROW_COUNT = 2;
   private final static int GRID_COLUMN_COUNT = 3;
   private final static int PADDING_LENGTH = 10;
-  private final static String DISPLAY_CLASS_NAME = "displayWindow";
-  private final List<ViewContainer> viewContainers = new ArrayList<>();
 
-  private final GridPane pane;
+  private final Map<String, Pane> viewNamesMap = new HashMap<>();
+
+  private final List<ViewContainer> viewContainers = new ArrayList<>();
+  private final CustomGridPane pane;
+  private final FrontEndController frontEndController;
   private final HistoryDisplay historyDisplay;
   private final VariablesDisplay variablesDisplay;
   private final UserCommandsDisplay userCommandsDisplay;
-
+  private final ButtonDisplay buttonDisplay;
   private String[] viewOrder;
 
-  public ViewLayout(GridPane pane, HistoryDisplay historyDisplay, VariablesDisplay variablesDisplay, UserCommandsDisplay userCommandsDisplay){
-    this.pane = pane;
+  private final static int[] viewContainerXPositions = {500, 200, 300, 400};
+  private final static int[] viewContainerYPositions = {500, 200, 300, 400};
+
+  public ViewLayout(HistoryDisplay historyDisplay, VariablesDisplay variablesDisplay, UserCommandsDisplay userCommandsDisplay, ButtonDisplay buttonDisplay, FrontEndController frontEndController){
+    this.pane = new CustomGridPane(GRID_ROW_COUNT, GRID_COLUMN_COUNT, PADDING_LENGTH);
+    this.frontEndController = frontEndController;
     this.historyDisplay = historyDisplay;
     this.variablesDisplay = variablesDisplay;
     this.userCommandsDisplay = userCommandsDisplay;
+    this.buttonDisplay = buttonDisplay;
 
-    setupGrid();
-    setupViews();
+    initializeMap();
     setupViewContainers();
     initializeViewOrder();
   }
 
+  //private final static String[] viewNames = {"Variables Display", "commands", "history", "palette", "states", "buttons"};
+  private void initializeMap(){
+    viewNamesMap.put("Variables", variablesDisplay.getPane());
+    viewNamesMap.put("Commands", userCommandsDisplay.getPane());
+    viewNamesMap.put("History", historyDisplay.getPane());
+    viewNamesMap.put("Buttons", buttonDisplay.getPane());
+  }
+
   private void initializeViewOrder(){
     viewOrder = new String[GRID_COLUMN_COUNT * GRID_ROW_COUNT];
-  }
-
-  private void setupGrid() {
-    initializeGridSize();
-    initializeGridRowsAndCols();
-  }
-
-  private void initializeGridSize() {
-    pane.setMinSize(0, 0);
-    pane.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-    pane.setVgap(PADDING_LENGTH);
-    pane.setHgap(PADDING_LENGTH);
-    pane.setPadding(new Insets(PADDING_LENGTH));
-  }
-
-  private void initializeGridRowsAndCols() {
-    for (int i = 0; i < GRID_ROW_COUNT; i++) {
-      RowConstraints row = new RowConstraints();
-      row.setPercentHeight(100.0 / GRID_ROW_COUNT);
-      pane.getRowConstraints().add(row);
-    }
-
-    for (int i = 0; i < GRID_COLUMN_COUNT; i++) {
-      ColumnConstraints col = new ColumnConstraints();
-      col.setPercentWidth(100.0 / GRID_COLUMN_COUNT);
-      pane.getColumnConstraints().add(col);
-    }
-  }
-
-  private void setupViews(){
-    GridPane historyPane = new GridPane();
-    GridPane variablesPane = new GridPane();
-    GridPane userCommandsPane = new GridPane();
-
-    historyPane.getStyleClass().add(DISPLAY_CLASS_NAME);
-    variablesPane.getStyleClass().add(DISPLAY_CLASS_NAME);
-    userCommandsPane.getStyleClass().add(DISPLAY_CLASS_NAME);
   }
 
   private void setupViewContainers(){
@@ -80,26 +58,56 @@ public class ViewLayout {
       for(int col = 0; col < GRID_COLUMN_COUNT; col++){
         GridPane viewContainerPane = new GridPane();
         pane.add(viewContainerPane, col, row);
-        viewContainers.add(new ViewContainer(this, viewContainerPane, GRID_COLUMN_COUNT * row + col));
+        viewContainers.add(new ViewContainer(this, viewContainerPane, GRID_COLUMN_COUNT * row + col, viewNamesMap.keySet()));
       }
     }
+
+    //initially set all panes invisible
+    historyDisplay.getPane().setVisible(false);
+    variablesDisplay.getPane().setVisible(false);
+    userCommandsDisplay.getPane().setVisible(false);
   }
 
-  public void updateViewLayouts(int containerIndex, String viewName){
+  //clickedOn,   currentINdex
+  //commands -> variables
+
+  public void updateViewLayouts(int clickedIndex, String viewName){
     int currentIndex = findIndexOf(viewName);
+
     if(currentIndex != -1) {
-      viewOrder[currentIndex] = viewOrder[containerIndex];
-      viewContainers.get(currentIndex).updateComboBox(viewOrder[containerIndex]);
+      String nameToBeSwapped = viewOrder[clickedIndex];
+      turnOffView(viewNamesMap.get(viewName), currentIndex);
+      if(nameToBeSwapped != null){
+        turnOnView(viewNamesMap.get(nameToBeSwapped), currentIndex);
+      }
+      viewOrder[currentIndex] = viewOrder[clickedIndex];
+      viewContainers.get(currentIndex).updateComboBox(viewOrder[clickedIndex]);
     }
-    viewOrder[containerIndex] = viewName;
-    viewContainers.get(containerIndex).updateComboBox(viewName);
-
-
-    // set visible & position views
-    for(String name : viewOrder){
-      System.out.printf("%s, ", name);
+    if(viewContainers.get(clickedIndex).getPane().getChildren().size() > 2){
+      turnOffView(viewNamesMap.get(viewOrder[clickedIndex]), clickedIndex);
     }
-    System.out.println();
+    viewOrder[clickedIndex] = viewName;
+    viewContainers.get(clickedIndex).updateComboBox(viewName);
+    if(viewName != null && viewContainers.get(clickedIndex).getPane().getChildren().size() <= 2){
+      turnOnView(viewNamesMap.get(viewName), clickedIndex);
+    }
+//
+//
+//    // set visible & position views
+//    for(String name : viewOrder){
+//      System.out.printf("%s, ", name);
+//    }
+//    System.out.println();
+  }
+
+  private void turnOnView(Pane targetPane, int index){
+    viewContainers.get(index).getPane().add(targetPane, 0, 1, 1, 1);
+    targetPane.setVisible(true);
+  }
+
+  private void turnOffView(Pane targetPane, int index){
+    viewContainers.get(index).getPane().getChildren().remove(targetPane);
+    targetPane.setVisible(false);
   }
 
   private int findIndexOf(String desiredView){
@@ -109,5 +117,9 @@ public class ViewLayout {
       }
     }
     return -1;
+  }
+
+  public GridPane getPane() {
+    return pane;
   }
 }

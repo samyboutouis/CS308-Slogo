@@ -5,10 +5,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import slogo.model.BackEndTurtleTracker;
+import slogo.visualization.FrontEndTurtle;
 
 public class FrontEndTurtleTracker implements SafeFrontEndTurtleTracker{
   // keep track of all the turtles in the front end
-  private Map<Integer,FrontEndTurtle> allTurtles;
+  private Map<Integer, FrontEndTurtle> allTurtles;
   private List<Integer> activeTurtles; // is this active turtles list needed? Where should be the "truth" of this information?
 
   public FrontEndTurtleTracker() {
@@ -17,15 +18,30 @@ public class FrontEndTurtleTracker implements SafeFrontEndTurtleTracker{
 
   public BackEndTurtleTracker passToBackEnd() {
     Map<Integer, BackEndTurtle> backEndAllTurtles = new HashMap<>();
-    for(Integer i : allTurtles.keySet()){
+    for(int i = 1; i <= allTurtles.size(); i++){
       backEndAllTurtles.put(i, new BackEndTurtle(allTurtles.get(i)));
     }
    return new BackEndTurtleTracker(backEndAllTurtles, new ArrayList<>(activeTurtles), this);
   }
 
   @Override
-  public void addTurtle(int id) {
+  public void setActive(int id) {
+    if(!activeTurtles.contains(id)){
+      activeTurtles.add(id);
+    }
+    allTurtles.get(id).setActive();
+  }
 
+  @Override
+  public void setInactive(int id) {
+    if(activeTurtles.contains(id)){
+      activeTurtles.remove(Integer.valueOf(id));
+    }
+    allTurtles.get(id).setInactive();
+  }
+
+  public void addTurtle(FrontEndTurtle frontEndTurtle) {
+    // find available id
   }
 
   public void changeColor() {

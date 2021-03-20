@@ -54,6 +54,16 @@ public class TurtleDisplayTest extends DukeApplicationTest {
     assertEquals(50, turtle.getRotate() - originalDirection);
   }
 
+  @Test
+  void testActiveToggle() {
+    turtle = lookup("#" + idBundle.getString("Turtle")).query();
+    ImageView activeCircle = lookup("#" + idBundle.getString("ActiveCircleID")).query();
+    clickOn(turtle, (int) turtle.getTranslateX(), (int) turtle.getTranslateY());
+    assertFalse(activeCircle.isVisible());
+    clickOn(turtle, (int) turtle.getTranslateX(), (int) turtle.getTranslateY());
+    assertTrue(activeCircle.isVisible());
+  }
+
   private void addTurtle() {
     Button addTurtleButton = lookup("#" + idBundle.getString("AddTurtleButton")).query();
     clickOn(addTurtleButton);
