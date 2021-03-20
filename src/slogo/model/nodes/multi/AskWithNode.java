@@ -69,20 +69,12 @@ public class AskWithNode extends TurtleCommandNode {
   public double getReturnValue(BackEndTurtleTracker tracker) {
     setFirstEnd();
     List<Integer> askTurtleList = getAskTurtles(tracker);
-    tracker.setAskList(askTurtleList);
-    // create TellCommand that sets turtles active
-    tracker.findActiveAndInactiveTurtles(((currTurtle, id, isActive) -> {
-      currTurtle.addCommand(new TellCommand(tracker.getSafe(), id, isActive));
-    }));
+    tracker.setAskList(askTurtleList); // creates the tellCommand
     double ret = 0;
     for(int i = firstEnd + 2; i < parameters.size() - 1; i++) {
       ret = parameters.get(i).getReturnValue(tracker);
     }
-    tracker.revertAskList();
-    // create TellCommand that sets old values to be active
-    tracker.findActiveAndInactiveTurtles(((currTurtle, id, isActive) -> {
-      currTurtle.addCommand(new TellCommand(tracker.getSafe(), id, isActive));
-    }));
+    tracker.revertAskList(); // creates the tellCommand
     return ret;
   }
 }

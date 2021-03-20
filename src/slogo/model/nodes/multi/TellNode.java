@@ -44,9 +44,6 @@ public class TellNode extends SlogoNode {
       tellTurtleList.add(ret);
     }
     tracker.setTellList(tellTurtleList);
-    tracker.findActiveAndInactiveTurtles(((currTurtle, id, isActive) -> {
-      currTurtle.addCommand(new TellCommand(tracker.getSafe(), id, isActive));
-    }));
     return ret;
   }
 
