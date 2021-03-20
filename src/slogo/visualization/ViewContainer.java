@@ -1,5 +1,6 @@
 package slogo.visualization;
 
+import java.util.Set;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.GridPane;
@@ -11,14 +12,14 @@ public class ViewContainer {
   private final ComboBox<String> comboBox;
   private final Button closeButton;
   private final int containerIndex;
+  private final Set<String> viewNames;
 
-  private final static String[] viewNames = {"Variables Display", "commands", "history", "palette", "states", "buttons"};
-
-  public ViewContainer(ViewLayout viewLayout, GridPane pane, int containerIndex){
+  public ViewContainer(ViewLayout viewLayout, GridPane pane, int containerIndex, Set<String> viewNames){
     this.viewLayout = viewLayout;
     this.pane = pane;
     this.containerIndex = containerIndex;
     pane.getStyleClass().add("yeetBox"); //for testing
+    this.viewNames = viewNames;
 
     comboBox = new ComboBox<>();
     closeButton = new Button();
@@ -51,5 +52,9 @@ public class ViewContainer {
 
   public void updateComboBox(String title){
     comboBox.setValue(title);
+  }
+
+  public GridPane getPane(){
+    return pane;
   }
 }

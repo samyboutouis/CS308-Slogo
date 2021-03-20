@@ -42,14 +42,14 @@ public class Workspace {
     HistoryDisplay historyDisplay = new HistoryDisplay(RESOURCE_PACKAGE);
     VariablesDisplay variablesDisplay = new VariablesDisplay(RESOURCE_PACKAGE);
     UserCommandsDisplay userCommandsDisplay = new UserCommandsDisplay(RESOURCE_PACKAGE);
-    //ButtonDisplay buttonDisplay = new ButtonDisplay(frontEndController);
+    ButtonDisplay buttonDisplay = new ButtonDisplay(frontEndController);
     //paletteDisplay
     //turtleStatesDisplay
 
     TerminalDisplay terminalDisplay = new TerminalDisplay(RESOURCE_PACKAGE, historyDisplay, frontEndTurtle, variablesDisplay, controller);
     TurtleDisplay turtleDisplay = new TurtleDisplay(frontEndTurtle);
     ToolbarDisplay toolbarDisplay = new ToolbarDisplay(RESOURCE_PACKAGE, controller, frontEndController);
-    ViewLayout viewLayout = new ViewLayout(historyDisplay, variablesDisplay, userCommandsDisplay, frontEndController);
+    ViewLayout viewLayout = new ViewLayout(historyDisplay, variablesDisplay, userCommandsDisplay, buttonDisplay, frontEndController);
 
     frontEndController.setToolbarDisplay(toolbarDisplay);
     frontEndController.setTurtleDisplay(turtleDisplay);
@@ -58,6 +58,8 @@ public class Workspace {
     pane.add(turtleDisplay.getPane(), paneIndexes[4], paneIndexes[5], paneIndexes[6], paneIndexes[7]);
     pane.add(terminalDisplay.getPane(), paneIndexes[8], paneIndexes[9], paneIndexes[10], paneIndexes[11]);
     pane.add(viewLayout.getPane(), paneIndexes[12], paneIndexes[13], paneIndexes[14], paneIndexes[15]);
+
+    pane.add(historyDisplay.getPane(), 0, 0, 1, 1);
   }
 
   private void setStyleSheet() {
