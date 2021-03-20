@@ -65,11 +65,19 @@ public class AskNode extends TurtleCommandNode {
     List<Integer> askTurtleList = getAskTurtles(tracker);
     tracker.setAskList(askTurtleList);
     // create AskCommand that sets turtles active
-    double ret = super.loopThroughTurtles(tracker, parameters.subList(firstEnd + 2, parameters.size()), (currTurtle, values) -> {
-      // sublist parameters because we don't want to include stuff in first bracket pair
-      // everything to do on current turtle has been done in getValues
-      return values.get(values.size() - 1);
-    });
+
+    double ret = 0;
+    for(int i = firstEnd + 2; i < parameters.size() - 1; i++) {
+      ret = parameters.get(i).getReturnValue(tracker);
+    }
+
+
+//    double ret = super.loopThroughTurtles(tracker, parameters.subList(firstEnd + 2, parameters.size()), (currTurtle, values) -> {
+//      // sublist parameters because we don't want to include stuff in first bracket pair
+//      // everything to do on current turtle has been done in getValues
+//      System.out.println(values.get(values.size() - 1));
+//      return values.get(values.size() - 1);
+//    });
     // create TellCommand that sets old values to be active
     tracker.revertAskList();
     return ret;
