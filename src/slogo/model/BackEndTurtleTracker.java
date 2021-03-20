@@ -9,6 +9,7 @@ import java.util.Stack;
 import slogo.BackEndTurtle;
 import slogo.Command;
 import slogo.SafeFrontEndTurtleTracker;
+import slogo.model.nodes.commands.TurtleActivate;
 
 // manages all turtles in the backend,
 public class BackEndTurtleTracker {
@@ -46,6 +47,10 @@ public class BackEndTurtleTracker {
       allCommands.addAll(getTurtle(itrn.next()).getCommands());
     }
     return allCommands;
+  }
+
+  public SafeFrontEndTurtleTracker getSafe() {
+    return safeTurtleTracker;
   }
 
   public void deleteAllData(){
@@ -133,6 +138,12 @@ public class BackEndTurtleTracker {
 
   public int turtles() {
     return allTurtles.keySet().size();
+  }
+
+  public void findActiveAndInactiveTurtles(TurtleActivate activate) {
+    for(Integer i : allTurtles.keySet()){
+      activate.activate(allTurtles.get(i), i, activeTurtles.contains(i));
+    }
   }
 
   private BackEndTurtle getBasicTurtle(int id) {
