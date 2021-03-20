@@ -28,4 +28,8 @@ public class FrontEndTurtleTracker implements SafeFrontEndTurtleTracker{
   public void addTurtle(int id) {
 
   }
+
+  public void changeColor() {
+
+  }
 }
