@@ -48,13 +48,8 @@ public class BackEndTurtleTracker {
     activeTurtles = new ArrayList<>();
     currTurtle = 0;
   }
-
-  // FIX: does this make sure last turtle is last in the activeTurtles list?
-  // If activeTurtles contains the last turtle, its position won't be moved to the back
-  // add a backend turtle to turtle tracker to both allTurtles and list of activeTurtles
+  
   public void addTurtle(BackEndTurtle turtle){
-    // I (felix) edited the code so that if the turtle was already active, it would be put at the end of the list
-    // then extracted common parts in the if else statements
     if (allTurtles.containsKey(turtle.getIndex())){
       if (activeTurtles.contains(turtle.getIndex())){
         activeTurtles.remove(Integer.valueOf(turtle.getIndex())); // remove object Integer, not at index
