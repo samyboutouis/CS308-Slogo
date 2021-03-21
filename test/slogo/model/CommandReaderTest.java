@@ -228,4 +228,14 @@ public class CommandReaderTest {
       assertEquals(e.getMessage(), "Input syntax is incorrect");
     }
   }
+
+  @Test
+  void testRGBRange () {
+    try{
+      // rgb values out of range
+      myReader.testParseInput("setpalette 1 -1 500 240");
+    } catch(IllegalArgumentException e){
+      assertEquals(e.getMessage(), "Set Palette RGB Value Error - Not within range [0, 255]");
+    }
+  }
 }
