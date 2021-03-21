@@ -60,6 +60,7 @@ public class BackEndTurtleTracker implements SafeBackEndTurtleTracker {
     return safeTurtleTracker;
   }
 
+  // used for tests that run multiple times; don't want previous test to affect next one
   public void deleteAllData(){
     allTurtles = new HashMap<>();
     activeTurtles = new ArrayList<>();
@@ -91,13 +92,6 @@ public class BackEndTurtleTracker implements SafeBackEndTurtleTracker {
   // clear the list of activeTurtles
   public void clearActiveTurtles(){
     activeTurtles.clear();
-  }
-
-  public void clearAllCommands(){
-    Iterator<Integer> itrn = getIterator();
-    while (itrn.hasNext()){
-      getTurtle(itrn.next()).clearCommands();
-    }
   }
 
   public void setTellList(List<Integer> tellList) {
