@@ -5,5 +5,6 @@ import slogo.BackEndTurtle;
 
 @FunctionalInterface
 public interface TurtleAction {
+
   double turtleAction(BackEndTurtle turtle, List<Double> values);
 }

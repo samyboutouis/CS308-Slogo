@@ -18,28 +18,29 @@ public class UserCommandsDisplay extends ScrollingDisplay {
   private final ResourceBundle idBundle;
   private final VBox userCommandsBox;
 
-  public UserCommandsDisplay(Workspace workspace, String resourcePackage){
+  public UserCommandsDisplay(Workspace workspace, String resourcePackage) {
     super(workspace, resourcePackage);
 
     userCommandsBox = setupVBoxContainer(USER_COMMANDS_TITLE, USER_COMMANDS_BOX_ID);
     String language = "English";
-    this.resourceBundle = ResourceBundle.getBundle(String.format("%s/%s/%s", resourcePackage, "languages", language));
-    this.idBundle = ResourceBundle.getBundle(String.format("%s/%s/%s", resourcePackage, "stylesheets", "CSS_IDs"));
+    this.resourceBundle = ResourceBundle
+        .getBundle(String.format("%s/%s/%s", resourcePackage, "languages", language));
+    this.idBundle = ResourceBundle
+        .getBundle(String.format("%s/%s/%s", resourcePackage, "stylesheets", "CSS_IDs"));
   }
 
   /**
-   *
    * @param commandsMap
    */
-  public void updateBox(Map<String, String> commandsMap){
+  public void updateBox(Map<String, String> commandsMap) {
     userCommandsBox.getChildren().clear();
 
-    for(Map.Entry<String, String> entry : commandsMap.entrySet()){
+    for (Map.Entry<String, String> entry : commandsMap.entrySet()) {
       addNewCommandsTag(entry.getKey(), entry.getValue());
     }
   }
 
-  private void addNewCommandsTag(String name, String value){
+  private void addNewCommandsTag(String name, String value) {
     Button commandsTag = new Button(String.format("%s =%s", name, value));
     commandsTag.setWrapText(true);
     commandsTag.setMaxWidth(Double.MAX_VALUE);
@@ -61,7 +62,7 @@ public class UserCommandsDisplay extends ScrollingDisplay {
       textDialog.showAndWait();
 
       String newValue = textDialog.getEditor().getText();
-      if(newValue != null){
+      if (newValue != null) {
         String command = String.format("%s%s", commandName, newValue);
         getTerminalDisplay().setTerminalText(command);
       }

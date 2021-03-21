@@ -45,8 +45,8 @@ public class TerminalDisplay {
   private boolean ctrlPressed;
 
   public TerminalDisplay(String resourcePackage, Scene scene, HistoryDisplay historyDisplay,
-    FrontEndTurtleTracker frontEndTurtleTracker, VariablesDisplay variablesDisplay,
-    UserCommandsDisplay userCommandsDisplay, Controller controller) {
+      FrontEndTurtleTracker frontEndTurtleTracker, VariablesDisplay variablesDisplay,
+      UserCommandsDisplay userCommandsDisplay, Controller controller) {
 
     pane = new GridPane();
     pane.getStyleClass().add(DISPLAY_CLASS_NAME);
@@ -65,11 +65,11 @@ public class TerminalDisplay {
 
     String language = "English";
     this.resourceBundle = ResourceBundle
-      .getBundle(String.format("%s/%s/%s", resourcePackage, "languages", language));
+        .getBundle(String.format("%s/%s/%s", resourcePackage, "languages", language));
     this.idBundle = ResourceBundle
-      .getBundle(String.format("%s/%s/%s", resourcePackage, "stylesheets", "CSS_IDs"));
+        .getBundle(String.format("%s/%s/%s", resourcePackage, "stylesheets", "CSS_IDs"));
     this.errorBundle = ResourceBundle
-      .getBundle(String.format("%s/%s/%s", resourcePackage, "languages", language + "Errors"));
+        .getBundle(String.format("%s/%s/%s", resourcePackage, "languages", language + "Errors"));
 
     for (int i = 0; i < COLUMN_COUNT; i++) {
       ColumnConstraints col = new ColumnConstraints();
@@ -121,17 +121,17 @@ public class TerminalDisplay {
     });
   }
 
-  private void applyKeyPressedLogic(KeyEvent e, boolean state){
-    if(e.getCode() == KeyCode.CONTROL){
+  private void applyKeyPressedLogic(KeyEvent e, boolean state) {
+    if (e.getCode() == KeyCode.CONTROL) {
       ctrlPressed = state;
     } else if (e.getCode() == KeyCode.ENTER && ctrlPressed) {
       sendCommandToController();
     }
   }
 
-  private void sendCommandToController(){
+  private void sendCommandToController() {
     String command = textBox.getText().trim();
-    if(turtleTracker.isEmpty()) {
+    if (turtleTracker.isEmpty()) {
       FrontEndTurtle turtle = new FrontEndTurtle(turtleTracker);
       turtleTracker.addTurtle(turtle);
     }
@@ -160,7 +160,7 @@ public class TerminalDisplay {
     newAlert.showAndWait();
   }
 
-  public void setTerminalText(String command){
+  public void setTerminalText(String command) {
     textBox.setText(command);
   }
 

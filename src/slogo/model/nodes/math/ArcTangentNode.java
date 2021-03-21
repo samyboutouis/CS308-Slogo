@@ -8,13 +8,13 @@ public class ArcTangentNode extends SlogoNode {
 
   private List<SlogoNode> parameters;
 
-  public ArcTangentNode(int numParameters){
+  public ArcTangentNode(int numParameters) {
     super(numParameters);
     parameters = super.getParameters();
   }
 
   @Override
   public double getReturnValue(BackEndTurtleTracker tracker) {
-    return Math.atan(Math.toRadians( parameters.get(0).getReturnValue(tracker)));
+    return Math.atan(Math.toRadians(parameters.get(0).getReturnValue(tracker)));
   }
 }

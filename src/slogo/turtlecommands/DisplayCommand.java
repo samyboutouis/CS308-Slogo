@@ -6,7 +6,7 @@ import slogo.visualization.FrontEndTurtle;
 // used to display information from backend to frontend
 public class DisplayCommand implements Command {
 
-  public DisplayCommand(String info){
+  public DisplayCommand(String info) {
 
   }
 

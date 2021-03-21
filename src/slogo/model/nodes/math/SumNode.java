@@ -8,7 +8,7 @@ public class SumNode extends SlogoNode {
 
   private List<SlogoNode> parameters;
 
-  public SumNode(int numParameters){
+  public SumNode(int numParameters) {
     super(numParameters);
     parameters = super.getParameters();
   }

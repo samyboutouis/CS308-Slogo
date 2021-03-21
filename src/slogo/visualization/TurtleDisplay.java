@@ -10,6 +10,7 @@ import javafx.scene.paint.Color;
 import slogo.FrontEndTurtleTracker;
 
 public class TurtleDisplay implements BackgroundObserver {
+
   private static final int BACKGROUND_RADIUS = 20;
   private static final String ID_PROPERTY = "resources/stylesheets/CSS_IDs";
   private static final String TURTLE_PANE_ID = "TurtlePaneID";
@@ -32,8 +33,8 @@ public class TurtleDisplay implements BackgroundObserver {
 
   public void setBackgroundColor(Color color) {
     anchorPane
-      .setBackground(new Background(
-        new BackgroundFill(color, new CornerRadii(BACKGROUND_RADIUS), Insets.EMPTY)));
+        .setBackground(new Background(
+            new BackgroundFill(color, new CornerRadii(BACKGROUND_RADIUS), Insets.EMPTY)));
   }
 
   public void addToBackground(FrontEndTurtle turtle) {

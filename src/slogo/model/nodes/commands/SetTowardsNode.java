@@ -10,15 +10,15 @@ public class SetTowardsNode extends TurtleCommandNode {
   private List<SlogoNode> parameters;
   private List<Double> values;
 
-  public SetTowardsNode(int numParameters){
+  public SetTowardsNode(int numParameters) {
     super(numParameters);
     parameters = super.getParameters();
   }
 
   @Override
   public double getReturnValue(BackEndTurtleTracker tracker) {
-    return super.loopThroughTurtles(tracker,parameters, (currTurtle, values)->{
-      currTurtle.addCommand(new SetTowardsCommand(values.get(0),values.get(1)));
+    return super.loopThroughTurtles(tracker, parameters, (currTurtle, values) -> {
+      currTurtle.addCommand(new SetTowardsCommand(values.get(0), values.get(1)));
       double prevHeading = currTurtle.getDirection();
       currTurtle.towards(values.get(0), values.get(1));
       return Math.abs(prevHeading - currTurtle.getDirection());

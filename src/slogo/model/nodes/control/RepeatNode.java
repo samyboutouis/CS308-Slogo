@@ -28,10 +28,11 @@ public class RepeatNode extends SlogoNode {
     // assume expr only results in one value, so parameters.get(1) is start bracket
     getIndexing(tracker);
     double ret = 0;
-    for(double i = 1; i <= repeatEnd; i++){
+    for (double i = 1; i <= repeatEnd; i++) {
       variable.setValue(i);
-      for(int j = 1; j < parameters.size(); j++){ // starts at j = 1 to avoid initial expression
-        if(!(parameters.get(j) instanceof ListStartNode) && !(parameters.get(j) instanceof ListEndNode)){
+      for (int j = 1; j < parameters.size(); j++) { // starts at j = 1 to avoid initial expression
+        if (!(parameters.get(j) instanceof ListStartNode) && !(parameters
+            .get(j) instanceof ListEndNode)) {
           ret = parameters.get(j).getReturnValue(tracker); // ret is value of last command executed
         }
       }
@@ -40,7 +41,7 @@ public class RepeatNode extends SlogoNode {
   }
 
   // get how many times we repeat
-  private void getIndexing(BackEndTurtleTracker tracker){
+  private void getIndexing(BackEndTurtleTracker tracker) {
     // repeat fd 50 [ fd 50 ]
     // i = 1 is left bracket
     variable = new VariableNode(0, variables, ":repcount");

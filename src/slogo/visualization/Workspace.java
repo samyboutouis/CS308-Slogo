@@ -37,7 +37,6 @@ public class Workspace {
 
   private void setupDisplays() {
 
-
     HistoryDisplay historyDisplay = new HistoryDisplay(this, RESOURCE_PACKAGE);
     VariablesDisplay variablesDisplay = new VariablesDisplay(this, RESOURCE_PACKAGE);
     UserCommandsDisplay userCommandsDisplay = new UserCommandsDisplay(this, RESOURCE_PACKAGE);
@@ -48,25 +47,32 @@ public class Workspace {
     frontEndController = new FrontEndController(stage, frontEndTurtleTracker);
 
     TurtleStateDisplay turtleStateDisplay = new TurtleStateDisplay(frontEndController,
-      frontEndTurtleTracker);
+        frontEndTurtleTracker);
     TurtleDisplay turtleDisplay = new TurtleDisplay(frontEndTurtleTracker);
-    terminalDisplay = new TerminalDisplay(RESOURCE_PACKAGE, scene, historyDisplay, frontEndTurtleTracker, variablesDisplay, userCommandsDisplay, controller);
-    ToolbarDisplay toolbarDisplay = new ToolbarDisplay(RESOURCE_PACKAGE, controller, frontEndController, frontEndTurtleTracker);
-    ViewLayout viewLayout = new ViewLayout(historyDisplay, variablesDisplay, userCommandsDisplay, paletteDisplay, buttonDisplay, turtleStateDisplay, frontEndController);
+    terminalDisplay = new TerminalDisplay(RESOURCE_PACKAGE, scene, historyDisplay,
+        frontEndTurtleTracker, variablesDisplay, userCommandsDisplay, controller);
+    ToolbarDisplay toolbarDisplay = new ToolbarDisplay(RESOURCE_PACKAGE, controller,
+        frontEndController, frontEndTurtleTracker);
+    ViewLayout viewLayout = new ViewLayout(historyDisplay, variablesDisplay, userCommandsDisplay,
+        paletteDisplay, buttonDisplay, turtleStateDisplay, frontEndController);
 
-    pane.add(toolbarDisplay.getPane(), paneIndexes[0], paneIndexes[1], paneIndexes[2], paneIndexes[3]);
-    pane.add(turtleDisplay.getPane(), paneIndexes[4], paneIndexes[5], paneIndexes[6], paneIndexes[7]);
-    pane.add(terminalDisplay.getPane(), paneIndexes[8], paneIndexes[9], paneIndexes[10], paneIndexes[11]);
-    pane.add(viewLayout.getPane(), paneIndexes[12], paneIndexes[13], paneIndexes[14], paneIndexes[15]);
+    pane.add(toolbarDisplay.getPane(), paneIndexes[0], paneIndexes[1], paneIndexes[2],
+        paneIndexes[3]);
+    pane.add(turtleDisplay.getPane(), paneIndexes[4], paneIndexes[5], paneIndexes[6],
+        paneIndexes[7]);
+    pane.add(terminalDisplay.getPane(), paneIndexes[8], paneIndexes[9], paneIndexes[10],
+        paneIndexes[11]);
+    pane.add(viewLayout.getPane(), paneIndexes[12], paneIndexes[13], paneIndexes[14],
+        paneIndexes[15]);
   }
 
   private void setStyleSheet() {
     scene.getStylesheets().add(
-      getClass().getResource(String.format("/%s/stylesheets/%s", RESOURCE_PACKAGE, "default.css"))
-        .toExternalForm());
+        getClass().getResource(String.format("/%s/stylesheets/%s", RESOURCE_PACKAGE, "default.css"))
+            .toExternalForm());
   }
 
-  public TerminalDisplay getTerminalDisplay(){
+  public TerminalDisplay getTerminalDisplay() {
     return terminalDisplay;
   }
 }

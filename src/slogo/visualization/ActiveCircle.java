@@ -5,6 +5,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class ActiveCircle {
+
   private static final String DEFAULT_IMAGE = "resources/active-circle.png";
 
   private final ResourceBundle idBundle;
@@ -14,7 +15,7 @@ public class ActiveCircle {
 
   public ActiveCircle(int width, int height) {
     this.idBundle = ResourceBundle
-      .getBundle(String.format("%s/%s/%s", "resources", "stylesheets", "CSS_IDs"));
+        .getBundle(String.format("%s/%s/%s", "resources", "stylesheets", "CSS_IDs"));
     setDefaultImage(width, height);
   }
 

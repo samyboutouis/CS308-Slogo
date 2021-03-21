@@ -18,6 +18,7 @@ import slogo.SafeTurtle;
 import slogo.controller.FrontEndController;
 
 public class TurtleStateDisplay implements TurtleObserver {
+
   private static final String LABEL_PROPERTY = "resources/reflection/TurtleStateLabels";
   private static final String COLORPICKER_ID = "PenColorPicker";
   private static final String SLIDER_ID = "Slider";
@@ -34,14 +35,17 @@ public class TurtleStateDisplay implements TurtleObserver {
   private ComboBox<Integer> turtleDropdown;
   private int currentID;
 
-  public TurtleStateDisplay(FrontEndController frontEndController, FrontEndTurtleTracker frontEndTurtleTracker) {
+  public TurtleStateDisplay(FrontEndController frontEndController,
+      FrontEndTurtleTracker frontEndTurtleTracker) {
     vbox = new VBox();
     buttonFactory = new ButtonFactory(frontEndController);
     turtleTracker = frontEndTurtleTracker;
     turtleTracker.addObserver(this);
     pane = new GridPane();
     labelBundle = ResourceBundle.getBundle(LABEL_PROPERTY);
-    labelList = List.of("X Position", "Y Position", "Direction", "Pen Status", "Pen Color", "Pen Width", "Image");
+    labelList = List
+        .of("X Position", "Y Position", "Direction", "Pen Status", "Pen Color", "Pen Width",
+            "Image");
     currentID = 0;
     createComboBox();
     pane.add(vbox, 0, 0);
@@ -54,8 +58,8 @@ public class TurtleStateDisplay implements TurtleObserver {
   }
 
   public void updateTurtleNumber(List<Integer> list) {
-    for(int id : list) {
-      if(!turtleDropdown.getItems().contains(id)){
+    for (int id : list) {
+      if (!turtleDropdown.getItems().contains(id)) {
         turtleDropdown.getItems().add(id);
       }
     }
@@ -65,7 +69,7 @@ public class TurtleStateDisplay implements TurtleObserver {
     currentID = id;
     vbox.getChildren().clear();
     vbox.getChildren().add(turtleDropdown);
-    for(String property : labelList) {
+    for (String property : labelList) {
       HBox hbox = new HBox();
       makeLabels(property, hbox, id);
       vbox.getChildren().add(hbox);
@@ -76,7 +80,7 @@ public class TurtleStateDisplay implements TurtleObserver {
     hbox.getChildren().add(new Label(property + ": "));
     try {
       Method m = this.getClass()
-        .getDeclaredMethod(labelBundle.getString(property), SafeTurtle.class, HBox.class);
+          .getDeclaredMethod(labelBundle.getString(property), SafeTurtle.class, HBox.class);
       m.invoke(this, turtleTracker.getSafeTurtle(id), hbox);
     } catch (Exception e) {
       throw new RuntimeException("Improper configuration", e);
@@ -84,7 +88,7 @@ public class TurtleStateDisplay implements TurtleObserver {
   }
 
   public void updateTurtleState(int id) {
-    if(id == currentID) {
+    if (id == currentID) {
       updateFields(id);
     }
   }
@@ -110,7 +114,7 @@ public class TurtleStateDisplay implements TurtleObserver {
 
   private void isPenDown(SafeTurtle safeTurtle, HBox hBox) {
     Button button;
-    if(safeTurtle.isPenDown()){
+    if (safeTurtle.isPenDown()) {
       button = buttonFactory.createTurtleButton(PEN_UP, safeTurtle);
     } else {
       button = buttonFactory.createTurtleButton(PEN_DOWN, safeTurtle);

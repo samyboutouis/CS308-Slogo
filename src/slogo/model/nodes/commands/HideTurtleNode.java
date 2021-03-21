@@ -19,7 +19,7 @@ public class HideTurtleNode extends TurtleCommandNode {
 
   @Override
   public double getReturnValue(BackEndTurtleTracker tracker) {
-    return super.loopThroughTurtles(tracker, new ArrayList<>(), (currTurtle, values)->{
+    return super.loopThroughTurtles(tracker, new ArrayList<>(), (currTurtle, values) -> {
       currTurtle.addCommand(new HideTurtleCommand());
       currTurtle.hide();
       return 0;

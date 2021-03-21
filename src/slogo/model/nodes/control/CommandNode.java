@@ -22,7 +22,7 @@ public class CommandNode extends SlogoNode {
   public double getReturnValue(BackEndTurtleTracker tracker) {
     double ret = 0;
     setParameters(tracker);
-    for(SlogoNode node : myCommands) {
+    for (SlogoNode node : myCommands) {
       ret = node.getReturnValue(tracker);
     }
     return ret;
@@ -30,7 +30,7 @@ public class CommandNode extends SlogoNode {
 
   // size of parameters must be equal to size of variables
   private void setParameters(BackEndTurtleTracker tracker) {
-    for(int i = 0; i < variables.size(); i++){
+    for (int i = 0; i < variables.size(); i++) {
       variables.get(i).setValue(parameters.get(i).getReturnValue(tracker));
     }
   }

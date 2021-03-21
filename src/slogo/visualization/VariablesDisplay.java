@@ -7,6 +7,7 @@ import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.VBox;
 
 public class VariablesDisplay extends ScrollingDisplay {
+
   private static final String ID_PROPERTY = "resources/stylesheets/CSS_IDs";
   private final static String VARIABLES_TITLE = "VariablesTitle";
   private final static String VARIABLES_BOX_ID = "VariablesBoxID";
@@ -20,31 +21,30 @@ public class VariablesDisplay extends ScrollingDisplay {
   private final VBox variablesBox;
 
   /**
-   *
    * @param resourcePackage
    */
-  public VariablesDisplay(Workspace workspace, String resourcePackage){
+  public VariablesDisplay(Workspace workspace, String resourcePackage) {
     super(workspace, resourcePackage);
 
     variablesBox = setupVBoxContainer(VARIABLES_TITLE, VARIABLES_BOX_ID);
     String language = "English";
-    this.resourceBundle = ResourceBundle.getBundle(String.format("%s/%s/%s", resourcePackage, "languages", language));
+    this.resourceBundle = ResourceBundle
+        .getBundle(String.format("%s/%s/%s", resourcePackage, "languages", language));
     this.idBundle = ResourceBundle.getBundle(ID_PROPERTY);
   }
 
   /**
-   *
    * @param variablesMap
    */
-  public void updateBox(Map<String, Double> variablesMap){
+  public void updateBox(Map<String, Double> variablesMap) {
     variablesBox.getChildren().clear();
 
-    for(Map.Entry<String, Double> entry : variablesMap.entrySet()){
+    for (Map.Entry<String, Double> entry : variablesMap.entrySet()) {
       addNewVariablesTag(entry.getKey(), entry.getValue());
     }
   }
 
-  private void addNewVariablesTag(String name, double value){
+  private void addNewVariablesTag(String name, double value) {
     Button variablesTag = new Button(String.format("%s = %.2f", name.substring(1), value));
     variablesTag.setWrapText(true);
     variablesTag.setMaxWidth(Double.MAX_VALUE);
@@ -65,7 +65,7 @@ public class VariablesDisplay extends ScrollingDisplay {
       textDialog.showAndWait();
 
       String newValue = textDialog.getEditor().getText();
-      if(newValue != null && !newValue.equals(variableValue)){
+      if (newValue != null && !newValue.equals(variableValue)) {
         String command = String.format("%s%s%s", SET_COMMAND, variableName, newValue);
         getTerminalDisplay().setTerminalText(command);
       }

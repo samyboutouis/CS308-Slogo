@@ -6,9 +6,11 @@ import slogo.model.nodes.commands.TurtleCommandNode;
 import slogo.turtlecommands.DisplayCommand;
 
 public class IsShowingNode extends TurtleCommandNode {
+
   private String mesg;
   private int ret;
-  public IsShowingNode(int parameter){
+
+  public IsShowingNode(int parameter) {
     super(parameter);
   }
 
@@ -28,11 +30,11 @@ public class IsShowingNode extends TurtleCommandNode {
 
   @Override
   public double getReturnValue(BackEndTurtleTracker tracker) {
-    return super.loopThroughTurtles(tracker, new ArrayList<>(), (currTurtle, values)->{
-      if (currTurtle.isShowing()){
+    return super.loopThroughTurtles(tracker, new ArrayList<>(), (currTurtle, values) -> {
+      if (currTurtle.isShowing()) {
         //mesg = "Turtle is shown";
         mesg = String.format("Turtle %d is shown", currTurtle.getIndex());
-        ret  =1;
+        ret = 1;
       } else {
         mesg = String.format("Turtle %d is hidden", currTurtle.getIndex());
         ret = 0;

@@ -14,10 +14,11 @@ public abstract class TurtleCommandNode extends SlogoNode {
     super(numParameters);
   }
 
-  protected double loopThroughTurtles(BackEndTurtleTracker tracker, List<SlogoNode> parameters, TurtleAction action) {
+  protected double loopThroughTurtles(BackEndTurtleTracker tracker, List<SlogoNode> parameters,
+      TurtleAction action) {
     Iterator<Integer> itr = tracker.getIterator();
     double ret = 0.0;
-    while(itr.hasNext()){
+    while (itr.hasNext()) {
       int index = itr.next();
       tracker.setCurr(index);
       BackEndTurtle currTurtle = tracker.getTurtle(index);
@@ -28,8 +29,9 @@ public abstract class TurtleCommandNode extends SlogoNode {
 
   private List<Double> getValues(BackEndTurtleTracker tracker, List<SlogoNode> parameters) {
     List<Double> values = new ArrayList<>();
-    for(SlogoNode node : parameters) {
-      values.add(node.getReturnValue(tracker)); // runs on current turtle that was just set in while loop
+    for (SlogoNode node : parameters) {
+      values.add(
+          node.getReturnValue(tracker)); // runs on current turtle that was just set in while loop
     }
     return values;
   }

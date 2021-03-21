@@ -4,7 +4,8 @@ import java.util.List;
 import slogo.model.SlogoNode;
 import slogo.model.BackEndTurtleTracker;
 
-public class IfElseNode extends SlogoNode{
+public class IfElseNode extends SlogoNode {
+
   private List<SlogoNode> parameters;
   private int brackets; // how many pairs of brackets to expect
 
@@ -26,16 +27,16 @@ public class IfElseNode extends SlogoNode{
     int start = 0;
     int end = 0;
     double ret = 0;
-    if(parameters.get(0).getReturnValue(tracker) != 0.0) { // does the expression part
+    if (parameters.get(0).getReturnValue(tracker) != 0.0) { // does the expression part
       start = 1; // i = 1 should be list start (hop over expr)
       end = firstEnd;
-    }
-    else{
+    } else {
       start = firstEnd;
       end = parameters.size();
     }
-    for(int i = start; i < end; i++){
-      if(!(parameters.get(i) instanceof ListStartNode) && !(parameters.get(i) instanceof ListEndNode)){
+    for (int i = start; i < end; i++) {
+      if (!(parameters.get(i) instanceof ListStartNode) && !(parameters
+          .get(i) instanceof ListEndNode)) {
         ret = parameters.get(i).getReturnValue(tracker); // ret is value of last command executed
       }
     }
@@ -44,8 +45,8 @@ public class IfElseNode extends SlogoNode{
 
   private int getFirstEnd() {
     int firstEnd = 0;
-    for(int i = 0; i < parameters.size(); i++){
-      if(parameters.get(i) instanceof ListEndNode){
+    for (int i = 0; i < parameters.size(); i++) {
+      if (parameters.get(i) instanceof ListEndNode) {
         firstEnd = i;
         break;
       }
@@ -56,8 +57,8 @@ public class IfElseNode extends SlogoNode{
   // check to see if we've seen brackets number of list end nodes
   private boolean checkBrackets() {
     int seen = 0;
-    for(SlogoNode node : parameters){
-      if(node instanceof ListEndNode){
+    for (SlogoNode node : parameters) {
+      if (node instanceof ListEndNode) {
         seen++;
       }
     }

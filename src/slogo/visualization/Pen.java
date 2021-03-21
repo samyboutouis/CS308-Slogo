@@ -8,6 +8,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 
 public class Pen {
+
   private static final String LINE_ID = "LineID";
   private static final double DEFAULT_WIDTH = 1.0;
 
@@ -29,7 +30,7 @@ public class Pen {
   }
 
   public void drawLine(double startX, double startY, double changeX, double changeY) {
-    if(isPenDown) {
+    if (isPenDown) {
       Line line = new Line(0, 0, changeX, changeY);
       line.setStroke(lineColor);
       line.setStrokeWidth(strokeWidth);
@@ -58,7 +59,7 @@ public class Pen {
   }
 
   public void removeLines() {
-    for(Line line : lineList) {
+    for (Line line : lineList) {
       pane.getChildren().remove(line);
     }
   }
@@ -71,7 +72,9 @@ public class Pen {
     return lineColor;
   }
 
-  public double getThickness() { return strokeWidth; }
+  public double getThickness() {
+    return strokeWidth;
+  }
 
   public int getPenColorIndex() {
     return penColorIndex;
