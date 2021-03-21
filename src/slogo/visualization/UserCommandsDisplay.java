@@ -29,7 +29,7 @@ public class UserCommandsDisplay extends ScrollingDisplay {
    *
    * @param commandsMap
    */
-  public void updateBox( Map<String, String> commandsMap){
+  public void updateBox(Map<String, String> commandsMap){
     userCommandsBox.getChildren().clear();
 
     for(Map.Entry<String, String> entry : commandsMap.entrySet()){
@@ -38,6 +38,8 @@ public class UserCommandsDisplay extends ScrollingDisplay {
   }
 
   private void addNewCommandsTag(String name, String value){
+    System.out.println(name + ", " + value);
+
     Button commandsTag = new Button(String.format("%s :: %s", name, value));
     commandsTag.setWrapText(true);
     commandsTag.setMaxWidth(Double.MAX_VALUE);
