@@ -11,6 +11,8 @@ public class BackEndTurtle implements Turtle {
   private double direction;
   private boolean isPenDown;
   private boolean isShowing;
+  private int penColorIndex;
+  private int shapeIndex;
   private List<Command> commands;
 
   public BackEndTurtle(SafeTurtle transfer) {
