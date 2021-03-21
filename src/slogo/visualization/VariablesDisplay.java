@@ -12,6 +12,9 @@ public class VariablesDisplay extends ScrollingDisplay {
   private final static String VARIABLES_BOX_ID = "VariablesBoxID";
   private final static String VARIABLES_TAG_ID = "VariablesTagID";
 
+  private final static String DIALOG_BOX_HEADER_TEXT = "Set a new value for:";
+  private final static String SET_COMMAND = "set :";
+
   private final ResourceBundle resourceBundle;
   private final ResourceBundle idBundle;
   private final VBox variablesBox;
@@ -58,13 +61,13 @@ public class VariablesDisplay extends ScrollingDisplay {
       String variableName = variableMap[0];
       String variableValue = variableMap[1];
       TextInputDialog textDialog = new TextInputDialog(String.format("%s", variableValue));
-      textDialog.setHeaderText(String.format("Set new value for %s", variableName));
+      textDialog.setHeaderText(String.format("%s %s", DIALOG_BOX_HEADER_TEXT, variableName));
       textDialog.showAndWait();
 
       // for testing
       String newValue = textDialog.getEditor().getText();
       if(newValue != null){
-        String command = String.format("set :%s%s", variableName, newValue);
+        String command = String.format("%s%s%s", SET_COMMAND, variableName, newValue);
         getTerminalDisplay().setTerminalText(command);
       }
     });
