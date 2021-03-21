@@ -51,8 +51,6 @@ public class PaletteDisplay extends ScrollingDisplay {
     Circle paletteCircle = new Circle();
     Label paletteLabel = new Label();
 
-    updatePaletteTag(index, r, g, b, imageName);
-
     paletteCircle.setRadius(12);
     paletteCircle.setStroke(Color.BLACK);
     paletteCircle.setStrokeWidth(2);
@@ -62,6 +60,8 @@ public class PaletteDisplay extends ScrollingDisplay {
     paletteTag.add(paletteLabel, 2, 0, 4, 1);
 
     paletteBox.getChildren().add(paletteTag);
+
+    updatePaletteTag(index, r, g, b, imageName);
   }
 
   private void updatePaletteTag(int index, int r, int g, int b, String imageName) {
