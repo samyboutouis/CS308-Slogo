@@ -10,7 +10,7 @@ import java.util.Stack;
 import slogo.BackEndTurtle;
 import slogo.Command;
 import slogo.SafeFrontEndTurtleTracker;
-import slogo.model.nodes.commands.TurtleActivate;
+import slogo.turtlecommands.TellCommand;
 
 // manages all turtles in the backend,
 public class BackEndTurtleTracker {
@@ -28,6 +28,8 @@ public class BackEndTurtleTracker {
     this.allTurtles = allTurtles;
     this.activeTurtles = activeTurtles;
     this.safeTurtleTracker = safeTurtleTracker;
+    askActiveTurtles = new Stack<>();
+    tellActiveTurtles = new ArrayList<>(activeTurtles);
     currTurtle = activeTurtles.get(0); // assumes at least one turtle is on the screen
   }
 
@@ -50,6 +52,14 @@ public class BackEndTurtleTracker {
     return allCommands;
   }
 
+  public Map<Integer, List<Command>> getAllTurtleCommands() {
+    Map<Integer, List<Command>> ret = new HashMap<>();
+    for(Integer id : allTurtles.keySet()) {
+      ret.put(id, allTurtles.get(id).getCommands());
+    }
+    return ret;
+  }
+
   public Set<Integer> getAllTurtles(){
     return allTurtles.keySet();
   }
@@ -61,6 +71,8 @@ public class BackEndTurtleTracker {
   public void deleteAllData(){
     allTurtles = new HashMap<>();
     activeTurtles = new ArrayList<>();
+    askActiveTurtles = new Stack<>();
+    tellActiveTurtles = new ArrayList<>();
     currTurtle = 0;
   }
 
@@ -101,6 +113,7 @@ public class BackEndTurtleTracker {
     for(Integer i : tellList) {
       addTurtle(getBasicTurtle(i));
     }
+    addTellCommands();
     tellActiveTurtles = new ArrayList<>(activeTurtles);
   }
 
@@ -109,6 +122,7 @@ public class BackEndTurtleTracker {
     for(Integer i : askList) {
       addTurtle(getBasicTurtle(i));
     }
+    addTellCommands();
     askActiveTurtles.push(new ArrayList<>(activeTurtles));
     // at this point, top of askActiveTurtles == activeTurtles
   }
@@ -124,6 +138,7 @@ public class BackEndTurtleTracker {
     else {
       activeTurtles = new ArrayList<>(askActiveTurtles.peek());
     }
+    addTellCommands();
   }
 
   // loops through active turtles for one node, will have many iterator instances out for nested commands e.g. fd fd 50
@@ -152,9 +167,10 @@ public class BackEndTurtleTracker {
     return allTurtles.keySet().size();
   }
 
-  public void findActiveAndInactiveTurtles(TurtleActivate activate) {
-    for(Integer i : allTurtles.keySet()){
-      activate.activate(allTurtles.get(i), i, activeTurtles.contains(i));
+  // add tellCommands to each turtle whenever tell, ask, and askWith are created
+  private void addTellCommands () {
+    for(Integer i : allTurtles.keySet()) {
+      allTurtles.get(i).addCommand(new TellCommand(getSafe(), i, activeTurtles.contains(i)));
     }
   }
 

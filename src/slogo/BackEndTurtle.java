@@ -11,7 +11,6 @@ public class BackEndTurtle implements Turtle {
   private double direction;
   private boolean isPenDown;
   private boolean isShowing;
-  private boolean isActive;
   private List<Command> commands;
 
   public BackEndTurtle(SafeTurtle transfer) {
@@ -31,7 +30,6 @@ public class BackEndTurtle implements Turtle {
     this.direction = direction;
     this.isPenDown = isPenDown;
     this.isShowing = isShowing;
-    this.isActive = isActive;
     commands = new ArrayList<>();
   }
 
@@ -126,17 +124,5 @@ public class BackEndTurtle implements Turtle {
   public void clearScreen() {
     home();
     setDirection(0);
-  }
-
-  public boolean isActive() {
-    return isActive;
-  }
-
-  public void setActive() {
-    isActive = true;
-  }
-
-  public void setInactive() {
-    isActive = false;
   }
 }

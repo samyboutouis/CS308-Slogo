@@ -5,7 +5,6 @@ import java.util.List;
 import slogo.model.SlogoNode;
 import slogo.model.BackEndTurtleTracker;
 import slogo.model.nodes.control.ListEndNode;
-import slogo.turtlecommands.TellCommand;
 
 public class TellNode extends SlogoNode {
   private List<SlogoNode> parameters;
@@ -44,9 +43,6 @@ public class TellNode extends SlogoNode {
       tellTurtleList.add(ret);
     }
     tracker.setTellList(tellTurtleList);
-    tracker.findActiveAndInactiveTurtles(((currTurtle, id, isActive) -> {
-      currTurtle.addCommand(new TellCommand(tracker.getSafe(), id, isActive));
-    }));
     return ret;
   }
 
