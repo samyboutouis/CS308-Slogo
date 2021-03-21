@@ -7,25 +7,36 @@ import javafx.scene.layout.GridPane;
 
 public class ViewContainer {
 
+  private final static int GRID_ROW_COUNT = 10;
+  private final static int GRID_COLUMN_COUNT = 6;
+  private final static int PADDING_LENGTH = 5;
+  private final static int BUTTON_LENGTH = 5;
+
   private final ViewLayout viewLayout;
-  private final GridPane pane;
+  private final CustomGridPane pane;
   private final ComboBox<String> comboBox;
   private final Button closeButton;
   private final int containerIndex;
   private final Set<String> viewNames;
 
-  public ViewContainer(ViewLayout viewLayout, GridPane pane, int containerIndex, Set<String> viewNames){
+  public ViewContainer(ViewLayout viewLayout, int containerIndex, Set<String> viewNames){
     this.viewLayout = viewLayout;
-    this.pane = pane;
     this.containerIndex = containerIndex;
-    pane.getStyleClass().add("yeetBox"); //for testing
     this.viewNames = viewNames;
 
-    comboBox = new ComboBox<>();
-    closeButton = new Button();
+    pane = new CustomGridPane(GRID_ROW_COUNT, GRID_COLUMN_COUNT, PADDING_LENGTH);
+    pane.getStyleClass().add("yeetBox"); //for testing
 
-    pane.add(comboBox, 0, 0);
-    pane.add(closeButton, 1, 0);
+    comboBox = new ComboBox<>();
+    comboBox.setId("ViewContainerComboBox");
+    comboBox.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+
+    closeButton = new Button("-");
+    closeButton.setId("ViewContainerCloseButton");
+    closeButton.setMaxSize(BUTTON_LENGTH, BUTTON_LENGTH);
+
+    pane.add(comboBox, 0, 0, 5, 1);
+    pane.add(closeButton, 5, 0, 1, 1);
 
     initializeComboBox();
     initializeCloseButton();

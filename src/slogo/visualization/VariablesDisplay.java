@@ -3,6 +3,7 @@ package slogo.visualization;
 import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.VBox;
 
 public class VariablesDisplay extends ScrollingDisplay {
@@ -36,16 +37,28 @@ public class VariablesDisplay extends ScrollingDisplay {
     variablesBox.getChildren().clear();
 
     for(Map.Entry<String, Double> entry : variablesMap.entrySet()){
-      addNewVariablesTab(entry.getKey(), entry.getValue());
+      addNewVariablesTag(entry.getKey(), entry.getValue());
     }
   }
 
-  private void addNewVariablesTab(String name, double value){
-    Button variablesTab = new Button(String.format("%s : %.2f", name.substring(1), value));
-    variablesTab.setMaxWidth(Double.MAX_VALUE);
-    variablesTab.setMaxHeight(Double.MAX_VALUE);
-    variablesTab.setId(idBundle.getString(VARIABLES_TAG_ID));
+  private void addNewVariablesTag(String name, double value){
+    Button variablesTag = new Button(String.format("%s : %.2f", name.substring(1), value));
+    variablesTag.setMaxWidth(Double.MAX_VALUE);
+    variablesTag.setMaxHeight(Double.MAX_VALUE);
+    variablesTag.setId(idBundle.getString(VARIABLES_TAG_ID));
+    applyVariablesTagLogic(variablesTag);
 
-    variablesBox.getChildren().add(variablesTab);
+    variablesBox.getChildren().add(variablesTag);
+  }
+
+  private void applyVariablesTagLogic(Button variablesTag) {
+    variablesTag.setOnAction(e -> {
+      String[] variableMap = variablesTag.getText().split(":");
+      String variableName = variableMap[0];
+      String variableValue = variableMap[1];
+      TextInputDialog textDialog = new TextInputDialog(String.format("%s", variableValue));
+      textDialog.setHeaderText(String.format("Set new value for %s", variableName));
+      textDialog.show();
+    });
   }
 }
