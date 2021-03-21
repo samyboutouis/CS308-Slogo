@@ -25,7 +25,8 @@ public class BackEndTurtle implements Turtle {
     commands = new ArrayList<>();
   }
 
-  public BackEndTurtle(double xCoordinate, double yCoordinate, double direction, boolean isPenDown, boolean isShowing, int ID) {
+  public BackEndTurtle(double xCoordinate, double yCoordinate, double direction, boolean isPenDown,
+      boolean isShowing, int ID) {
     this.ID = ID;
     this.xCoordinate = xCoordinate;
     this.yCoordinate = yCoordinate;
@@ -35,13 +36,15 @@ public class BackEndTurtle implements Turtle {
     commands = new ArrayList<>();
   }
 
-  public List<Command> getCommands(){
+  public List<Command> getCommands() {
     return commands;
   }
 
-  public int getIndex(){return this.ID;}
+  public int getIndex() {
+    return this.ID;
+  }
 
-  public void clearCommands(){
+  public void clearCommands() {
     commands.clear();
   }
 
@@ -99,23 +102,31 @@ public class BackEndTurtle implements Turtle {
     return yCoordinate;
   }
 
-  public double getDirection() { return direction; }
+  public double getDirection() {
+    return direction;
+  }
 
-  public boolean isPenDown() { return isPenDown; }
+  public boolean isPenDown() {
+    return isPenDown;
+  }
 
-  public void penDown() { isPenDown = true; }
+  public void penDown() {
+    isPenDown = true;
+  }
 
-  public void penUp() { isPenDown = false; }
+  public void penUp() {
+    isPenDown = false;
+  }
 
   public boolean isShowing() {
     return isShowing;
   }
 
-  public void show(){
+  public void show() {
     isShowing = true;
   }
 
-  public void hide(){
+  public void hide() {
     isShowing = false;
   }
 

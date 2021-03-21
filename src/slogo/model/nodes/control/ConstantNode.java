@@ -4,6 +4,7 @@ import slogo.model.SlogoNode;
 import slogo.model.BackEndTurtleTracker;
 
 public class ConstantNode extends SlogoNode {
+
   private double value;
 
   public ConstantNode(int numParameters, double value) {

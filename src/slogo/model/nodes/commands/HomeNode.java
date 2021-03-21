@@ -22,12 +22,13 @@ public class HomeNode extends TurtleCommandNode {
 
   @Override
   public double getReturnValue(BackEndTurtleTracker tracker) {
-    return super.loopThroughTurtles(tracker,new ArrayList<>(), (currTurtle, values)->{
+    return super.loopThroughTurtles(tracker, new ArrayList<>(), (currTurtle, values) -> {
       currTurtle.addCommand(new HomeCommand());
       double prevX = currTurtle.getX();
       double prevY = currTurtle.getY();
       currTurtle.home();
-      return Math.sqrt(Math.pow(prevX - currTurtle.getX(), 2) +  Math.pow(prevY - currTurtle.getY(), 2));
+      return Math
+          .sqrt(Math.pow(prevX - currTurtle.getX(), 2) + Math.pow(prevY - currTurtle.getY(), 2));
     });
   }
 }

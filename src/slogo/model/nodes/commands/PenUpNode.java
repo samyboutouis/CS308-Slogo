@@ -18,7 +18,7 @@ public class PenUpNode extends TurtleCommandNode {
 
   @Override
   public double getReturnValue(BackEndTurtleTracker tracker) {
-    return super.loopThroughTurtles(tracker,new ArrayList<>(), (currTurtle, values)->{
+    return super.loopThroughTurtles(tracker, new ArrayList<>(), (currTurtle, values) -> {
       currTurtle.addCommand(new PenUpCommand());
       currTurtle.penUp();
       return 0;

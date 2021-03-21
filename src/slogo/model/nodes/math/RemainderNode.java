@@ -8,7 +8,7 @@ public class RemainderNode extends SlogoNode {
 
   private List<SlogoNode> parameters;
 
-  public RemainderNode(int numParameters){
+  public RemainderNode(int numParameters) {
     super(numParameters);
     parameters = super.getParameters();
   }

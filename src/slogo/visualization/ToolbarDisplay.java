@@ -50,14 +50,14 @@ public class ToolbarDisplay {
   private Color backgroundColor;
 
   public ToolbarDisplay(String resourcePackage, Controller controller,
-    FrontEndController frontEndController, FrontEndTurtleTracker frontEndTurtleTracker) {
+      FrontEndController frontEndController, FrontEndTurtleTracker frontEndTurtleTracker) {
     String language = DEFAULT_LANGUAGE;
     this.gridPane = new GridPane();
     this.controller = controller;
     this.languageBundle = ResourceBundle
-      .getBundle(String.format("%s/%s/%s", resourcePackage, "languages", "LanguageOptions"));
+        .getBundle(String.format("%s/%s/%s", resourcePackage, "languages", "LanguageOptions"));
     this.resourceBundle = ResourceBundle
-      .getBundle(String.format("%s/%s/%s", resourcePackage, "languages", language));
+        .getBundle(String.format("%s/%s/%s", resourcePackage, "languages", language));
     this.idBundle = ResourceBundle.getBundle(DEFAULT_RESOURCE_FOLDER + ID_PROPERTY);
     this.frontEndController = frontEndController;
     this.toggleButtonList = List.of("AddTurtleButton");
@@ -104,7 +104,7 @@ public class ToolbarDisplay {
     ColorPicker colorPicker = new ColorPicker(backgroundColor);
     colorPicker.setId(COLOR_PICKER_ID);
     colorPicker
-      .setOnAction(event -> handleBackgroundColorPicker(colorPicker));
+        .setOnAction(event -> handleBackgroundColorPicker(colorPicker));
     hBox.getChildren().addAll(new Label(BACKGROUND_COLOR_LABEL), colorPicker);
     hBox.setAlignment(Pos.CENTER);
     gridPane.add(hBox, colIndex, 0, colIndex, 1);

@@ -14,9 +14,10 @@ import slogo.model.nodes.control.MakeUserInstructionNode;
 
 // creates parser, reads commands, and creates nodes
 public class CommandReader {
+
   private static final String WHITESPACE = "\\s+";
   private static final String NEWLINE = "\n";
-  private static final String RESOURCES_PACKAGE ="resources.";
+  private static final String RESOURCES_PACKAGE = "resources.";
   private static final String PARAMETERS_FILE = "parameters.Commands";
   private static final String PACKAGES_FILE = "packages.Packages";
   private static final String NODES_PATH = "slogo.model.nodes.";
@@ -43,15 +44,18 @@ public class CommandReader {
     nodeFactory = new NodeFactory();
   }
 
-  public SafeBackEndTurtleTracker parseInput(String input, BackEndTurtleTracker tracker) throws IllegalArgumentException{
+  public SafeBackEndTurtleTracker parseInput(String input, BackEndTurtleTracker tracker)
+      throws IllegalArgumentException {
     try {
-      tracker.clearAllCommands(); // we do not make assumption that tracker has empty commands list, but it should each time
+      tracker
+          .clearAllCommands(); // we do not make assumption that tracker has empty commands list, but it should each time
       this.tracker = tracker;
       List<String> cleaned = cleanInput(input);
       List<SlogoNode> roots = buildTree(cleaned);
       makeCommands(roots);
     } catch (NoSuchMethodException | ClassNotFoundException | IllegalAccessException | InvocationTargetException | InstantiationException e) {
-      throw new IllegalArgumentException("Java Reflection Error: Unrecognized/Unimplemented Command");
+      throw new IllegalArgumentException(
+          "Java Reflection Error: Unrecognized/Unimplemented Command");
     }
     return tracker;
   }
@@ -61,7 +65,9 @@ public class CommandReader {
   }
 
   // where you get the user specified functions to appear in UI.
-  public Map<String, String> getUserDefinedCommandsInString(){return userDefinedCommandsInString;}
+  public Map<String, String> getUserDefinedCommandsInString() {
+    return userDefinedCommandsInString;
+  }
 
   public Map<String, String> getCommands() {
     return userDefinedCommandsInString;
@@ -87,16 +93,20 @@ public class CommandReader {
     Stack<SlogoNode> st = new Stack<>();
     List<SlogoNode> roots = new ArrayList<>();
     SlogoNode curr = null;
-    for(String s : cleaned){
+    for (String s : cleaned) {
       String symbol = parser.getSymbol(s);
-      if(symbol.equals("NO MATCH")){
+      if (symbol.equals("NO MATCH")) {
         throw new IllegalArgumentException("Input syntax is incorrect: " + s);
       }
-      Class<?> node = Class.forName(NODES_PATH + packageName.getString(symbol) + "." + symbol + "Node");
+      Class<?> node = Class
+          .forName(NODES_PATH + packageName.getString(symbol) + "." + symbol + "Node");
       int parameters = Integer.parseInt(numParameters.getString(symbol));
-      curr = nodeFactory.getNode(symbol, s, node, parameters, variables, userDefinedCommands, curr, userDefinedCommandsInString);
+      curr = nodeFactory.getNode(symbol, s, node, parameters, variables, userDefinedCommands, curr,
+          userDefinedCommandsInString);
 
-      if(curr == null){ continue; }
+      if (curr == null) {
+        continue;
+      }
 
       handleStack(st, roots, curr);
     }
@@ -104,16 +114,14 @@ public class CommandReader {
   }
 
   private void handleStack(Stack<SlogoNode> st, List<SlogoNode> roots, SlogoNode curr) {
-    if(curr.isFull()){ // only true if node has no parameters
-      if(st.isEmpty()) {
+    if (curr.isFull()) { // only true if node has no parameters
+      if (st.isEmpty()) {
         roots.add(curr);
-      }
-      else{
+      } else {
         st.peek().addNode(curr);
       }
-    }
-    else { // curr not full
-      if(st.isEmpty()){
+    } else { // curr not full
+      if (st.isEmpty()) {
         roots.add(curr);
       }
       st.push(curr);
@@ -124,9 +132,9 @@ public class CommandReader {
   }
 
   private void popAllFullChildren(Stack<SlogoNode> st) {
-    while(!st.isEmpty() && st.peek().isFull()){
+    while (!st.isEmpty() && st.peek().isFull()) {
       SlogoNode top = st.pop();
-      if(!st.isEmpty()){
+      if (!st.isEmpty()) {
         st.peek().addNode(top);
       }
     }
@@ -134,8 +142,8 @@ public class CommandReader {
 
   // each command will add objects to tracker
   // we keep track of values only for testing purposes
-  private void makeCommands(List<SlogoNode> roots){
-    for(SlogoNode root : roots){
+  private void makeCommands(List<SlogoNode> roots) {
+    for (SlogoNode root : roots) {
       double value = root.getReturnValue(tracker);
       forTests.add(value);
     }
@@ -145,11 +153,11 @@ public class CommandReader {
   private List<String> cleanInput(String input) {
     String[] preCleaned = input.split(NEWLINE);
     List<String> cleaned = new ArrayList<>();
-    for(String line : preCleaned){
-      if(line.trim().equals("")){
+    for (String line : preCleaned) {
+      if (line.trim().equals("")) {
         continue; // ignores lines that are only new lines
       }
-      if (!parser.getSymbol(line).equals("Comment")){
+      if (!parser.getSymbol(line).equals("Comment")) {
         cleaned.addAll(Arrays.asList(line.trim().split(WHITESPACE)));
       }
     }

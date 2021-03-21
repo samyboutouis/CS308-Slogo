@@ -10,7 +10,7 @@ public class RightNode extends TurtleCommandNode {
   private List<SlogoNode> parameters;
   private List<Double> values;
 
-  public RightNode(int numParameters){
+  public RightNode(int numParameters) {
     super(numParameters);
     parameters = super.getParameters();
   }
@@ -30,10 +30,12 @@ public class RightNode extends TurtleCommandNode {
 
   @Override
   public double getReturnValue(BackEndTurtleTracker tracker) {
-    return super.loopThroughTurtles(tracker,parameters, (currTurtle, values)->{
+    return super.loopThroughTurtles(tracker, parameters, (currTurtle, values) -> {
       currTurtle.rotate(values.get(0));
       currTurtle.addCommand(new MovementCommand(0, values.get(0)));
       return values.get(0);
     });
-  };
+  }
+
+  ;
 }

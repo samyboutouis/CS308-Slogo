@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class ViewFactory {
+
   private static final String PACKAGE = View.class.getPackageName();
   private static final String POSSIBLE_VIEWS = "resources/reflection/PossibleViews.properties";
 
@@ -25,7 +26,7 @@ public class ViewFactory {
       Constructor<?> ctor = clazz.getDeclaredConstructor();
       return (View) ctor.newInstance();
     } catch (ClassNotFoundException | NoSuchMethodException | IllegalAccessException |
-      InstantiationException | InvocationTargetException e) {
+        InstantiationException | InvocationTargetException e) {
       throw new IllegalStateException("ERROR: unable to create proper view", e);
     }
 

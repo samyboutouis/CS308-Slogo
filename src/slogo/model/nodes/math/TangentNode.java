@@ -8,14 +8,14 @@ public class TangentNode extends SlogoNode {
 
   private List<SlogoNode> parameters;
 
-  public TangentNode(int numParameters){
+  public TangentNode(int numParameters) {
     super(numParameters);
     parameters = super.getParameters();
   }
 
   @Override
   public double getReturnValue(BackEndTurtleTracker tracker) {
-    return Math.tan(Math.toRadians( parameters.get(0).getReturnValue(tracker)));
+    return Math.tan(Math.toRadians(parameters.get(0).getReturnValue(tracker)));
   }
 }
 

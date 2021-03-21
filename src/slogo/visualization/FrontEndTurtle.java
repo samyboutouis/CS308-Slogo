@@ -31,7 +31,7 @@ public class FrontEndTurtle implements Turtle, SafeTurtle {
 
   public FrontEndTurtle(FrontEndTurtleTracker frontEndTurtleTracker) {
     this.idBundle = ResourceBundle
-      .getBundle(String.format("%s/%s/%s", "resources", "stylesheets", "CSS_IDs"));
+        .getBundle(String.format("%s/%s/%s", "resources", "stylesheets", "CSS_IDs"));
     setDefaultImage();
     isActive = true;
     turtleTracker = frontEndTurtleTracker;
@@ -40,8 +40,8 @@ public class FrontEndTurtle implements Turtle, SafeTurtle {
   public void forward(double pixels) {
     double xChange = calculateComponentX(pixels);
     double yChange = calculateComponentY(pixels);
-    double penX = imageView.getX() + imageView.getTranslateX() + IMAGE_WIDTH/2.0;
-    double penY = imageView.getY() + imageView.getTranslateY() + IMAGE_HEIGHT/2.0;
+    double penX = imageView.getX() + imageView.getTranslateX() + IMAGE_WIDTH / 2.0;
+    double penY = imageView.getY() + imageView.getTranslateY() + IMAGE_HEIGHT / 2.0;
     pen.drawLine(penX, penY, xChange, -yChange);
     imageView.setTranslateX(imageView.getTranslateX() + xChange);
     imageView.setTranslateY(imageView.getTranslateY() - yChange);
@@ -53,8 +53,8 @@ public class FrontEndTurtle implements Turtle, SafeTurtle {
   public void back(double pixels) {
     double xChange = calculateComponentX(pixels);
     double yChange = calculateComponentY(pixels);
-    double penX = imageView.getX() + imageView.getTranslateX() + IMAGE_WIDTH/2.0;
-    double penY = imageView.getY() + imageView.getTranslateY() + IMAGE_HEIGHT/2.0;
+    double penX = imageView.getX() + imageView.getTranslateX() + IMAGE_WIDTH / 2.0;
+    double penY = imageView.getY() + imageView.getTranslateY() + IMAGE_HEIGHT / 2.0;
     pen.drawLine(penX, penY, -xChange, yChange);
     imageView.setTranslateX(imageView.getTranslateX() - xChange);
     imageView.setTranslateY(imageView.getTranslateY() + yChange);
@@ -128,11 +128,11 @@ public class FrontEndTurtle implements Turtle, SafeTurtle {
   }
 
   public void addToScreen(Pane turtlePane, double height, double width) {
-    imageView.setTranslateX(width/2 - IMAGE_WIDTH/2);
-    imageView.setTranslateY(height/2 - IMAGE_HEIGHT/2);
+    imageView.setTranslateX(width / 2 - IMAGE_WIDTH / 2);
+    imageView.setTranslateY(height / 2 - IMAGE_HEIGHT / 2);
     ImageView activeCircleView = activeCircle.getImageView();
-    activeCircleView.setTranslateX(width/2 - ACTIVE_IMAGE_WIDTH/2);
-    activeCircleView.setTranslateY(height/2 - ACTIVE_IMAGE_HEIGHT/2);
+    activeCircleView.setTranslateX(width / 2 - ACTIVE_IMAGE_WIDTH / 2);
+    activeCircleView.setTranslateY(height / 2 - ACTIVE_IMAGE_HEIGHT / 2);
     turtlePane.getChildren().add(imageView);
     turtlePane.getChildren().add(activeCircleView);
     pen = new Pen(turtlePane, idBundle);
@@ -166,9 +166,13 @@ public class FrontEndTurtle implements Turtle, SafeTurtle {
     return yCoordinate;
   }
 
-  public double getDirection() { return direction; }
+  public double getDirection() {
+    return direction;
+  }
 
-  public boolean isPenDown() { return pen.isPenDown(); }
+  public boolean isPenDown() {
+    return pen.isPenDown();
+  }
 
   public void home() {
     setXY(0, 0);
@@ -181,7 +185,7 @@ public class FrontEndTurtle implements Turtle, SafeTurtle {
   }
 
   private void toggleActive() {
-    if(isActive) {
+    if (isActive) {
       setInactive();
     } else {
       setActive();

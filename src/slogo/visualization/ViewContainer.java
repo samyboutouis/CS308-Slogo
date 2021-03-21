@@ -19,7 +19,7 @@ public class ViewContainer {
   private final int containerIndex;
   private final Set<String> viewNames;
 
-  public ViewContainer(ViewLayout viewLayout, int containerIndex, Set<String> viewNames){
+  public ViewContainer(ViewLayout viewLayout, int containerIndex, Set<String> viewNames) {
     this.viewLayout = viewLayout;
     this.containerIndex = containerIndex;
     this.viewNames = viewNames;
@@ -42,30 +42,30 @@ public class ViewContainer {
     initializeCloseButton();
   }
 
-  private void initializeComboBox(){
+  private void initializeComboBox() {
     for (String viewName : viewNames) {
       comboBox.getItems().add(viewName);
     }
     comboBox.setOnAction(event -> handleClick(comboBox.getValue()));
   }
 
-  private void initializeCloseButton(){
+  private void initializeCloseButton() {
     closeButton.setOnAction(e -> handleCloseButton());
   }
 
-  private void handleClick(String viewName){
+  private void handleClick(String viewName) {
     viewLayout.updateViewLayouts(containerIndex, viewName);
   }
 
-  private void handleCloseButton(){
+  private void handleCloseButton() {
     viewLayout.updateViewLayouts(containerIndex, null);
   }
 
-  public void updateComboBox(String title){
+  public void updateComboBox(String title) {
     comboBox.setValue(title);
   }
 
-  public GridPane getPane(){
+  public GridPane getPane() {
     return pane;
   }
 }

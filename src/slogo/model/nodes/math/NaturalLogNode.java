@@ -8,7 +8,7 @@ public class NaturalLogNode extends SlogoNode {
 
   private List<SlogoNode> parameters;
 
-  public NaturalLogNode(int numParameters){
+  public NaturalLogNode(int numParameters) {
     super(numParameters);
     parameters = super.getParameters();
   }

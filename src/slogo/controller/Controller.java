@@ -8,6 +8,7 @@ import slogo.model.CommandReader;
 import slogo.model.BackEndTurtleTracker;
 
 public class Controller {
+
   private static final String INITIAL_LANGUAGE = "English";
 
   private String language;
@@ -18,14 +19,15 @@ public class Controller {
     language = INITIAL_LANGUAGE;
     commandReader = new CommandReader(language);
     translationBundle = ResourceBundle
-      .getBundle(String.format("%s/%s/%s", "resources", "languages", "TranslateOptions"));
+        .getBundle(String.format("%s/%s/%s", "resources", "languages", "TranslateOptions"));
   }
 
-  public SafeBackEndTurtleTracker parseProgram(String program, BackEndTurtleTracker backEndTurtleTracker) {
+  public SafeBackEndTurtleTracker parseProgram(String program,
+      BackEndTurtleTracker backEndTurtleTracker) {
     return commandReader.parseInput(program, backEndTurtleTracker);
   }
 
-  public void setLanguage (String language) {
+  public void setLanguage(String language) {
     this.language = translationBundle.getString(language);
     commandReader.setLanguage(this.language);
   }
@@ -35,5 +37,7 @@ public class Controller {
     return commandReader.getVariables();
   }
 
-  public Map<String, String> getUserDefinedCommands() { return commandReader.getUserDefinedCommandsInString(); }
+  public Map<String, String> getUserDefinedCommands() {
+    return commandReader.getUserDefinedCommandsInString();
+  }
 }

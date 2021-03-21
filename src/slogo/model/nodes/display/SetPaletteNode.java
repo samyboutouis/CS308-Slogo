@@ -18,9 +18,10 @@ public class SetPaletteNode extends TurtleCommandNode {
   @Override
   public double getReturnValue(BackEndTurtleTracker tracker) {
     return super.loopThroughTurtles(tracker, parameters, (currTurtle, values) -> {
-      for(Double v : values) {
-        if(v.intValue() > 255 || v.intValue() < 0) {
-          throw new IllegalArgumentException("Set Palette RGB Value Error - Not within range [0, 255]");
+      for (Double v : values) {
+        if (v.intValue() > 255 || v.intValue() < 0) {
+          throw new IllegalArgumentException(
+              "Set Palette RGB Value Error - Not within range [0, 255]");
         }
       }
       currTurtle.addCommand(new SetPaletteCommand(tracker.getSafe(), values.get(0).intValue(),

@@ -11,6 +11,7 @@ import javafx.scene.layout.VBox;
 import slogo.controller.FrontEndController;
 
 public class ButtonDisplay {
+
   private final VBox vbox;
   private final ButtonFactory buttonFactory;
   private final List<String> buttonList;
@@ -26,7 +27,7 @@ public class ButtonDisplay {
   }
 
   private void addFields() {
-    for(String property : buttonList) {
+    for (String property : buttonList) {
       HBox hbox = new HBox();
       TextField textField = makeTextField();
       hbox.getChildren().add(textField);

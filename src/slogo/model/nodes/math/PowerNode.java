@@ -8,14 +8,15 @@ public class PowerNode extends SlogoNode {
 
   private List<SlogoNode> parameters;
 
-  public PowerNode(int numParameters){
+  public PowerNode(int numParameters) {
     super(numParameters);
     parameters = super.getParameters();
   }
 
   @Override
   public double getReturnValue(BackEndTurtleTracker tracker) {
-    return Math.pow(parameters.get(0).getReturnValue(tracker), parameters.get(1).getReturnValue(tracker));
+    return Math
+        .pow(parameters.get(0).getReturnValue(tracker), parameters.get(1).getReturnValue(tracker));
   }
 }
 

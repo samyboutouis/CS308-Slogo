@@ -6,7 +6,8 @@ import slogo.model.nodes.commands.TurtleCommandNode;
 import slogo.turtlecommands.DisplayCommand;
 
 public class XCoordinateNode extends TurtleCommandNode {
-  public XCoordinateNode(int parameter){
+
+  public XCoordinateNode(int parameter) {
     super(parameter);
   }
 
@@ -18,8 +19,9 @@ public class XCoordinateNode extends TurtleCommandNode {
 
   @Override
   public double getReturnValue(BackEndTurtleTracker tracker) {
-    return super.loopThroughTurtles(tracker, new ArrayList<>(), (currTurtle, values)->{
-      String mesg = String.format("Turtle %d X Coordinate is %.2f", currTurtle.getIndex(), currTurtle.getX());
+    return super.loopThroughTurtles(tracker, new ArrayList<>(), (currTurtle, values) -> {
+      String mesg = String
+          .format("Turtle %d X Coordinate is %.2f", currTurtle.getIndex(), currTurtle.getX());
       System.out.println(mesg);
       currTurtle.addCommand(new DisplayCommand(mesg));
       return currTurtle.getX();

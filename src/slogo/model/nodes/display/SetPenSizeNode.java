@@ -18,7 +18,7 @@ public class SetPenSizeNode extends TurtleCommandNode {
   @Override
   public double getReturnValue(BackEndTurtleTracker tracker) {
     return super.loopThroughTurtles(tracker, parameters, (currTurtle, values) -> {
-      currTurtle.addCommand( new SetPenSizeCommand(values.get(0)));
+      currTurtle.addCommand(new SetPenSizeCommand(values.get(0)));
       return values.get(0);
     });
   }

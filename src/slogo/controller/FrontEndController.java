@@ -13,6 +13,7 @@ import slogo.visualization.ButtonFactory;
 import slogo.visualization.FrontEndTurtle;
 
 public class FrontEndController {
+
   private final Stage stage;
   private final FrontEndTurtleTracker frontEndTurtleTracker;
   private final ButtonFactory buttonFactory;
@@ -33,7 +34,7 @@ public class FrontEndController {
     fileChooser.setTitle("Open Image File");
     fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
     fileChooser.getExtensionFilters()
-      .setAll(new ExtensionFilter("Image File", "*.png", "*.jpg", "*.svg"));
+        .setAll(new ExtensionFilter("Image File", "*.png", "*.jpg", "*.svg"));
     File file = fileChooser.showOpenDialog(stage);
     if (file != null) {
       safeTurtle.setImage(file);

@@ -8,7 +8,7 @@ public class PiNode extends SlogoNode {
 
   private List<SlogoNode> parameters;
 
-  public PiNode(int numParameters){
+  public PiNode(int numParameters) {
     super(numParameters);
     parameters = super.getParameters();
   }

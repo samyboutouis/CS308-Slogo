@@ -25,7 +25,8 @@ public class BackEndTurtleTracker implements SafeBackEndTurtleTracker {
   private SafeFrontEndTurtleTracker safeTurtleTracker;
 
   // frontend would pass these in so we can create a back end turtle
-  public BackEndTurtleTracker(Map<Integer, BackEndTurtle> allTurtles, List<Integer> activeTurtles, SafeFrontEndTurtleTracker safeTurtleTracker) {
+  public BackEndTurtleTracker(Map<Integer, BackEndTurtle> allTurtles, List<Integer> activeTurtles,
+      SafeFrontEndTurtleTracker safeTurtleTracker) {
     this.allTurtles = allTurtles;
     this.activeTurtles = activeTurtles;
     this.safeTurtleTracker = safeTurtleTracker;
@@ -46,13 +47,13 @@ public class BackEndTurtleTracker implements SafeBackEndTurtleTracker {
 
   public Map<Integer, List<Command>> getAllTurtleCommands() {
     Map<Integer, List<Command>> ret = new HashMap<>();
-    for(Integer id : allTurtles.keySet()) {
+    for (Integer id : allTurtles.keySet()) {
       ret.put(id, allTurtles.get(id).getCommands());
     }
     return ret;
   }
 
-  public Set<Integer> getAllTurtles(){
+  public Set<Integer> getAllTurtles() {
     return allTurtles.keySet();
   }
 
@@ -61,7 +62,7 @@ public class BackEndTurtleTracker implements SafeBackEndTurtleTracker {
   }
 
   // used for tests that run multiple times; don't want previous test to affect next one
-  public void deleteAllData(){
+  public void deleteAllData() {
     allTurtles = new HashMap<>();
     activeTurtles = new ArrayList<>();
     askActiveTurtles = new Stack<>();
@@ -70,22 +71,22 @@ public class BackEndTurtleTracker implements SafeBackEndTurtleTracker {
   }
 
   // just in case future tracker given to us has previous commands
-  public void clearAllCommands(){
+  public void clearAllCommands() {
     Iterator<Integer> itr = getIterator();
-    while (itr.hasNext()){
+    while (itr.hasNext()) {
       getTurtle(itr.next()).clearCommands();
     }
   }
 
 
   // if this turtleId already exists, we only update activeTurtles, and not allTurtles
-  public void addTurtle(BackEndTurtle turtle){
-    if (allTurtles.containsKey(turtle.getIndex())){
-      if (activeTurtles.contains(turtle.getIndex())){
-        activeTurtles.remove(Integer.valueOf(turtle.getIndex())); // remove object Integer, not at index
+  public void addTurtle(BackEndTurtle turtle) {
+    if (allTurtles.containsKey(turtle.getIndex())) {
+      if (activeTurtles.contains(turtle.getIndex())) {
+        activeTurtles
+            .remove(Integer.valueOf(turtle.getIndex())); // remove object Integer, not at index
       }
-    }
-    else {
+    } else {
       allTurtles.put(turtle.getIndex(), turtle);
     }
     activeTurtles.add(turtle.getIndex());
@@ -93,19 +94,19 @@ public class BackEndTurtleTracker implements SafeBackEndTurtleTracker {
 
   // only used in AskWithNode, to temporarily set the active turtle list to a specific turtle, and run
   // the logic expression to see if that specific turtle satisfies the requirement in AskWith.
-  public void checkOneTurtle(int id){
+  public void checkOneTurtle(int id) {
     clearActiveTurtles();
     activeTurtles.add(id);
   }
 
   // clear the list of activeTurtles
-  public void clearActiveTurtles(){
+  public void clearActiveTurtles() {
     activeTurtles.clear();
   }
 
   public void setTellList(List<Integer> tellList) {
     activeTurtles.clear();
-    for(Integer i : tellList) {
+    for (Integer i : tellList) {
       addTurtle(getBasicTurtle(i));
     }
     addTellCommands();
@@ -114,7 +115,7 @@ public class BackEndTurtleTracker implements SafeBackEndTurtleTracker {
 
   public void setAskList(List<Integer> askList) {
     activeTurtles.clear(); // tellActiveTurtles should have this handled
-    for(Integer i : askList) {
+    for (Integer i : askList) {
       addTurtle(getBasicTurtle(i));
     }
     addTellCommands();
@@ -127,10 +128,9 @@ public class BackEndTurtleTracker implements SafeBackEndTurtleTracker {
     // ask [ 2 3 ] [ fd 50 tell [ 1 4 ] bk 50 ]
     // turtles 2, 3 do fd 50, while turtles 1 4 do bk 50
     askActiveTurtles.pop();
-    if(askActiveTurtles.isEmpty()) {
+    if (askActiveTurtles.isEmpty()) {
       activeTurtles = new ArrayList<>(tellActiveTurtles);
-    }
-    else {
+    } else {
       activeTurtles = new ArrayList<>(askActiveTurtles.peek());
     }
     addTellCommands();
@@ -163,14 +163,14 @@ public class BackEndTurtleTracker implements SafeBackEndTurtleTracker {
   }
 
   // add tellCommands to each turtle whenever tell, ask, and askWith are created
-  private void addTellCommands () {
-    for(Integer i : allTurtles.keySet()) {
+  private void addTellCommands() {
+    for (Integer i : allTurtles.keySet()) {
       allTurtles.get(i).addCommand(new TellCommand(getSafe(), i, activeTurtles.contains(i)));
     }
   }
 
   private BackEndTurtle getBasicTurtle(int id) {
-    return new BackEndTurtle(0,0,0,true,true, id);
+    return new BackEndTurtle(0, 0, 0, true, true, id);
   }
 
 //  tell [ 1 2 3 ]
@@ -181,7 +181,6 @@ public class BackEndTurtleTracker implements SafeBackEndTurtleTracker {
   // 2 6, 3 12, 4 20
   // fd fd 20
   // order of things done: 1fd 21, 2fd 22, 1fd 22, fd
-
 
 
 }

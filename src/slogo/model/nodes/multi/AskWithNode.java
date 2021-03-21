@@ -28,14 +28,14 @@ public class AskWithNode extends AskNode {
     // ask with has exact same setup as ask, except the way we get the turtles is by checking expression, so I just overrode this one method
     // protected is still called by askNode, and it knows that this method has been overridden, even though askNode also has implementation
     List<Integer> ret = new ArrayList<>();
-    try{
-    assert parameters.get(1).getBooleanNode();}
-    catch (ClassCastException e){
+    try {
+      assert parameters.get(1).getBooleanNode();
+    } catch (ClassCastException e) {
       System.out.println("Not a Boolean Expression in AskWith");
     }
-    for (Integer i: tracker.getAllTurtles()){
+    for (Integer i : tracker.getAllTurtles()) {
       tracker.checkOneTurtle(i);
-      if (parameters.get(1).getReturnValue(tracker)!=0){
+      if (parameters.get(1).getReturnValue(tracker) != 0) {
         ret.add(i);
       }
     }

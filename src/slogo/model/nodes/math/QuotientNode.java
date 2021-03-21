@@ -9,7 +9,7 @@ public class QuotientNode extends SlogoNode {
 
   private List<SlogoNode> parameters;
 
-  public QuotientNode(int numParameters){
+  public QuotientNode(int numParameters) {
     super(numParameters);
     parameters = super.getParameters();
   }

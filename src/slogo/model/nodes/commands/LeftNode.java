@@ -10,7 +10,7 @@ public class LeftNode extends TurtleCommandNode {
   private List<SlogoNode> parameters;
   private List<Double> values;
 
-  public LeftNode(int numParameters){
+  public LeftNode(int numParameters) {
     super(numParameters);
     parameters = super.getParameters();
   }
@@ -30,9 +30,9 @@ public class LeftNode extends TurtleCommandNode {
 
   @Override
   public double getReturnValue(BackEndTurtleTracker tracker) {
-    return super.loopThroughTurtles(tracker,parameters,(currTurtle, values)->{
-      currTurtle.rotate(-1*values.get(0));
-      currTurtle.addCommand(new MovementCommand(0,-1*values.get(0)));
+    return super.loopThroughTurtles(tracker, parameters, (currTurtle, values) -> {
+      currTurtle.rotate(-1 * values.get(0));
+      currTurtle.addCommand(new MovementCommand(0, -1 * values.get(0)));
       return values.get(0);
     });
   }

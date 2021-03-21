@@ -15,7 +15,8 @@ public class ForNode extends SlogoNode {
   private int firstEnd;
 
   public ForNode(int numParameters) {
-    super(numParameters); // parameters being full determined by bracket, just like conditional node, so this is a dummy value
+    super(
+        numParameters); // parameters being full determined by bracket, just like conditional node, so this is a dummy value
     brackets = numParameters;
     parameters = super.getParameters();
   }
@@ -30,10 +31,12 @@ public class ForNode extends SlogoNode {
     setFirstEnd();
     getIndexing(tracker);
     double ret = 0;
-    for(double i = forStart; i <= forEnd; i = i + forIncrement){
+    for (double i = forStart; i <= forEnd; i = i + forIncrement) {
       variable.setValue(i);
-      for(int j = firstEnd; j < parameters.size(); j++){ // runs through all the commands in the loop
-        if(!(parameters.get(j) instanceof ListStartNode) && !(parameters.get(j) instanceof ListEndNode)){
+      for (int j = firstEnd; j < parameters.size();
+          j++) { // runs through all the commands in the loop
+        if (!(parameters.get(j) instanceof ListStartNode) && !(parameters
+            .get(j) instanceof ListEndNode)) {
           ret = parameters.get(j).getReturnValue(tracker); // ret is value of last command executed
         }
       }
@@ -42,7 +45,7 @@ public class ForNode extends SlogoNode {
   }
 
   // get start, end, and increment
-  private void getIndexing(BackEndTurtleTracker tracker){
+  private void getIndexing(BackEndTurtleTracker tracker) {
     // for [ :var 1 5 1 ]
     // i = 0 is left bracket
     variable = (VariableNode) parameters.get(1);
@@ -52,8 +55,8 @@ public class ForNode extends SlogoNode {
   }
 
   private void setFirstEnd() {
-    for(int i = 0; i < parameters.size(); i++){
-      if(parameters.get(i) instanceof ListEndNode){
+    for (int i = 0; i < parameters.size(); i++) {
+      if (parameters.get(i) instanceof ListEndNode) {
         firstEnd = i;
         break;
       }
@@ -63,8 +66,8 @@ public class ForNode extends SlogoNode {
   // check to see if we've seen brackets number of list end nodes
   private boolean checkBrackets() {
     int seen = 0;
-    for(SlogoNode node : parameters){
-      if(node instanceof ListEndNode){
+    for (SlogoNode node : parameters) {
+      if (node instanceof ListEndNode) {
         seen++;
       }
     }

@@ -4,7 +4,7 @@ import java.io.File;
 import javafx.scene.paint.Color;
 
 public interface SafeTurtle {
-  
+
   double getX();
 
   double getY();
@@ -16,7 +16,7 @@ public interface SafeTurtle {
   void penDown();
 
   void penUp();
-  
+
   boolean isShowing();
 
   Color getPenColor();

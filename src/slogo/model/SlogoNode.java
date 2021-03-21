@@ -4,46 +4,49 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class SlogoNode {
-    private List<SlogoNode> parameters;
-    private int numParameters;
-    private String myString;
-    private boolean BooleanNode =false;
 
-    public SlogoNode(int numParameters) {
-      this.numParameters = numParameters;
-      parameters = new ArrayList<>();
+  private List<SlogoNode> parameters;
+  private int numParameters;
+  private String myString;
+  private boolean BooleanNode = false;
+
+  public SlogoNode(int numParameters) {
+    this.numParameters = numParameters;
+    parameters = new ArrayList<>();
+  }
+
+  public void addNode(SlogoNode node) {
+    parameters.add(node);
+  }
+
+  public String getMyString() {
+    StringBuilder ret = new StringBuilder(myString);
+    for (SlogoNode s : parameters) {
+      ret.append(" ").append(s.getMyString());
     }
+    return ret.toString();
+  }
 
-    public void addNode(SlogoNode node) {
-      parameters.add(node);
-    }
+  public void setString(String s) {
+    myString = s;
+  }
 
-    public String getMyString(){
-      StringBuilder ret = new StringBuilder(myString);
-      for (SlogoNode s : parameters){
-        ret.append(" ").append(s.getMyString());
-      }
-      return ret.toString();
-      }
+  public void setBooleanNode(boolean flag) {
+    BooleanNode = flag;
+  }
 
-    public void setString(String s){
-      myString = s;
-    }
+  public boolean getBooleanNode() {
+    return BooleanNode;
+  }
 
-    public void setBooleanNode(boolean flag){
-      BooleanNode = flag;
-    }
+  public boolean isFull() {
+    return parameters.size() == numParameters;
+  }
 
-    public boolean getBooleanNode(){return BooleanNode;}
+  protected List<SlogoNode> getParameters() {
+    return parameters;
+  }
 
-    public boolean isFull() {
-      return parameters.size() == numParameters;
-    }
-
-    protected List<SlogoNode> getParameters() {
-      return parameters;
-    }
-
-    public abstract double getReturnValue(BackEndTurtleTracker tracker);
+  public abstract double getReturnValue(BackEndTurtleTracker tracker);
 }
 

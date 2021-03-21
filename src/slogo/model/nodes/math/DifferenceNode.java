@@ -8,7 +8,7 @@ public class DifferenceNode extends SlogoNode {
 
   private List<SlogoNode> parameters;
 
-  public DifferenceNode(int numParameters){
+  public DifferenceNode(int numParameters) {
     super(numParameters);
     parameters = super.getParameters();
   }
