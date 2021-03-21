@@ -76,6 +76,7 @@ public class CommandReaderTest {
     assertEquals(List.of(50.0), myReader.testParseInput("setxy 30 40"));
     assertEquals(List.of(90.0), myReader.testParseInput("towards 1 0"));
     assertEquals(List.of(45.0, 45.0), myReader.testParseInput("rt 45 setheading 90"));
+    assertEquals(List.of(45.0, 135.0), myReader.testParseInput("lt 45 setheading 90"));
   }
 
   @Test
