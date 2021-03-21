@@ -51,7 +51,7 @@ public class CommandReader {
       List<SlogoNode> roots = buildTree(cleaned);
       makeCommands(roots);
     } catch (NoSuchMethodException | ClassNotFoundException | IllegalAccessException | InvocationTargetException | InstantiationException e) {
-      e.printStackTrace();
+      throw new IllegalArgumentException("Java Reflection Error: Unrecognized/Unimplemented Command");
     }
     return tracker;
   }
