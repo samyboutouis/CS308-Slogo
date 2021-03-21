@@ -30,6 +30,7 @@ public class HistoryDisplay extends ScrollingDisplay {
    */
   public Button addNewHistoryTag(String command){
     Button historyTag = new Button(command);
+    historyTag.setWrapText(true);
     historyTag.setMaxWidth(Double.MAX_VALUE);
     historyTag.setMaxHeight(Double.MAX_VALUE);
     historyTag.setId(idBundle.getString(HISTORY_TAG_ID));

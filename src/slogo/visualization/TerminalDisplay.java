@@ -31,15 +31,17 @@ public class TerminalDisplay {
   private Button button;
   private final HistoryDisplay historyDisplay;
   private final VariablesDisplay variablesDisplay;
+  private final UserCommandsDisplay userCommandsDisplay;
   private final FrontEndTurtle frontEndTurtle;
   private final Controller controller;
 
   public TerminalDisplay(String resourcePackage, HistoryDisplay historyDisplay,
-    FrontEndTurtle frontEndTurtle, VariablesDisplay variablesDisplay, Controller controller) {
+    FrontEndTurtle frontEndTurtle, VariablesDisplay variablesDisplay, UserCommandsDisplay userCommandsDisplay, Controller controller) {
     pane = new GridPane();
     pane.getStyleClass().add(DISPLAY_CLASS_NAME);
     this.historyDisplay = historyDisplay;
     this.variablesDisplay = variablesDisplay;
+    this.userCommandsDisplay = userCommandsDisplay;
     this.frontEndTurtle = frontEndTurtle;
     this.controller = controller;
 
@@ -101,6 +103,7 @@ public class TerminalDisplay {
           new AnimationManager(controller.parseProgram(command, backendTurtle).getAllCommands(), frontEndTurtle);
           Button historyTag = historyDisplay.addNewHistoryTag(command);
           variablesDisplay.updateBox(controller.getVariables());
+          userCommandsDisplay.updateBox(controller.getUserDefinedCommands());
           applyHistoryTagLogic(historyTag);
         } catch (Exception error) {
           createErrorDialog(error); // backend throws new exception with specific error message

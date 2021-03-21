@@ -46,7 +46,7 @@ public class Workspace {
     //paletteDisplay
     //turtleStatesDisplay
 
-    TerminalDisplay terminalDisplay = new TerminalDisplay(RESOURCE_PACKAGE, historyDisplay, frontEndTurtle, variablesDisplay, controller);
+    TerminalDisplay terminalDisplay = new TerminalDisplay(RESOURCE_PACKAGE, historyDisplay, frontEndTurtle, variablesDisplay, userCommandsDisplay, controller);
     TurtleDisplay turtleDisplay = new TurtleDisplay(frontEndTurtle);
     ToolbarDisplay toolbarDisplay = new ToolbarDisplay(RESOURCE_PACKAGE, controller, frontEndController);
     ViewLayout viewLayout = new ViewLayout(historyDisplay, variablesDisplay, userCommandsDisplay, buttonDisplay, frontEndController);

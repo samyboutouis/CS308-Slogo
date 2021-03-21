@@ -1,5 +1,6 @@
 package slogo.visualization;
 
+import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
@@ -21,28 +22,27 @@ public class UserCommandsDisplay extends ScrollingDisplay {
     String language = "English";
     this.resourceBundle = ResourceBundle.getBundle(String.format("%s/%s/%s", resourcePackage, "languages", language));
     this.idBundle = ResourceBundle.getBundle(String.format("%s/%s/%s", resourcePackage, "stylesheets", "CSS_IDs"));
-
-    updateBox(new String[]{"yeet", "ok", "example"}); //test
   }
 
   /**
    *
-   * @param commandsList
+   * @param commandsMap
    */
-  public void updateBox(String[] commandsList){
+  public void updateBox( Map<String, String> commandsMap){
     userCommandsBox.getChildren().clear();
 
-    for (String commandName : commandsList) {
-      addNewVariablesTab(commandName);
+    for(Map.Entry<String, String> entry : commandsMap.entrySet()){
+      addNewCommandsTag(entry.getKey(), entry.getValue());
     }
   }
 
-  private void addNewVariablesTab(String variableName){
-    Button commandsTab = new Button(variableName);
-    commandsTab.setMaxWidth(Double.MAX_VALUE);
-    commandsTab.setMaxHeight(Double.MAX_VALUE);
-    commandsTab.setId(idBundle.getString(USER_COMMANDS_TAG_ID));
+  private void addNewCommandsTag(String name, String value){
+    Button commandsTag = new Button(String.format("%s : %s", name, value));
+    commandsTag.setWrapText(true);
+    commandsTag.setMaxWidth(Double.MAX_VALUE);
+    commandsTag.setMaxHeight(Double.MAX_VALUE);
+    commandsTag.setId(idBundle.getString(USER_COMMANDS_TAG_ID));
 
-    userCommandsBox.getChildren().add(commandsTab);
+    userCommandsBox.getChildren().add(commandsTag);
   }
 }

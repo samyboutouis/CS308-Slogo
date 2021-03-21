@@ -35,4 +35,6 @@ public class Controller {
   public Map<String, Double> getVariables() {
     return commandReader.getVariables();
   }
+
+  public Map<String, String> getUserDefinedCommands() { return commandReader.getUserDefinedCommandsInString(); }
 }

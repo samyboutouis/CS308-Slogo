@@ -13,6 +13,7 @@ import javafx.scene.layout.VBox;
 public class ScrollingDisplay {
 
   private final static int PADDING_LENGTH = 10;
+  private final static int VBOX_PADDING_LENGTH = 5;
   private final static int ROW_COUNT = 10;
   private final static String DISPLAY_CLASS_NAME = "displayWindow";
 
@@ -73,8 +74,8 @@ public class ScrollingDisplay {
 
     VBox vBox = new VBox();
     vBox.setFillWidth(true);
-    vBox.setSpacing(PADDING_LENGTH);
-    vBox.setPadding(new Insets(PADDING_LENGTH));
+    vBox.setSpacing(VBOX_PADDING_LENGTH);
+    vBox.setPadding(new Insets(VBOX_PADDING_LENGTH));
 
     scrollPane.setContent(vBox);
 
