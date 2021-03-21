@@ -54,7 +54,7 @@ public class VariablesDisplay extends ScrollingDisplay {
 
   private void applyVariablesTagLogic(Button variablesTag) {
     variablesTag.setOnAction(e -> {
-      String[] variableMap = variablesTag.getText().split("::");
+      String[] variableMap = variablesTag.getText().split(":: ");
       String variableName = variableMap[0];
       String variableValue = variableMap[1];
       TextInputDialog textDialog = new TextInputDialog(String.format("%s", variableValue));
