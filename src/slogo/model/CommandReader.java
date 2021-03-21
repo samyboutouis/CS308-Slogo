@@ -90,7 +90,7 @@ public class CommandReader {
     for(String s : cleaned){
       String symbol = parser.getSymbol(s);
       if(symbol.equals("NO MATCH")){
-        throw new IllegalArgumentException("Input syntax is incorrect");
+        throw new IllegalArgumentException("Input syntax is incorrect: " + s);
       }
       Class<?> node = Class.forName(NODES_PATH + packageName.getString(symbol) + "." + symbol + "Node");
       int parameters = Integer.parseInt(numParameters.getString(symbol));
