@@ -36,7 +36,7 @@ public class ToolbarDisplay {
   private static final String ID_PROPERTY = "stylesheets/CSS_IDs";
   private static final String DISPLAY_CLASS_NAME = "displayWindow";
   private static final Color DEFAULT_COLOR = Color.web("#dedcdc");
-  private static final String BACKGROUND_COLOR_LABEL = "Background Color: ";
+  private static final String BACKGROUND_COLOR_LABEL = "Background: ";
 
   private final GridPane gridPane;
   private final Controller controller;
@@ -61,7 +61,7 @@ public class ToolbarDisplay {
     this.idBundle = ResourceBundle.getBundle(DEFAULT_RESOURCE_FOLDER + ID_PROPERTY);
     this.frontEndController = frontEndController;
     this.toggleButtonList = List.of("AddTurtleButton");
-    this.defaultButtonList = List.of("NewWorkspaceButton");
+    this.defaultButtonList = List.of("NewWorkspaceButton", "LoadWorkspaceButton", "SaveWorkspaceButton");
     this.backgroundColor = DEFAULT_COLOR;
     this.turtleTracker = frontEndTurtleTracker;
     initializeGridPane();
@@ -90,13 +90,13 @@ public class ToolbarDisplay {
     for (String label : toggleButtonList) {
       gridPane.add(buttonFactory.createToggleButton(label), colIndex++, 0, 1, 1);
     }
-    addBackgroundColorPicker(colIndex);
-    colIndex++;
+    addBackgroundColorPicker(colIndex++);
     for (String label : defaultButtonList) {
       gridPane.add(buttonFactory.createDefaultButton(label), colIndex++, 0, 1, 1);
     }
     addLanguageDropdown(colIndex++);
-    addHelpDropdown();
+    colIndex++;
+    addHelpDropdown(colIndex);
   }
 
   private void addBackgroundColorPicker(int colIndex) {
@@ -107,7 +107,7 @@ public class ToolbarDisplay {
         .setOnAction(event -> handleBackgroundColorPicker(colorPicker));
     hBox.getChildren().addAll(new Label(BACKGROUND_COLOR_LABEL), colorPicker);
     hBox.setAlignment(Pos.CENTER);
-    gridPane.add(hBox, colIndex, 0, colIndex, 1);
+    gridPane.add(hBox, colIndex, 0, 1, 1);
   }
 
   private void addLanguageDropdown(int colIndex) {
@@ -121,7 +121,7 @@ public class ToolbarDisplay {
     gridPane.add(comboBox, colIndex, 0, 4, 1);
   }
 
-  private void addHelpDropdown() {
+  private void addHelpDropdown(int colIndex) {
     ComboBox<String> comboBox = new ComboBox<>();
     comboBox.setId(idBundle.getString("HelpDropdown"));
     File folder = new File(REFERENCES_FOLDER);
@@ -134,7 +134,7 @@ public class ToolbarDisplay {
     comboBox.getItems().addAll(commands);
     comboBox.setValue(resourceBundle.getString("HelpButton"));
     comboBox.setOnAction(event -> handleHelpClick(comboBox.getValue()));
-    gridPane.add(comboBox, 7, 0, 2, 1);
+    gridPane.add(comboBox, colIndex, 0, 2, 1);
   }
 
   private void handleBackgroundColorPicker(ColorPicker colorPicker) {

@@ -81,4 +81,20 @@ public class FrontEndController {
     Main main = new Main();
     main.createNewWorkspace();
   }
+
+  public void handleLoadWorkspaceClick() {
+    FileChooser fileChooser = new FileChooser();
+    fileChooser.setTitle("Open XML File");
+    fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
+    fileChooser.getExtensionFilters()
+      .setAll(new ExtensionFilter("XML File", "*.xml"));
+    File file = fileChooser.showOpenDialog(stage);
+    if (file != null) {
+
+    }
+  }
+
+  public void handleSaveWorkspaceClick() {
+
+  }
 }
