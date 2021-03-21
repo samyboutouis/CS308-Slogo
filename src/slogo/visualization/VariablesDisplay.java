@@ -64,9 +64,8 @@ public class VariablesDisplay extends ScrollingDisplay {
       textDialog.setHeaderText(String.format("%s %s", DIALOG_BOX_HEADER_TEXT, variableName));
       textDialog.showAndWait();
 
-      // for testing
       String newValue = textDialog.getEditor().getText();
-      if(newValue != null){
+      if(newValue != null && !newValue.equals(variableValue)){
         String command = String.format("%s%s%s", SET_COMMAND, variableName, newValue);
         getTerminalDisplay().setTerminalText(command);
       }

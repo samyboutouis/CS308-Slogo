@@ -49,7 +49,6 @@ public class PaletteDisplay extends ScrollingDisplay {
     } else {
       updatePaletteTag(index, r, g, b);
     }
-
   }
 
   private void addNewPaletteTag(int index, int r, int g, int b){
