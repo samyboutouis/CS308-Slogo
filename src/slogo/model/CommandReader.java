@@ -10,11 +10,7 @@ import java.util.ResourceBundle;
 import java.util.Stack;
 import slogo.BackEndTurtle;
 import slogo.SafeBackEndTurtleTracker;
-import slogo.model.nodes.control.ConstantNode;
 import slogo.model.nodes.control.MakeUserInstructionNode;
-import slogo.model.nodes.control.RepeatNode;
-import slogo.model.nodes.control.VariableNode;
-import slogo.model.nodes.multi.TellNode;
 
 // creates parser, reads commands, and creates nodes
 public class CommandReader {
@@ -38,7 +34,6 @@ public class CommandReader {
     numParameters = ResourceBundle.getBundle(RESOURCES_PACKAGE + PARAMETERS_FILE);
     packageName = ResourceBundle.getBundle(RESOURCES_PACKAGE + PACKAGES_FILE);
 
-    //commands = new ArrayList<>();
     variables = new HashMap<>();
     forTests = new ArrayList<>();
     userDefinedCommands = new HashMap<>();
@@ -66,7 +61,6 @@ public class CommandReader {
     return variables;
   }
 
-
   // where you get the user specified functions to appear in UI.
   public Map<String, String> getUserDefinedCommandsInString(){return userDefinedCommandsInString;}
 
@@ -85,7 +79,6 @@ public class CommandReader {
     forTests = new ArrayList<>();
     tracker.deleteAllData();
     tracker.addTurtle(new BackEndTurtle(0.0, 0.0, 0.0, true, true, 0));
-    //parseInput(input, new BackEndTurtle(0, 0, 0, true, true, 0));
     parseInput(input, tracker);
     return forTests;
   }
@@ -129,7 +122,8 @@ public class CommandReader {
     return roots;
   }
 
-
+  // each command will add objects to tracker
+  // we keep track of values only for testing purposes
   private void makeCommands(List<SlogoNode> roots){
     for(SlogoNode root : roots){
       double value = root.getReturnValue(tracker);
@@ -138,7 +132,7 @@ public class CommandReader {
   }
 
   // removes comments from input and white space between values
-  private List<String> cleanInput(String input) throws IllegalArgumentException{
+  private List<String> cleanInput(String input) {
     String[] preCleaned = input.split(NEWLINE);
     List<String> cleaned = new ArrayList<>();
     for(String line : preCleaned){

@@ -16,6 +16,7 @@ public class NodeFactory {
       switch(symbol) {
         case "Constant" -> {
           curr = new ConstantNode(parameters, Double.parseDouble(value));
+          // guaranteed to be parsable to double since our regex will catch something that isn't
           // if stack is empty and we see a constant, it doesn't do anything to the program but
           // we still add it to the tree
         }

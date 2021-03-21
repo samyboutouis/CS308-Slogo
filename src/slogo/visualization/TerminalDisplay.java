@@ -100,8 +100,8 @@ public class TerminalDisplay {
       if (command.length() > 0) {
         try {
           BackEndTurtleTracker backEndTurtleTracker = turtleTracker.passToBackEnd();
-          new AnimationManager(
-            controller.parseProgram(command, backEndTurtleTracker).getAllCommands(), turtleTracker);
+          //new AnimationManager(
+            //controller.parseProgram(command, backEndTurtleTracker).getAllCommands(), turtleTracker);
           Button historyTag = historyDisplay.addNewHistoryTag(command);
           variablesDisplay.updateBox(controller.getVariables());
           applyHistoryTagLogic(historyTag);

@@ -25,13 +25,10 @@ public class CommandReaderTest {
   // SECTION
   // test that values are correct based on Logo code
 
-
-
   @Test
   void testAskWith(){
     assertEquals(List.of(10.0, 100.0, 50.0, 100.0, 200.0),myReader.testParseInput("tell [ 1 2 7 10 ] fd 100 ask [ 2 7 ] [ bk 50 ] askwith [ greater? ycor 50 ] [ fd 100 ] ycor"));
   }
-
 
   @Test
   void testConditional () {
