@@ -2,6 +2,7 @@ package slogo.visualization;
 
 import java.util.ResourceBundle;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.VBox;
 
 public class HistoryDisplay extends ScrollingDisplay {
@@ -15,9 +16,8 @@ public class HistoryDisplay extends ScrollingDisplay {
 
   private final VBox historyBox;
 
-  public HistoryDisplay(String resourcePackage){
-    super(resourcePackage);
-
+  public HistoryDisplay(Workspace workspace, String resourcePackage){
+    super(workspace, resourcePackage);
     historyBox = setupVBoxContainer(HISTORY_TITLE, HISTORY_BOX_ID);
     String language = "English";
     this.resourceBundle = ResourceBundle.getBundle(String.format("%s/%s/%s", resourcePackage, "languages", language));
@@ -37,6 +37,15 @@ public class HistoryDisplay extends ScrollingDisplay {
 
     historyBox.getChildren().add(historyTag);
 
+    applyHistoryTagLogic(historyTag);
+
     return historyTag;
+  }
+
+  public void applyHistoryTagLogic(Button historyTag){
+    historyTag.setOnAction(e -> {
+      String command = historyTag.getText();
+      getTerminalDisplay().setTerminalText(command);
+    });
   }
 }

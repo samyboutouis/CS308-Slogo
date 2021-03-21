@@ -2,14 +2,16 @@ package slogo.visualization;
 
 import java.util.ResourceBundle;
 import javafx.geometry.Insets;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
-import slogo.BackEndTurtle;
 import slogo.FrontEndTurtleTracker;
 import slogo.controller.Controller;
 import slogo.model.BackEndTurtleTracker;
@@ -25,6 +27,7 @@ public class TerminalDisplay {
   private final static String DISPLAY_CLASS_NAME = "displayWindow";
   private final static int COLUMN_COUNT = 4;
 
+  private final Scene scene;
   private final ResourceBundle resourceBundle;
   private final ResourceBundle idBundle;
   private final ResourceBundle errorBundle;
@@ -38,11 +41,14 @@ public class TerminalDisplay {
   private final FrontEndTurtleTracker turtleTracker;
   private final Controller controller;
 
-  public TerminalDisplay(String resourcePackage, HistoryDisplay historyDisplay,
+  private boolean ctrlPressed;
+
+  public TerminalDisplay(String resourcePackage, Scene scene, HistoryDisplay historyDisplay,
     FrontEndTurtleTracker frontEndTurtleTracker, VariablesDisplay variablesDisplay,
     UserCommandsDisplay userCommandsDisplay, Controller controller) {
     pane = new GridPane();
     pane.getStyleClass().add(DISPLAY_CLASS_NAME);
+    this.scene = scene;
     this.historyDisplay = historyDisplay;
     this.variablesDisplay = variablesDisplay;
     this.userCommandsDisplay = userCommandsDisplay;
@@ -70,10 +76,11 @@ public class TerminalDisplay {
       pane.getColumnConstraints().add(col);
     }
 
+    ctrlPressed = false;
+
     initializeTextField();
     initializeButton();
-
-    applyButtonLogic();
+    applyTerminalLogic();
   }
 
   private void initializeTextField() {
@@ -97,31 +104,42 @@ public class TerminalDisplay {
     pane.add(button, 3, 0, 1, 1);
   }
 
-  private void applyButtonLogic() {
+  private void applyTerminalLogic() {
     button.setOnAction(e -> {
-      String command = textBox.getText().trim();
-      if (command.length() > 0) {
-        try {
-          BackEndTurtleTracker backEndTurtleTracker = turtleTracker.passToBackEnd();
-          new AnimationManager(
-            controller.parseProgram(command, backEndTurtleTracker).getAllCommands(), turtleTracker);
-          Button historyTag = historyDisplay.addNewHistoryTag(command);
-          variablesDisplay.updateBox(controller.getVariables());
-          userCommandsDisplay.updateBox(controller.getUserDefinedCommands());
-          applyHistoryTagLogic(historyTag);
-        } catch (Exception error) {
-          createErrorDialog(error); // backend throws new exception with specific error message
-        }
-      }
-      textBox.clear();
+      sendCommandToController();
+    });
+
+    scene.setOnKeyPressed(e -> {
+      applyKeyPressedLogic(e, true);
+    });
+
+    scene.setOnKeyReleased(e -> {
+      applyKeyPressedLogic(e, false);
     });
   }
 
-  private void applyHistoryTagLogic(Button historyTag) {
-    historyTag.setOnAction(e -> {
-      String command = historyTag.getText();
-      textBox.setText(command);
-    });
+  private void applyKeyPressedLogic(KeyEvent e, boolean state){
+    if(e.getCode() == KeyCode.CONTROL){
+      ctrlPressed = state;
+    } else if (e.getCode() == KeyCode.ENTER && ctrlPressed) {
+      sendCommandToController();
+    }
+  }
+
+  private void sendCommandToController(){
+    String command = textBox.getText().trim();
+    if (command.length() > 0) {
+      try {
+        BackEndTurtleTracker backEndTurtleTracker = turtleTracker.passToBackEnd();
+        new AnimationManager(
+            controller.parseProgram(command, backEndTurtleTracker).getAllCommands(), turtleTracker);
+        variablesDisplay.updateBox(controller.getVariables());
+        userCommandsDisplay.updateBox(controller.getUserDefinedCommands());
+      } catch (Exception error) {
+        createErrorDialog(error); // backend throws new exception with specific error message
+      }
+    }
+    textBox.clear();
   }
 
   private void createErrorDialog(Exception error) {
@@ -130,6 +148,10 @@ public class TerminalDisplay {
     newAlert.setHeaderText(null);
     newAlert.setContentText(error.getMessage());
     newAlert.showAndWait();
+  }
+
+  public void setTerminalText(String command){
+    textBox.setText(command);
   }
 
   public GridPane getPane() {

@@ -20,8 +20,8 @@ public class VariablesDisplay extends ScrollingDisplay {
    *
    * @param resourcePackage
    */
-  public VariablesDisplay(String resourcePackage){
-    super(resourcePackage);
+  public VariablesDisplay(Workspace workspace, String resourcePackage){
+    super(workspace, resourcePackage);
 
     variablesBox = setupVBoxContainer(VARIABLES_TITLE, VARIABLES_BOX_ID);
     String language = "English";
@@ -42,7 +42,7 @@ public class VariablesDisplay extends ScrollingDisplay {
   }
 
   private void addNewVariablesTag(String name, double value){
-    Button variablesTag = new Button(String.format("%s : %.2f", name.substring(1), value));
+    Button variablesTag = new Button(String.format("%s :: %.2f", name.substring(1), value));
     variablesTag.setWrapText(true);
     variablesTag.setMaxWidth(Double.MAX_VALUE);
     variablesTag.setMaxHeight(Double.MAX_VALUE);
@@ -54,7 +54,7 @@ public class VariablesDisplay extends ScrollingDisplay {
 
   private void applyVariablesTagLogic(Button variablesTag) {
     variablesTag.setOnAction(e -> {
-      String[] variableMap = variablesTag.getText().split(":");
+      String[] variableMap = variablesTag.getText().split("::");
       String variableName = variableMap[0];
       String variableValue = variableMap[1];
       TextInputDialog textDialog = new TextInputDialog(String.format("%s", variableValue));
@@ -62,13 +62,11 @@ public class VariablesDisplay extends ScrollingDisplay {
       textDialog.showAndWait();
 
       // for testing
-      if(textDialog.getEditor().getText() != null){
-        System.out.println(textDialog.getEditor().getText());
+      String newValue = textDialog.getEditor().getText();
+      if(newValue != null){
+        String command = String.format("set :%s%s", variableName, newValue);
+        getTerminalDisplay().setTerminalText(command);
       }
-
-      // for real:
-      // call method in backend to change variable value
-      // call updateBox()
     });
   }
 }

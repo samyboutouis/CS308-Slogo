@@ -21,6 +21,8 @@ public class Workspace {
   private final Controller controller;
   private FrontEndController frontEndController;
 
+  private TerminalDisplay terminalDisplay;
+
   public Workspace(Pane root, Scene scene, Stage stage) {
     this.scene = scene;
     this.stage = stage;
@@ -37,15 +39,15 @@ public class Workspace {
     FrontEndTurtleTracker frontEndTurtleTracker = new FrontEndTurtleTracker();
     frontEndController = new FrontEndController(stage, frontEndTurtleTracker);
 
-    HistoryDisplay historyDisplay = new HistoryDisplay(RESOURCE_PACKAGE);
-    VariablesDisplay variablesDisplay = new VariablesDisplay(RESOURCE_PACKAGE);
-    UserCommandsDisplay userCommandsDisplay = new UserCommandsDisplay(RESOURCE_PACKAGE);
+    HistoryDisplay historyDisplay = new HistoryDisplay(this, RESOURCE_PACKAGE);
+    VariablesDisplay variablesDisplay = new VariablesDisplay(this, RESOURCE_PACKAGE);
+    UserCommandsDisplay userCommandsDisplay = new UserCommandsDisplay(this, RESOURCE_PACKAGE);
     ButtonDisplay buttonDisplay = new ButtonDisplay(frontEndController);
     //paletteDisplay
     TurtleStateDisplay turtleStateDisplay = new TurtleStateDisplay(frontEndController, frontEndTurtleTracker);
     frontEndTurtleTracker.addObserver(turtleStateDisplay);
 
-    TerminalDisplay terminalDisplay = new TerminalDisplay(RESOURCE_PACKAGE, historyDisplay, frontEndTurtleTracker, variablesDisplay, userCommandsDisplay, controller);
+    terminalDisplay = new TerminalDisplay(RESOURCE_PACKAGE, scene, historyDisplay, frontEndTurtleTracker, variablesDisplay, userCommandsDisplay, controller);
     TurtleDisplay turtleDisplay = new TurtleDisplay();
 
     ToolbarDisplay toolbarDisplay = new ToolbarDisplay(RESOURCE_PACKAGE, controller, frontEndController);
@@ -66,5 +68,9 @@ public class Workspace {
     scene.getStylesheets().add(
       getClass().getResource(String.format("/%s/stylesheets/%s", RESOURCE_PACKAGE, "default.css"))
         .toExternalForm());
+  }
+
+  public TerminalDisplay getTerminalDisplay(){
+    return terminalDisplay;
   }
 }

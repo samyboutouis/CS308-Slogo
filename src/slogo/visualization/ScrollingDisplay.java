@@ -20,15 +20,17 @@ public class ScrollingDisplay {
   private final ResourceBundle resourceBundle;
   private final ResourceBundle idBundle;
   private final GridPane pane;
+  private final Workspace workspace;
 
   /**
    *
    * @param resourcePackage
    */
-  public ScrollingDisplay(String resourcePackage){
+  public ScrollingDisplay(Workspace workspace, String resourcePackage){
     pane = new GridPane();
     pane.getStyleClass().add(DISPLAY_CLASS_NAME);
     String language = "English";
+    this.workspace = workspace;
     this.resourceBundle = ResourceBundle.getBundle(String.format("%s/%s/%s", resourcePackage, "languages", language));
     this.idBundle = ResourceBundle.getBundle(String.format("%s/%s/%s", resourcePackage, "stylesheets", "CSS_IDs"));
   }
@@ -84,5 +86,9 @@ public class ScrollingDisplay {
 
   public GridPane getPane(){
     return pane;
+  }
+
+  public TerminalDisplay getTerminalDisplay() {
+    return workspace.getTerminalDisplay();
   }
 }
