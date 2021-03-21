@@ -10,6 +10,7 @@ import slogo.BackEndTurtle;
 import slogo.turtlecommands.HomeCommand;
 import slogo.turtlecommands.MovementCommand;
 import slogo.turtlecommands.SetPaletteCommand;
+import slogo.turtlecommands.SetPenSizeCommand;
 import slogo.turtlecommands.TellCommand;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -216,6 +217,7 @@ public class CommandReaderTest {
   void testDisplayCommands () {
     setUpTracker();
     assertTrue(getAllCommands(myReader.parseInput("setpalette 1 0 100 255", tracker).getAllTurtleCommands()).get(0) instanceof SetPaletteCommand);
+    assertTrue(getAllCommands(myReader.parseInput("setpensize 10", tracker).getAllTurtleCommands()).get(0) instanceof SetPenSizeCommand);
   }
 
   // SECTION
