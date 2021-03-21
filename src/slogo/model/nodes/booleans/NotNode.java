@@ -10,6 +10,7 @@ public class NotNode extends SlogoNode{
   public NotNode(int numParameters){
     super(numParameters);
     parameters = super.getParameters();
+    setBooleanNode(true);
   }
 
   @Override

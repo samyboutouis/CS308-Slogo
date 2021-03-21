@@ -39,6 +39,23 @@ Known Bugs:
 
 Extra credit:
 
+### Code Design Decisions
+
+#### Ask
+```
+tell [ 1 2 3 ]
+ask [ 1 3 ] [ fd 50 ]
+```
+1 2 3 should be active after code is run
+
+#### Tell
+```
+tell [ 100 ]
+```
+Creates one turtle with id 100, rather than all turtles up to 100. Design decision made by the team here
+We thought up cases where we only wanted to tell a single turtle something (to see their xcor for example)
+So tell [ 2 ] xcor would provide us the xcor of second turtle, but if we didn't allow single tells to only create one turtle, issues may occur
+
 
 ### Impressions
 

@@ -10,6 +10,7 @@ public class NotEqualNode extends SlogoNode{
   public NotEqualNode(int numParameters){
     super(numParameters);
     parameters = super.getParameters();
+    setBooleanNode(true);
   }
 
   @Override

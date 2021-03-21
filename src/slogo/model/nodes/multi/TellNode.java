@@ -1,10 +1,11 @@
 package slogo.model.nodes.multi;
 
+import java.util.ArrayList;
 import java.util.List;
-import slogo.BackEndTurtle;
 import slogo.model.SlogoNode;
 import slogo.model.BackEndTurtleTracker;
 import slogo.model.nodes.control.ListEndNode;
+import slogo.turtlecommands.TellCommand;
 
 public class TellNode extends SlogoNode {
   private List<SlogoNode> parameters;
@@ -31,16 +32,21 @@ public class TellNode extends SlogoNode {
     return seen == brackets;
   }
 
-
+  
 
   @Override
   public double getReturnValue(BackEndTurtleTracker tracker) {
     int ret=0;
+    tracker.clearActiveTurtles(); // clear the previous active list of turtles, to prepare room for new list of active turtles.
+    List<Integer> tellTurtleList = new ArrayList<>();
     for (int i=1; i<parameters.size()-1;i++){
       ret= (int) parameters.get(i).getReturnValue(tracker); // should all be constant nodes
-      tracker.addTurtle(new BackEndTurtle(0,0,0,true,true, ret));
-      // create a tellCommand object here that calls a frontend method to make turtle look active
+      tellTurtleList.add(ret);
     }
+    tracker.setTellList(tellTurtleList);
+    tracker.findActiveAndInactiveTurtles(((currTurtle, id, isActive) -> {
+      currTurtle.addCommand(new TellCommand(tracker.getSafe(), id, isActive));
+    }));
     return ret;
   }
 
