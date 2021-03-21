@@ -44,17 +44,6 @@ public class BackEndTurtleTracker implements SafeBackEndTurtleTracker {
     currTurtle = 0;
   }
 
-  // FIX: front end needs to know which turtle to run each list of commands on, so we can't
-  // just concatenate all command lists
-  public List<Command> getAllCommands(){
-    List<Command> allCommands = new ArrayList<>();
-    Iterator<Integer> itrn = getIterator();
-    while (itrn.hasNext()){
-      allCommands.addAll(getTurtle(itrn.next()).getCommands());
-    }
-    return allCommands;
-  }
-
   public Map<Integer, List<Command>> getAllTurtleCommands() {
     Map<Integer, List<Command>> ret = new HashMap<>();
     for(Integer id : allTurtles.keySet()) {
