@@ -49,7 +49,7 @@ public class ViewLayout {
     viewNamesMap.put("History", historyDisplay.getPane());
     viewNamesMap.put("Palette", paletteDisplay.getPane());
     viewNamesMap.put("Move Turtle", buttonDisplay.getPane());
-    viewNamesMap.put("Turtle States", turtleStateDisplay.getPane());
+    viewNamesMap.put("Turtles", turtleStateDisplay.getPane());
   }
 
   private void initializeViewOrder(){

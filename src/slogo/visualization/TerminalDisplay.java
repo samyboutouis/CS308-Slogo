@@ -40,14 +40,13 @@ public class TerminalDisplay {
   private final UserCommandsDisplay userCommandsDisplay;
 
   private final FrontEndTurtleTracker turtleTracker;
-  private final TurtleDisplay turtleDisplay;
   private final Controller controller;
 
   private boolean ctrlPressed;
 
   public TerminalDisplay(String resourcePackage, Scene scene, HistoryDisplay historyDisplay,
     FrontEndTurtleTracker frontEndTurtleTracker, VariablesDisplay variablesDisplay,
-    UserCommandsDisplay userCommandsDisplay, Controller controller, TurtleDisplay turtleDisplay) {
+    UserCommandsDisplay userCommandsDisplay, Controller controller) {
 
     pane = new GridPane();
     pane.getStyleClass().add(DISPLAY_CLASS_NAME);
@@ -57,7 +56,6 @@ public class TerminalDisplay {
     this.userCommandsDisplay = userCommandsDisplay;
     this.turtleTracker = frontEndTurtleTracker;
     this.controller = controller;
-    this.turtleDisplay = turtleDisplay;
 
     pane.setMaxWidth(Double.MAX_VALUE);
     pane.setMaxHeight(Double.MAX_VALUE);
@@ -135,7 +133,6 @@ public class TerminalDisplay {
     String command = textBox.getText().trim();
     if(turtleTracker.isEmpty()) {
       FrontEndTurtle turtle = new FrontEndTurtle(turtleTracker);
-      turtleDisplay.addTurtle(turtle);
       turtleTracker.addTurtle(turtle);
     }
     if (command.length() > 0) {
@@ -143,8 +140,7 @@ public class TerminalDisplay {
         BackEndTurtleTracker backEndTurtleTracker = turtleTracker.passToBackEnd();
         new AnimationManager(
             controller.parseProgram(command, backEndTurtleTracker).getAllTurtleCommands(),
-            turtleTracker, turtleDisplay
-        );
+            turtleTracker);
         historyDisplay.addNewHistoryTag(command);
         variablesDisplay.updateBox(controller.getVariables());
         userCommandsDisplay.updateBox(controller.getUserDefinedCommands());

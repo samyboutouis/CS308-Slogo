@@ -8,7 +8,9 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
+import javafx.scene.paint.Color;
 import slogo.model.BackEndTurtleTracker;
+import slogo.visualization.BackgroundObserver;
 import slogo.visualization.FrontEndTurtle;
 import slogo.visualization.PaletteDisplay;
 import slogo.visualization.TurtleObserver;
@@ -17,12 +19,14 @@ public class FrontEndTurtleTracker implements SafeFrontEndTurtleTracker{
   private final Map<Integer, FrontEndTurtle> allTurtles;
   private final List<Integer> activeTurtles;
   private final List<TurtleObserver> turtleObservers;
+  private final List<BackgroundObserver> backgroundObservers;
   private final PaletteDisplay paletteDisplay;
 
   public FrontEndTurtleTracker(PaletteDisplay paletteDisplay) {
     allTurtles = new TreeMap<>();
     activeTurtles = new ArrayList<>();
     turtleObservers = new ArrayList<>();
+    backgroundObservers = new ArrayList<>();
     this.paletteDisplay = paletteDisplay;
   }
 
@@ -30,19 +34,28 @@ public class FrontEndTurtleTracker implements SafeFrontEndTurtleTracker{
     turtleObservers.add(turtleObserver);
   }
 
-  public void removeObserver(TurtleObserver turtleObserver) {
-    turtleObservers.remove(turtleObserver);
+  public void addObserver(BackgroundObserver backgroundObserver) {
+    backgroundObservers.add(backgroundObserver);
   }
 
-  private void notifyAddTurtle(List<Integer> list) {
+  private void notifyAddTurtle(List<Integer> list, FrontEndTurtle turtle) {
     for(TurtleObserver turtleObserver : turtleObservers) {
       turtleObserver.updateTurtleNumber(list);
+    }
+    for(BackgroundObserver backgroundObserver : backgroundObservers) {
+      backgroundObserver.addToBackground(turtle);
     }
   }
 
   private void notifyUpdateTurtleState(int id) {
     for(TurtleObserver turtleObserver : turtleObservers) {
       turtleObserver.updateTurtleState(id);
+    }
+  }
+
+  public void notifyBackgroundObservers(Color color) {
+    for(BackgroundObserver backgroundObserver : backgroundObservers) {
+      backgroundObserver.setBackgroundColor(color);
     }
   }
 
@@ -98,7 +111,7 @@ public class FrontEndTurtleTracker implements SafeFrontEndTurtleTracker{
     }
     allTurtles.put(turtleID, turtle);
     if(turtle.isActive()) activeTurtles.add(turtleID);
-    notifyAddTurtle(getTurtleIDs());
+    notifyAddTurtle(getTurtleIDs(), turtle);
   }
 
   public void updatePalette(int index, int r, int g, int b){

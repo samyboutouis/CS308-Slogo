@@ -16,17 +16,36 @@ public class ButtonFactory {
   private static final String IMAGE_PROPERTY = "reflection/Image";
   private static final String ID_PROPERTY = "stylesheets/CSS_IDs";
   private static final String METHODS_PROPERTY = "reflection/ButtonMethods";
+  private static final String LABELS_PROPERTY = "reflection/ButtonText";
 
   private final ResourceBundle imageBundle;
   private final ResourceBundle idBundle;
   private final ResourceBundle commandBundle;
+  private final ResourceBundle labelBundle;
   private final FrontEndController controller;
 
   public ButtonFactory(FrontEndController controller) {
     this.imageBundle = ResourceBundle.getBundle(DEFAULT_RESOURCE_FOLDER + IMAGE_PROPERTY);
     this.idBundle = ResourceBundle.getBundle(DEFAULT_RESOURCE_FOLDER + ID_PROPERTY);
     this.commandBundle = ResourceBundle.getBundle(DEFAULT_RESOURCE_FOLDER + METHODS_PROPERTY);
+    this.labelBundle = ResourceBundle.getBundle(DEFAULT_RESOURCE_FOLDER + LABELS_PROPERTY);
     this.controller = controller;
+  }
+
+  public Button createDefaultButton(String property) {
+    Button button = new Button();
+    button.setText(labelBundle.getString(property));
+    button.setId(idBundle.getString(property));
+    button.setOnAction(handler -> {
+      try {
+        Method m = controller.getClass()
+          .getDeclaredMethod(commandBundle.getString(property));
+        m.invoke(controller);
+      } catch (Exception e) {
+        throw new RuntimeException("Improper configuration", e);
+      }
+    });
+    return button;
   }
 
   public Button createTurtleButton(String property, SafeTurtle turtle) {

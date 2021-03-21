@@ -13,7 +13,6 @@ public class AnimationManager {
 
   private final Map<Integer, List<Command>> commands;
   private final FrontEndTurtleTracker turtleTracker;
-  private final TurtleDisplay turtleDisplay;
   private int frameIndex;
   private Iterator<Integer> turtleIterator;
   private int turtleID;
@@ -21,11 +20,9 @@ public class AnimationManager {
   private Timeline animation;
 
   public AnimationManager(Map<Integer, List<Command>> map,
-    FrontEndTurtleTracker frontEndTurtleTracker, TurtleDisplay turtleDisplay) {
+    FrontEndTurtleTracker frontEndTurtleTracker) {
     this.commands = map;
     this.turtleTracker = frontEndTurtleTracker;
-    this.turtleDisplay = turtleDisplay;
-
     setupTimeline();
   }
 
@@ -73,7 +70,6 @@ public class AnimationManager {
     for (int id : commands.keySet()) {
       if (!turtleTracker.turtleExists(id)) {
         FrontEndTurtle turtle = new FrontEndTurtle(turtleTracker);
-        turtleDisplay.addTurtle(turtle);
         turtleTracker.addTurtle(turtle);
       }
     }

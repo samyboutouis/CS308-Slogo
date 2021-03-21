@@ -49,13 +49,9 @@ public class Workspace {
 
     TurtleStateDisplay turtleStateDisplay = new TurtleStateDisplay(frontEndController,
       frontEndTurtleTracker);
-    frontEndTurtleTracker.addObserver(turtleStateDisplay);
-
-    TurtleDisplay turtleDisplay = new TurtleDisplay();
-    terminalDisplay = new TerminalDisplay(RESOURCE_PACKAGE, scene, historyDisplay, frontEndTurtleTracker, variablesDisplay, userCommandsDisplay, controller, turtleDisplay);
-
-
-    ToolbarDisplay toolbarDisplay = new ToolbarDisplay(RESOURCE_PACKAGE, controller, frontEndController);
+    TurtleDisplay turtleDisplay = new TurtleDisplay(frontEndTurtleTracker);
+    terminalDisplay = new TerminalDisplay(RESOURCE_PACKAGE, scene, historyDisplay, frontEndTurtleTracker, variablesDisplay, userCommandsDisplay, controller);
+    ToolbarDisplay toolbarDisplay = new ToolbarDisplay(RESOURCE_PACKAGE, controller, frontEndController, frontEndTurtleTracker);
     ViewLayout viewLayout = new ViewLayout(historyDisplay, variablesDisplay, userCommandsDisplay, paletteDisplay, buttonDisplay, turtleStateDisplay, frontEndController);
 
     frontEndController.setToolbarDisplay(toolbarDisplay);
