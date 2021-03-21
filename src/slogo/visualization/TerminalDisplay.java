@@ -34,17 +34,19 @@ public class TerminalDisplay {
   private final HistoryDisplay historyDisplay;
   private final VariablesDisplay variablesDisplay;
   private final FrontEndTurtleTracker turtleTracker;
+  private final TurtleDisplay turtleDisplay;
   private final Controller controller;
 
   public TerminalDisplay(String resourcePackage, HistoryDisplay historyDisplay,
     FrontEndTurtleTracker frontEndTurtleTracker, VariablesDisplay variablesDisplay,
-    Controller controller) {
+    Controller controller, TurtleDisplay turtleDisplay) {
     pane = new GridPane();
     pane.getStyleClass().add(DISPLAY_CLASS_NAME);
     this.historyDisplay = historyDisplay;
     this.variablesDisplay = variablesDisplay;
     this.turtleTracker = frontEndTurtleTracker;
     this.controller = controller;
+    this.turtleDisplay = turtleDisplay;
 
     pane.setMaxWidth(Double.MAX_VALUE);
     pane.setMaxHeight(Double.MAX_VALUE);
@@ -101,7 +103,8 @@ public class TerminalDisplay {
         try {
           BackEndTurtleTracker backEndTurtleTracker = turtleTracker.passToBackEnd();
           new AnimationManager(
-            controller.parseProgram(command, backEndTurtleTracker).getAllCommands(), turtleTracker);
+            controller.parseProgram(command, backEndTurtleTracker).getAllTurtleCommands(),
+            turtleTracker, turtleDisplay);
           Button historyTag = historyDisplay.addNewHistoryTag(command);
           variablesDisplay.updateBox(controller.getVariables());
           applyHistoryTagLogic(historyTag);
