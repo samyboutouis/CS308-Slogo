@@ -10,7 +10,9 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import slogo.BackEndTurtle;
+import slogo.FrontEndTurtleTracker;
 import slogo.controller.Controller;
+import slogo.model.BackEndTurtleTracker;
 
 public class TerminalDisplay {
 
@@ -31,16 +33,17 @@ public class TerminalDisplay {
   private Button button;
   private final HistoryDisplay historyDisplay;
   private final VariablesDisplay variablesDisplay;
-  private final FrontEndTurtle frontEndTurtle;
+  private final FrontEndTurtleTracker turtleTracker;
   private final Controller controller;
 
   public TerminalDisplay(String resourcePackage, HistoryDisplay historyDisplay,
-    FrontEndTurtle frontEndTurtle, VariablesDisplay variablesDisplay, Controller controller) {
+    FrontEndTurtleTracker frontEndTurtleTracker, VariablesDisplay variablesDisplay,
+    Controller controller) {
     pane = new GridPane();
     pane.getStyleClass().add(DISPLAY_CLASS_NAME);
     this.historyDisplay = historyDisplay;
     this.variablesDisplay = variablesDisplay;
-    this.frontEndTurtle = frontEndTurtle;
+    this.turtleTracker = frontEndTurtleTracker;
     this.controller = controller;
 
     pane.setMaxWidth(Double.MAX_VALUE);
@@ -96,9 +99,9 @@ public class TerminalDisplay {
       String command = textBox.getText().trim();
       if (command.length() > 0) {
         try {
-          BackEndTurtle backendTurtle = new BackEndTurtle(frontEndTurtle.getX(), frontEndTurtle.getY(),
-              frontEndTurtle.getDirection(), frontEndTurtle.isPenDown(), frontEndTurtle.isShowing(),0); // assuming it has index 0
-          new AnimationManager(controller.parseProgram(command, backendTurtle).getAllCommands(), frontEndTurtle);
+          BackEndTurtleTracker backEndTurtleTracker = turtleTracker.passToBackEnd();
+          new AnimationManager(
+            controller.parseProgram(command, backEndTurtleTracker).getAllCommands(), turtleTracker);
           Button historyTag = historyDisplay.addNewHistoryTag(command);
           variablesDisplay.updateBox(controller.getVariables());
           applyHistoryTagLogic(historyTag);
@@ -125,7 +128,7 @@ public class TerminalDisplay {
     newAlert.showAndWait();
   }
 
-  public GridPane getPane(){
+  public GridPane getPane() {
     return pane;
   }
 }

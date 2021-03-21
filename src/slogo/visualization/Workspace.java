@@ -46,7 +46,7 @@ public class Workspace {
     frontEndTurtleTracker.addObserver(turtleStateDisplay);
 
     //FIXME: Implement turtle tracker
-    TerminalDisplay terminalDisplay = new TerminalDisplay(RESOURCE_PACKAGE, historyDisplay, new FrontEndTurtle(frontEndTurtleTracker), variablesDisplay, controller);
+    TerminalDisplay terminalDisplay = new TerminalDisplay(RESOURCE_PACKAGE, historyDisplay, frontEndTurtleTracker, variablesDisplay, controller);
     TurtleDisplay turtleDisplay = new TurtleDisplay();
     ToolbarDisplay toolbarDisplay = new ToolbarDisplay(RESOURCE_PACKAGE, controller, frontEndController);
     ViewLayout viewLayout = new ViewLayout(historyDisplay, variablesDisplay, userCommandsDisplay, buttonDisplay, turtleStateDisplay, frontEndController);
