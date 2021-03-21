@@ -15,7 +15,9 @@ public class Workspace {
   private final static String RESOURCE_PACKAGE = "resources";
   private final static String STYLESHEETS_PACKAGE = String.format("/%s/stylesheets", RESOURCE_PACKAGE);
   private final static int[] paneIndexes = {0, 0, 5, 1, 0, 1, 2, 7, 0, 8, 2, 2, 2, 1, 3, 9};
-  private final static String DEFAULT_STYLESHEET = "default.css";
+  private final static String DEFAULT_STYLESHEET = "dark.css";
+
+  private final static String WORKSPACE_PANE_ID = "Workspace";
 
   private final Stage stage;
   private final Scene scene;
@@ -29,6 +31,7 @@ public class Workspace {
     this.stage = stage;
     controller = new Controller();
     pane = new CustomGridPane(GRID_ROW_COUNT, GRID_COLUMN_COUNT, PADDING_LENGTH);
+    pane.setId(WORKSPACE_PANE_ID);
     root.getChildren().add(pane);
     pane.setPrefSize(scene);
     setupDisplays();

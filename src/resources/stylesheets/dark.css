@@ -1,7 +1,7 @@
 * {
   -fx-font-family: monospace;
   -fx-font-size: 20;
-  -fx-text-fill: black;
+  -fx-text-fill: white;
 }
 
 .combo-box, .combo-box .context-menu {
@@ -30,7 +30,7 @@
 }
 
 #TerminalTextBox .scroll-pane{
-  -fx-background-color: white;
+  -fx-background-color: #7c7c7c;
   -fx-background-radius: 20px;
 }
 
@@ -41,36 +41,36 @@
 #TerminalButton {
   -fx-background-radius: 20px;
   -fx-border-width: 0px;
-  -fx-background-color: #8bdd3f;
+  -fx-background-color: #6c8c52;
   -fx-font-size: 10;
 }
 
 #TerminalButton:hover {
-  -fx-background-color: #95e947;
+  -fx-background-color: #7e9d63;
 }
 
 #TerminalButton:pressed {
-  -fx-background-color: #7fcd37;
+  -fx-background-color: #5b7942;
 }
 
 .displayWindow{
-  -fx-background-color: #dedcdc;
+  -fx-background-color: #3c3c3c;
   -fx-background-radius: 20px;
 }
 
 .ViewContainer{
-  -fx-background-color: #fafafa;
+  -fx-background-color: #7c7c7c;
   -fx-background-radius: 20px;
 }
 
 #ViewContainerCloseButton {
   -fx-background-radius: 50%;
   -fx-border-width: 0px;
-  -fx-background-color: #f37878;
+  -fx-background-color: #ab3737;
 }
 
 #ViewContainerCloseButton:hover {
-  -fx-background-color: #d44848;
+  -fx-background-color: #ca4848;
 }
 
 #ViewContainerComboBox {
@@ -82,7 +82,7 @@
 #HistoryBox, #VariablesBox, #UserCommandsBox, #PaletteBox {
   -fx-background-radius: 20px;
   -fx-border-radius: 20px;
-  -fx-background-color: white;
+  -fx-background-color: #aeadad;
 }
 
 #HistoryBox .viewport, #VariablesBox .viewport, #UserCommandsBox .viewport, #PaletteBox .viewport{
@@ -92,15 +92,15 @@
 #HistoryTag, #VariablesTag, #UserCommandsTag, #PaletteTag {
   -fx-background-radius: 20px;
   -fx-border-width: 0px;
-  -fx-background-color: #f5f5f5;
+  -fx-background-color: #707070;
 }
 
 #HistoryTag:hover, #VariablesTag:hover, #UserCommandsTag:hover {
-  -fx-background-color: #fafafa;
+  -fx-background-color: #838282;
 }
 
 #HistoryTag:pressed, #VariablesTag:pressed, #UserCommandsTag:pressed {
-  -fx-background-color: #e7e7e7;
+  -fx-background-color: #5a5a5a;
 }
 
 #PenColorPicker {
