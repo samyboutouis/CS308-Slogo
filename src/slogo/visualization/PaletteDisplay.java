@@ -31,24 +31,55 @@ public class PaletteDisplay extends ScrollingDisplay {
     this.resourceBundle = ResourceBundle.getBundle(String.format("%s/%s/%s", resourcePackage, "languages", language));
     this.idBundle = ResourceBundle.getBundle(ID_PROPERTY);
 
-    addNewPaletteTag(1, 1, 1, 1);
+    updatePaletteBox(1, 255, 180, 120);
+    updatePaletteBox(2, 255, 0, 0);
+    updatePaletteBox(1, 255, 0, 0);
   }
 
-  public void addNewPaletteTag(int index, int r, int g, int b){
+  /**
+   *
+   * @param index
+   * @param r
+   * @param g
+   * @param b
+   */
+  public void updatePaletteBox(int index, int r, int g, int b){
+    if(paletteBox.getChildren().size() < index){
+      addNewPaletteTag(index, r, g, b);
+    } else {
+      updatePaletteTag(index, r, g, b);
+    }
+
+  }
+
+  private void addNewPaletteTag(int index, int r, int g, int b){
     CustomGridPane paletteTag = new CustomGridPane(PALETTE_TAG_ROW_COUNT, PALETTE_TAG_COL_COUNT, PALETTE_TAG_PADDING_LENGTH);
     paletteTag.setId(idBundle.getString(PALETTE_TAG_ID));
 
+    Label indexLabel = new Label(String.format(" %d:", index));
     Circle paletteCircle = new Circle();
-    paletteCircle.setRadius(15);
-    paletteCircle.setFill(Color.WHITE);
+    Label paletteLabel = new Label(String.format("%d,%d,%d", r, g, b));
+
+    paletteCircle.setRadius(12);
+    paletteCircle.setFill(Color.rgb(r, g, b));
     paletteCircle.setStroke(Color.BLACK);
     paletteCircle.setStrokeWidth(2);
-    Label paletteLabel = new Label("TEST");
 
-    paletteTag.add(paletteCircle, 0, 0, 1, 1);
-    paletteTag.add(paletteLabel, 1, 0, 5, 1);
+    paletteTag.add(indexLabel, 0, 0, 1, 1);
+    paletteTag.add(paletteCircle, 1, 0, 1, 1);
+    paletteTag.add(paletteLabel, 2, 0, 4, 1);
 
     paletteBox.getChildren().add(paletteTag);
   }
 
+  private void updatePaletteTag(int index, int r, int g, int b){
+    CustomGridPane paletteTag = (CustomGridPane) paletteBox.getChildren().get(index - 1);
+    Label indexLabel = (Label) paletteTag.getChildren().get(0);
+    Circle paletteCircle = (Circle) paletteTag.getChildren().get(1);
+    Label paletteLabel = (Label) paletteTag.getChildren().get(2);
+
+    indexLabel.setText(String.format(" %d:", index));
+    paletteCircle.setFill(Color.rgb(r, g, b));
+    paletteLabel.setText(String.format("%d,%d,%d", r, g, b));
+  }
 }
