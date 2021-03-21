@@ -40,7 +40,7 @@ public class UserCommandsDisplay extends ScrollingDisplay {
   }
 
   private void addNewCommandsTag(String name, String value){
-    Button commandsTag = new Button(String.format("%s ::%s", name, value));
+    Button commandsTag = new Button(String.format("%s =%s", name, value));
     commandsTag.setWrapText(true);
     commandsTag.setMaxWidth(Double.MAX_VALUE);
     commandsTag.setMaxHeight(Double.MAX_VALUE);
@@ -53,7 +53,7 @@ public class UserCommandsDisplay extends ScrollingDisplay {
 
   private void applyCommandsTagLogic(Button commandsTag) {
     commandsTag.setOnAction(e -> {
-      String[] commandsMap = commandsTag.getText().split(":: ");
+      String[] commandsMap = commandsTag.getText().split("= ");
       String commandName = commandsMap[0];
 
       TextInputDialog textDialog = new TextInputDialog();
