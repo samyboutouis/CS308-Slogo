@@ -38,10 +38,10 @@ class ButtonDisplayTest extends DukeApplicationTest {
     addTurtle();
   }
 
-  @Test
-  void testRight() {
-    clickOn(myRightButton);
-  }
+//  @Test
+//  void testRight() {
+//    clickOn(myRightButton);
+//  }
 
   private void addTurtle() {
     Button addTurtleButton = lookup("#" + idBundle.getString("AddTurtleButton")).query();

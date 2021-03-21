@@ -60,6 +60,11 @@ public class FrontEndTurtleTracker implements SafeFrontEndTurtleTracker {
     }
   }
 
+  public void setBackgroundColor(int index) {
+    Color color = paletteDisplay.getColorFromIndex(index);
+    notifyBackgroundObservers(color);
+  }
+
   public BackEndTurtleTracker passToBackEnd() {
     Map<Integer, BackEndTurtle> backEndAllTurtles = new HashMap<>();
     for (int i = 1; i <= allTurtles.size(); i++) {

@@ -100,10 +100,12 @@ public class FrontEndTurtle implements Turtle, SafeTurtle {
 
   public void show() {
     imageView.setVisible(true);
+    activeCircle.show();
   }
 
   public void hide() {
     imageView.setVisible(false);
+    activeCircle.hide();
   }
 
   public boolean isShowing() {
