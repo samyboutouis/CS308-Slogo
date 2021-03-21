@@ -13,7 +13,8 @@ public class Workspace {
   private final static int GRID_COLUMN_COUNT = 5;
   private final static int PADDING_LENGTH = 10;
   private final static String RESOURCE_PACKAGE = "resources";
-  private final static String STYLESHEETS_PACKAGE = String.format("/%s/stylesheets", RESOURCE_PACKAGE);
+  private final static String STYLESHEETS_PACKAGE = String
+    .format("/%s/stylesheets", RESOURCE_PACKAGE);
   private final static int[] paneIndexes = {0, 0, 5, 1, 0, 1, 2, 7, 0, 8, 2, 2, 2, 1, 3, 9};
   private final static String DEFAULT_STYLESHEET = "dark.css";
 
@@ -42,7 +43,8 @@ public class Workspace {
   private void setupDisplays() {
     PaletteDisplay paletteDisplay = new PaletteDisplay(this, RESOURCE_PACKAGE);
     FrontEndTurtleTracker frontEndTurtleTracker = new FrontEndTurtleTracker(paletteDisplay);
-    FrontEndController frontEndController = new FrontEndController(stage, frontEndTurtleTracker, controller, paletteDisplay);
+    FrontEndController frontEndController = new FrontEndController(stage, frontEndTurtleTracker,
+      controller, paletteDisplay, this);
     HistoryDisplay historyDisplay = new HistoryDisplay(this, RESOURCE_PACKAGE);
     VariablesDisplay variablesDisplay = new VariablesDisplay(this, RESOURCE_PACKAGE);
     UserCommandsDisplay userCommandsDisplay = new UserCommandsDisplay(this, RESOURCE_PACKAGE);
@@ -68,9 +70,11 @@ public class Workspace {
       paneIndexes[15]);
   }
 
-  private void setStyleSheet(String styleSheetName) {
+  public void setStyleSheet(String styleSheetName) {
+    scene.getStylesheets().clear();
     scene.getStylesheets().add(
-      getClass().getResource(String.format("%s/%s", STYLESHEETS_PACKAGE, styleSheetName)).toExternalForm());
+      getClass().getResource(String.format("%s/%s", STYLESHEETS_PACKAGE, styleSheetName))
+        .toExternalForm());
   }
 
   public TerminalDisplay getTerminalDisplay() {

@@ -15,6 +15,7 @@ import slogo.SafeTurtle;
 import slogo.visualization.ButtonFactory;
 import slogo.visualization.FrontEndTurtle;
 import slogo.visualization.PaletteDisplay;
+import slogo.visualization.Workspace;
 
 public class FrontEndController {
   private static final String DIALOG_HEADER_TEXT = "Create XML File";
@@ -25,13 +26,15 @@ public class FrontEndController {
   private final ButtonFactory buttonFactory;
   private final PaletteDisplay paletteDisplay;
   private final Controller controller;
+  private final Workspace workspace;
 
-  public FrontEndController(Stage stage, FrontEndTurtleTracker frontEndTurtleTracker, Controller controller, PaletteDisplay paletteDisplay) {
+  public FrontEndController(Stage stage, FrontEndTurtleTracker frontEndTurtleTracker, Controller controller, PaletteDisplay paletteDisplay, Workspace workspace) {
     this.stage = stage;
     this.frontEndTurtleTracker = frontEndTurtleTracker;
     this.buttonFactory = new ButtonFactory(this);
     this.paletteDisplay = paletteDisplay;
     this.controller = controller;
+    this.workspace = workspace;
   }
 
   public void handleAddTurtleClick(Button addTurtleButton) {
@@ -116,5 +119,17 @@ public class FrontEndController {
     if (newValue != null) {
       XMLCreator xmlCreator = new XMLCreator(frontEndTurtleTracker, controller, newValue);
     }
+  }
+
+  public void handleColorThemeClick(Button button) {
+    buttonFactory.setImage(button, "DarkThemeButton");
+    workspace.setStyleSheet("default.css");
+    button.setOnAction(event -> handleDarkThemeClick(button));
+  }
+
+  public void handleDarkThemeClick(Button button) {
+    buttonFactory.setImage(button, "ColorThemeButton");
+    workspace.setStyleSheet("dark.css");
+    button.setOnAction(event -> handleColorThemeClick(button));
   }
 }

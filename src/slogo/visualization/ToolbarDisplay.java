@@ -29,7 +29,7 @@ public class ToolbarDisplay implements XMLObserver {
 
   private static final String COLOR_PICKER_ID = "ColorPicker";
   private static final int PADDING_LENGTH = 10;
-  private static final int COLUMN_COUNT = 8;
+  private static final int COLUMN_COUNT = 10;
   private static final String DEFAULT_LANGUAGE = "English";
   private static final String DEFAULT_RESOURCE_FOLDER = "resources/";
   private static final String REFERENCES_FOLDER = "src/resources/reference";
@@ -61,7 +61,7 @@ public class ToolbarDisplay implements XMLObserver {
         .getBundle(String.format("%s/%s/%s", resourcePackage, "languages", language));
     this.idBundle = ResourceBundle.getBundle(DEFAULT_RESOURCE_FOLDER + ID_PROPERTY);
     this.frontEndController = frontEndController;
-    this.toggleButtonList = List.of("AddTurtleButton");
+    this.toggleButtonList = List.of("AddTurtleButton", "ColorThemeButton");
     this.defaultButtonList = List.of("NewWorkspaceButton", "LoadWorkspaceButton", "SaveWorkspaceButton");
     this.backgroundColor = DEFAULT_COLOR;
     this.turtleTracker = frontEndTurtleTracker;
