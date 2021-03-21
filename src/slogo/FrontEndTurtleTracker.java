@@ -140,4 +140,12 @@ public class FrontEndTurtleTracker implements SafeFrontEndTurtleTracker{
       .stream()
       .collect(Collectors.toUnmodifiableList());
   }
+
+  public FrontEndTurtle getFrontEndTurtle(int id) {
+    return allTurtles.get(id);
+  }
+
+  public boolean turtleExists(int id) {
+    return allTurtles.containsKey(id);
+  }
 }
