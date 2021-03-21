@@ -85,7 +85,7 @@ public class FrontEndTurtle implements Turtle, SafeTurtle {
     imageView.setTranslateY(imageView.getTranslateY() - yChange);
     xCoordinate = xPosition;
     yCoordinate = yPosition;
-    activeCircle.updatePosition(xChange, yChange);
+    activeCircle.setXY(xPosition, yPosition);
   }
 
   public void towards(double xPosition, double yPosition) {

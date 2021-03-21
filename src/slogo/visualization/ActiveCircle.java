@@ -9,6 +9,8 @@ public class ActiveCircle {
 
   private final ResourceBundle idBundle;
   private ImageView imageView;
+  private double xCoordinate;
+  private double yCoordinate;
 
   public ActiveCircle(int width, int height) {
     this.idBundle = ResourceBundle
@@ -19,6 +21,8 @@ public class ActiveCircle {
   public void updatePosition(double xChange, double yChange) {
     imageView.setTranslateX(imageView.getTranslateX() + xChange);
     imageView.setTranslateY(imageView.getTranslateY() + yChange);
+    xCoordinate += xChange;
+    yCoordinate += yChange;
   }
 
   private void setDefaultImage(int width, int height) {
@@ -37,5 +41,14 @@ public class ActiveCircle {
 
   public void hide() {
     imageView.setVisible(false);
+  }
+
+  public void setXY(double xPosition, double yPosition) {
+    double xChange = xPosition - xCoordinate;
+    double yChange = yPosition - yCoordinate;
+    imageView.setTranslateX(imageView.getTranslateX() + xChange);
+    imageView.setTranslateY(imageView.getTranslateY() - yChange);
+    xCoordinate = xPosition;
+    yCoordinate = yPosition;
   }
 }

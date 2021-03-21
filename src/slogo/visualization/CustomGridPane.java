@@ -11,7 +11,6 @@ public class CustomGridPane extends GridPane {
   private final int rowCount;
   private final int colCount;
   private final int paddingLength;
-  private final static String DISPLAY_CLASS_NAME = "displayWindow";
 
   public CustomGridPane(int rowCount, int colCount, int paddingLength){
     this.rowCount = rowCount;
@@ -50,6 +49,5 @@ public class CustomGridPane extends GridPane {
       col.setPercentWidth(100.0 / colCount);
       this.getColumnConstraints().add(col);
     }
-    //this.getStyleClass().add(DISPLAY_CLASS_NAME);
   }
 }
