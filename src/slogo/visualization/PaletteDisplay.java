@@ -1,9 +1,7 @@
 package slogo.visualization;
 
 import java.util.ResourceBundle;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -11,56 +9,49 @@ import javafx.scene.shape.Circle;
 public class PaletteDisplay extends ScrollingDisplay {
 
   private static final String ID_PROPERTY = "resources/stylesheets/CSS_IDs";
+  private static final String DEFAULT_PALETTE_PROPERTY = "resources/parameters/DefaultPalette";
   private final static String PALETTE_TITLE = "PaletteTitle";
   private final static String PALETTE_BOX_ID = "PaletteBoxID";
   private final static String PALETTE_TAG_ID = "PaletteTagID";
+
+  private final static String[] DEFAULT_PALETTE_TAG_PROPERTIES = {"Default1", "Default2", "Default3", "Default4", "Default5"};
 
   private final static int PALETTE_TAG_ROW_COUNT = 1;
   private final static int PALETTE_TAG_COL_COUNT = 6;
   private final static int PALETTE_TAG_PADDING_LENGTH = 5;
 
   private final ResourceBundle idBundle;
-  private final ResourceBundle resourceBundle;
+  private final ResourceBundle paletteBundle;
 
   private final VBox paletteBox;
 
   public PaletteDisplay(Workspace workspace, String resourcePackage) {
     super(workspace, resourcePackage);
     paletteBox = setupVBoxContainer(PALETTE_TITLE, PALETTE_BOX_ID);
-    String language = "English";
-    this.resourceBundle = ResourceBundle
-        .getBundle(String.format("%s/%s/%s", resourcePackage, "languages", language));
-    this.idBundle = ResourceBundle.getBundle(ID_PROPERTY);
+
+    idBundle = ResourceBundle.getBundle(ID_PROPERTY);
+    paletteBundle = ResourceBundle.getBundle(DEFAULT_PALETTE_PROPERTY);
 
     addDefaultPaletteTags();
   }
 
-  /**
-   * @param index
-   * @param r
-   * @param g
-   * @param b
-   */
   public void updatePaletteBox(int index, int r, int g, int b) {
     if (paletteBox.getChildren().size() < index) {
       addNewPaletteTag(index, r, g, b, null);
     } else {
-      updatePaletteTag(index, r, g, b);
+      updatePaletteTag(index, r, g, b, null);
     }
   }
 
   private void addNewPaletteTag(int index, int r, int g, int b, String imageName) {
-    CustomGridPane paletteTag = new CustomGridPane(PALETTE_TAG_ROW_COUNT, PALETTE_TAG_COL_COUNT,
-        PALETTE_TAG_PADDING_LENGTH);
+    CustomGridPane paletteTag = new CustomGridPane(PALETTE_TAG_ROW_COUNT, PALETTE_TAG_COL_COUNT, PALETTE_TAG_PADDING_LENGTH);
     paletteTag.setId(idBundle.getString(PALETTE_TAG_ID));
 
-    Label indexLabel = new Label(String.format(" %d:", index));
+    Label indexLabel = new Label();
     Circle paletteCircle = new Circle();
-    Label paletteLabel = new Label(
-        imageName == null ? String.format("%d,%d,%d", r, g, b) : String.format("%s", imageName));
+    Label paletteLabel = new Label();
 
     paletteCircle.setRadius(12);
-    paletteCircle.setFill(Color.rgb(r, g, b));
     paletteCircle.setStroke(Color.BLACK);
     paletteCircle.setStrokeWidth(2);
 
@@ -69,17 +60,11 @@ public class PaletteDisplay extends ScrollingDisplay {
     paletteTag.add(paletteLabel, 2, 0, 4, 1);
 
     paletteBox.getChildren().add(paletteTag);
+
+    updatePaletteTag(index, r, g, b, imageName);
   }
 
-  private void addDefaultPaletteTags() {
-    String[] defaultImageNames = {"paint-brush.png", "paint-bucket.png", "turtle.png",
-        "turtle-icon.png"};
-    for (int i = 0; i < defaultImageNames.length; i++) {
-      addNewPaletteTag(i + 1, 255, 255, 255, defaultImageNames[i]);
-    }
-  }
-
-  private void updatePaletteTag(int index, int r, int g, int b) {
+  private void updatePaletteTag(int index, int r, int g, int b, String imageName) {
     CustomGridPane paletteTag = (CustomGridPane) paletteBox.getChildren().get(index - 1);
     Label indexLabel = (Label) paletteTag.getChildren().get(0);
     Circle paletteCircle = (Circle) paletteTag.getChildren().get(1);
@@ -87,7 +72,23 @@ public class PaletteDisplay extends ScrollingDisplay {
 
     indexLabel.setText(String.format(" %d:", index));
     paletteCircle.setFill(Color.rgb(r, g, b));
-    paletteLabel.setText(String.format("%d,%d,%d", r, g, b));
+    paletteLabel.setText(
+        imageName == null ? String.format("%d,%d,%d", r, g, b) : String.format("%s", imageName)
+    );
+  }
+
+  private void addDefaultPaletteTags() {
+    for (int i = 0; i < DEFAULT_PALETTE_TAG_PROPERTIES.length; i++) {
+      String[] paletteValue = paletteBundle.getString(DEFAULT_PALETTE_TAG_PROPERTIES[i]).split(" ");
+      paletteValue[3] = paletteValue[3].equals("null") ? null : paletteValue[3];
+      addNewPaletteTag(
+          i + 1,
+          Integer.parseInt(paletteValue[0]),
+          Integer.parseInt(paletteValue[1]),
+          Integer.parseInt(paletteValue[2]),
+          paletteValue[3]
+      );
+    }
   }
 
   /**
@@ -100,6 +101,18 @@ public class PaletteDisplay extends ScrollingDisplay {
     return (Color) paletteCircle.getFill();
   }
 
+  public int getIndexFromColor(Color color){
+    for(int i = 0; i < paletteBox.getChildren().size(); i++){
+      CustomGridPane paletteTag = (CustomGridPane) paletteBox.getChildren().get(i);
+      Circle paletteCircle = (Circle) paletteTag.getChildren().get(1);
+      Color paletteColor = (Color) paletteCircle.getFill();
+      if(paletteColor == color){
+        return i + 1;
+      }
+    }
+    return -1;
+  }
+
   /**
    * @param index
    * @return
@@ -108,5 +121,17 @@ public class PaletteDisplay extends ScrollingDisplay {
     CustomGridPane paletteTag = (CustomGridPane) paletteBox.getChildren().get(index - 1);
     Label paletteLabel = (Label) paletteTag.getChildren().get(2);
     return String.format("resources/%s", paletteLabel.getText());
+  }
+
+  public int getIndexFromImage(String path){
+    for(int i = 0; i < paletteBox.getChildren().size(); i++){
+      CustomGridPane paletteTag = (CustomGridPane) paletteBox.getChildren().get(i);
+      Label paletteLabel = (Label) paletteTag.getChildren().get(2);
+      String paletteValue = paletteLabel.getText();
+      if(paletteValue.equals(path)){
+        return i + 1;
+      }
+    }
+    return -1;
   }
 }

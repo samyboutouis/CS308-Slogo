@@ -76,6 +76,7 @@ public class CommandReaderTest {
     assertEquals(List.of(50.0), myReader.testParseInput("setxy 30 40"));
     assertEquals(List.of(90.0), myReader.testParseInput("towards 1 0"));
     assertEquals(List.of(45.0, 45.0), myReader.testParseInput("rt 45 setheading 90"));
+    assertEquals(List.of(45.0, 135.0), myReader.testParseInput("lt 45 setheading 90"));
   }
 
   @Test
@@ -128,6 +129,10 @@ public class CommandReaderTest {
     assertEquals(List.of(Math.tan(Math.toRadians(68))), myReader.testParseInput("tan 68"));
     assertEquals(List.of(-90.0), myReader.testParseInput("minus 90"));
     assertEquals(List.of(8.0), myReader.testParseInput("pow 2 3"));
+    assertEquals(List.of(Math.atan(Math.toRadians(1))), myReader.testParseInput("atan 1"));
+    assertEquals(List.of(Math.PI), myReader.testParseInput("pi"));
+    assertTrue(10.0 > myReader.testParseInput("random 10").get(0));
+    assertEquals(List.of(Math.log(5)), myReader.testParseInput("log 5"));
   }
 
   @Test
@@ -240,5 +245,15 @@ public class CommandReaderTest {
     } catch(IllegalArgumentException e){
       assertEquals(e.getMessage(), "Set Palette RGB Value Error - Not within range [0, 255]");
     }
+  }
+
+  @Test
+  void testUndefinedCommand () {
+    try{
+      myReader.testParseInput("felix");
+    } catch(IllegalArgumentException e){
+      assertEquals(e.getMessage(), "Command felix undefined!");
+    }
+
   }
 }
