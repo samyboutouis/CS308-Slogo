@@ -11,17 +11,20 @@ import slogo.Main;
 import slogo.SafeTurtle;
 import slogo.visualization.ButtonFactory;
 import slogo.visualization.FrontEndTurtle;
+import slogo.visualization.PaletteDisplay;
 
 public class FrontEndController {
 
   private final Stage stage;
   private final FrontEndTurtleTracker frontEndTurtleTracker;
   private final ButtonFactory buttonFactory;
+  private final PaletteDisplay paletteDisplay;
 
-  public FrontEndController(Stage stage, FrontEndTurtleTracker frontEndTurtleTracker) {
+  public FrontEndController(Stage stage, FrontEndTurtleTracker frontEndTurtleTracker, PaletteDisplay paletteDisplay) {
     this.stage = stage;
     this.frontEndTurtleTracker = frontEndTurtleTracker;
     this.buttonFactory = new ButtonFactory(this);
+    this.paletteDisplay = paletteDisplay;
   }
 
   public void handleAddTurtleClick(Button addTurtleButton) {
@@ -37,6 +40,7 @@ public class FrontEndController {
         .setAll(new ExtensionFilter("Image File", "*.png", "*.jpg", "*.svg"));
     File file = fileChooser.showOpenDialog(stage);
     if (file != null) {
+      //paletteDisplay.getImagePathFromIndex();
       safeTurtle.setImage(file);
     }
   }

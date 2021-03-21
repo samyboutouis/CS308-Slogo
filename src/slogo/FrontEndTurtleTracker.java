@@ -147,7 +147,7 @@ public class FrontEndTurtleTracker implements SafeFrontEndTurtleTracker {
     }
   }
 
-  public static <T, E> Set<T> getKeyByValue(Map<T, E> map, E value) {
+  public <T, E> Set<T> getKeyByValue(Map<T, E> map, E value) {
     return map.entrySet()
         .stream()
         .filter(entry -> Objects.equals(entry.getValue(), value))
@@ -175,5 +175,9 @@ public class FrontEndTurtleTracker implements SafeFrontEndTurtleTracker {
 
   public boolean isEmpty() {
     return allTurtles.isEmpty();
+  }
+
+  public Color getColorIndex(int index) {
+    return paletteDisplay.getColorFromIndex(index);
   }
 }

@@ -35,6 +35,7 @@ public class FrontEndTurtle implements Turtle, SafeTurtle {
     setDefaultImage();
     isActive = true;
     turtleTracker = frontEndTurtleTracker;
+    shapeIndex = 3;
   }
 
   public void forward(double pixels) {
@@ -144,6 +145,11 @@ public class FrontEndTurtle implements Turtle, SafeTurtle {
     pen.setColor(color);
   }
 
+  public void setPenColor(int index) {
+    Color color = turtleTracker.getColorIndex(index);
+    setPenColor(color);
+  }
+
   public double getPenThickness() {
     return pen.getThickness();
   }
@@ -215,6 +221,9 @@ public class FrontEndTurtle implements Turtle, SafeTurtle {
   }
 
   public int getPenColorIndex() {
-    return pen.getPenColorIndex();
+    // get index from color
+    //return pen.getColor()
+    //FIXME
+    return -1;
   }
 }
