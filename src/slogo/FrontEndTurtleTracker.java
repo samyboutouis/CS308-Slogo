@@ -8,7 +8,9 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
+import javafx.scene.paint.Color;
 import slogo.model.BackEndTurtleTracker;
+import slogo.visualization.BackgroundObserver;
 import slogo.visualization.FrontEndTurtle;
 import slogo.visualization.TurtleObserver;
 
@@ -16,19 +18,21 @@ public class FrontEndTurtleTracker implements SafeFrontEndTurtleTracker{
   private final Map<Integer, FrontEndTurtle> allTurtles;
   private final List<Integer> activeTurtles;
   private final List<TurtleObserver> turtleObservers;
+  private final List<BackgroundObserver> backgroundObservers;
 
   public FrontEndTurtleTracker() {
     allTurtles = new TreeMap<>();
     activeTurtles = new ArrayList<>();
     turtleObservers = new ArrayList<>();
+    backgroundObservers = new ArrayList<>();
   }
 
   public void addObserver(TurtleObserver turtleObserver) {
     turtleObservers.add(turtleObserver);
   }
 
-  public void removeObserver(TurtleObserver turtleObserver) {
-    turtleObservers.remove(turtleObserver);
+  public void addObserver(BackgroundObserver backgroundObserver) {
+    backgroundObservers.add(backgroundObserver);
   }
 
   private void notifyAddTurtle(List<Integer> list) {
@@ -40,6 +44,12 @@ public class FrontEndTurtleTracker implements SafeFrontEndTurtleTracker{
   private void notifyUpdateTurtleState(int id) {
     for(TurtleObserver turtleObserver : turtleObservers) {
       turtleObserver.updateTurtleState(id);
+    }
+  }
+
+  public void notifyBackgroundObservers(Color color) {
+    for(BackgroundObserver backgroundObserver : backgroundObservers) {
+      backgroundObserver.setBackgroundColor(color);
     }
   }
 

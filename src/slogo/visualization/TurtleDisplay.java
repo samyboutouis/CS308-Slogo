@@ -7,19 +7,21 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Color;
+import slogo.FrontEndTurtleTracker;
 
-public class TurtleDisplay {
-  private static final String ID_PROPERTY = "resources/stylesheets/CSS_IDs";
+public class TurtleDisplay implements BackgroundObserver {
   private static final int BACKGROUND_RADIUS = 20;
+  private static final String ID_PROPERTY = "resources/stylesheets/CSS_IDs";
   private static final String TURTLE_PANE_ID = "TurtlePaneID";
   private static final String DISPLAY_CLASS_NAME = "displayWindow";
 
   private final ResourceBundle idBundle;
   private final AnchorPane anchorPane;
 
-  public TurtleDisplay() {
+  public TurtleDisplay(FrontEndTurtleTracker frontEndTurtleTracker) {
     this.anchorPane = new AnchorPane();
     this.idBundle = ResourceBundle.getBundle(ID_PROPERTY);
+    frontEndTurtleTracker.addObserver(this);
     setScreen();
   }
 

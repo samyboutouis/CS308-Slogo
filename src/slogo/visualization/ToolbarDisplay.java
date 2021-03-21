@@ -11,22 +11,28 @@ import java.util.ResourceBundle;
 import javafx.geometry.Insets;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
+import javafx.scene.paint.Color;
+import slogo.FrontEndTurtleTracker;
 import slogo.controller.Controller;
 import slogo.controller.FrontEndController;
 
 public class ToolbarDisplay {
-  private final static int PADDING_LENGTH = 10;
-  private final static int COLUMN_COUNT = 8;
+
+  private static final String COLOR_PICKER_ID = "ColorPicker";
+  private static final int PADDING_LENGTH = 10;
+  private static final int COLUMN_COUNT = 8;
   private static final String DEFAULT_LANGUAGE = "English";
   private static final String DEFAULT_RESOURCE_FOLDER = "resources/";
   private static final String REFERENCES_FOLDER = "src/resources/reference";
   private static final String ID_PROPERTY = "stylesheets/CSS_IDs";
-  private final static String DISPLAY_CLASS_NAME = "displayWindow";
+  private static final String DISPLAY_CLASS_NAME = "displayWindow";
+  private static final Color DEFAULT_COLOR = Color.web("#dedcdc");
 
   private final GridPane gridPane;
   private final Controller controller;
@@ -36,8 +42,11 @@ public class ToolbarDisplay {
   private final ResourceBundle idBundle;
   private final List<String> toggleButtonList;
   private final List<String> defaultButtonList;
+  private final FrontEndTurtleTracker turtleTracker;
+  private Color backgroundColor;
 
-  public ToolbarDisplay(String resourcePackage, Controller controller, FrontEndController frontEndController) {
+  public ToolbarDisplay(String resourcePackage, Controller controller,
+    FrontEndController frontEndController, FrontEndTurtleTracker frontEndTurtleTracker) {
     String language = DEFAULT_LANGUAGE;
     this.gridPane = new GridPane();
     this.controller = controller;
@@ -47,8 +56,10 @@ public class ToolbarDisplay {
       .getBundle(String.format("%s/%s/%s", resourcePackage, "languages", language));
     this.idBundle = ResourceBundle.getBundle(DEFAULT_RESOURCE_FOLDER + ID_PROPERTY);
     this.frontEndController = frontEndController;
-    this.toggleButtonList = List.of("AddTurtleButton", "BackgroundColorButton");
+    this.toggleButtonList = List.of("AddTurtleButton");
     this.defaultButtonList = List.of("NewWorkspaceButton");
+    this.backgroundColor = DEFAULT_COLOR;
+    this.turtleTracker = frontEndTurtleTracker;
     initializeGridPane();
     makeToolbar();
   }
@@ -72,14 +83,24 @@ public class ToolbarDisplay {
     gridPane.getStyleClass().add(DISPLAY_CLASS_NAME);
     int colIndex = 0;
     ButtonFactory buttonFactory = new ButtonFactory(frontEndController);
-    for(String label : toggleButtonList) {
+    for (String label : toggleButtonList) {
       gridPane.add(buttonFactory.createToggleButton(label), colIndex++, 0, 1, 1);
     }
-    for(String label : defaultButtonList) {
+    addBackgroundColorPicker(colIndex);
+    colIndex++;
+    for (String label : defaultButtonList) {
       gridPane.add(buttonFactory.createDefaultButton(label), colIndex++, 0, 1, 1);
     }
     addLanguageDropdown(colIndex++);
     addHelpDropdown();
+  }
+
+  private void addBackgroundColorPicker(int colIndex) {
+    ColorPicker colorPicker = new ColorPicker(backgroundColor);
+    colorPicker.setId(COLOR_PICKER_ID);
+    colorPicker
+      .setOnAction(event -> handleBackgroundColorPicker(colorPicker));
+    gridPane.add(colorPicker, colIndex, 0, colIndex, 1);
   }
 
   private void addLanguageDropdown(int colIndex) {
@@ -107,6 +128,11 @@ public class ToolbarDisplay {
     comboBox.setValue(resourceBundle.getString("HelpButton"));
     comboBox.setOnAction(event -> handleHelpClick(comboBox.getValue()));
     gridPane.add(comboBox, 7, 0, 2, 1);
+  }
+
+  private void handleBackgroundColorPicker(ColorPicker colorPicker) {
+    backgroundColor = colorPicker.getValue();
+    turtleTracker.notifyBackgroundObservers(backgroundColor);
   }
 
   private void handleLanguageClick(String language) {

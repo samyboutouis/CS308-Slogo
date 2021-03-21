@@ -38,6 +38,7 @@ public class TurtleStateDisplay implements TurtleObserver {
     vbox = new VBox();
     buttonFactory = new ButtonFactory(frontEndController);
     turtleTracker = frontEndTurtleTracker;
+    turtleTracker.addObserver(this);
     pane = new GridPane();
     labelBundle = ResourceBundle.getBundle(LABEL_PROPERTY);
     labelList = List.of("X Position", "Y Position", "Direction", "Pen Status", "Pen Color", "Pen Width", "Image");
