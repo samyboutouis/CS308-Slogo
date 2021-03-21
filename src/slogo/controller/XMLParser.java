@@ -1,7 +1,6 @@
 package slogo.controller;
 
 import java.io.File;
-import java.util.ResourceBundle;
 import javafx.scene.paint.Color;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -13,6 +12,7 @@ public class XMLParser {
   private Document doc;
   private String language;
   private Color backgroundColor;
+  private String stylesheet;
 
   public XMLParser(File file) throws Exception {
     try {
@@ -37,6 +37,7 @@ public class XMLParser {
   private void parseFile() throws Exception {
     language = findValue("Language");
     backgroundColor = Color.web(findValue("BackgroundColor"));
+    stylesheet = findValue("ColorTheme");
   }
 
   private String findValue(String key) throws Exception {
@@ -54,5 +55,9 @@ public class XMLParser {
 
   public Color getBackgroundColor() {
     return backgroundColor;
+  }
+
+  public String getStylesheet() {
+    return stylesheet;
   }
 }

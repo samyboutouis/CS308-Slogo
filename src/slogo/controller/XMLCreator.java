@@ -18,6 +18,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import slogo.FrontEndTurtleTracker;
 import slogo.SafeTurtle;
+import slogo.visualization.Workspace;
 
 public class XMLCreator {
   private static final String RESOURCES_FILE = "resources.languages.EnglishErrors";
@@ -26,15 +27,18 @@ public class XMLCreator {
 
   private final FrontEndTurtleTracker turtleTracker;
   private final Controller controller;
+  private final Workspace workspace;
   private Document doc;
   private String filePath;
   private ResourceBundle errorBundle;
 
-  public XMLCreator(FrontEndTurtleTracker frontEndTurtleTracker, Controller controller, String filePath) {
+  public XMLCreator(FrontEndTurtleTracker frontEndTurtleTracker, Controller controller, Workspace workspace,
+    String filePath) {
     this.filePath = filePath;
     this.errorBundle = ResourceBundle.getBundle(RESOURCES_FILE);
     this.turtleTracker = frontEndTurtleTracker;
     this.controller = controller;
+    this.workspace = workspace;
     try {
       initialize();
       makeDocument();
@@ -103,6 +107,7 @@ public class XMLCreator {
   private void recordPreferences(Element root) {
     addToDocument(root, "Language", controller.getLanguage());
     addToDocument(root, "BackgroundColor", String.valueOf(turtleTracker.getBackgroundColor()));
+    addToDocument(root, "ColorTheme", workspace.getStylesheet());
   }
 
   private void makeFile() {

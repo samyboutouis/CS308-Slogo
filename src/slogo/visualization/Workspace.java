@@ -24,8 +24,8 @@ public class Workspace {
   private final Scene scene;
   private final CustomGridPane pane;
   private final Controller controller;
-
   private TerminalDisplay terminalDisplay;
+  private String stylesheet;
 
   public Workspace(Pane root, Scene scene, Stage stage) {
     this.scene = scene;
@@ -75,9 +75,14 @@ public class Workspace {
     scene.getStylesheets().add(
       getClass().getResource(String.format("%s/%s", STYLESHEETS_PACKAGE, styleSheetName))
         .toExternalForm());
+    stylesheet = styleSheetName;
   }
 
   public TerminalDisplay getTerminalDisplay() {
     return terminalDisplay;
+  }
+
+  public String getStylesheet() {
+    return stylesheet;
   }
 }
