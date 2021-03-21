@@ -5,16 +5,21 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.Stack;
 import slogo.BackEndTurtle;
 import slogo.Command;
 import slogo.SafeFrontEndTurtleTracker;
+import slogo.turtlecommands.TellCommand;
 
 // manages all turtles in the backend,
 public class BackEndTurtleTracker {
 
   // assume each new Tell overrides previous Tell
   private Map<Integer, BackEndTurtle> allTurtles;
-  private List<Integer> activeTurtles;
+  private List<Integer> activeTurtles; // current active turtles, from Ask or Tell
+  private List<Integer> tellActiveTurtles; // most recent tell command defined tell
+  private Stack<List<Integer>> askActiveTurtles; // represents all active turtles defined by asks (could be nested asks)
   private int currTurtle;
   private SafeFrontEndTurtleTracker safeTurtleTracker;
 
@@ -23,12 +28,16 @@ public class BackEndTurtleTracker {
     this.allTurtles = allTurtles;
     this.activeTurtles = activeTurtles;
     this.safeTurtleTracker = safeTurtleTracker;
+    askActiveTurtles = new Stack<>();
+    tellActiveTurtles = new ArrayList<>(activeTurtles);
     currTurtle = activeTurtles.get(0); // assumes at least one turtle is on the screen
   }
 
   public BackEndTurtleTracker() {
     allTurtles = new HashMap<>();
     activeTurtles = new ArrayList<>();
+    askActiveTurtles = new Stack<>();
+    tellActiveTurtles = new ArrayList<>();
     currTurtle = 0;
   }
 
@@ -43,18 +52,32 @@ public class BackEndTurtleTracker {
     return allCommands;
   }
 
+  public Map<Integer, List<Command>> getAllTurtleCommands() {
+    Map<Integer, List<Command>> ret = new HashMap<>();
+    for(Integer id : allTurtles.keySet()) {
+      ret.put(id, allTurtles.get(id).getCommands());
+    }
+    return ret;
+  }
+
+  public Set<Integer> getAllTurtles(){
+    return allTurtles.keySet();
+  }
+
+  public SafeFrontEndTurtleTracker getSafe() {
+    return safeTurtleTracker;
+  }
+
   public void deleteAllData(){
     allTurtles = new HashMap<>();
     activeTurtles = new ArrayList<>();
+    askActiveTurtles = new Stack<>();
+    tellActiveTurtles = new ArrayList<>();
     currTurtle = 0;
   }
 
-  // FIX: does this make sure last turtle is last in the activeTurtles list?
-  // If activeTurtles contains the last turtle, its position won't be moved to the back
-  // add a backend turtle to turtle tracker to both allTurtles and list of activeTurtles
+  // if this turtleId already exists, we only update activeTurtles, and not allTurtles
   public void addTurtle(BackEndTurtle turtle){
-    // I (felix) edited the code so that if the turtle was already active, it would be put at the end of the list
-    // then extracted common parts in the if else statements
     if (allTurtles.containsKey(turtle.getIndex())){
       if (activeTurtles.contains(turtle.getIndex())){
         activeTurtles.remove(Integer.valueOf(turtle.getIndex())); // remove object Integer, not at index
@@ -64,6 +87,13 @@ public class BackEndTurtleTracker {
       allTurtles.put(turtle.getIndex(), turtle);
     }
     activeTurtles.add(turtle.getIndex());
+  }
+
+  // only used in AskWithNode, to temporarily set the active turtle list to a specific turtle, and run
+  // the logic expression to see if that specific turtle satisfies the requirement in AskWith.
+  public void checkOneTurtle(int id){
+    clearActiveTurtles();
+    activeTurtles.add(id);
   }
 
   // clear the list of activeTurtles
@@ -76,6 +106,39 @@ public class BackEndTurtleTracker {
     while (itrn.hasNext()){
       getTurtle(itrn.next()).clearCommands();
     }
+  }
+
+  public void setTellList(List<Integer> tellList) {
+    activeTurtles.clear();
+    for(Integer i : tellList) {
+      addTurtle(getBasicTurtle(i));
+    }
+    addTellCommands();
+    tellActiveTurtles = new ArrayList<>(activeTurtles);
+  }
+
+  public void setAskList(List<Integer> askList) {
+    activeTurtles.clear(); // tellActiveTurtles should have this handled
+    for(Integer i : askList) {
+      addTurtle(getBasicTurtle(i));
+    }
+    addTellCommands();
+    askActiveTurtles.push(new ArrayList<>(activeTurtles));
+    // at this point, top of askActiveTurtles == activeTurtles
+  }
+
+  // after ask is done, revert to previous tell list
+  public void revertAskList() {
+    // ask [ 2 3 ] [ fd 50 tell [ 1 4 ] bk 50 ]
+    // turtles 2, 3 do fd 50, while turtles 1 4 do bk 50
+    askActiveTurtles.pop();
+    if(askActiveTurtles.isEmpty()) {
+      activeTurtles = new ArrayList<>(tellActiveTurtles);
+    }
+    else {
+      activeTurtles = new ArrayList<>(askActiveTurtles.peek());
+    }
+    addTellCommands();
   }
 
   // loops through active turtles for one node, will have many iterator instances out for nested commands e.g. fd fd 50
@@ -102,6 +165,17 @@ public class BackEndTurtleTracker {
 
   public int turtles() {
     return allTurtles.keySet().size();
+  }
+
+  // add tellCommands to each turtle whenever tell, ask, and askWith are created
+  private void addTellCommands () {
+    for(Integer i : allTurtles.keySet()) {
+      allTurtles.get(i).addCommand(new TellCommand(getSafe(), i, activeTurtles.contains(i)));
+    }
+  }
+
+  private BackEndTurtle getBasicTurtle(int id) {
+    return new BackEndTurtle(0,0,0,true,true, id);
   }
 
 //  tell [ 1 2 3 ]

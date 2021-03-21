@@ -110,9 +110,9 @@ public class TerminalDisplay {
     });
   }
 
-  private void applyHistoryTagLogic(Button historyTab) {
-    historyTab.setOnAction(e -> {
-      String command = historyTab.getText();
+  private void applyHistoryTagLogic(Button historyTag) {
+    historyTag.setOnAction(e -> {
+      String command = historyTag.getText();
       textBox.setText(command);
     });
   }

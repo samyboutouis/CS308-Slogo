@@ -34,10 +34,4 @@ public interface Turtle {
   void home();
 
   void clearScreen();
-
-  boolean isActive();
-
-  void setActive();
-
-  void setInactive();
 }

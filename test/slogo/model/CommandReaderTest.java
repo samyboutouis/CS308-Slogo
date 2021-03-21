@@ -1,12 +1,15 @@
 package slogo.model;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import slogo.Command;
 import slogo.BackEndTurtle;
 import slogo.turtlecommands.HomeCommand;
 import slogo.turtlecommands.MovementCommand;
+import slogo.turtlecommands.TellCommand;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -21,6 +24,15 @@ public class CommandReaderTest {
 
   // SECTION
   // test that values are correct based on Logo code
+
+
+
+  @Test
+  void testAskWith(){
+    assertEquals(List.of(10.0, 100.0, 50.0, 100.0, 200.0),myReader.testParseInput("tell [ 1 2 7 10 ] fd 100 ask [ 2 7 ] [ bk 50 ] askwith [ greater? ycor 50 ] [ fd 100 ] ycor"));
+  }
+
+
   @Test
   void testConditional () {
     assertEquals(List.of(0.0), myReader.testParseInput("if 0 [ if fd 0 [ fd 20 ] sum 50 50 ]"));
@@ -35,6 +47,12 @@ public class CommandReaderTest {
     assertEquals(List.of(5.0), myReader.testParseInput("tell [ 2 5 ]")); // note testParseInput adds a index 0 turtle by default
     assertEquals(List.of(5.0, 90.0, 50.0, 50.0), myReader.testParseInput(" tell [ 0 2 5 ] rt 90 fd 50 xcor"));
     assertEquals(List.of(3.0, 30.0, 1.0, 10.0, 2.0, 20.0, 3.0, 30.0), myReader.testParseInput("tell [ 1 2 3 ] fd product ID 10 tell [ 1 ] ycor tell [ 2 ] ycor tell [ 3 ] ycor"));
+
+    // testing multi turtle different movement and home and cs commands
+    assertEquals(List.of(3.0, 30.0, 1.0, 10.0, 2.0, 20.0, 3.0, 30.0), myReader.testParseInput("tell [ 1 2 3 ] fd product ID 10 tell [ 1 ] home tell [ 2 ] cs tell [ 3 ] home"));
+
+    // testing ask command
+    assertEquals(List.of(3.0, 50.0, 50.0, 50.0), myReader.testParseInput("tell [ 1 2 3 ] ask [ 1 4 ] [ fd 50 ycor ] fd 50 ycor "));
   }
 
   @Test
@@ -164,6 +182,23 @@ public class CommandReaderTest {
     assertEquals(10, loop.size());
     for(Command c : loop){
       assertTrue(c instanceof MovementCommand);
+    }
+  }
+
+  @Test
+  void testMultiCommands () {
+    setUpTracker();
+//    List<Class<TellCommand>> turtle1 = List.of(TellCommand.class, TellCommand.class, TellCommand.class);
+//    // for turtle1, first tell is in tell, then in ask, then once ask pops it comes up again
+//    List<Class<TellCommand>> turtle2 = List.of(TellCommand.class, TellCommand.class, TellCommand.class);
+//    List<Class<TellCommand>> turtle3 = List.of(TellCommand.class, TellCommand.class, TellCommand.class);
+//    List<Class<TellCommand>> turtle4 = List.of(TellCommand.class, TellCommand.class);
+//    List<List<Class<TellCommand>>> forTest = List.of(turtle1, turtle2, turtle3, turtle4);
+    // can't test for instanceof by having a list of classes
+    List<Integer> correctNumberOfCommands = List.of(3, 3, 3, 3, 2);
+    Map<Integer, List<Command>> output = myReader.parseInput("tell [ 1 2 3 ] ask [ 1 4 ] [ ]", tracker).getAllTurtleCommands();
+    for(int i = 0; i < output.size(); i++){
+      assertTrue(output.get(i).size() == correctNumberOfCommands.get(i));
     }
   }
 

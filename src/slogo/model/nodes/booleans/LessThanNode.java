@@ -11,6 +11,7 @@ public class LessThanNode extends SlogoNode {
   public LessThanNode(int numParameters){
     super(numParameters);
     parameters = super.getParameters();
+    setBooleanNode(true);
   }
 
   @Override

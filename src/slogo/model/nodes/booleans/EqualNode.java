@@ -10,6 +10,7 @@ public class EqualNode extends SlogoNode{
   public EqualNode(int numParameters){
     super(numParameters);
     parameters = super.getParameters();
+    setBooleanNode(true);
   }
 
   @Override

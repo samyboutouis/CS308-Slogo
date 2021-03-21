@@ -26,10 +26,8 @@ public class ViewLayout {
   private final TurtleStateDisplay turtleStateDisplay;
   private String[] viewOrder;
 
-  private final static int[] viewContainerXPositions = {500, 200, 300, 400};
-  private final static int[] viewContainerYPositions = {500, 200, 300, 400};
-
   public ViewLayout(HistoryDisplay historyDisplay, VariablesDisplay variablesDisplay, UserCommandsDisplay userCommandsDisplay, ButtonDisplay buttonDisplay, TurtleStateDisplay turtleStateDisplay, FrontEndController frontEndController){
+
     this.pane = new CustomGridPane(GRID_ROW_COUNT, GRID_COLUMN_COUNT, PADDING_LENGTH);
     this.frontEndController = frontEndController;
     this.historyDisplay = historyDisplay;
@@ -43,7 +41,6 @@ public class ViewLayout {
     initializeViewOrder();
   }
 
-  //private final static String[] viewNames = {"Variables Display", "commands", "history", "palette", "states", "buttons"};
   private void initializeMap(){
     viewNamesMap.put("Variables", variablesDisplay.getPane());
     viewNamesMap.put("Commands", userCommandsDisplay.getPane());
@@ -59,9 +56,9 @@ public class ViewLayout {
   private void setupViewContainers(){
     for(int row = 0; row < GRID_ROW_COUNT; row++){
       for(int col = 0; col < GRID_COLUMN_COUNT; col++){
-        GridPane viewContainerPane = new GridPane();
-        pane.add(viewContainerPane, col, row);
-        viewContainers.add(new ViewContainer(this, viewContainerPane, GRID_COLUMN_COUNT * row + col, viewNamesMap.keySet()));
+        ViewContainer newViewContainer = new ViewContainer(this,  GRID_COLUMN_COUNT * row + col, viewNamesMap.keySet());
+        pane.add(newViewContainer.getPane(), col, row);
+        viewContainers.add(newViewContainer);
       }
     }
 
@@ -72,9 +69,6 @@ public class ViewLayout {
     buttonDisplay.getPane().setVisible(false);
     turtleStateDisplay.getPane().setVisible(false);
   }
-
-  //clickedOn,   currentINdex
-  //commands -> variables
 
   public void updateViewLayouts(int clickedIndex, String viewName){
     int currentIndex = findIndexOf(viewName);
@@ -96,17 +90,10 @@ public class ViewLayout {
     if(viewName != null && viewContainers.get(clickedIndex).getPane().getChildren().size() <= 2){
       turnOnView(viewNamesMap.get(viewName), clickedIndex);
     }
-//
-//
-//    // set visible & position views
-//    for(String name : viewOrder){
-//      System.out.printf("%s, ", name);
-//    }
-//    System.out.println();
   }
 
   private void turnOnView(Pane targetPane, int index){
-    viewContainers.get(index).getPane().add(targetPane, 0, 1, 1, 1);
+    viewContainers.get(index).getPane().add(targetPane, 0, 1, 6, 9);
     targetPane.setVisible(true);
   }
 

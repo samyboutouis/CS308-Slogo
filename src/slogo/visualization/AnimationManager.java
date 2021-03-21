@@ -38,7 +38,7 @@ public class AnimationManager {
   }
 
   private void stepAnimation(){
-    if(turtle != null){
+    if(turtle != null && commands != null && commands.size() > 0){
       commands.get(frameIndex).doCommand(turtle);
       frameIndex++;
       if (frameIndex >= commands.size()){
