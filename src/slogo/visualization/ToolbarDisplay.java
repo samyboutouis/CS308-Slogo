@@ -21,12 +21,11 @@ import slogo.controller.FrontEndController;
 
 public class ToolbarDisplay {
   private final static int PADDING_LENGTH = 10;
-  private final static int COLUMN_COUNT = 10;
+  private final static int COLUMN_COUNT = 8;
   private static final String DEFAULT_LANGUAGE = "English";
   private static final String DEFAULT_RESOURCE_FOLDER = "resources/";
   private static final String REFERENCES_FOLDER = "src/resources/reference";
   private static final String ID_PROPERTY = "stylesheets/CSS_IDs";
-  private static final String METHODS_PROPERTY = "reflection/ButtonMethods";
   private final static String DISPLAY_CLASS_NAME = "displayWindow";
 
   private final GridPane gridPane;
@@ -35,8 +34,8 @@ public class ToolbarDisplay {
   private final ResourceBundle languageBundle;
   private final ResourceBundle resourceBundle;
   private final ResourceBundle idBundle;
-  private final ResourceBundle commandBundle;
-  private final List<String> buttonList;
+  private final List<String> toggleButtonList;
+  private final List<String> defaultButtonList;
 
   public ToolbarDisplay(String resourcePackage, Controller controller, FrontEndController frontEndController) {
     String language = DEFAULT_LANGUAGE;
@@ -47,9 +46,9 @@ public class ToolbarDisplay {
     this.resourceBundle = ResourceBundle
       .getBundle(String.format("%s/%s/%s", resourcePackage, "languages", language));
     this.idBundle = ResourceBundle.getBundle(DEFAULT_RESOURCE_FOLDER + ID_PROPERTY);
-    this.commandBundle = ResourceBundle.getBundle(DEFAULT_RESOURCE_FOLDER + METHODS_PROPERTY);
     this.frontEndController = frontEndController;
-    this.buttonList = List.of("AddTurtleButton", "BackgroundColorButton");
+    this.toggleButtonList = List.of("AddTurtleButton", "BackgroundColorButton");
+    this.defaultButtonList = List.of("NewWorkspaceButton");
     initializeGridPane();
     makeToolbar();
   }
@@ -70,10 +69,14 @@ public class ToolbarDisplay {
   }
 
   private void makeToolbar() {
+    gridPane.getStyleClass().add(DISPLAY_CLASS_NAME);
     int colIndex = 0;
     ButtonFactory buttonFactory = new ButtonFactory(frontEndController);
-    for(String label : buttonList) {
+    for(String label : toggleButtonList) {
       gridPane.add(buttonFactory.createToggleButton(label), colIndex++, 0, 1, 1);
+    }
+    for(String label : defaultButtonList) {
+      gridPane.add(buttonFactory.createDefaultButton(label), colIndex++, 0, 1, 1);
     }
     addLanguageDropdown(colIndex++);
     addHelpDropdown();
@@ -103,7 +106,7 @@ public class ToolbarDisplay {
     comboBox.getItems().addAll(commands);
     comboBox.setValue(resourceBundle.getString("HelpButton"));
     comboBox.setOnAction(event -> handleHelpClick(comboBox.getValue()));
-    gridPane.add(comboBox, 9, 0, 2, 1);
+    gridPane.add(comboBox, 7, 0, 2, 1);
   }
 
   private void handleLanguageClick(String language) {

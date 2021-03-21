@@ -9,6 +9,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 import slogo.FrontEndTurtleTracker;
+import slogo.Main;
 import slogo.SafeTurtle;
 import slogo.visualization.ButtonFactory;
 import slogo.visualization.FrontEndTurtle;
@@ -106,5 +107,10 @@ public class FrontEndController {
     buttonFactory.setImage(button, "PenUpButton");
     turtle.penDown();
     button.setOnAction(event -> handlePenUpClick(button, turtle));
+  }
+
+  public void handleNewWorkspaceClick() {
+    Main main = new Main();
+    main.createNewWorkspace();
   }
 }
