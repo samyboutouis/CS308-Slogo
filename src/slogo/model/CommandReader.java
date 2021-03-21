@@ -97,6 +97,10 @@ public class CommandReader {
       int parameters = Integer.parseInt(numParameters.getString(symbol));
       curr = nodeFactory.getNode(symbol, s, node, parameters, variables, userDefinedCommands, curr, userDefinedCommandsInString);
 
+      if(curr == null){
+        continue;
+      }
+
       if(curr.isFull()){ // only true if node has no parameters
         if(st.isEmpty()) {
           roots.add(curr);
