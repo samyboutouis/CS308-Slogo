@@ -36,15 +36,17 @@ public class Workspace {
 
 
   private void setupDisplays() {
-    FrontEndTurtleTracker frontEndTurtleTracker = new FrontEndTurtleTracker();
-    frontEndController = new FrontEndController(stage, frontEndTurtleTracker);
+
 
     HistoryDisplay historyDisplay = new HistoryDisplay(this, RESOURCE_PACKAGE);
     VariablesDisplay variablesDisplay = new VariablesDisplay(this, RESOURCE_PACKAGE);
     UserCommandsDisplay userCommandsDisplay = new UserCommandsDisplay(this, RESOURCE_PACKAGE);
     PaletteDisplay paletteDisplay = new PaletteDisplay(this, RESOURCE_PACKAGE);
     ButtonDisplay buttonDisplay = new ButtonDisplay(frontEndController);
-    //paletteDisplay
+
+    FrontEndTurtleTracker frontEndTurtleTracker = new FrontEndTurtleTracker(paletteDisplay);
+    frontEndController = new FrontEndController(stage, frontEndTurtleTracker);
+
     TurtleStateDisplay turtleStateDisplay = new TurtleStateDisplay(frontEndController,
       frontEndTurtleTracker);
     frontEndTurtleTracker.addObserver(turtleStateDisplay);

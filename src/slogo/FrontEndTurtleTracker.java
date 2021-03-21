@@ -10,17 +10,20 @@ import java.util.TreeMap;
 import java.util.stream.Collectors;
 import slogo.model.BackEndTurtleTracker;
 import slogo.visualization.FrontEndTurtle;
+import slogo.visualization.PaletteDisplay;
 import slogo.visualization.TurtleObserver;
 
 public class FrontEndTurtleTracker implements SafeFrontEndTurtleTracker{
   private final Map<Integer, FrontEndTurtle> allTurtles;
   private final List<Integer> activeTurtles;
   private final List<TurtleObserver> turtleObservers;
+  private final PaletteDisplay paletteDisplay;
 
-  public FrontEndTurtleTracker() {
+  public FrontEndTurtleTracker(PaletteDisplay paletteDisplay) {
     allTurtles = new TreeMap<>();
     activeTurtles = new ArrayList<>();
     turtleObservers = new ArrayList<>();
+    this.paletteDisplay = paletteDisplay;
   }
 
   public void addObserver(TurtleObserver turtleObserver) {
@@ -98,8 +101,8 @@ public class FrontEndTurtleTracker implements SafeFrontEndTurtleTracker{
     notifyAddTurtle(getTurtleIDs());
   }
 
-  public void changeColor() {
-
+  public void updatePalette(int index, int r, int g, int b){
+    paletteDisplay.updatePaletteBox(index, r, g, b);
   }
 
   public void forward(double pixels) {

@@ -8,7 +8,7 @@ public interface SafeFrontEndTurtleTracker {
 
   // can probably but methods that change global color in here as well
 
-  void changeColor();
+  void updatePalette(int index, int r, int g, int b);
   // Actually since color changes can occur in the middle of a long command, those need to be ran at
     // the correct times, so either turtle class should have access to changing colors and adding
     // turtles, or we pass in a bigger object that does what each turtle does but also changes the
