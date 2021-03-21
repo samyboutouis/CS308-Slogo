@@ -9,6 +9,7 @@ import slogo.Command;
 import slogo.BackEndTurtle;
 import slogo.turtlecommands.HomeCommand;
 import slogo.turtlecommands.MovementCommand;
+import slogo.turtlecommands.SetPaletteCommand;
 import slogo.turtlecommands.TellCommand;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -207,8 +208,14 @@ public class CommandReaderTest {
     List<Integer> correctNumberOfCommands = List.of(3, 3, 3, 3, 2);
     Map<Integer, List<Command>> output = myReader.parseInput("tell [ 1 2 3 ] ask [ 1 4 ] [ ]", tracker).getAllTurtleCommands();
     for(int i = 0; i < output.size(); i++){
-      assertTrue(output.get(i).size() == correctNumberOfCommands.get(i));
+      assertEquals(output.get(i).size(), correctNumberOfCommands.get(i));
     }
+  }
+
+  @Test
+  void testDisplayCommands () {
+    setUpTracker();
+    assertTrue(getAllCommands(myReader.parseInput("setpalette 1 0 100 255", tracker).getAllTurtleCommands()).get(0) instanceof SetPaletteCommand);
   }
 
   // SECTION
