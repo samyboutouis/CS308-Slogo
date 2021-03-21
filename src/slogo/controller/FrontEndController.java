@@ -9,6 +9,8 @@ import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 import slogo.FrontEndTurtleTracker;
+import slogo.SafeTurtle;
+import slogo.visualization.ButtonFactory;
 import slogo.visualization.FrontEndTurtle;
 import slogo.visualization.ToolbarDisplay;
 import slogo.visualization.TurtleDisplay;
@@ -17,18 +19,18 @@ public class FrontEndController {
   private static final String COLOR_PICKER_ID = "ColorPicker";
 
   private final Stage stage;
+  private final FrontEndTurtleTracker frontEndTurtleTracker;
   private Color backgroundColor;
-  private Color penColor;
   private TurtleDisplay turtleDisplay;
   private ToolbarDisplay toolbarDisplay;
-  private FrontEndTurtleTracker frontEndTurtleTracker;
   private FrontEndTurtle turtle;
+  private ButtonFactory buttonFactory;
 
   public FrontEndController(Stage stage, FrontEndTurtleTracker frontEndTurtleTracker) {
     this.stage = stage;
     this.frontEndTurtleTracker = frontEndTurtleTracker;
+    this.buttonFactory = new ButtonFactory(this);
     backgroundColor = Color.web("#dedcdc");
-    penColor = Color.BLACK;
   }
 
   public void handleAddTurtleClick(Button addTurtleButton) {
@@ -93,5 +95,17 @@ public class FrontEndController {
   public void handleDownClick(TextField textField) {
     frontEndTurtleTracker.back(Double.parseDouble(textField.getText()));
     textField.clear();
+  }
+
+  public void handlePenUpClick(Button button, SafeTurtle turtle) {
+    buttonFactory.setImage(button, "PenDownButton");
+    turtle.penUp();
+    button.setOnAction(event -> handlePenDownClick(button, turtle));
+  }
+
+  public void handlePenDownClick(Button button, SafeTurtle turtle) {
+    buttonFactory.setImage(button, "PenUpButton");
+    turtle.penDown();
+    button.setOnAction(event -> handlePenUpClick(button, turtle));
   }
 }

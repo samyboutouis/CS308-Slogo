@@ -73,7 +73,7 @@ public class ToolbarDisplay {
     int colIndex = 0;
     ButtonFactory buttonFactory = new ButtonFactory(frontEndController);
     for(String label : buttonList) {
-      gridPane.add(buttonFactory.createDisableableButton(label), colIndex++, 0, 1, 1);
+      gridPane.add(buttonFactory.createToggleButton(label), colIndex++, 0, 1, 1);
     }
     addLanguageDropdown();
     addHelpDropdown();

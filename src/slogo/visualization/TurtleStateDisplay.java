@@ -3,6 +3,7 @@ package slogo.visualization;
 import java.lang.reflect.Method;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -20,6 +21,8 @@ public class TurtleStateDisplay implements TurtleObserver {
   private static final String LABEL_PROPERTY = "resources/reflection/TurtleStateLabels";
   private static final String COLORPICKER_ID = "PenColorPicker";
   private static final String SLIDER_ID = "Slider";
+  private static final String PEN_UP = "PenUpButton";
+  private static final String PEN_DOWN = "PenDownButton";
 
   private final VBox vbox;
   private final ButtonFactory buttonFactory;
@@ -104,9 +107,13 @@ public class TurtleStateDisplay implements TurtleObserver {
   }
 
   private void isPenDown(SafeTurtle safeTurtle, HBox hBox) {
-    boolean info = safeTurtle.isPenDown();
-    String status = info ? "Down" : "Up";
-    hBox.getChildren().add(new Text(status));
+    Button button;
+    if(safeTurtle.isPenDown()){
+      button = buttonFactory.createTurtleButton(PEN_UP, safeTurtle);
+    } else {
+      button = buttonFactory.createTurtleButton(PEN_DOWN, safeTurtle);
+    }
+    hBox.getChildren().add(button);
   }
 
   private void getPenColor(SafeTurtle safeTurtle, HBox hBox) {

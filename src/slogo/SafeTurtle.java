@@ -11,6 +11,10 @@ public interface SafeTurtle {
   double getDirection();
 
   boolean isPenDown();
+
+  void penDown();
+
+  void penUp();
   
   boolean isShowing();
 

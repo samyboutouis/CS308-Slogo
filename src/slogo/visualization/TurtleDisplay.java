@@ -1,6 +1,5 @@
 package slogo.visualization;
 
-import java.io.File;
 import java.util.ResourceBundle;
 import javafx.geometry.Insets;
 import javafx.scene.layout.AnchorPane;
