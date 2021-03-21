@@ -27,6 +27,7 @@ public class FrontEndTurtle implements Turtle, SafeTurtle {
   private final FrontEndTurtleTracker turtleTracker;
   private ActiveCircle activeCircle;
   private boolean isActive;
+  private int shapeIndex;
 
   public FrontEndTurtle(FrontEndTurtleTracker frontEndTurtleTracker) {
     this.idBundle = ResourceBundle
@@ -201,5 +202,13 @@ public class FrontEndTurtle implements Turtle, SafeTurtle {
     activeCircle.hide();
     isActive = false;
     turtleTracker.setInactive(this);
+  }
+
+  public int getShapeIndex() {
+    return shapeIndex;
+  }
+
+  public int getPenColorIndex() {
+    return pen.getPenColorIndex();
   }
 }

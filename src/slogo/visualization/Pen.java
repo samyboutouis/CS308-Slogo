@@ -17,6 +17,7 @@ public class Pen {
   private boolean isPenDown;
   private Color lineColor;
   private double strokeWidth;
+  private int penColorIndex;
 
   public Pen(Pane pane, ResourceBundle resourceBundle) {
     this.pane = pane;
@@ -71,4 +72,8 @@ public class Pen {
   }
 
   public double getThickness() { return strokeWidth; }
+
+  public int getPenColorIndex() {
+    return penColorIndex;
+  }
 }
