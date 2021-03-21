@@ -149,6 +149,7 @@ public class TerminalDisplay {
         variablesDisplay.updateBox(controller.getVariables());
         userCommandsDisplay.updateBox(controller.getUserDefinedCommands());
       } catch (Exception error) {
+        historyDisplay.addNewHistoryTag(command);
         createErrorDialog(error); // backend throws new exception with specific error message
       }
     }
