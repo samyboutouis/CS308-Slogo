@@ -41,7 +41,7 @@ public class Workspace {
     HistoryDisplay historyDisplay = new HistoryDisplay(this, RESOURCE_PACKAGE);
     VariablesDisplay variablesDisplay = new VariablesDisplay(this, RESOURCE_PACKAGE);
     UserCommandsDisplay userCommandsDisplay = new UserCommandsDisplay(this, RESOURCE_PACKAGE);
-    ButtonDisplay buttonDisplay = new ButtonDisplay(frontEndController);
+    ButtonDisplay buttonDisplay = new ButtonDisplay(this, RESOURCE_PACKAGE, frontEndController);
 
     TurtleStateDisplay turtleStateDisplay = new TurtleStateDisplay(frontEndController,
       frontEndTurtleTracker);
