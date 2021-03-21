@@ -9,7 +9,7 @@ import slogo.visualization.Workspace;
 public class Main extends Application  {
 
     private final static int SCREEN_WIDTH = 1600;
-    private final static int SCREEN_HEIGHT = 1000;
+    private final static int SCREEN_HEIGHT = 900;
     private final static String STAGE_TITLE = "SLogo Application";
 
     /**
