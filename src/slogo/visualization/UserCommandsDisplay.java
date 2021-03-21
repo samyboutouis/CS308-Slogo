@@ -12,6 +12,8 @@ public class UserCommandsDisplay extends ScrollingDisplay {
   private final static String USER_COMMANDS_BOX_ID = "UserCommandsBoxID";
   private final static String USER_COMMANDS_TAG_ID = "UserCommandsTagID";
 
+  private final static String DIALOG_BOX_HEADER_TEXT = "Set the parameters, with each parameter separated by spaces, for the command:";
+
   private final ResourceBundle resourceBundle;
   private final ResourceBundle idBundle;
   private final VBox userCommandsBox;
@@ -38,9 +40,7 @@ public class UserCommandsDisplay extends ScrollingDisplay {
   }
 
   private void addNewCommandsTag(String name, String value){
-    System.out.println(name + ", " + value);
-
-    Button commandsTag = new Button(String.format("%s :: %s", name, value));
+    Button commandsTag = new Button(String.format("%s =%s", name, value));
     commandsTag.setWrapText(true);
     commandsTag.setMaxWidth(Double.MAX_VALUE);
     commandsTag.setMaxHeight(Double.MAX_VALUE);
@@ -53,7 +53,18 @@ public class UserCommandsDisplay extends ScrollingDisplay {
 
   private void applyCommandsTagLogic(Button commandsTag) {
     commandsTag.setOnAction(e -> {
+      String[] commandsMap = commandsTag.getText().split("= ");
+      String commandName = commandsMap[0];
 
+      TextInputDialog textDialog = new TextInputDialog();
+      textDialog.setHeaderText(String.format("%s %s", DIALOG_BOX_HEADER_TEXT, commandName));
+      textDialog.showAndWait();
+
+      String newValue = textDialog.getEditor().getText();
+      if(newValue != null){
+        String command = String.format("%s%s", commandName, newValue);
+        getTerminalDisplay().setTerminalText(command);
+      }
     });
   }
 }

@@ -45,7 +45,7 @@ public class VariablesDisplay extends ScrollingDisplay {
   }
 
   private void addNewVariablesTag(String name, double value){
-    Button variablesTag = new Button(String.format("%s :: %.2f", name.substring(1), value));
+    Button variablesTag = new Button(String.format("%s = %.2f", name.substring(1), value));
     variablesTag.setWrapText(true);
     variablesTag.setMaxWidth(Double.MAX_VALUE);
     variablesTag.setMaxHeight(Double.MAX_VALUE);
@@ -57,16 +57,15 @@ public class VariablesDisplay extends ScrollingDisplay {
 
   private void applyVariablesTagLogic(Button variablesTag) {
     variablesTag.setOnAction(e -> {
-      String[] variableMap = variablesTag.getText().split(":: ");
+      String[] variableMap = variablesTag.getText().split("= ");
       String variableName = variableMap[0];
       String variableValue = variableMap[1];
       TextInputDialog textDialog = new TextInputDialog(String.format("%s", variableValue));
       textDialog.setHeaderText(String.format("%s %s", DIALOG_BOX_HEADER_TEXT, variableName));
       textDialog.showAndWait();
 
-      // for testing
       String newValue = textDialog.getEditor().getText();
-      if(newValue != null){
+      if(newValue != null && !newValue.equals(variableValue)){
         String command = String.format("%s%s%s", SET_COMMAND, variableName, newValue);
         getTerminalDisplay().setTerminalText(command);
       }
