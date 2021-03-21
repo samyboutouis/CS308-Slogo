@@ -63,7 +63,6 @@ public class TurtleStateDisplayTest extends DukeApplicationTest {
   private void addTurtle() {
     Button addTurtleButton = lookup("#" + idBundle.getString("AddTurtleButton")).query();
     clickOn(addTurtleButton);
-    clickOn(lookup("#" + idBundle.getString("PenColorButton")).query());
   }
 
   private void runCommand(String command) {
