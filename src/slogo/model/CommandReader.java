@@ -51,7 +51,7 @@ public class CommandReader {
       List<SlogoNode> roots = buildTree(cleaned);
       makeCommands(roots);
     } catch (NoSuchMethodException | ClassNotFoundException | IllegalAccessException | InvocationTargetException | InstantiationException e) {
-      e.printStackTrace();
+      throw new IllegalArgumentException("Java Reflection Error: Unrecognized/Unimplemented Command");
     }
     return tracker;
   }
@@ -83,14 +83,14 @@ public class CommandReader {
   }
 
   private List<SlogoNode> buildTree(List<String> cleaned)
-      throws NoSuchMethodException, ClassNotFoundException, IllegalAccessException, InvocationTargetException, InstantiationException {
+      throws NoSuchMethodException, ClassNotFoundException, IllegalAccessException, InvocationTargetException, InstantiationException, IllegalArgumentException {
     Stack<SlogoNode> st = new Stack<>();
     List<SlogoNode> roots = new ArrayList<>();
     SlogoNode curr = null;
     for(String s : cleaned){
       String symbol = parser.getSymbol(s);
       if(symbol.equals("NO MATCH")){
-        throw new IllegalArgumentException("Input syntax is incorrect");
+        throw new IllegalArgumentException("Input syntax is incorrect: " + s);
       }
       Class<?> node = Class.forName(NODES_PATH + packageName.getString(symbol) + "." + symbol + "Node");
       int parameters = Integer.parseInt(numParameters.getString(symbol));
