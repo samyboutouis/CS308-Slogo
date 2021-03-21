@@ -166,19 +166,29 @@ public class CommandReaderTest {
 
   void setUpTracker() {
     tracker = new BackEndTurtleTracker();
+    // default turtle in backend for testing has ID 0
     tracker.addTurtle(new BackEndTurtle(0, 0, 0, true, true,0));
+  }
+
+  // for converting map to list if test case only cares about first few command objects or there's only one turtle being tested
+  List<Command> getAllCommands(Map<Integer, List<Command>> map) {
+    List<Command> allCommands = new ArrayList<>();
+    for(Integer id : map.keySet()) {
+      allCommands.addAll(map.get(id));
+    }
+    return allCommands;
   }
 
   @Test
   void testHomeCommand () {
     setUpTracker();
-    assertTrue(myReader.parseInput("home", tracker).getAllCommands().get(0) instanceof HomeCommand);
+    assertTrue(getAllCommands(myReader.parseInput("home", tracker).getAllTurtleCommands()).get(0) instanceof HomeCommand);
   }
 
   @Test
   void testLoopCommand () {
     setUpTracker();
-    List<Command> loop = myReader.parseInput("for [ :a 1 5 1 ] [ fd 1 bk 2 ]", tracker).getAllCommands();
+    List<Command> loop = getAllCommands(myReader.parseInput("for [ :a 1 5 1 ] [ fd 1 bk 2 ]", tracker).getAllTurtleCommands());
     assertEquals(10, loop.size());
     for(Command c : loop){
       assertTrue(c instanceof MovementCommand);
