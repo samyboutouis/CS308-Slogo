@@ -1,12 +1,15 @@
 package slogo.model;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import slogo.Command;
 import slogo.BackEndTurtle;
 import slogo.turtlecommands.HomeCommand;
 import slogo.turtlecommands.MovementCommand;
+import slogo.turtlecommands.TellCommand;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -179,6 +182,23 @@ public class CommandReaderTest {
     assertEquals(10, loop.size());
     for(Command c : loop){
       assertTrue(c instanceof MovementCommand);
+    }
+  }
+
+  @Test
+  void testMultiCommands () {
+    setUpTracker();
+//    List<Class<TellCommand>> turtle1 = List.of(TellCommand.class, TellCommand.class, TellCommand.class);
+//    // for turtle1, first tell is in tell, then in ask, then once ask pops it comes up again
+//    List<Class<TellCommand>> turtle2 = List.of(TellCommand.class, TellCommand.class, TellCommand.class);
+//    List<Class<TellCommand>> turtle3 = List.of(TellCommand.class, TellCommand.class, TellCommand.class);
+//    List<Class<TellCommand>> turtle4 = List.of(TellCommand.class, TellCommand.class);
+//    List<List<Class<TellCommand>>> forTest = List.of(turtle1, turtle2, turtle3, turtle4);
+    // can't test for instanceof by having a list of classes
+    List<Integer> correctNumberOfCommands = List.of(3, 3, 3, 3, 2);
+    Map<Integer, List<Command>> output = myReader.parseInput("tell [ 1 2 3 ] ask [ 1 4 ] [ ]", tracker).getAllTurtleCommands();
+    for(int i = 0; i < output.size(); i++){
+      assertTrue(output.get(i).size() == correctNumberOfCommands.get(i));
     }
   }
 

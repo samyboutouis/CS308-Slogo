@@ -5,18 +5,19 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.util.Duration;
 import slogo.Command;
+import slogo.FrontEndTurtleTracker;
 
 public class AnimationManager {
 
   private final List<Command> commands;
-  private final FrontEndTurtle turtle;
+  private final FrontEndTurtleTracker turtleTracker;
   private int frameIndex;
 
   private Timeline animation;
 
-  public AnimationManager(List<Command> commands, FrontEndTurtle turtle){
+  public AnimationManager(List<Command> commands, FrontEndTurtleTracker frontEndTurtleTracker){
     this.commands = commands;
-    this.turtle = turtle;
+    this.turtleTracker = frontEndTurtleTracker;
 
     setupTimeline();
   }
@@ -38,14 +39,14 @@ public class AnimationManager {
   }
 
   private void stepAnimation(){
-    if(turtle != null && commands != null && commands.size() > 0){
-      commands.get(frameIndex).doCommand(turtle);
-      frameIndex++;
-      if (frameIndex >= commands.size()){
-        animation.stop();
-      }
-    } else {
-      animation.stop();
-    }
+//    if(turtle != null && commands != null && commands.size() > 0){
+//      commands.get(frameIndex).doCommand(turtle);
+//      frameIndex++;
+//      if (frameIndex >= commands.size()){
+//        animation.stop();
+//      }
+//    } else {
+//      animation.stop();
+//    }
   }
 }

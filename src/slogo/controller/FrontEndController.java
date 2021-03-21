@@ -8,6 +8,9 @@ import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
+import slogo.FrontEndTurtleTracker;
+import slogo.SafeTurtle;
+import slogo.visualization.ButtonFactory;
 import slogo.visualization.FrontEndTurtle;
 import slogo.visualization.ToolbarDisplay;
 import slogo.visualization.TurtleDisplay;
@@ -16,38 +19,24 @@ public class FrontEndController {
   private static final String COLOR_PICKER_ID = "ColorPicker";
 
   private final Stage stage;
+  private final FrontEndTurtleTracker frontEndTurtleTracker;
   private Color backgroundColor;
-  private Color penColor;
   private TurtleDisplay turtleDisplay;
   private ToolbarDisplay toolbarDisplay;
   private FrontEndTurtle turtle;
+  private ButtonFactory buttonFactory;
 
-  public FrontEndController(Stage stage, FrontEndTurtle frontEndTurtle) {
+  public FrontEndController(Stage stage, FrontEndTurtleTracker frontEndTurtleTracker) {
     this.stage = stage;
+    this.frontEndTurtleTracker = frontEndTurtleTracker;
+    this.buttonFactory = new ButtonFactory(this);
     backgroundColor = Color.web("#dedcdc");
-    penColor = Color.BLACK;
-    turtle = frontEndTurtle;
   }
 
   public void handleAddTurtleClick(Button addTurtleButton) {
-    turtleDisplay.addTurtle();
-  }
-
-  public void handlePenColorClick(Button penColorButton) {
-    penColorButton.setVisible(false);
-    penColorButton.setDisable(true);
-    ColorPicker colorPicker = new ColorPicker(penColor);
-    colorPicker.setId(COLOR_PICKER_ID);
-    colorPicker.setOnAction(event -> handlePenColorPicker(penColorButton, colorPicker));
-    toolbarDisplay.getPane().add(colorPicker, 3, 0, 1, 1);
-  }
-
-  private void handlePenColorPicker(Button penColorButton, ColorPicker colorPicker) {
-    penColor = colorPicker.getValue();
-    turtleDisplay.setPenColor(penColor);
-    toolbarDisplay.getPane().getChildren().remove(colorPicker);
-    penColorButton.setVisible(true);
-    penColorButton.setDisable(false);
+    turtle = new FrontEndTurtle(frontEndTurtleTracker);
+    turtleDisplay.addTurtle(turtle);
+    frontEndTurtleTracker.addTurtle(turtle);
   }
 
   public void handleBackgroundColorClick(Button backgroundColorButton) {
@@ -76,7 +65,7 @@ public class FrontEndController {
       .setAll(new ExtensionFilter("Image File", "*.png", "*.jpg", "*.svg"));
     File file = fileChooser.showOpenDialog(stage);
     if (file != null) {
-      turtleDisplay.setTurtleImage(file);
+      turtle.setImage(file);
     }
   }
 
@@ -89,22 +78,34 @@ public class FrontEndController {
   }
 
   public void handleRightClick(TextField textField) {
-    turtle.rotate(Double.parseDouble(textField.getText()));
+    frontEndTurtleTracker.rotate(Double.parseDouble(textField.getText()));
     textField.clear();
   }
 
   public void handleLeftClick(TextField textField) {
-    turtle.rotate(-Double.parseDouble(textField.getText()));
+    frontEndTurtleTracker.rotate(-Double.parseDouble(textField.getText()));
     textField.clear();
   }
 
   public void handleUpClick(TextField textField) {
-    turtle.forward(Double.parseDouble(textField.getText()));
+    frontEndTurtleTracker.forward(Double.parseDouble(textField.getText()));
     textField.clear();
   }
 
   public void handleDownClick(TextField textField) {
-    turtle.back(Double.parseDouble(textField.getText()));
+    frontEndTurtleTracker.back(Double.parseDouble(textField.getText()));
     textField.clear();
+  }
+
+  public void handlePenUpClick(Button button, SafeTurtle turtle) {
+    buttonFactory.setImage(button, "PenDownButton");
+    turtle.penUp();
+    button.setOnAction(event -> handlePenDownClick(button, turtle));
+  }
+
+  public void handlePenDownClick(Button button, SafeTurtle turtle) {
+    buttonFactory.setImage(button, "PenUpButton");
+    turtle.penDown();
+    button.setOnAction(event -> handlePenUpClick(button, turtle));
   }
 }

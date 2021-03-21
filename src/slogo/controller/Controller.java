@@ -20,10 +20,8 @@ public class Controller {
       .getBundle(String.format("%s/%s/%s", "resources", "languages", "TranslateOptions"));
   }
 
-  public BackEndTurtleTracker parseProgram(String program, BackEndTurtle backEndTurtle) {
-    BackEndTurtleTracker tracker = new BackEndTurtleTracker();
-    tracker.addTurtle(backEndTurtle);
-    return commandReader.parseInput(program, tracker);
+  public BackEndTurtleTracker parseProgram(String program, BackEndTurtleTracker backEndTurtleTracker) {
+    return commandReader.parseInput(program, backEndTurtleTracker);
   }
 
   public void setLanguage (String language) {

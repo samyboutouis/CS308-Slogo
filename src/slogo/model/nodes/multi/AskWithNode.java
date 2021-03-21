@@ -7,12 +7,12 @@ import slogo.model.SlogoNode;
 import slogo.model.nodes.commands.TurtleCommandNode;
 import slogo.model.nodes.control.ConstantNode;
 import slogo.model.nodes.control.ListEndNode;
+import slogo.turtlecommands.TellCommand;
 
-public class AskWithNode extends TurtleCommandNode {
+public class AskWithNode extends AskNode {
 
   private List<SlogoNode> parameters;
   private int brackets;
-  private int firstEnd;
 
   public AskWithNode(int numParameters) {
     super(numParameters);
@@ -20,32 +20,13 @@ public class AskWithNode extends TurtleCommandNode {
     parameters = super.getParameters();
   }
 
-  @Override
-  public boolean isFull(){
-    return !parameters.isEmpty() && checkBrackets();
-  }
-
-  private boolean checkBrackets() {
-    int seen = 0;
-    for(SlogoNode node : parameters){
-      if(node instanceof ListEndNode){
-        seen++;
-      }
-    }
-    return seen == brackets;
-  }
-
-  private void setFirstEnd() {
-    for(int i = 0; i < parameters.size(); i++){
-      if(parameters.get(i) instanceof ListEndNode){
-        firstEnd = i;
-        break;
-      }
-    }
-  }
-
   // gets all the turtles that the ask command wants
-  private List<Integer> getAskTurtles(BackEndTurtleTracker tracker) {
+  // can't use existing lambdas since we want to ONLY have one active turtle when checking the condition
+  // tellList should hold values already so we can wipe out active list each time
+  @Override
+  protected List<Integer> getAskTurtles(BackEndTurtleTracker tracker) {
+    // ask with has exact same setup as ask, except the way we get the turtles is by checking expression, so I just overrode this one method
+    // protected is still called by askNode, and it knows that this method has been overridden, even though askNode also has implementation
     List<Integer> ret = new ArrayList<>();
     try{
     assert parameters.get(1).getBooleanNode();}
@@ -58,24 +39,6 @@ public class AskWithNode extends TurtleCommandNode {
         ret.add(i);
       }
     }
-
-    return ret;
-  }
-
-  @Override
-  public double getReturnValue(BackEndTurtleTracker tracker) {
-    setFirstEnd();
-    List<Integer> askTurtleList = getAskTurtles(tracker);
-    tracker.setAskList(askTurtleList);
-    // create AskCommand that sets turtles active
-
-    double ret = 0;
-    for(int i = firstEnd + 2; i < parameters.size() - 1; i++) {
-      ret = parameters.get(i).getReturnValue(tracker);
-    }
-
-    // create TellCommand that sets old values to be active
-    tracker.revertAskList();
     return ret;
   }
 }

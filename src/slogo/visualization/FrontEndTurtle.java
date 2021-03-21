@@ -6,9 +6,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import slogo.FrontEndTurtleTracker;
 import slogo.SafeTurtle;
 import slogo.Turtle;
-import slogo.visualization.Pen;
 
 public class FrontEndTurtle implements Turtle, SafeTurtle {
 
@@ -24,14 +24,16 @@ public class FrontEndTurtle implements Turtle, SafeTurtle {
   private double direction;
   private Pen pen;
   private final ResourceBundle idBundle;
+  private final FrontEndTurtleTracker turtleTracker;
   private ActiveCircle activeCircle;
   private boolean isActive;
 
-  public FrontEndTurtle() {
+  public FrontEndTurtle(FrontEndTurtleTracker frontEndTurtleTracker) {
     this.idBundle = ResourceBundle
       .getBundle(String.format("%s/%s/%s", "resources", "stylesheets", "CSS_IDs"));
     setDefaultImage();
     isActive = true;
+    turtleTracker = frontEndTurtleTracker;
   }
 
   public void forward(double pixels) {
@@ -107,6 +109,10 @@ public class FrontEndTurtle implements Turtle, SafeTurtle {
     return imageView.isVisible();
   }
 
+  public Color getPenColor() {
+    return pen.getColor();
+  }
+
   public void setImage(File file) {
     Image image = new Image(file.toURI().toString(), IMAGE_WIDTH, IMAGE_HEIGHT, true, false);
     imageView.setImage(image);
@@ -135,6 +141,14 @@ public class FrontEndTurtle implements Turtle, SafeTurtle {
     pen.setColor(color);
   }
 
+  public double getPenThickness() {
+    return pen.getThickness();
+  }
+
+  public void setPenThickness(double width) {
+    pen.setThickness(width);
+  }
+
   public void penDown() {
     pen.penDown();
   }
@@ -153,7 +167,7 @@ public class FrontEndTurtle implements Turtle, SafeTurtle {
 
   public double getDirection() { return direction; }
 
-  public boolean isPenDown() { return false; }
+  public boolean isPenDown() { return pen.isPenDown(); }
 
   public void home() {
     setXY(0, 0);
@@ -167,11 +181,10 @@ public class FrontEndTurtle implements Turtle, SafeTurtle {
 
   private void toggleActive() {
     if(isActive) {
-      activeCircle.hide();
+      setInactive();
     } else {
-      activeCircle.show();
+      setActive();
     }
-    isActive = !isActive;
   }
 
   public boolean isActive() {
@@ -181,10 +194,12 @@ public class FrontEndTurtle implements Turtle, SafeTurtle {
   public void setActive() {
     activeCircle.show();
     isActive = true;
+    turtleTracker.setActive(this);
   }
 
   public void setInactive() {
     activeCircle.hide();
     isActive = false;
+    turtleTracker.setInactive(this);
   }
 }

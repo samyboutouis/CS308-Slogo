@@ -49,7 +49,7 @@ public class ToolbarDisplay {
     this.idBundle = ResourceBundle.getBundle(DEFAULT_RESOURCE_FOLDER + ID_PROPERTY);
     this.commandBundle = ResourceBundle.getBundle(DEFAULT_RESOURCE_FOLDER + METHODS_PROPERTY);
     this.frontEndController = frontEndController;
-    this.buttonList = List.of("AddTurtleButton", "BackgroundColorButton", "TurtleImageButton", "PenColorButton");
+    this.buttonList = List.of("AddTurtleButton", "BackgroundColorButton", "TurtleImageButton");
     initializeGridPane();
     makeToolbar();
   }
@@ -73,13 +73,13 @@ public class ToolbarDisplay {
     int colIndex = 0;
     ButtonFactory buttonFactory = new ButtonFactory(frontEndController);
     for(String label : buttonList) {
-      gridPane.add(buttonFactory.createDisableableButton(label), colIndex++, 0, 1, 1);
+      gridPane.add(buttonFactory.createToggleButton(label), colIndex++, 0, 1, 1);
     }
-    addLanguageDropdown();
+    addLanguageDropdown(colIndex++);
     addHelpDropdown();
   }
 
-  private void addLanguageDropdown() {
+  private void addLanguageDropdown(int colIndex) {
     ComboBox<String> comboBox = new ComboBox<>();
     comboBox.setId(idBundle.getString("LanguageDropdown"));
     for (String language : languageBundle.keySet()) {
@@ -87,7 +87,7 @@ public class ToolbarDisplay {
     }
     comboBox.setValue(DEFAULT_LANGUAGE);
     comboBox.setOnAction(event -> handleLanguageClick(comboBox.getValue()));
-    gridPane.add(comboBox, 4, 0, 4, 1);
+    gridPane.add(comboBox, colIndex, 0, 4, 1);
   }
 
   private void addHelpDropdown() {

@@ -29,9 +29,8 @@ public class CommandReader {
   private List<Double> forTests;
   private ResourceBundle numParameters;
   private ResourceBundle packageName;
-  //private List<Command> commands;
-  //private Turtle turtle;
   private BackEndTurtleTracker tracker;
+  private NodeFactory nodeFactory;
 
   public CommandReader(String language) {
     setLanguage(language);
@@ -44,9 +43,10 @@ public class CommandReader {
     userDefinedCommands = new HashMap<>();
     userDefinedCommandsInString = new HashMap<>();
     tracker = new BackEndTurtleTracker(); // tracker doesn't have a turtle yet
-
+    nodeFactory = new NodeFactory();
   }
 
+  // need to eventually change this to be returning a map of Id to list<command>
   public BackEndTurtleTracker parseInput(String input, BackEndTurtleTracker tracker) throws IllegalArgumentException{
     //commands.clear();
     tracker.clearAllCommands();
@@ -100,50 +100,8 @@ public class CommandReader {
         throw new IllegalArgumentException("Input syntax is incorrect");
       }
       Class<?> node = Class.forName("slogo.model.nodes." + packageName.getString(symbol) + "." + symbol + "Node");
-
       int parameters = Integer.parseInt(numParameters.getString(symbol));
-      switch(symbol){
-        // handle separately: Constant, Variable
-        case "Tell" ->{
-          curr = new TellNode(parameters);
-        }
-
-        case "Constant" -> {
-          curr = new ConstantNode(parameters, Double.parseDouble(s));
-          // if stack is empty and we see a constant, it doesn't do anything to the program but
-          // we still add it to the tree
-        }
-        case "Variable" -> {
-          curr = new VariableNode(parameters, variables, s); // s is the value we read, symbol is the classification
-        }
-        case "Repeat" -> {
-          // needs the map of variables in constructor to add repcount variable
-          curr = new RepeatNode(parameters, variables);
-        }
-        case "Command" -> {
-          if(curr instanceof MakeUserInstructionNode){
-            ((MakeUserInstructionNode) curr).setMethodName(s);
-            userDefinedCommands.put(s, (MakeUserInstructionNode) curr);
-            continue;
-          }
-          else {
-            if(!userDefinedCommands.containsKey(s)){
-              throw new IllegalArgumentException("Command " + s + " undefined!");
-            }
-            else{
-              curr = userDefinedCommands.get(s).createNode();
-            }
-          }
-        }
-        case "MakeUserInstruction" -> {
-          curr = new MakeUserInstructionNode(parameters, userDefinedCommandsInString);
-        }
-        default -> {
-          curr = (SlogoNode) node.getDeclaredConstructor(Integer.TYPE).newInstance(parameters);
-        }
-      }
-      // set the string for curr Node
-      curr.setString(s);
+      curr = nodeFactory.getNode(symbol, s, node, parameters, variables, userDefinedCommands, curr, userDefinedCommandsInString);
 
       if(curr.isFull()){ // only true if node has no parameters
         if(st.isEmpty()) {
