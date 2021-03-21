@@ -20,7 +20,9 @@ import slogo.model.BackEndTurtleTracker;
 public class TerminalDisplay {
 
   private final static int PADDING_LENGTH = 10;
-  private final static String TERMINAL_BUTTON = "TerminalButton";
+  private final static String TERMINAL_RUN_BUTTON = "TerminalRunButton";
+  private final static String TERMINAL_SAVE_BUTTON = "TerminalSaveButton";
+  private final static String TERMINAL_LOAD_BUTTON = "TerminalLoadButton";
   private final static String TERMINAL_PROMPT = "TerminalPrompt";
   private final static String TERMINAL_TEXT_BOX_ID = "TerminalTextBoxID";
   private final static String TERMINAL_BUTTON_ID = "TerminalButtonID";
@@ -34,7 +36,9 @@ public class TerminalDisplay {
   private final ResourceBundle errorBundle;
   private final GridPane pane;
   private TextArea textBox;
-  private Button button;
+  private Button runButton;
+  private Button saveButton;
+  private Button loadButton;
   private final HistoryDisplay historyDisplay;
   private final VariablesDisplay variablesDisplay;
   private final UserCommandsDisplay userCommandsDisplay;
@@ -81,7 +85,8 @@ public class TerminalDisplay {
     ctrlPressed = false;
 
     initializeTextField();
-    initializeButton();
+    initializeRunButton();
+    initializeSaveButton();
     applyTerminalLogic();
   }
 
@@ -96,19 +101,28 @@ public class TerminalDisplay {
     pane.add(textBox, 0, 0, 3, 1);
   }
 
-  private void initializeButton() {
-    button = new Button(resourceBundle.getString(TERMINAL_BUTTON));
-    button.setMaxWidth(Double.MAX_VALUE);
-    button.setMaxHeight(Double.MAX_VALUE);
-    button.setWrapText(true);
-    button.setTextAlignment(TextAlignment.CENTER);
-    button.setId(idBundle.getString(TERMINAL_BUTTON_ID));
+  private void initializeRunButton() {
+    runButton = new Button(resourceBundle.getString(TERMINAL_RUN_BUTTON));
+    runButton.setMaxWidth(Double.MAX_VALUE);
+    runButton.setMaxHeight(Double.MAX_VALUE);
+    runButton.setWrapText(true);
+    runButton.setTextAlignment(TextAlignment.CENTER);
+    runButton.setId(idBundle.getString(TERMINAL_BUTTON_ID));
 
-    pane.add(button, 3, 0, 1, 1);
+    pane.add(runButton, 3, 0, 1, 1);
+  }
+
+  private void initializeSaveButton(){
+    saveButton = new Button(resourceBundle.getString(TERMINAL_SAVE_BUTTON));
+    saveButton.setMaxSize(100, 20);
+    saveButton.setTranslateY(50);
+    saveButton.setTranslateX(10);
+
+    pane.add(saveButton, 0, 0);
   }
 
   private void applyTerminalLogic() {
-    button.setOnAction(e -> {
+    runButton.setOnAction(e -> {
       sendCommandToController();
     });
 

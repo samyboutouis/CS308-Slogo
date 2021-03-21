@@ -4,16 +4,21 @@
   -fx-text-fill: black;
 }
 
-.combo-box, .combo-box .context-menu {
+.combo-box, .combo-box .context-menu, .button {
   -fx-border-radius: 20px;
   -fx-background-radius: 20px;
   -fx-border-width: 0px;
   -fx-background-color: #c3c3c3;
 }
 
-.combo-box:hover {
+.combo-box:hover, .button:hover {
   -fx-background-color: #dbdbdb;
 }
+
+.button:pressed {
+  -fx-background-color: #a9a9a9;
+}
+
 
 .combo-box .list-cell {
   -fx-text-fill: black;
