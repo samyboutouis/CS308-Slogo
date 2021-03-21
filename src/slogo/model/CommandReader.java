@@ -59,7 +59,7 @@ public class CommandReader {
     } catch (NoSuchMethodException | ClassNotFoundException | IllegalAccessException | InvocationTargetException | InstantiationException e) {
       e.printStackTrace();
     }
-    return (SafeBackEndTurtleTracker) tracker;
+    return tracker;
   }
 
   public Map<String, Double> getVariables() {
