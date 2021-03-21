@@ -29,7 +29,7 @@ public class HistoryDisplay extends ScrollingDisplay {
   /**
    * @param command
    */
-  public Button addNewHistoryTag(String command) {
+  public void addNewHistoryTag(String command) {
     Button historyTag = new Button(command);
     historyTag.setWrapText(true);
     historyTag.setMaxWidth(Double.MAX_VALUE);
@@ -39,8 +39,6 @@ public class HistoryDisplay extends ScrollingDisplay {
     historyBox.getChildren().add(historyTag);
 
     applyHistoryTagLogic(historyTag);
-
-    return historyTag;
   }
 
   public void applyHistoryTagLogic(Button historyTag) {

@@ -12,6 +12,11 @@ public class ViewContainer {
   private final static int PADDING_LENGTH = 10;
   private final static int BUTTON_LENGTH = 5;
 
+  private static final String ID_PROPERTY = "resources/stylesheets/CSS_IDs";
+  private static final String VIEW_CONTAINER_ID = "ViewContainer";
+  private static final String VIEW_CONTAINER_COMBOBOX_ID = "ViewContainerComboBox";
+  private static final String VIEW_CONTAINER_BUTTON_ID = "ViewContainerCloseButton";
+
   private final ViewLayout viewLayout;
   private final CustomGridPane pane;
   private final ComboBox<String> comboBox;
@@ -25,14 +30,14 @@ public class ViewContainer {
     this.viewNames = viewNames;
 
     pane = new CustomGridPane(GRID_ROW_COUNT, GRID_COLUMN_COUNT, PADDING_LENGTH);
-    pane.getStyleClass().add("yeetBox"); //for testing
+    pane.getStyleClass().add(VIEW_CONTAINER_ID);
 
     comboBox = new ComboBox<>();
-    comboBox.setId("ViewContainerComboBox");
+    comboBox.setId(VIEW_CONTAINER_COMBOBOX_ID);
     comboBox.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 
     closeButton = new Button("-");
-    closeButton.setId("ViewContainerCloseButton");
+    closeButton.setId(VIEW_CONTAINER_BUTTON_ID);
     closeButton.setMaxSize(BUTTON_LENGTH, BUTTON_LENGTH);
 
     pane.add(comboBox, 0, 0, 5, 1);

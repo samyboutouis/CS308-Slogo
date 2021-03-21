@@ -4,12 +4,12 @@
   -fx-text-fill: black;
 }
 
+
 #TerminalTextBox {
   -fx-font-size: 20;
   -fx-background-radius: 20px;
   -fx-border-radius: 20px;
 }
-
 #TerminalTextBox .scroll-pane{
   -fx-background-color: white;
   -fx-background-radius: 20px;
@@ -18,52 +18,64 @@
   -fx-background-color: transparent;
 }
 
+
 #TerminalButton {
   -fx-background-radius: 20px;
   -fx-border-width: 0px;
   -fx-background-color: #8bdd3f;
   -fx-font-size: 10;
 }
-
 #TerminalButton:hover {
   -fx-background-color: #95e947;
 }
-
 #TerminalButton:pressed {
   -fx-background-color: #7fcd37;
 }
 
-.displayWindow{
+
+.displayWindow {
   -fx-background-color: #dedcdc;
   -fx-background-radius: 20px;
 }
 
-.yeetBox{
-  -fx-background-color: #ffffff;
+
+.ViewContainer {
+  -fx-background-color: #fafafa;
   -fx-background-radius: 20px;
 }
+#ViewContainerCloseButton {
+  -fx-background-radius: 50%;
+  -fx-border-width: 0px;
+  -fx-background-color: #f37878;
+}
+#ViewContainerCloseButton:hover {
+  -fx-background-color: #d44848;
+}
+#ViewContainerComboBox {
+  -fx-background-radius: 20px;
+  -fx-border-width: 0px;
+  -fx-border-image-width: 0px;
+}
+
 
 #HistoryBox, #VariablesBox, #UserCommandsBox, #PaletteBox {
   -fx-background-radius: 20px;
   -fx-border-radius: 20px;
   -fx-background-color: white;
 }
-
 #HistoryBox .viewport, #VariablesBox .viewport, #UserCommandsBox .viewport, #PaletteBox .viewport{
   -fx-background-color: transparent;
 }
-
 #HistoryTag, #VariablesTag, #UserCommandsTag, #PaletteTag {
   -fx-background-radius: 20px;
   -fx-border-width: 0px;
   -fx-background-color: #f5f5f5;
 }
 
-#HistoryTag:hover, #VariablesTag:hover {
+#HistoryTag:hover, #VariablesTag:hover, #UserCommandsTag:hover {
   -fx-background-color: #fafafa;
 }
-
-#HistoryTag:pressed, #VariablesTag:pressed {
+#HistoryTag:pressed, #VariablesTag:pressed. #UserCommandsTag:pressed {
   -fx-background-color: #e7e7e7;
 }
 
@@ -73,21 +85,4 @@
 
 #Slider {
   -fx-max-width: 100px;
-
-}
-
-#ViewContainerCloseButton {
-  -fx-background-radius: 50%;
-  -fx-border-width: 0px;
-  -fx-background-color: #f37878;
-}
-
-#ViewContainerCloseButton:hover {
-  -fx-background-color: #d44848;
-}
-
-#ViewContainerComboBox {
-  -fx-background-radius: 20px;
-  -fx-border-width: 0px;
-  -fx-border-image-width: 0px;
 }
