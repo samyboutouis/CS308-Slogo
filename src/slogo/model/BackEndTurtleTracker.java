@@ -33,6 +33,8 @@ public class BackEndTurtleTracker {
     currTurtle = activeTurtles.get(0); // assumes at least one turtle is on the screen
   }
 
+  // mainly used for testing since we don't create a frontEndTracker
+  // default turtle has Id 0 in this case
   public BackEndTurtleTracker() {
     allTurtles = new HashMap<>();
     activeTurtles = new ArrayList<>();
