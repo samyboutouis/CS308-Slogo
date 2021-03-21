@@ -148,4 +148,8 @@ public class FrontEndTurtleTracker implements SafeFrontEndTurtleTracker{
   public boolean turtleExists(int id) {
     return allTurtles.containsKey(id);
   }
+
+  public boolean isEmpty() {
+    return allTurtles.isEmpty();
+  }
 }

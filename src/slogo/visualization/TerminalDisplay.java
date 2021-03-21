@@ -133,6 +133,11 @@ public class TerminalDisplay {
 
   private void sendCommandToController(){
     String command = textBox.getText().trim();
+    if(turtleTracker.isEmpty()) {
+      FrontEndTurtle turtle = new FrontEndTurtle(turtleTracker);
+      turtleDisplay.addTurtle(turtle);
+      turtleTracker.addTurtle(turtle);
+    }
     if (command.length() > 0) {
       try {
         BackEndTurtleTracker backEndTurtleTracker = turtleTracker.passToBackEnd();
