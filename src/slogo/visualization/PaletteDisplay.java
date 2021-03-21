@@ -24,40 +24,40 @@ public class PaletteDisplay extends ScrollingDisplay {
 
   private final VBox paletteBox;
 
-  public PaletteDisplay(Workspace workspace, String resourcePackage){
+  public PaletteDisplay(Workspace workspace, String resourcePackage) {
     super(workspace, resourcePackage);
     paletteBox = setupVBoxContainer(PALETTE_TITLE, PALETTE_BOX_ID);
     String language = "English";
-    this.resourceBundle = ResourceBundle.getBundle(String.format("%s/%s/%s", resourcePackage, "languages", language));
+    this.resourceBundle = ResourceBundle
+        .getBundle(String.format("%s/%s/%s", resourcePackage, "languages", language));
     this.idBundle = ResourceBundle.getBundle(ID_PROPERTY);
 
-    updatePaletteBox(1, 255, 180, 120);
-    updatePaletteBox(2, 255, 0, 0);
-    updatePaletteBox(1, 255, 0, 0);
+    addDefaultPaletteTags();
   }
 
   /**
-   *
    * @param index
    * @param r
    * @param g
    * @param b
    */
-  public void updatePaletteBox(int index, int r, int g, int b){
-    if(paletteBox.getChildren().size() < index){
-      addNewPaletteTag(index, r, g, b);
+  public void updatePaletteBox(int index, int r, int g, int b) {
+    if (paletteBox.getChildren().size() < index) {
+      addNewPaletteTag(index, r, g, b, null);
     } else {
       updatePaletteTag(index, r, g, b);
     }
   }
 
-  private void addNewPaletteTag(int index, int r, int g, int b){
-    CustomGridPane paletteTag = new CustomGridPane(PALETTE_TAG_ROW_COUNT, PALETTE_TAG_COL_COUNT, PALETTE_TAG_PADDING_LENGTH);
+  private void addNewPaletteTag(int index, int r, int g, int b, String imageName) {
+    CustomGridPane paletteTag = new CustomGridPane(PALETTE_TAG_ROW_COUNT, PALETTE_TAG_COL_COUNT,
+        PALETTE_TAG_PADDING_LENGTH);
     paletteTag.setId(idBundle.getString(PALETTE_TAG_ID));
 
     Label indexLabel = new Label(String.format(" %d:", index));
     Circle paletteCircle = new Circle();
-    Label paletteLabel = new Label(String.format("%d,%d,%d", r, g, b));
+    Label paletteLabel = new Label(
+        imageName == null ? String.format("%d,%d,%d", r, g, b) : String.format("%s", imageName));
 
     paletteCircle.setRadius(12);
     paletteCircle.setFill(Color.rgb(r, g, b));
@@ -71,7 +71,15 @@ public class PaletteDisplay extends ScrollingDisplay {
     paletteBox.getChildren().add(paletteTag);
   }
 
-  private void updatePaletteTag(int index, int r, int g, int b){
+  private void addDefaultPaletteTags() {
+    String[] defaultImageNames = {"paint-brush.png", "paint-bucket.png", "turtle.png",
+        "turtle-icon.png"};
+    for (int i = 0; i < defaultImageNames.length; i++) {
+      addNewPaletteTag(i + 1, 255, 255, 255, defaultImageNames[i]);
+    }
+  }
+
+  private void updatePaletteTag(int index, int r, int g, int b) {
     CustomGridPane paletteTag = (CustomGridPane) paletteBox.getChildren().get(index - 1);
     Label indexLabel = (Label) paletteTag.getChildren().get(0);
     Circle paletteCircle = (Circle) paletteTag.getChildren().get(1);
@@ -80,5 +88,25 @@ public class PaletteDisplay extends ScrollingDisplay {
     indexLabel.setText(String.format(" %d:", index));
     paletteCircle.setFill(Color.rgb(r, g, b));
     paletteLabel.setText(String.format("%d,%d,%d", r, g, b));
+  }
+
+  /**
+   * @param index
+   * @return
+   */
+  public Color getColorFromIndex(int index) {
+    CustomGridPane paletteTag = (CustomGridPane) paletteBox.getChildren().get(index - 1);
+    Circle paletteCircle = (Circle) paletteTag.getChildren().get(1);
+    return (Color) paletteCircle.getFill();
+  }
+
+  /**
+   * @param index
+   * @return
+   */
+  public String getImagePathFromIndex(int index) {
+    CustomGridPane paletteTag = (CustomGridPane) paletteBox.getChildren().get(index - 1);
+    Label paletteLabel = (Label) paletteTag.getChildren().get(2);
+    return String.format("resources/%s", paletteLabel.getText());
   }
 }

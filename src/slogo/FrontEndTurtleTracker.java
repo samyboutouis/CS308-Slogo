@@ -15,7 +15,8 @@ import slogo.visualization.FrontEndTurtle;
 import slogo.visualization.PaletteDisplay;
 import slogo.visualization.TurtleObserver;
 
-public class FrontEndTurtleTracker implements SafeFrontEndTurtleTracker{
+public class FrontEndTurtleTracker implements SafeFrontEndTurtleTracker {
+
   private final Map<Integer, FrontEndTurtle> allTurtles;
   private final List<Integer> activeTurtles;
   private final List<TurtleObserver> turtleObservers;
@@ -39,37 +40,37 @@ public class FrontEndTurtleTracker implements SafeFrontEndTurtleTracker{
   }
 
   private void notifyAddTurtle(List<Integer> list, FrontEndTurtle turtle) {
-    for(TurtleObserver turtleObserver : turtleObservers) {
+    for (TurtleObserver turtleObserver : turtleObservers) {
       turtleObserver.updateTurtleNumber(list);
     }
-    for(BackgroundObserver backgroundObserver : backgroundObservers) {
+    for (BackgroundObserver backgroundObserver : backgroundObservers) {
       backgroundObserver.addToBackground(turtle);
     }
   }
 
   private void notifyUpdateTurtleState(int id) {
-    for(TurtleObserver turtleObserver : turtleObservers) {
+    for (TurtleObserver turtleObserver : turtleObservers) {
       turtleObserver.updateTurtleState(id);
     }
   }
 
   public void notifyBackgroundObservers(Color color) {
-    for(BackgroundObserver backgroundObserver : backgroundObservers) {
+    for (BackgroundObserver backgroundObserver : backgroundObservers) {
       backgroundObserver.setBackgroundColor(color);
     }
   }
 
   public BackEndTurtleTracker passToBackEnd() {
     Map<Integer, BackEndTurtle> backEndAllTurtles = new HashMap<>();
-    for(int i = 1; i <= allTurtles.size(); i++){
+    for (int i = 1; i <= allTurtles.size(); i++) {
       backEndAllTurtles.put(i, new BackEndTurtle(allTurtles.get(i)));
     }
-   return new BackEndTurtleTracker(backEndAllTurtles, new ArrayList<>(activeTurtles), this);
+    return new BackEndTurtleTracker(backEndAllTurtles, new ArrayList<>(activeTurtles), this);
   }
 
   @Override
   public void setActive(int id) {
-    if(!activeTurtles.contains(id)){
+    if (!activeTurtles.contains(id)) {
       activeTurtles.add(id);
     }
     allTurtles.get(id).setActive();
@@ -78,14 +79,14 @@ public class FrontEndTurtleTracker implements SafeFrontEndTurtleTracker{
   public void setActive(FrontEndTurtle frontEndTurtle) {
     Set<Integer> turtleIDSet = getKeyByValue(allTurtles, frontEndTurtle);
     int turtleID = turtleIDSet.iterator().next();
-    if(!activeTurtles.contains(turtleID)){
+    if (!activeTurtles.contains(turtleID)) {
       activeTurtles.add(turtleID);
     }
   }
 
   @Override
   public void setInactive(int id) {
-    if(activeTurtles.contains(id)){
+    if (activeTurtles.contains(id)) {
       activeTurtles.remove(Integer.valueOf(id));
     }
     allTurtles.get(id).setInactive();
@@ -94,46 +95,48 @@ public class FrontEndTurtleTracker implements SafeFrontEndTurtleTracker{
   public void setInactive(FrontEndTurtle frontEndTurtle) {
     Set<Integer> turtleIDSet = getKeyByValue(allTurtles, frontEndTurtle);
     int turtleID = turtleIDSet.iterator().next();
-    if(activeTurtles.contains(turtleID)){
+    if (activeTurtles.contains(turtleID)) {
       activeTurtles.remove(Integer.valueOf(turtleID));
     }
   }
 
   public void addTurtle(FrontEndTurtle turtle) {
     int turtleID = 1;
-    Set<Integer> allIDs =  allTurtles.keySet();
-    for(int id : allIDs) {
-      if(turtleID == id) {
+    Set<Integer> allIDs = allTurtles.keySet();
+    for (int id : allIDs) {
+      if (turtleID == id) {
         turtleID++;
       } else {
         break;
       }
     }
     allTurtles.put(turtleID, turtle);
-    if(turtle.isActive()) activeTurtles.add(turtleID);
+    if (turtle.isActive()) {
+      activeTurtles.add(turtleID);
+    }
     notifyAddTurtle(getTurtleIDs(), turtle);
   }
 
-  public void updatePalette(int index, int r, int g, int b){
+  public void updatePalette(int index, int r, int g, int b) {
     paletteDisplay.updatePaletteBox(index, r, g, b);
   }
 
   public void forward(double pixels) {
-    for(int id : activeTurtles) {
+    for (int id : activeTurtles) {
       allTurtles.get(id).forward(pixels);
       notifyUpdateTurtleState(id);
     }
   }
 
   public void back(double pixels) {
-    for(int id : activeTurtles) {
+    for (int id : activeTurtles) {
       allTurtles.get(id).back(pixels);
       notifyUpdateTurtleState(id);
     }
   }
 
   public void rotate(double pixels) {
-    for(int id : activeTurtles) {
+    for (int id : activeTurtles) {
       allTurtles.get(id).rotate(pixels);
       notifyUpdateTurtleState(id);
     }
@@ -141,10 +144,10 @@ public class FrontEndTurtleTracker implements SafeFrontEndTurtleTracker{
 
   public static <T, E> Set<T> getKeyByValue(Map<T, E> map, E value) {
     return map.entrySet()
-      .stream()
-      .filter(entry -> Objects.equals(entry.getValue(), value))
-      .map(Map.Entry::getKey)
-      .collect(Collectors.toSet());
+        .stream()
+        .filter(entry -> Objects.equals(entry.getValue(), value))
+        .map(Map.Entry::getKey)
+        .collect(Collectors.toSet());
   }
 
   public SafeTurtle getSafeTurtle(int id) {
@@ -153,8 +156,8 @@ public class FrontEndTurtleTracker implements SafeFrontEndTurtleTracker{
 
   private List<Integer> getTurtleIDs() {
     return allTurtles.keySet()
-      .stream()
-      .collect(Collectors.toUnmodifiableList());
+        .stream()
+        .collect(Collectors.toUnmodifiableList());
   }
 
   public FrontEndTurtle getFrontEndTurtle(int id) {

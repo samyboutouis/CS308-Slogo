@@ -8,13 +8,13 @@ public class RandomNode extends SlogoNode {
 
   private List<SlogoNode> parameters;
 
-  public RandomNode(int numParameters){
+  public RandomNode(int numParameters) {
     super(numParameters);
     parameters = super.getParameters();
   }
 
   @Override
   public double getReturnValue(BackEndTurtleTracker tracker) {
-    return Math.random()* parameters.get(0).getReturnValue(tracker);
+    return Math.random() * parameters.get(0).getReturnValue(tracker);
   }
 }

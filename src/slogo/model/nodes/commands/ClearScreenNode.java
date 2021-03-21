@@ -6,7 +6,7 @@ import slogo.turtlecommands.ClearScreenCommand;
 
 public class ClearScreenNode extends TurtleCommandNode {
 
-  public ClearScreenNode(int numParameters){
+  public ClearScreenNode(int numParameters) {
     super(numParameters);
   }
 /*
@@ -21,12 +21,13 @@ public class ClearScreenNode extends TurtleCommandNode {
 
   @Override
   public double getReturnValue(BackEndTurtleTracker tracker) {
-    return super.loopThroughTurtles(tracker,new ArrayList<>(),(currTurtle, values)->{
+    return super.loopThroughTurtles(tracker, new ArrayList<>(), (currTurtle, values) -> {
       currTurtle.addCommand(new ClearScreenCommand());
       double prevX = currTurtle.getX();
       double prevY = currTurtle.getY();
       currTurtle.clearScreen();
-      return Math.sqrt(Math.pow(prevX - currTurtle.getX(), 2) +  Math.pow(prevY - currTurtle.getY(), 2));
+      return Math
+          .sqrt(Math.pow(prevX - currTurtle.getX(), 2) + Math.pow(prevY - currTurtle.getY(), 2));
     });
   }
 }

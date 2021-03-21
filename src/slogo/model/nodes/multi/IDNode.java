@@ -5,7 +5,7 @@ import slogo.model.BackEndTurtleTracker;
 
 public class IDNode extends SlogoNode {
 
-  public IDNode(int numParameters){
+  public IDNode(int numParameters) {
     super(numParameters);
   }
 

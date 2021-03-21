@@ -5,6 +5,7 @@ import slogo.model.SlogoNode;
 import slogo.model.BackEndTurtleTracker;
 
 public class VariableNode extends SlogoNode {
+
   private Map<String, Double> variables;
   private String name;
 
@@ -14,16 +15,15 @@ public class VariableNode extends SlogoNode {
     this.name = name;
   }
 
-  public void setValue(double value){
+  public void setValue(double value) {
     variables.put(name, value);
   }
 
   @Override
   public double getReturnValue(BackEndTurtleTracker tracker) {
-    if(!variables.containsKey(name)){
+    if (!variables.containsKey(name)) {
       return 0;
-    }
-    else {
+    } else {
       return variables.get(name);
     }
   }

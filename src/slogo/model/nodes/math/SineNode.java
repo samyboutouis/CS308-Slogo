@@ -8,7 +8,7 @@ public class SineNode extends SlogoNode {
 
   private List<SlogoNode> parameters;
 
-  public SineNode(int numParameters){
+  public SineNode(int numParameters) {
     super(numParameters);
     parameters = super.getParameters();
   }

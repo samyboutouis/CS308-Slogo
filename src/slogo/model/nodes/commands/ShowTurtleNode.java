@@ -20,7 +20,7 @@ public class ShowTurtleNode extends TurtleCommandNode {
 
   @Override
   public double getReturnValue(BackEndTurtleTracker tracker) {
-    return super.loopThroughTurtles(tracker,new ArrayList<>(), (currTurtle, values)->{
+    return super.loopThroughTurtles(tracker, new ArrayList<>(), (currTurtle, values) -> {
       currTurtle.addCommand(new ShowTurtleCommand());
       currTurtle.show();
       return 1;

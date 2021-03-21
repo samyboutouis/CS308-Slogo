@@ -6,10 +6,11 @@ import slogo.turtlecommands.SetHeadingCommand;
 import slogo.model.SlogoNode;
 
 public class SetHeadingNode extends TurtleCommandNode {
+
   private List<SlogoNode> parameters;
   private List<Double> values;
 
-  public SetHeadingNode(int numParameters){
+  public SetHeadingNode(int numParameters) {
     super(numParameters);
     parameters = super.getParameters();
   }
@@ -31,7 +32,7 @@ public class SetHeadingNode extends TurtleCommandNode {
 
   @Override
   public double getReturnValue(BackEndTurtleTracker tracker) {
-    return super.loopThroughTurtles(tracker,parameters, (currTurtle, values)->{
+    return super.loopThroughTurtles(tracker, parameters, (currTurtle, values) -> {
       currTurtle.addCommand(new SetHeadingCommand(values.get(0)));
       double prevHeading = currTurtle.getDirection();
       currTurtle.setDirection(values.get(0));

@@ -23,25 +23,25 @@ public class ScrollingDisplay {
   private final Workspace workspace;
 
   /**
-   *
    * @param resourcePackage
    */
-  public ScrollingDisplay(Workspace workspace, String resourcePackage){
+  public ScrollingDisplay(Workspace workspace, String resourcePackage) {
     pane = new GridPane();
     pane.getStyleClass().add(DISPLAY_CLASS_NAME);
     String language = "English";
     this.workspace = workspace;
-    this.resourceBundle = ResourceBundle.getBundle(String.format("%s/%s/%s", resourcePackage, "languages", language));
-    this.idBundle = ResourceBundle.getBundle(String.format("%s/%s/%s", resourcePackage, "stylesheets", "CSS_IDs"));
+    this.resourceBundle = ResourceBundle
+        .getBundle(String.format("%s/%s/%s", resourcePackage, "languages", language));
+    this.idBundle = ResourceBundle
+        .getBundle(String.format("%s/%s/%s", resourcePackage, "stylesheets", "CSS_IDs"));
   }
 
   /**
-   *
    * @param title
    * @param vBoxID
    * @return
    */
-  public VBox setupVBoxContainer(String title, String vBoxID){
+  public VBox setupVBoxContainer(String title, String vBoxID) {
     pane.setVgap(PADDING_LENGTH);
     pane.setPadding(new Insets(PADDING_LENGTH));
 
@@ -50,7 +50,7 @@ public class ScrollingDisplay {
     col.setPercentWidth(100.0);
     pane.getColumnConstraints().add(col);
 
-    for(int i = 0; i < ROW_COUNT; i++){
+    for (int i = 0; i < ROW_COUNT; i++) {
       RowConstraints row = new RowConstraints();
       row.setVgrow(Priority.ALWAYS);
       row.setPercentHeight(100.0 / ROW_COUNT);
@@ -61,12 +61,12 @@ public class ScrollingDisplay {
     return initializeVBox(vBoxID);
   }
 
-  private void initializeTitleLabel(String title){
+  private void initializeTitleLabel(String title) {
     Label titleLabel = new Label(resourceBundle.getString(title));
     pane.add(titleLabel, 0, 0, 1, 1);
   }
 
-  private VBox initializeVBox(String vBoxID){
+  private VBox initializeVBox(String vBoxID) {
     ScrollPane scrollPane = new ScrollPane();
     scrollPane.setFitToWidth(true);
     scrollPane.setPrefViewportHeight(1);
@@ -84,7 +84,7 @@ public class ScrollingDisplay {
     return vBox;
   }
 
-  public GridPane getPane(){
+  public GridPane getPane() {
     return pane;
   }
 

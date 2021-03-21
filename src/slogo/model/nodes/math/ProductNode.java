@@ -8,7 +8,7 @@ public class ProductNode extends SlogoNode {
 
   private List<SlogoNode> parameters;
 
-  public ProductNode(int numParameters){
+  public ProductNode(int numParameters) {
     super(numParameters);
     parameters = super.getParameters();
   }

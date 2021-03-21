@@ -9,20 +9,25 @@ import slogo.model.nodes.control.VariableNode;
 
 public class NodeFactory {
 
-  public SlogoNode getNode(String symbol, String value, Class<?> node, int parameters, Map<String, Double> variables, Map<String,
-      MakeUserInstructionNode> userDefinedCommands, SlogoNode prev, Map<String, String> userDefinedCommandsInString)
+  public SlogoNode getNode(String symbol, String value, Class<?> node, int parameters,
+      Map<String, Double> variables, Map<String,
+      MakeUserInstructionNode> userDefinedCommands, SlogoNode prev,
+      Map<String, String> userDefinedCommandsInString)
       throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
     SlogoNode curr = prev;
-    switch(symbol) {
+    switch (symbol) {
       case "Constant" -> curr = constantCase(value, parameters);
       case "Variable" -> curr = variableCase(value, parameters, variables);
       case "Repeat" -> curr = repeatCase(parameters, variables);
       case "Command" -> {
         curr = commandCase(curr, value, userDefinedCommands);
-        if(curr == null) { return null; }
+        if (curr == null) {
+          return null;
+        }
       }
       case "MakeUserInstruction" -> curr = makeCase(parameters, userDefinedCommandsInString);
-      default -> curr = (SlogoNode) node.getDeclaredConstructor(Integer.TYPE).newInstance(parameters);
+      default -> curr = (SlogoNode) node.getDeclaredConstructor(Integer.TYPE)
+          .newInstance(parameters);
     }
     curr.setString(value); // set the string for curr Node
     return curr;

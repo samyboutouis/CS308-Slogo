@@ -9,6 +9,8 @@ import slogo.Command;
 import slogo.BackEndTurtle;
 import slogo.turtlecommands.HomeCommand;
 import slogo.turtlecommands.MovementCommand;
+import slogo.turtlecommands.SetPaletteCommand;
+import slogo.turtlecommands.SetPenSizeCommand;
 import slogo.turtlecommands.TellCommand;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -28,6 +30,7 @@ public class CommandReaderTest {
   @Test
   void testAskWith(){
     assertEquals(List.of(10.0, 100.0, 50.0, 100.0, 200.0),myReader.testParseInput("tell [ 1 2 7 10 ] fd 100 ask [ 2 7 ] [ bk 50 ] askwith [ greater? ycor 50 ] [ fd 100 ] ycor"));
+    assertEquals(List.of(50.0, 1.0, 50.0, 2.0,  100.0, 3.0, 50.0),myReader.testParseInput("ask [ 1 2 ] [ ask [ 2 3 ] [ fd 50 ] fd 50 ] tell [ 1 ] ycor tell [ 2 ] ycor tell [ 3 ] ycor"));
   }
 
   @Test
@@ -207,8 +210,15 @@ public class CommandReaderTest {
     List<Integer> correctNumberOfCommands = List.of(3, 3, 3, 3, 2);
     Map<Integer, List<Command>> output = myReader.parseInput("tell [ 1 2 3 ] ask [ 1 4 ] [ ]", tracker).getAllTurtleCommands();
     for(int i = 0; i < output.size(); i++){
-      assertTrue(output.get(i).size() == correctNumberOfCommands.get(i));
+      assertEquals(output.get(i).size(), correctNumberOfCommands.get(i));
     }
+  }
+
+  @Test
+  void testDisplayCommands () {
+    setUpTracker();
+    assertTrue(getAllCommands(myReader.parseInput("setpalette 1 0 100 255", tracker).getAllTurtleCommands()).get(0) instanceof SetPaletteCommand);
+    assertTrue(getAllCommands(myReader.parseInput("setpensize 10", tracker).getAllTurtleCommands()).get(0) instanceof SetPenSizeCommand);
   }
 
   // SECTION
@@ -218,7 +228,17 @@ public class CommandReaderTest {
     try{
       myReader.testParseInput("::"); // invalid syntax
     } catch(IllegalArgumentException e){
-      assertEquals(e.getMessage(), "Input syntax is incorrect");
+      assertEquals(e.getMessage(), "Input syntax is incorrect: ::");
+    }
+  }
+
+  @Test
+  void testRGBRange () {
+    try{
+      // rgb values out of range
+      myReader.testParseInput("setpalette 1 -1 500 240");
+    } catch(IllegalArgumentException e){
+      assertEquals(e.getMessage(), "Set Palette RGB Value Error - Not within range [0, 255]");
     }
   }
 }

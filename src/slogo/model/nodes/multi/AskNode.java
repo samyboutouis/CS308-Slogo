@@ -20,14 +20,14 @@ public class AskNode extends SlogoNode {
   }
 
   @Override
-  public boolean isFull(){
+  public boolean isFull() {
     return !parameters.isEmpty() && checkBrackets();
   }
 
   private boolean checkBrackets() {
     int seen = 0;
-    for(SlogoNode node : parameters){
-      if(node instanceof ListEndNode){
+    for (SlogoNode node : parameters) {
+      if (node instanceof ListEndNode) {
         seen++;
       }
     }
@@ -35,8 +35,8 @@ public class AskNode extends SlogoNode {
   }
 
   private void setFirstEnd() {
-    for(int i = 0; i < parameters.size(); i++){
-      if(parameters.get(i) instanceof ListEndNode){
+    for (int i = 0; i < parameters.size(); i++) {
+      if (parameters.get(i) instanceof ListEndNode) {
         firstEnd = i;
         break;
       }
@@ -46,8 +46,8 @@ public class AskNode extends SlogoNode {
   // gets all the turtles that the ask command wants
   protected List<Integer> getAskTurtles(BackEndTurtleTracker tracker) {
     List<Integer> ret = new ArrayList<>();
-    for(int i = 1; i < firstEnd; i++) {
-      try{
+    for (int i = 1; i < firstEnd; i++) {
+      try {
         int turtleId = (int) ((ConstantNode) parameters.get(i)).getReturnValue(tracker);
         // should all be constant nodes
         ret.add(turtleId);
@@ -64,7 +64,7 @@ public class AskNode extends SlogoNode {
     List<Integer> askTurtleList = getAskTurtles(tracker);
     tracker.setAskList(askTurtleList); // creates the tellCommand
     double ret = 0;
-    for(int i = firstEnd + 2; i < parameters.size() - 1; i++) {
+    for (int i = firstEnd + 2; i < parameters.size() - 1; i++) {
       ret = parameters.get(i).getReturnValue(tracker);
     }
     tracker.revertAskList(); // creates the tellCommand

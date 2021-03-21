@@ -12,7 +12,7 @@ public class CustomGridPane extends GridPane {
   private final int colCount;
   private final int paddingLength;
 
-  public CustomGridPane(int rowCount, int colCount, int paddingLength){
+  public CustomGridPane(int rowCount, int colCount, int paddingLength) {
     this.rowCount = rowCount;
     this.colCount = colCount;
     this.paddingLength = paddingLength;
@@ -22,10 +22,9 @@ public class CustomGridPane extends GridPane {
   }
 
   /**
-   *
    * @param scene
    */
-  public void setPrefSize(Scene scene){
+  public void setPrefSize(Scene scene) {
     this.setPrefSize(scene.getWidth(), scene.getHeight());
   }
 

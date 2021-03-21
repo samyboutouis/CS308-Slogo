@@ -10,7 +10,7 @@ public class ForwardNode extends TurtleCommandNode {
   private List<SlogoNode> parameters;
   private List<Double> values;
 
-  public ForwardNode(int numParameters){
+  public ForwardNode(int numParameters) {
     super(numParameters);
     parameters = super.getParameters();
   }
