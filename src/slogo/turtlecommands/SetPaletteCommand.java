@@ -13,11 +13,15 @@ public class SetPaletteCommand implements Command {
   private int b;
 
   public SetPaletteCommand(SafeFrontEndTurtleTracker safe, int index, int r, int g, int b) {
-
+    this.safe = safe;
+    this.index = index;
+    this.r = r;
+    this.g = g;
+    this.b = b;
   }
 
   @Override
   public void doCommand(FrontEndTurtle frontEndTurtle) {
-    // safe.setPalette(index, r, g, b);
+    safe.updatePalette(index, r, g, b);
   }
 }
