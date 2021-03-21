@@ -1,6 +1,7 @@
 package slogo.controller;
 
 import java.io.File;
+import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.scene.control.Alert;
@@ -15,18 +16,25 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import slogo.FrontEndTurtleTracker;
+import slogo.SafeTurtle;
 
 public class XMLCreator {
-
   private static final String RESOURCES_FILE = "resources.languages.EnglishErrors";
+  private static final String DEFAULT_FILE_PATH = "src/resources/preferences/";
+  private static final String XML = ".xml";
 
+  private final FrontEndTurtleTracker turtleTracker;
+  private final Controller controller;
   private Document doc;
   private String filePath;
   private ResourceBundle errorBundle;
 
-  public XMLCreator(String filePath) {
+  public XMLCreator(FrontEndTurtleTracker frontEndTurtleTracker, Controller controller, String filePath) {
     this.filePath = filePath;
     this.errorBundle = ResourceBundle.getBundle(RESOURCES_FILE);
+    this.turtleTracker = frontEndTurtleTracker;
+    this.controller = controller;
     try {
       initialize();
       makeDocument();
@@ -48,19 +56,10 @@ public class XMLCreator {
   }
 
   private void makeDocument() {
-    Element root = doc.createElement("config");
+    Element root = doc.createElement("Workspace");
     doc.appendChild(root);
-//    Map<String, String> simulationInfo = configReader.getSimulationInfo();
-//    for (String element : simulationInfo.keySet()) {
-//      addToDocument(root, element, simulationInfo.get(element));
-//    }
-//    Map<String, String> cellConfigMap = configReader.getCellConfig();
-//    Element cellConfigTag = doc.createElement("cellConfig");
-//    root.appendChild(cellConfigTag);
-//    for (String element : cellConfigMap.keySet()) {
-//      addToDocument(cellConfigTag, element, cellConfigMap.get(element));
-//    }
-//    recordCells(root);
+    recordTurtles(root);
+    recordPreferences(root);
   }
 
   private void addToDocument(Element root, String tag, String value) {
@@ -69,20 +68,42 @@ public class XMLCreator {
     root.appendChild(element);
   }
 
-//  private void recordCells(Element root) {
-//    Element cellsTag = doc.createElement("cells");
-//    root.appendChild(cellsTag);
-//    int[][] stateGrid = grid.getStateIDGrid();
-//    for (int[] ints : stateGrid) {
-//      StringBuilder sb = new StringBuilder();
-//      for (int col = 0; col < stateGrid[0].length; col++) {
-//        sb.append(ints[col]);
-//      }
-//      Element rowTag = doc.createElement("row");
-//      rowTag.appendChild(doc.createTextNode(sb.toString()));
-//      cellsTag.appendChild(rowTag);
-//    }
-//  }
+  private void recordTurtles(Element root) {
+    Element turtlesTag = doc.createElement("Turtles");
+    List<Integer> allTurtleIDs = turtleTracker.getTurtleIDs();
+    for(int id : allTurtleIDs) {
+      Element turtleTag = doc.createElement("Turtle");
+      SafeTurtle turtle = turtleTracker.getSafeTurtle(id);
+      turtleTag.appendChild(createLineTag(turtle.getLineInfo()));
+      addToDocument(turtleTag, "XPosition", String.valueOf(turtle.getX()));
+      addToDocument(turtleTag, "YPosition", String.valueOf(turtle.getY()));
+      addToDocument(turtleTag, "Direction", String.valueOf(turtle.getDirection()));
+      addToDocument(turtleTag, "PenColor", String.valueOf(turtle.getPenColor()));
+      addToDocument(turtleTag, "PenThickness", String.valueOf(turtle.getPenThickness()));
+      addToDocument(turtleTag, "Active", String.valueOf(turtle.isActive()));
+      addToDocument(turtleTag, "PenDown", String.valueOf(turtle.isPenDown()));
+      addToDocument(turtleTag, "Showing", String.valueOf(turtle.isShowing()));
+      turtlesTag.appendChild(turtleTag);
+    }
+    root.appendChild(turtlesTag);
+  }
+
+  private Element createLineTag(List<Map<String, String>> lineList) {
+    Element linesTag = doc.createElement("Lines");
+    for(Map<String, String> lineInfo : lineList){
+      Element lineTag = doc.createElement("Line");
+      for(String key : lineInfo.keySet()) {
+        addToDocument(lineTag, key, lineInfo.get(key));
+      }
+      linesTag.appendChild(lineTag);
+    }
+    return linesTag;
+  }
+
+  private void recordPreferences(Element root) {
+    addToDocument(root, "Language", controller.getLanguage());
+    addToDocument(root, "BackgroundColor", String.valueOf(turtleTracker.getBackgroundColor()));
+  }
 
   private void makeFile() {
     try {
@@ -91,7 +112,7 @@ public class XMLCreator {
       transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
       transformer.setOutputProperty(OutputKeys.INDENT, "yes");
       DOMSource domSource = new DOMSource(doc);
-      StreamResult streamResult = new StreamResult(new File(filePath));
+      StreamResult streamResult = new StreamResult(new File(DEFAULT_FILE_PATH + filePath + XML));
       transformer.transform(domSource, streamResult);
     } catch (TransformerException e) {
       showCreationError();
@@ -106,6 +127,6 @@ public class XMLCreator {
 
   private void showCreationSuccess() {
     AlertType type = AlertType.CONFIRMATION;
-    new Alert(type, filePath).showAndWait();
+    new Alert(type, DEFAULT_FILE_PATH + filePath + XML).showAndWait();
   }
 }

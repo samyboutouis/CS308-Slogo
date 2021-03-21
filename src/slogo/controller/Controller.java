@@ -40,4 +40,8 @@ public class Controller {
   public Map<String, String> getUserDefinedCommands() {
     return commandReader.getUserDefinedCommandsInString();
   }
+
+  public String getLanguage() {
+    return language;
+  }
 }

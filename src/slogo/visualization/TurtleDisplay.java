@@ -44,4 +44,8 @@ public class TurtleDisplay implements BackgroundObserver {
   public AnchorPane getPane() {
     return anchorPane;
   }
+
+  public Color getBackgroundColor() {
+    return (Color) anchorPane.getBackground().getFills().get(0).getFill();
+  }
 }

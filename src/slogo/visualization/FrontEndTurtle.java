@@ -1,11 +1,14 @@
 package slogo.visualization;
 
 import java.io.File;
+import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
 import slogo.FrontEndTurtleTracker;
 import slogo.SafeTurtle;
 import slogo.Turtle;
@@ -225,5 +228,9 @@ public class FrontEndTurtle implements Turtle, SafeTurtle {
     //return pen.getColor()
     //FIXME
     return -1;
+  }
+
+  public List<Map<String, String>> getLineInfo() {
+    return pen.getLineInfo();
   }
 }

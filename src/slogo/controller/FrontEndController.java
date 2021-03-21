@@ -3,6 +3,7 @@ package slogo.controller;
 import java.io.File;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputDialog;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
@@ -14,17 +15,20 @@ import slogo.visualization.FrontEndTurtle;
 import slogo.visualization.PaletteDisplay;
 
 public class FrontEndController {
+  private static final String DIALOG_HEADER_TEXT = "Create XML File";
 
   private final Stage stage;
   private final FrontEndTurtleTracker frontEndTurtleTracker;
   private final ButtonFactory buttonFactory;
   private final PaletteDisplay paletteDisplay;
+  private final Controller controller;
 
-  public FrontEndController(Stage stage, FrontEndTurtleTracker frontEndTurtleTracker, PaletteDisplay paletteDisplay) {
+  public FrontEndController(Stage stage, FrontEndTurtleTracker frontEndTurtleTracker, Controller controller, PaletteDisplay paletteDisplay) {
     this.stage = stage;
     this.frontEndTurtleTracker = frontEndTurtleTracker;
     this.buttonFactory = new ButtonFactory(this);
     this.paletteDisplay = paletteDisplay;
+    this.controller = controller;
   }
 
   public void handleAddTurtleClick(Button addTurtleButton) {
@@ -95,6 +99,12 @@ public class FrontEndController {
   }
 
   public void handleSaveWorkspaceClick() {
-
+    TextInputDialog textDialog = new TextInputDialog();
+    textDialog.setHeaderText(String.format(DIALOG_HEADER_TEXT));
+    textDialog.showAndWait();
+    String newValue = textDialog.getEditor().getText();
+    if (newValue != null) {
+      XMLCreator xmlCreator = new XMLCreator(frontEndTurtleTracker, controller, newValue);
+    }
   }
 }

@@ -1,8 +1,11 @@
 package slogo.visualization;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
@@ -73,5 +76,20 @@ public class Pen {
 
   public double getThickness() {
     return strokeWidth;
+  }
+
+  public List<Map<String, String>> getLineInfo() {
+    List<Map<String, String>> listInfo = new ArrayList<>();
+    for(Line line : lineList) {
+      Map<String, String> map = new HashMap<>();
+      map.put("TranslateX", String.valueOf(line.getTranslateX()));
+      map.put("TranslateY", String.valueOf(line.getTranslateY()));
+      map.put("EndX", String.valueOf(line.getEndX()));
+      map.put("EndY", String.valueOf(line.getEndY()));
+      map.put("Color", line.getStroke().toString());
+      map.put("Width", String.valueOf(line.getStrokeWidth()));
+      listInfo.add(map);
+    }
+    return listInfo;
   }
 }

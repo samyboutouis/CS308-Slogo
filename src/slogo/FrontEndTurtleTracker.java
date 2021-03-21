@@ -159,7 +159,7 @@ public class FrontEndTurtleTracker implements SafeFrontEndTurtleTracker {
     return allTurtles.get(id);
   }
 
-  private List<Integer> getTurtleIDs() {
+  public List<Integer> getTurtleIDs() {
     return allTurtles.keySet()
         .stream()
         .collect(Collectors.toUnmodifiableList());
@@ -179,5 +179,9 @@ public class FrontEndTurtleTracker implements SafeFrontEndTurtleTracker {
 
   public Color getColorIndex(int index) {
     return paletteDisplay.getColorFromIndex(index);
+  }
+
+  public Color getBackgroundColor() {
+    return backgroundObservers.get(0).getBackgroundColor();
   }
 }
