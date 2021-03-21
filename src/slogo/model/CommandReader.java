@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Stack;
 import slogo.BackEndTurtle;
+import slogo.SafeBackEndTurtleTracker;
 import slogo.model.nodes.control.ConstantNode;
 import slogo.model.nodes.control.MakeUserInstructionNode;
 import slogo.model.nodes.control.RepeatNode;
@@ -47,7 +48,7 @@ public class CommandReader {
   }
 
   // need to eventually change this to be returning a map of Id to list<command>
-  public BackEndTurtleTracker parseInput(String input, BackEndTurtleTracker tracker) throws IllegalArgumentException{
+  public SafeBackEndTurtleTracker parseInput(String input, BackEndTurtleTracker tracker) throws IllegalArgumentException{
     //commands.clear();
     tracker.clearAllCommands();
     try {
@@ -58,7 +59,7 @@ public class CommandReader {
     } catch (NoSuchMethodException | ClassNotFoundException | IllegalAccessException | InvocationTargetException | InstantiationException e) {
       e.printStackTrace();
     }
-    return tracker;
+    return (SafeBackEndTurtleTracker) tracker;
   }
 
   public Map<String, Double> getVariables() {
