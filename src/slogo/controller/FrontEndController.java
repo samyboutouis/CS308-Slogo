@@ -99,6 +99,8 @@ public class FrontEndController {
     if (file != null) {
       try {
         XMLParser xmlParser = new XMLParser(file);
+        frontEndTurtleTracker.notifyBackgroundObservers(xmlParser.getBackgroundColor());
+        controller.setTranslatedLanguage(xmlParser.getLanguage());
       } catch (Exception e) {
         AlertType type = AlertType.ERROR;
         new Alert(type, ERROR_MESSAGE).showAndWait();

@@ -25,7 +25,7 @@ import slogo.FrontEndTurtleTracker;
 import slogo.controller.Controller;
 import slogo.controller.FrontEndController;
 
-public class ToolbarDisplay {
+public class ToolbarDisplay implements XMLObserver {
 
   private static final String COLOR_PICKER_ID = "ColorPicker";
   private static final int PADDING_LENGTH = 10;
@@ -48,6 +48,7 @@ public class ToolbarDisplay {
   private final List<String> defaultButtonList;
   private final FrontEndTurtleTracker turtleTracker;
   private Color backgroundColor;
+  private ComboBox<String> languageBox;
 
   public ToolbarDisplay(String resourcePackage, Controller controller,
       FrontEndController frontEndController, FrontEndTurtleTracker frontEndTurtleTracker) {
@@ -84,6 +85,7 @@ public class ToolbarDisplay {
   }
 
   private void makeToolbar() {
+    controller.addXMLObserver(this);
     gridPane.getStyleClass().add(DISPLAY_CLASS_NAME);
     int colIndex = 0;
     ButtonFactory buttonFactory = new ButtonFactory(frontEndController);
@@ -111,14 +113,14 @@ public class ToolbarDisplay {
   }
 
   private void addLanguageDropdown(int colIndex) {
-    ComboBox<String> comboBox = new ComboBox<>();
-    comboBox.setId(idBundle.getString("LanguageDropdown"));
+    languageBox = new ComboBox<>();
+    languageBox.setId(idBundle.getString("LanguageDropdown"));
     for (String language : languageBundle.keySet()) {
-      comboBox.getItems().add(languageBundle.getString(language));
+      languageBox.getItems().add(languageBundle.getString(language));
     }
-    comboBox.setValue(DEFAULT_LANGUAGE);
-    comboBox.setOnAction(event -> handleLanguageClick(comboBox.getValue()));
-    gridPane.add(comboBox, colIndex, 0, 4, 1);
+    languageBox.setValue(DEFAULT_LANGUAGE);
+    languageBox.setOnAction(event -> handleLanguageClick(languageBox.getValue()));
+    gridPane.add(languageBox, colIndex, 0, 4, 1);
   }
 
   private void addHelpDropdown(int colIndex) {
@@ -160,5 +162,9 @@ public class ToolbarDisplay {
 
   public GridPane getPane() {
     return gridPane;
+  }
+
+  public void updateLanguage(String language) {
+    languageBox.setValue(language);
   }
 }

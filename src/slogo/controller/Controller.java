@@ -6,6 +6,7 @@ import slogo.BackEndTurtle;
 import slogo.SafeBackEndTurtleTracker;
 import slogo.model.CommandReader;
 import slogo.model.BackEndTurtleTracker;
+import slogo.visualization.XMLObserver;
 
 public class Controller {
 
@@ -13,13 +14,17 @@ public class Controller {
 
   private String language;
   private final CommandReader commandReader;
+  private final ResourceBundle languageBundle;
   private final ResourceBundle translationBundle;
+  private XMLObserver xmlObserver;
 
   public Controller() {
     language = INITIAL_LANGUAGE;
     commandReader = new CommandReader(language);
     translationBundle = ResourceBundle
         .getBundle(String.format("%s/%s/%s", "resources", "languages", "TranslateOptions"));
+    languageBundle = ResourceBundle
+      .getBundle(String.format("%s/%s/%s", "resources", "languages", "LanguageOptions"));
   }
 
   public SafeBackEndTurtleTracker parseProgram(String program,
@@ -32,6 +37,18 @@ public class Controller {
     commandReader.setLanguage(this.language);
   }
 
+  public void setTranslatedLanguage(String language) {
+    this.language = language;
+    notifyXMLObserver(languageBundle.getString(language));
+  }
+
+  public void addXMLObserver(XMLObserver xmlObserver) {
+    this.xmlObserver = xmlObserver;
+  }
+
+  public void notifyXMLObserver(String language) {
+    xmlObserver.updateLanguage(language);
+  }
 
   public Map<String, Double> getVariables() {
     return commandReader.getVariables();

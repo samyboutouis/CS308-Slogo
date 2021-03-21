@@ -1,23 +1,23 @@
 package slogo.controller;
 
 import java.io.File;
-import java.util.Map;
 import java.util.ResourceBundle;
+import javafx.scene.paint.Color;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
 public class XMLParser {
-  private static final String RESOURCES_FILE = "resources.languages.EnglishErrors";
 
   private Document doc;
-  private ResourceBundle resourceBundle;
+  private String language;
+  private Color backgroundColor;
 
   public XMLParser(File file) throws Exception {
-    resourceBundle = ResourceBundle.getBundle(RESOURCES_FILE);
     try {
       initialize(file);
+      parseFile();
     } catch (Exception e) {
       throw new Exception();
     }
@@ -34,14 +34,25 @@ public class XMLParser {
     }
   }
 
-  private void addToMap(String key, Map<String, String> map, boolean optional) throws Exception {
+  private void parseFile() throws Exception {
+    language = findValue("Language");
+    backgroundColor = Color.web(findValue("BackgroundColor"));
+  }
+
+  private String findValue(String key) throws Exception {
     NodeList nodes = doc.getElementsByTagName(key);
-    if (nodes.getLength() == 0 && !optional) {
+    if (nodes.getLength() == 0) {
       throw new Exception();
-    } else if (optional && nodes.getLength() == 0) {
-      map.put(key, "");
     } else {
-      map.put(key, nodes.item(0).getTextContent());
+      return nodes.item(0).getTextContent();
     }
+  }
+
+  public String getLanguage() {
+    return language;
+  }
+
+  public Color getBackgroundColor() {
+    return backgroundColor;
   }
 }
