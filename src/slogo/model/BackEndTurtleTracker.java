@@ -9,11 +9,12 @@ import java.util.Set;
 import java.util.Stack;
 import slogo.BackEndTurtle;
 import slogo.Command;
+import slogo.SafeBackEndTurtleTracker;
 import slogo.SafeFrontEndTurtleTracker;
 import slogo.turtlecommands.TellCommand;
 
 // manages all turtles in the backend,
-public class BackEndTurtleTracker {
+public class BackEndTurtleTracker implements SafeBackEndTurtleTracker {
 
   // assume each new Tell overrides previous Tell
   private Map<Integer, BackEndTurtle> allTurtles;
@@ -33,6 +34,8 @@ public class BackEndTurtleTracker {
     currTurtle = activeTurtles.get(0); // assumes at least one turtle is on the screen
   }
 
+  // mainly used for testing since we don't create a frontEndTracker
+  // default turtle has Id 0 in this case
   public BackEndTurtleTracker() {
     allTurtles = new HashMap<>();
     activeTurtles = new ArrayList<>();

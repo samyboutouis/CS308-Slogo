@@ -3,6 +3,7 @@ package slogo.controller;
 import java.util.Map;
 import java.util.ResourceBundle;
 import slogo.BackEndTurtle;
+import slogo.SafeBackEndTurtleTracker;
 import slogo.model.CommandReader;
 import slogo.model.BackEndTurtleTracker;
 
@@ -20,7 +21,7 @@ public class Controller {
       .getBundle(String.format("%s/%s/%s", "resources", "languages", "TranslateOptions"));
   }
 
-  public BackEndTurtleTracker parseProgram(String program, BackEndTurtleTracker backEndTurtleTracker) {
+  public SafeBackEndTurtleTracker parseProgram(String program, BackEndTurtleTracker backEndTurtleTracker) {
     return commandReader.parseInput(program, backEndTurtleTracker);
   }
 

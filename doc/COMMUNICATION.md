@@ -19,6 +19,9 @@ Commands that aren't associated to a specific turtle but affect the front end (s
   * If we see a setbg in a tell, we add it to all turtles. That is what the code tells us to do
   * SetBGCommand will have access to safe turtle and that can call the change background command
 
+SetPalette rgb values are integer between 0 and 255
+  * Backend parser will handle this, and if it's not, will throw an error that front end already is capable of displaying
+
 ```
 tell [ 1 2 3 ]
 fd 50
