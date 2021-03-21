@@ -58,7 +58,16 @@ public class VariablesDisplay extends ScrollingDisplay {
       String variableValue = variableMap[1];
       TextInputDialog textDialog = new TextInputDialog(String.format("%s", variableValue));
       textDialog.setHeaderText(String.format("Set new value for %s", variableName));
-      textDialog.show();
+      textDialog.showAndWait();
+
+      // for testing
+      if(textDialog.getEditor().getText() != null){
+        System.out.println(textDialog.getEditor().getText());
+      }
+
+      // for real:
+      // call method in backend to change variable value
+      // call updateBox()
     });
   }
 }

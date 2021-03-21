@@ -78,4 +78,6 @@
 
 #ViewContainerComboBox {
   -fx-background-radius: 20px;
+  -fx-border-width: 0px;
+  -fx-border-image-width: 0px;
 }
