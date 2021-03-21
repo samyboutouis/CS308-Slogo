@@ -13,23 +13,19 @@ public class HistoryDisplay extends ScrollingDisplay {
   private final static String HISTORY_TAG_ID = "HistoryTagID";
 
   private final ResourceBundle idBundle;
-  private final ResourceBundle resourceBundle;
 
   private final VBox historyBox;
 
   public HistoryDisplay(Workspace workspace, String resourcePackage) {
     super(workspace, resourcePackage);
     historyBox = setupVBoxContainer(HISTORY_TITLE, HISTORY_BOX_ID);
-    String language = "English";
-    this.resourceBundle = ResourceBundle
-        .getBundle(String.format("%s/%s/%s", resourcePackage, "languages", language));
     this.idBundle = ResourceBundle.getBundle(ID_PROPERTY);
   }
 
   /**
    * @param command
    */
-  public Button addNewHistoryTag(String command) {
+  public void addNewHistoryTag(String command) {
     Button historyTag = new Button(command);
     historyTag.setWrapText(true);
     historyTag.setMaxWidth(Double.MAX_VALUE);
@@ -39,8 +35,6 @@ public class HistoryDisplay extends ScrollingDisplay {
     historyBox.getChildren().add(historyTag);
 
     applyHistoryTagLogic(historyTag);
-
-    return historyTag;
   }
 
   public void applyHistoryTagLogic(Button historyTag) {
