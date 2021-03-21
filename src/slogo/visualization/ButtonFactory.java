@@ -42,7 +42,7 @@ public class ButtonFactory {
     return button;
   }
 
-  public Button createTextButton(String property, TextField textField) {
+  public Button createTextFieldButton(String property, TextField textField) {
     Button button = makeButton(property);
     button.setOnAction(handler -> {
       try {

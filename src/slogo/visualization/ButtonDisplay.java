@@ -30,7 +30,7 @@ public class ButtonDisplay {
       HBox hbox = new HBox();
       TextField textField = makeTextField();
       hbox.getChildren().add(textField);
-      hbox.getChildren().add(buttonFactory.createTextButton(property, textField));
+      hbox.getChildren().add(buttonFactory.createTextFieldButton(property, textField));
       vbox.getChildren().add(hbox);
     }
   }

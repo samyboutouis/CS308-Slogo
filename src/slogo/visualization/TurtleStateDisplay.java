@@ -23,7 +23,7 @@ public class TurtleStateDisplay implements TurtleObserver {
   private final FrontEndTurtleTracker turtleTracker;
   private final ResourceBundle labelBundle;
   private final List<String> labelList;
-  private ComboBox<String> turtleDropdown;
+  private ComboBox<Integer> turtleDropdown;
   private int currentID;
 
   public TurtleStateDisplay(FrontEndController frontEndController, FrontEndTurtleTracker frontEndTurtleTracker) {
@@ -33,6 +33,7 @@ public class TurtleStateDisplay implements TurtleObserver {
     pane = new GridPane();
     labelBundle = ResourceBundle.getBundle(LABEL_PROPERTY);
     labelList = List.of("X Position", "Y Position", "Direction", "Pen Status", "Pen Color");
+    currentID = 0;
     createComboBox();
     pane.add(vbox, 0, 0);
   }
@@ -40,25 +41,15 @@ public class TurtleStateDisplay implements TurtleObserver {
   private void createComboBox() {
     turtleDropdown = new ComboBox<>();
     vbox.getChildren().add(turtleDropdown);
-  }
-
-  private void makeLabels(String property, HBox hbox, int id) {
-    hbox.getChildren().add(new Label(property + ": "));
-    try {
-      Method m = this.getClass()
-        .getDeclaredMethod(labelBundle.getString(property), SafeTurtle.class, HBox.class);
-      m.invoke(this, turtleTracker.getSafeTurtle(id), hbox);
-    } catch (Exception e) {
-      throw new RuntimeException("Improper configuration", e);
-    }
+    turtleDropdown.valueProperty().addListener(event -> updateFields(turtleDropdown.getValue()));
   }
 
   public void updateTurtleNumber(List<Integer> list) {
-    turtleDropdown.getItems().clear();
     for(int id : list) {
-      turtleDropdown.getItems().add(String.valueOf(id));
+      if(!turtleDropdown.getItems().contains(id)){
+        turtleDropdown.getItems().add(id);
+      }
     }
-    turtleDropdown.setOnAction(event -> updateFields(Integer.parseInt(turtleDropdown.getValue())));
   }
 
   private void updateFields(int id) {
@@ -69,6 +60,17 @@ public class TurtleStateDisplay implements TurtleObserver {
       HBox hbox = new HBox();
       makeLabels(property, hbox, id);
       vbox.getChildren().add(hbox);
+    }
+  }
+
+  private void makeLabels(String property, HBox hbox, int id) {
+    hbox.getChildren().add(new Label(property + ": "));
+    try {
+      Method m = this.getClass()
+        .getDeclaredMethod(labelBundle.getString(property), SafeTurtle.class, HBox.class);
+      m.invoke(this, turtleTracker.getSafeTurtle(id), hbox);
+    } catch (Exception e) {
+      throw new RuntimeException("Improper configuration", e);
     }
   }
 
@@ -84,17 +86,17 @@ public class TurtleStateDisplay implements TurtleObserver {
 
   private void getX(SafeTurtle safeTurtle, HBox hBox) {
     double info = safeTurtle.getX();
-    hBox.getChildren().add(new Text(String.valueOf(info)));
+    hBox.getChildren().add(new Text(String.format("%.2f", info)));
   }
 
   private void getY(SafeTurtle safeTurtle, HBox hBox) {
     double info = safeTurtle.getY();
-    hBox.getChildren().add(new Text(String.valueOf(info)));
+    hBox.getChildren().add(new Text(String.format("%.2f", info)));
   }
 
   private void getDirection(SafeTurtle safeTurtle, HBox hBox) {
     double info = safeTurtle.getDirection();
-    hBox.getChildren().add(new Text(String.valueOf(info)));
+    hBox.getChildren().add(new Text(String.format("%.2f", info)));
   }
 
   private void isPenDown(SafeTurtle safeTurtle, HBox hBox) {
@@ -107,6 +109,7 @@ public class TurtleStateDisplay implements TurtleObserver {
     Color color = safeTurtle.getPenColor();
     ColorPicker colorPicker = new ColorPicker();
     colorPicker.setValue(color);
+    colorPicker.setOnAction(event -> safeTurtle.setPenColor(colorPicker.getValue()));
     hBox.getChildren().add(colorPicker);
   }
 }

@@ -15,4 +15,6 @@ public interface SafeTurtle {
   boolean isShowing();
 
   Color getPenColor();
+
+  void setPenColor(Color color);
 }
