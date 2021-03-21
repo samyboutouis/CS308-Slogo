@@ -12,6 +12,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
+import javafx.scene.text.TextAlignment;
 import slogo.FrontEndTurtleTracker;
 import slogo.controller.Controller;
 import slogo.model.BackEndTurtleTracker;
@@ -99,6 +100,7 @@ public class TerminalDisplay {
     button.setMaxWidth(Double.MAX_VALUE);
     button.setMaxHeight(Double.MAX_VALUE);
     button.setWrapText(true);
+    button.setTextAlignment(TextAlignment.CENTER);
     button.setId(idBundle.getString(TERMINAL_BUTTON_ID));
 
     pane.add(button, 3, 0, 1, 1);
@@ -133,6 +135,7 @@ public class TerminalDisplay {
         BackEndTurtleTracker backEndTurtleTracker = turtleTracker.passToBackEnd();
         new AnimationManager(
             controller.parseProgram(command, backEndTurtleTracker).getAllCommands(), turtleTracker);
+        historyDisplay.addNewHistoryTag(command);
         variablesDisplay.updateBox(controller.getVariables());
         userCommandsDisplay.updateBox(controller.getUserDefinedCommands());
       } catch (Exception error) {
