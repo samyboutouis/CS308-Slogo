@@ -20,11 +20,10 @@ public class FrontEndController {
 
   private final Stage stage;
   private final FrontEndTurtleTracker frontEndTurtleTracker;
+  private final ButtonFactory buttonFactory;
   private Color backgroundColor;
   private TurtleDisplay turtleDisplay;
   private ToolbarDisplay toolbarDisplay;
-  private FrontEndTurtle turtle;
-  private ButtonFactory buttonFactory;
 
   public FrontEndController(Stage stage, FrontEndTurtleTracker frontEndTurtleTracker) {
     this.stage = stage;
@@ -34,7 +33,7 @@ public class FrontEndController {
   }
 
   public void handleAddTurtleClick(Button addTurtleButton) {
-    turtle = new FrontEndTurtle(frontEndTurtleTracker);
+    FrontEndTurtle turtle = new FrontEndTurtle(frontEndTurtleTracker);
     turtleDisplay.addTurtle(turtle);
     frontEndTurtleTracker.addTurtle(turtle);
   }
@@ -57,7 +56,7 @@ public class FrontEndController {
     backgroundColorButton.setDisable(false);
   }
 
-  public void handleTurtleImageClick(Button button) {
+  public void handleTurtleImageClick(Button button, SafeTurtle safeTurtle) {
     FileChooser fileChooser = new FileChooser();
     fileChooser.setTitle("Open Image File");
     fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
@@ -65,7 +64,7 @@ public class FrontEndController {
       .setAll(new ExtensionFilter("Image File", "*.png", "*.jpg", "*.svg"));
     File file = fileChooser.showOpenDialog(stage);
     if (file != null) {
-      turtle.setImage(file);
+      safeTurtle.setImage(file);
     }
   }
 

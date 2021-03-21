@@ -49,7 +49,7 @@ public class ToolbarDisplay {
     this.idBundle = ResourceBundle.getBundle(DEFAULT_RESOURCE_FOLDER + ID_PROPERTY);
     this.commandBundle = ResourceBundle.getBundle(DEFAULT_RESOURCE_FOLDER + METHODS_PROPERTY);
     this.frontEndController = frontEndController;
-    this.buttonList = List.of("AddTurtleButton", "BackgroundColorButton", "TurtleImageButton");
+    this.buttonList = List.of("AddTurtleButton", "BackgroundColorButton");
     initializeGridPane();
     makeToolbar();
   }

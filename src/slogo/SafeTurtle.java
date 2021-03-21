@@ -1,5 +1,6 @@
 package slogo;
 
+import java.io.File;
 import javafx.scene.paint.Color;
 
 public interface SafeTurtle {
@@ -25,4 +26,6 @@ public interface SafeTurtle {
   double getPenThickness();
 
   void setPenThickness(double width);
+
+  void setImage(File file);
 }

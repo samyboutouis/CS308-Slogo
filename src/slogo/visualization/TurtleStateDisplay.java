@@ -23,6 +23,7 @@ public class TurtleStateDisplay implements TurtleObserver {
   private static final String SLIDER_ID = "Slider";
   private static final String PEN_UP = "PenUpButton";
   private static final String PEN_DOWN = "PenDownButton";
+  private static final String IMAGE_BUTTON = "TurtleImageButton";
 
   private final VBox vbox;
   private final ButtonFactory buttonFactory;
@@ -39,7 +40,7 @@ public class TurtleStateDisplay implements TurtleObserver {
     turtleTracker = frontEndTurtleTracker;
     pane = new GridPane();
     labelBundle = ResourceBundle.getBundle(LABEL_PROPERTY);
-    labelList = List.of("X Position", "Y Position", "Direction", "Pen Status", "Pen Color", "Pen Width");
+    labelList = List.of("X Position", "Y Position", "Direction", "Pen Status", "Pen Color", "Pen Width", "Image");
     currentID = 0;
     createComboBox();
     pane.add(vbox, 0, 0);
@@ -134,5 +135,10 @@ public class TurtleStateDisplay implements TurtleObserver {
     slider.setMajorTickUnit(1);
     slider.valueProperty().addListener(event -> safeTurtle.setPenThickness(slider.getValue()));
     hBox.getChildren().add(slider);
+  }
+
+  private void setImage(SafeTurtle safeTurtle, HBox hBox) {
+    Button button = buttonFactory.createTurtleButton(IMAGE_BUTTON, safeTurtle);
+    hBox.getChildren().add(button);
   }
 }
