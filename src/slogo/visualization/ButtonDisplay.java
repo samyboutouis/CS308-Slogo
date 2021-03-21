@@ -11,8 +11,8 @@ import javafx.scene.layout.VBox;
 import slogo.controller.FrontEndController;
 
 public class ButtonDisplay {
-  private VBox vbox;
-  private ButtonFactory buttonFactory;
+  private final VBox vbox;
+  private final ButtonFactory buttonFactory;
   private final List<String> buttonList;
   private final GridPane pane;
 
@@ -30,7 +30,7 @@ public class ButtonDisplay {
       HBox hbox = new HBox();
       TextField textField = makeTextField();
       hbox.getChildren().add(textField);
-      hbox.getChildren().add(buttonFactory.createTextButton(property, textField));
+      hbox.getChildren().add(buttonFactory.createTextFieldButton(property, textField));
       vbox.getChildren().add(hbox);
     }
   }

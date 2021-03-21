@@ -23,15 +23,18 @@ public class ViewLayout {
   private final VariablesDisplay variablesDisplay;
   private final UserCommandsDisplay userCommandsDisplay;
   private final ButtonDisplay buttonDisplay;
+  private final TurtleStateDisplay turtleStateDisplay;
   private String[] viewOrder;
 
-  public ViewLayout(HistoryDisplay historyDisplay, VariablesDisplay variablesDisplay, UserCommandsDisplay userCommandsDisplay, ButtonDisplay buttonDisplay, FrontEndController frontEndController){
+  public ViewLayout(HistoryDisplay historyDisplay, VariablesDisplay variablesDisplay, UserCommandsDisplay userCommandsDisplay, ButtonDisplay buttonDisplay, TurtleStateDisplay turtleStateDisplay, FrontEndController frontEndController){
+
     this.pane = new CustomGridPane(GRID_ROW_COUNT, GRID_COLUMN_COUNT, PADDING_LENGTH);
     this.frontEndController = frontEndController;
     this.historyDisplay = historyDisplay;
     this.variablesDisplay = variablesDisplay;
     this.userCommandsDisplay = userCommandsDisplay;
     this.buttonDisplay = buttonDisplay;
+    this.turtleStateDisplay = turtleStateDisplay;
 
     initializeMap();
     setupViewContainers();
@@ -42,7 +45,8 @@ public class ViewLayout {
     viewNamesMap.put("Variables", variablesDisplay.getPane());
     viewNamesMap.put("Commands", userCommandsDisplay.getPane());
     viewNamesMap.put("History", historyDisplay.getPane());
-    viewNamesMap.put("Buttons", buttonDisplay.getPane());
+    viewNamesMap.put("Move Turtle", buttonDisplay.getPane());
+    viewNamesMap.put("Turtle States", turtleStateDisplay.getPane());
   }
 
   private void initializeViewOrder(){
@@ -62,6 +66,8 @@ public class ViewLayout {
     historyDisplay.getPane().setVisible(false);
     variablesDisplay.getPane().setVisible(false);
     userCommandsDisplay.getPane().setVisible(false);
+    buttonDisplay.getPane().setVisible(false);
+    turtleStateDisplay.getPane().setVisible(false);
   }
 
   public void updateViewLayouts(int clickedIndex, String viewName){

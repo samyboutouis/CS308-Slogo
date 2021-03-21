@@ -66,6 +66,15 @@
   -fx-background-color: #e7e7e7;
 }
 
+#PenColorPicker {
+  -fx-max-width: 100px;
+}
+
+#Slider {
+  -fx-max-width: 100px;
+
+}
+
 #ViewContainerCloseButton {
   -fx-background-radius: 50%;
   -fx-border-width: 0px;
