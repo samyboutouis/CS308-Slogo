@@ -65,3 +65,7 @@
 #HistoryTag:pressed {
   -fx-background-color: #e7e7e7;
 }
+
+#PenColorPicker {
+  -fx-max-width: 100px;
+}

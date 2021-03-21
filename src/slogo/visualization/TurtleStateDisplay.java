@@ -17,6 +17,8 @@ import slogo.controller.FrontEndController;
 
 public class TurtleStateDisplay implements TurtleObserver {
   private static final String LABEL_PROPERTY = "resources/reflection/TurtleStateLabels";
+  private static final String COLORPICKER_ID = "PenColorPicker";
+
   private final VBox vbox;
   private final ButtonFactory buttonFactory;
   private final GridPane pane;
@@ -108,6 +110,7 @@ public class TurtleStateDisplay implements TurtleObserver {
   private void getPenColor(SafeTurtle safeTurtle, HBox hBox) {
     Color color = safeTurtle.getPenColor();
     ColorPicker colorPicker = new ColorPicker();
+    colorPicker.setId(COLORPICKER_ID);
     colorPicker.setValue(color);
     colorPicker.setOnAction(event -> safeTurtle.setPenColor(colorPicker.getValue()));
     hBox.getChildren().add(colorPicker);
