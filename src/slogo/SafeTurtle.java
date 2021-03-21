@@ -17,4 +17,8 @@ public interface SafeTurtle {
   Color getPenColor();
 
   void setPenColor(Color color);
+
+  double getPenThickness();
+
+  void setPenThickness(double width);
 }

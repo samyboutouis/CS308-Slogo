@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.Slider;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -18,6 +19,7 @@ import slogo.controller.FrontEndController;
 public class TurtleStateDisplay implements TurtleObserver {
   private static final String LABEL_PROPERTY = "resources/reflection/TurtleStateLabels";
   private static final String COLORPICKER_ID = "PenColorPicker";
+  private static final String SLIDER_ID = "Slider";
 
   private final VBox vbox;
   private final ButtonFactory buttonFactory;
@@ -34,7 +36,7 @@ public class TurtleStateDisplay implements TurtleObserver {
     turtleTracker = frontEndTurtleTracker;
     pane = new GridPane();
     labelBundle = ResourceBundle.getBundle(LABEL_PROPERTY);
-    labelList = List.of("X Position", "Y Position", "Direction", "Pen Status", "Pen Color");
+    labelList = List.of("X Position", "Y Position", "Direction", "Pen Status", "Pen Color", "Pen Width");
     currentID = 0;
     createComboBox();
     pane.add(vbox, 0, 0);
@@ -114,5 +116,16 @@ public class TurtleStateDisplay implements TurtleObserver {
     colorPicker.setValue(color);
     colorPicker.setOnAction(event -> safeTurtle.setPenColor(colorPicker.getValue()));
     hBox.getChildren().add(colorPicker);
+  }
+
+  private void getPenThickness(SafeTurtle safeTurtle, HBox hBox) {
+    double thickness = safeTurtle.getPenThickness();
+    Slider slider = new Slider(1, 5, thickness);
+    slider.setId(SLIDER_ID);
+    slider.setShowTickLabels(true);
+    slider.setShowTickMarks(true);
+    slider.setMajorTickUnit(1);
+    slider.valueProperty().addListener(event -> safeTurtle.setPenThickness(slider.getValue()));
+    hBox.getChildren().add(slider);
   }
 }

@@ -44,7 +44,7 @@ public class Pen {
     lineColor = color;
   }
 
-  public void setStrokeWidth(double width) {
+  public void setThickness(double width) {
     strokeWidth = width;
   }
 
@@ -66,9 +66,9 @@ public class Pen {
     return isPenDown;
   }
 
-  public Color getPenColor() {
+  public Color getColor() {
     return lineColor;
   }
 
-  public double getStrokeWidth() { return strokeWidth; }
+  public double getThickness() { return strokeWidth; }
 }

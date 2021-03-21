@@ -9,7 +9,6 @@ import javafx.scene.paint.Color;
 import slogo.FrontEndTurtleTracker;
 import slogo.SafeTurtle;
 import slogo.Turtle;
-import slogo.visualization.Pen;
 
 public class FrontEndTurtle implements Turtle, SafeTurtle {
 
@@ -111,7 +110,7 @@ public class FrontEndTurtle implements Turtle, SafeTurtle {
   }
 
   public Color getPenColor() {
-    return pen.getPenColor();
+    return pen.getColor();
   }
 
   public void setImage(File file) {
@@ -140,6 +139,14 @@ public class FrontEndTurtle implements Turtle, SafeTurtle {
 
   public void setPenColor(Color color) {
     pen.setColor(color);
+  }
+
+  public double getPenThickness() {
+    return pen.getThickness();
+  }
+
+  public void setPenThickness(double width) {
+    pen.setThickness(width);
   }
 
   public void penDown() {

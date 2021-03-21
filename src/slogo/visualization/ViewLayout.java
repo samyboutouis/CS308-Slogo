@@ -48,7 +48,7 @@ public class ViewLayout {
     viewNamesMap.put("Variables", variablesDisplay.getPane());
     viewNamesMap.put("Commands", userCommandsDisplay.getPane());
     viewNamesMap.put("History", historyDisplay.getPane());
-    viewNamesMap.put("Buttons", buttonDisplay.getPane());
+    viewNamesMap.put("Move Turtle", buttonDisplay.getPane());
     viewNamesMap.put("Turtle States", turtleStateDisplay.getPane());
   }
 

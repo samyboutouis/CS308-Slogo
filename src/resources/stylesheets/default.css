@@ -69,3 +69,7 @@
 #PenColorPicker {
   -fx-max-width: 100px;
 }
+
+#Slider {
+  -fx-max-width: 100px;
+}
