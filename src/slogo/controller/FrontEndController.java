@@ -1,6 +1,8 @@
 package slogo.controller;
 
 import java.io.File;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
@@ -16,6 +18,7 @@ import slogo.visualization.PaletteDisplay;
 
 public class FrontEndController {
   private static final String DIALOG_HEADER_TEXT = "Create XML File";
+  private static final String ERROR_MESSAGE = "Invalid file.";
 
   private final Stage stage;
   private final FrontEndTurtleTracker frontEndTurtleTracker;
@@ -94,7 +97,12 @@ public class FrontEndController {
       .setAll(new ExtensionFilter("XML File", "*.xml"));
     File file = fileChooser.showOpenDialog(stage);
     if (file != null) {
-
+      try {
+        XMLParser xmlParser = new XMLParser(file);
+      } catch (Exception e) {
+        AlertType type = AlertType.ERROR;
+        new Alert(type, ERROR_MESSAGE).showAndWait();
+      }
     }
   }
 
