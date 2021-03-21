@@ -45,6 +45,8 @@ public class CommandReaderTest {
   @Test
   void testMultiTurtle(){
     assertEquals(List.of(5.0), myReader.testParseInput("tell [ 2 5 ]")); // note testParseInput adds a index 0 turtle by default
+    // test if both turtles move fd 50
+    assertEquals(List.of(2.0, 50.0, 1.0, 50.0, 2.0, 50.0), myReader.testParseInput("tell [ 1 2 ] fd 50 tell [ 1 ] ycor tell [ 2 ] ycor"));
     assertEquals(List.of(5.0, 90.0, 50.0, 50.0), myReader.testParseInput(" tell [ 0 2 5 ] rt 90 fd 50 xcor"));
     assertEquals(List.of(3.0, 30.0, 1.0, 10.0, 2.0, 20.0, 3.0, 30.0), myReader.testParseInput("tell [ 1 2 3 ] fd product ID 10 tell [ 1 ] ycor tell [ 2 ] ycor tell [ 3 ] ycor"));
 
