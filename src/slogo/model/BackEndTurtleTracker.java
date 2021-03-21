@@ -69,6 +69,15 @@ public class BackEndTurtleTracker implements SafeBackEndTurtleTracker {
     currTurtle = 0;
   }
 
+  // just in case future tracker given to us has previous commands
+  public void clearAllCommands(){
+    Iterator<Integer> itr = getIterator();
+    while (itr.hasNext()){
+      getTurtle(itr.next()).clearCommands();
+    }
+  }
+
+
   // if this turtleId already exists, we only update activeTurtles, and not allTurtles
   public void addTurtle(BackEndTurtle turtle){
     if (allTurtles.containsKey(turtle.getIndex())){

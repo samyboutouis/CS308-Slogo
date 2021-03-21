@@ -45,6 +45,7 @@ public class CommandReader {
 
   public SafeBackEndTurtleTracker parseInput(String input, BackEndTurtleTracker tracker) throws IllegalArgumentException{
     try {
+      tracker.clearAllCommands(); // we do not make assumption that tracker has empty commands list, but it should each time
       this.tracker = tracker;
       List<String> cleaned = cleanInput(input);
       List<SlogoNode> roots = buildTree(cleaned);
