@@ -9,12 +9,15 @@ import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.paint.Color;
@@ -33,6 +36,7 @@ public class ToolbarDisplay {
   private static final String ID_PROPERTY = "stylesheets/CSS_IDs";
   private static final String DISPLAY_CLASS_NAME = "displayWindow";
   private static final Color DEFAULT_COLOR = Color.web("#dedcdc");
+  private static final String BACKGROUND_COLOR_LABEL = "Background Color: ";
 
   private final GridPane gridPane;
   private final Controller controller;
@@ -96,11 +100,14 @@ public class ToolbarDisplay {
   }
 
   private void addBackgroundColorPicker(int colIndex) {
+    HBox hBox = new HBox();
     ColorPicker colorPicker = new ColorPicker(backgroundColor);
     colorPicker.setId(COLOR_PICKER_ID);
     colorPicker
       .setOnAction(event -> handleBackgroundColorPicker(colorPicker));
-    gridPane.add(colorPicker, colIndex, 0, colIndex, 1);
+    hBox.getChildren().addAll(new Label(BACKGROUND_COLOR_LABEL), colorPicker);
+    hBox.setAlignment(Pos.CENTER);
+    gridPane.add(hBox, colIndex, 0, colIndex, 1);
   }
 
   private void addLanguageDropdown(int colIndex) {
