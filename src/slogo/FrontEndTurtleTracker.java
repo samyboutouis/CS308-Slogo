@@ -35,9 +35,12 @@ public class FrontEndTurtleTracker implements SafeFrontEndTurtleTracker{
     backgroundObservers.add(backgroundObserver);
   }
 
-  private void notifyAddTurtle(List<Integer> list) {
+  private void notifyAddTurtle(List<Integer> list, FrontEndTurtle turtle) {
     for(TurtleObserver turtleObserver : turtleObservers) {
       turtleObserver.updateTurtleNumber(list);
+    }
+    for(BackgroundObserver backgroundObserver : backgroundObservers) {
+      backgroundObserver.addToBackground(turtle);
     }
   }
 
@@ -105,7 +108,7 @@ public class FrontEndTurtleTracker implements SafeFrontEndTurtleTracker{
     }
     allTurtles.put(turtleID, turtle);
     if(turtle.isActive()) activeTurtles.add(turtleID);
-    notifyAddTurtle(getTurtleIDs());
+    notifyAddTurtle(getTurtleIDs(), turtle);
   }
 
   public void changeColor() {

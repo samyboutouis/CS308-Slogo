@@ -30,14 +30,14 @@ public class TurtleDisplay implements BackgroundObserver {
     anchorPane.setId(idBundle.getString(TURTLE_PANE_ID));
   }
 
-  public void addTurtle(FrontEndTurtle turtle) {
-    turtle.addToScreen(anchorPane, anchorPane.getHeight(), anchorPane.getWidth());
-  }
-
   public void setBackgroundColor(Color color) {
     anchorPane
       .setBackground(new Background(
         new BackgroundFill(color, new CornerRadii(BACKGROUND_RADIUS), Insets.EMPTY)));
+  }
+
+  public void addToBackground(FrontEndTurtle turtle) {
+    turtle.addToScreen(anchorPane, anchorPane.getHeight(), anchorPane.getWidth());
   }
 
   public AnchorPane getPane() {

@@ -3,7 +3,6 @@ package slogo.controller;
 import java.io.File;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
@@ -12,13 +11,11 @@ import slogo.Main;
 import slogo.SafeTurtle;
 import slogo.visualization.ButtonFactory;
 import slogo.visualization.FrontEndTurtle;
-import slogo.visualization.TurtleDisplay;
 
 public class FrontEndController {
   private final Stage stage;
   private final FrontEndTurtleTracker frontEndTurtleTracker;
   private final ButtonFactory buttonFactory;
-  private TurtleDisplay turtleDisplay;
 
   public FrontEndController(Stage stage, FrontEndTurtleTracker frontEndTurtleTracker) {
     this.stage = stage;
@@ -28,7 +25,6 @@ public class FrontEndController {
 
   public void handleAddTurtleClick(Button addTurtleButton) {
     FrontEndTurtle turtle = new FrontEndTurtle(frontEndTurtleTracker);
-    turtleDisplay.addTurtle(turtle);
     frontEndTurtleTracker.addTurtle(turtle);
   }
 
@@ -42,10 +38,6 @@ public class FrontEndController {
     if (file != null) {
       safeTurtle.setImage(file);
     }
-  }
-
-  public void setTurtleDisplay(TurtleDisplay turtleDisplay) {
-    this.turtleDisplay = turtleDisplay;
   }
 
   public void handleRightClick(TextField textField) {
