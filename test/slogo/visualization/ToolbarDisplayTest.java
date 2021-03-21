@@ -5,11 +5,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextArea;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.Test;
 import util.DukeApplicationTest;
@@ -21,9 +18,7 @@ class ToolbarDisplayTest extends DukeApplicationTest {
   private final static String RESOURCE_PACKAGE = "resources";
 
   private ResourceBundle idBundle;
-  private Button myPenColorButton;
-  private Button myBackgroundColorButton;
-  private Button myTurtleImageButton;
+  private ColorPicker myBackgroundColorPicker;
   private ComboBox<String> myLanguageDropdown;
   private ComboBox<String> myHelpDropdown;
   private Pane myTurtlePane;
@@ -37,9 +32,7 @@ class ToolbarDisplayTest extends DukeApplicationTest {
     new Workspace(root, scene, stage);
     idBundle = ResourceBundle
       .getBundle(String.format("%s/%s/%s", RESOURCE_PACKAGE, "stylesheets", "CSS_IDs"));
-    myPenColorButton = lookup("#" + idBundle.getString("PenColorButton")).query();
-    myBackgroundColorButton = lookup("#" + idBundle.getString("BackgroundColorButton")).query();
-    myTurtleImageButton = lookup("#" + idBundle.getString("TurtleImageButton")).query();
+    myBackgroundColorPicker = lookup("#" + idBundle.getString("ColorPicker")).query();
     myLanguageDropdown = lookup("#" + idBundle.getString("LanguageDropdown")).query();
     myHelpDropdown = lookup("#" + idBundle.getString("HelpDropdown")).query();
     myTurtlePane = lookup("#" + idBundle.getString("TurtlePaneID")).query();
@@ -47,39 +40,11 @@ class ToolbarDisplayTest extends DukeApplicationTest {
   }
 
   @Test
-  void testChangePenColor() {
-    assertTrue(myPenColorButton.isVisible());
-    clickOn(myPenColorButton);
-    assertTrue(myPenColorButton.isDisabled());
-    assertFalse(myPenColorButton.isVisible());
-    ColorPicker colorPicker = lookup("#" + idBundle.getString("ColorPicker")).query();
-    setValue(colorPicker, Color.RED);
-    TextArea terminalTextBox = lookup("#" + idBundle.getString("TerminalTextBoxID")).query();
-    Button terminalButton =  lookup("#" + idBundle.getString("TerminalButtonID")).query();
-    writeTo(terminalTextBox, "fd 50");
-    clickOn(terminalButton);
-    Line line = lookup("#" + idBundle.getString("LineID")).query();
-    Color lineColor = (Color) line.getStroke();
-    assertEquals(lineColor, Color.RED);
-  }
-
-  @Test
   void testChangeBackgroundColor() {
-    assertTrue(myBackgroundColorButton.isVisible());
-    clickOn(myBackgroundColorButton);
-    assertTrue(myBackgroundColorButton.isDisabled());
-    assertFalse(myBackgroundColorButton.isVisible());
-    ColorPicker colorPicker = lookup("#" + idBundle.getString("ColorPicker")).query();
-    setValue(colorPicker, Color.RED);
+    assertTrue(myBackgroundColorPicker.isVisible());
+    setValue(myBackgroundColorPicker, Color.RED);
     Color backgroundColor = (Color) myTurtlePane.getBackground().getFills().get(0).getFill();
     assertEquals(backgroundColor, Color.RED);
-  }
-
-  @Test
-  void testChangeTurtleImage() {
-    ImageView turtleImageView = lookup("#" + idBundle.getString("Turtle")).query();
-    assertTrue(myTurtleImageButton.isVisible());
-    clickOn(myTurtleImageButton);
   }
 
   @Test

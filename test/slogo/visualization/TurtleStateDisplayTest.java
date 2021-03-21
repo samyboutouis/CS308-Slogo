@@ -12,7 +12,7 @@ import util.DukeApplicationTest;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class TurtleDisplayTest extends DukeApplicationTest {
+public class TurtleStateDisplayTest extends DukeApplicationTest {
   private final static String RESOURCE_PACKAGE = "resources";
 
   private ResourceBundle idBundle;
@@ -36,37 +36,34 @@ public class TurtleDisplayTest extends DukeApplicationTest {
     assertTrue(turtle.isVisible());
   }
 
-  @Test
-  void testMoveForward() {
-    turtle = lookup("#" + idBundle.getString("Turtle")).query();
-    double originalX = turtle.getTranslateX();
-    double originalY = turtle.getTranslateY();
-    runCommand("fd 50");
-    assertEquals(-50, turtle.getTranslateY() - originalY);
-    assertEquals(0, turtle.getTranslateX() - originalX);
-  }
+//  @Test
+//  void testChangePenColor() {
+//    assertTrue(myPenColorButton.isVisible());
+//    clickOn(myPenColorButton);
+//    assertTrue(myPenColorButton.isDisabled());
+//    assertFalse(myPenColorButton.isVisible());
+//    ColorPicker colorPicker = lookup("#" + idBundle.getString("ColorPicker")).query();
+//    setValue(colorPicker, Color.RED);
+//    TextArea terminalTextBox = lookup("#" + idBundle.getString("TerminalTextBoxID")).query();
+//    Button terminalButton =  lookup("#" + idBundle.getString("TerminalButtonID")).query();
+//    writeTo(terminalTextBox, "fd 50");
+//    clickOn(terminalButton);
+//    Line line = lookup("#" + idBundle.getString("LineID")).query();
+//    Color lineColor = (Color) line.getStroke();
+//    assertEquals(lineColor, Color.RED);
+//  }
 
-  @Test
-  void testRotate() {
-    turtle = lookup("#" + idBundle.getString("Turtle")).query();
-    double originalDirection = turtle.getRotate();
-    runCommand("rt 50");
-    assertEquals(50, turtle.getRotate() - originalDirection);
-  }
-
-  @Test
-  void testActiveToggle() {
-    turtle = lookup("#" + idBundle.getString("Turtle")).query();
-    ImageView activeCircle = lookup("#" + idBundle.getString("ActiveCircleID")).query();
-    clickOn(turtle, (int) turtle.getTranslateX(), (int) turtle.getTranslateY());
-    assertFalse(activeCircle.isVisible());
-    clickOn(turtle, (int) turtle.getTranslateX(), (int) turtle.getTranslateY());
-    assertTrue(activeCircle.isVisible());
-  }
+//  @Test
+//  void testChangeTurtleImage() {
+//    ImageView turtleImageView = lookup("#" + idBundle.getString("Turtle")).query();
+//    assertTrue(myTurtleImageButton.isVisible());
+//    clickOn(myTurtleImageButton);
+//  }
 
   private void addTurtle() {
     Button addTurtleButton = lookup("#" + idBundle.getString("AddTurtleButton")).query();
     clickOn(addTurtleButton);
+    clickOn(lookup("#" + idBundle.getString("PenColorButton")).query());
   }
 
   private void runCommand(String command) {
