@@ -30,6 +30,7 @@ public class CommandReaderTest {
   @Test
   void testAskWith(){
     assertEquals(List.of(10.0, 100.0, 50.0, 100.0, 200.0),myReader.testParseInput("tell [ 1 2 7 10 ] fd 100 ask [ 2 7 ] [ bk 50 ] askwith [ greater? ycor 50 ] [ fd 100 ] ycor"));
+    assertEquals(List.of(50.0, 1.0, 50.0, 2.0,  100.0, 3.0, 50.0),myReader.testParseInput("ask [ 1 2 ] [ ask [ 2 3 ] [ fd 50 ] fd 50 ] tell [ 1 ] ycor tell [ 2 ] ycor tell [ 3 ] ycor"));
   }
 
   @Test
@@ -227,7 +228,7 @@ public class CommandReaderTest {
     try{
       myReader.testParseInput("::"); // invalid syntax
     } catch(IllegalArgumentException e){
-      assertEquals(e.getMessage(), "Input syntax is incorrect");
+      assertEquals(e.getMessage(), "Input syntax is incorrect: ::");
     }
   }
 
