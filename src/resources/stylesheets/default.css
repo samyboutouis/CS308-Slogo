@@ -8,11 +8,11 @@
   -fx-border-radius: 20px;
   -fx-background-radius: 20px;
   -fx-border-width: 0px;
-  -fx-background-color: #3c3c3c;
+  -fx-background-color: #c3c3c3;
 }
 
 .combo-box:hover {
-  -fx-background-color: #4f4f4f;
+  -fx-background-color: #dbdbdb;
 }
 
 .combo-box .list-cell {
@@ -20,7 +20,7 @@
 }
 
 #Workspace {
-  -fx-background-color: #292929;
+  -fx-background-color: #f3f3f3;
 }
 
 #TerminalTextBox {
