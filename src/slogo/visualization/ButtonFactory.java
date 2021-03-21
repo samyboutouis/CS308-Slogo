@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import slogo.SafeTurtle;
 import slogo.controller.FrontEndController;
 
 public class ButtonFactory {
@@ -28,7 +29,21 @@ public class ButtonFactory {
     this.controller = controller;
   }
 
-  public Button createDisableableButton(String property) {
+  public Button createTurtleButton(String property, SafeTurtle turtle) {
+    Button button = makeButton(property);
+    button.setOnAction(handler -> {
+      try {
+        Method m = controller.getClass()
+          .getDeclaredMethod(commandBundle.getString(property), Button.class, SafeTurtle.class);
+        m.invoke(controller, button, turtle);
+      } catch (Exception e) {
+        throw new RuntimeException("Improper configuration", e);
+      }
+    });
+    return button;
+  }
+
+  public Button createToggleButton(String property) {
     Button button = makeButton(property);
     button.setOnAction(handler -> {
       try {
@@ -42,7 +57,7 @@ public class ButtonFactory {
     return button;
   }
 
-  public Button createTextButton(String property, TextField textField) {
+  public Button createTextFieldButton(String property, TextField textField) {
     Button button = makeButton(property);
     button.setOnAction(handler -> {
       try {
@@ -59,10 +74,14 @@ public class ButtonFactory {
   private Button makeButton(String property) {
     Button button = new Button();
     button.setId(idBundle.getString(property));
+    setImage(button, property);
+    return button;
+  }
+
+  public void setImage(Button button, String property) {
     String label = imageBundle.getString(property);
     button.setGraphic(new ImageView(
       new Image(DEFAULT_RESOURCE_FOLDER + label, ICON_WIDTH,
         ICON_HEIGHT, false, false)));
-    return button;
   }
 }

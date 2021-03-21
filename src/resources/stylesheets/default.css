@@ -58,10 +58,33 @@
   -fx-background-color: #f5f5f5;
 }
 
-#HistoryTag:hover {
+#HistoryTag:hover, #VariablesTag:hover {
   -fx-background-color: #fafafa;
 }
 
-#HistoryTag:pressed {
+#HistoryTag:pressed, #VariablesTag:pressed {
   -fx-background-color: #e7e7e7;
+}
+
+#PenColorPicker {
+  -fx-max-width: 100px;
+}
+
+#Slider {
+  -fx-max-width: 100px;
+
+}
+
+#ViewContainerCloseButton {
+  -fx-background-radius: 50%;
+  -fx-border-width: 0px;
+  -fx-background-color: #f37878;
+}
+
+#ViewContainerCloseButton:hover {
+  -fx-background-color: #d44848;
+}
+
+#ViewContainerComboBox {
+  -fx-background-radius: 20px;
 }
