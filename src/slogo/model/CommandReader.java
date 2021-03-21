@@ -83,7 +83,7 @@ public class CommandReader {
   }
 
   private List<SlogoNode> buildTree(List<String> cleaned)
-      throws NoSuchMethodException, ClassNotFoundException, IllegalAccessException, InvocationTargetException, InstantiationException {
+      throws NoSuchMethodException, ClassNotFoundException, IllegalAccessException, InvocationTargetException, InstantiationException, IllegalArgumentException {
     Stack<SlogoNode> st = new Stack<>();
     List<SlogoNode> roots = new ArrayList<>();
     SlogoNode curr = null;
