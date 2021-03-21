@@ -46,7 +46,6 @@ public class ActiveCircle {
   public void setXY(double xPosition, double yPosition) {
     double xChange = xPosition - xCoordinate;
     double yChange = yPosition - yCoordinate;
-    System.out.println(xChange + " " + yChange);
     imageView.setTranslateX(imageView.getTranslateX() + xChange);
     imageView.setTranslateY(imageView.getTranslateY() - yChange);
     xCoordinate = xPosition;
