@@ -19,6 +19,7 @@ public class CommandReader {
   private static final String RESOURCES_PACKAGE ="resources.";
   private static final String PARAMETERS_FILE = "parameters.Commands";
   private static final String PACKAGES_FILE = "packages.Packages";
+  private static final String NODES_PATH = "slogo.model.nodes.";
   private ProgramParser parser;
   private Map<String, Double> variables;
   private Map<String, MakeUserInstructionNode> userDefinedCommands;
@@ -42,10 +43,7 @@ public class CommandReader {
     nodeFactory = new NodeFactory();
   }
 
-  // need to eventually change this to be returning a map of Id to list<command>
   public SafeBackEndTurtleTracker parseInput(String input, BackEndTurtleTracker tracker) throws IllegalArgumentException{
-    //commands.clear();
-    tracker.clearAllCommands();
     try {
       this.tracker = tracker;
       List<String> cleaned = cleanInput(input);
@@ -93,37 +91,44 @@ public class CommandReader {
       if(symbol.equals("NO MATCH")){
         throw new IllegalArgumentException("Input syntax is incorrect");
       }
-      Class<?> node = Class.forName("slogo.model.nodes." + packageName.getString(symbol) + "." + symbol + "Node");
+      Class<?> node = Class.forName(NODES_PATH + packageName.getString(symbol) + "." + symbol + "Node");
       int parameters = Integer.parseInt(numParameters.getString(symbol));
       curr = nodeFactory.getNode(symbol, s, node, parameters, variables, userDefinedCommands, curr, userDefinedCommandsInString);
 
-      if(curr == null){
-        continue;
-      }
+      if(curr == null){ continue; }
 
-      if(curr.isFull()){ // only true if node has no parameters
-        if(st.isEmpty()) {
-          roots.add(curr);
-        }
-        else{
-          st.peek().addNode(curr);
-        }
-      }
-      else if(st.isEmpty()){
-        roots.add(curr);
-        st.push(curr);
-      }
-      else{ // curr not full and stack not empty
-        st.push(curr);
-      }
-      while(!st.isEmpty() && st.peek().isFull()){
-        SlogoNode top = st.pop();
-        if(!st.isEmpty()){
-          st.peek().addNode(top);
-        }
-      }
+      handleStack(st, roots, curr);
     }
     return roots;
+  }
+
+  private void handleStack(Stack<SlogoNode> st, List<SlogoNode> roots, SlogoNode curr) {
+    if(curr.isFull()){ // only true if node has no parameters
+      if(st.isEmpty()) {
+        roots.add(curr);
+      }
+      else{
+        st.peek().addNode(curr);
+      }
+    }
+    else { // curr not full
+      if(st.isEmpty()){
+        roots.add(curr);
+      }
+      st.push(curr);
+    }
+    // add to roots whenever stack is empty, so we can pop off stack without worrying about adding to root
+    // each thing on the stack is essentially the previous (lower) nodes' left most unfilled children
+    popAllFullChildren(st);
+  }
+
+  private void popAllFullChildren(Stack<SlogoNode> st) {
+    while(!st.isEmpty() && st.peek().isFull()){
+      SlogoNode top = st.pop();
+      if(!st.isEmpty()){
+        st.peek().addNode(top);
+      }
+    }
   }
 
   // each command will add objects to tracker
