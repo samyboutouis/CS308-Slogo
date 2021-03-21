@@ -18,6 +18,7 @@ public class SetBackgroundNode extends TurtleCommandNode {
   public double getReturnValue(BackEndTurtleTracker tracker) {
     return super.loopThroughTurtles(tracker, parameters, (currTurtle, values) -> {
       // create set background command here
+      // FIXME:
       return values.get(0);
     });
   }

@@ -16,6 +16,6 @@ public class SetBackgroundCommand implements Command {
 
   @Override
   public void doCommand(FrontEndTurtle frontEndTurtle) {
-    // safe.setbg
+    // FIXME: safe.setbg
   }
 }
