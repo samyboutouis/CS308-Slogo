@@ -13,16 +13,12 @@ public class HistoryDisplay extends ScrollingDisplay {
   private final static String HISTORY_TAG_ID = "HistoryTagID";
 
   private final ResourceBundle idBundle;
-  private final ResourceBundle resourceBundle;
 
   private final VBox historyBox;
 
   public HistoryDisplay(Workspace workspace, String resourcePackage) {
     super(workspace, resourcePackage);
     historyBox = setupVBoxContainer(HISTORY_TITLE, HISTORY_BOX_ID);
-    String language = "English";
-    this.resourceBundle = ResourceBundle
-        .getBundle(String.format("%s/%s/%s", resourcePackage, "languages", language));
     this.idBundle = ResourceBundle.getBundle(ID_PROPERTY);
   }
 
