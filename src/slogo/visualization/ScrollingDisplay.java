@@ -13,21 +13,24 @@ import javafx.scene.layout.VBox;
 public class ScrollingDisplay {
 
   private final static int PADDING_LENGTH = 10;
+  private final static int VBOX_PADDING_LENGTH = 5;
   private final static int ROW_COUNT = 10;
   private final static String DISPLAY_CLASS_NAME = "displayWindow";
 
   private final ResourceBundle resourceBundle;
   private final ResourceBundle idBundle;
   private final GridPane pane;
+  private final Workspace workspace;
 
   /**
    *
    * @param resourcePackage
    */
-  public ScrollingDisplay(String resourcePackage){
+  public ScrollingDisplay(Workspace workspace, String resourcePackage){
     pane = new GridPane();
     pane.getStyleClass().add(DISPLAY_CLASS_NAME);
     String language = "English";
+    this.workspace = workspace;
     this.resourceBundle = ResourceBundle.getBundle(String.format("%s/%s/%s", resourcePackage, "languages", language));
     this.idBundle = ResourceBundle.getBundle(String.format("%s/%s/%s", resourcePackage, "stylesheets", "CSS_IDs"));
   }
@@ -73,8 +76,8 @@ public class ScrollingDisplay {
 
     VBox vBox = new VBox();
     vBox.setFillWidth(true);
-    vBox.setSpacing(PADDING_LENGTH);
-    vBox.setPadding(new Insets(PADDING_LENGTH));
+    vBox.setSpacing(VBOX_PADDING_LENGTH);
+    vBox.setPadding(new Insets(VBOX_PADDING_LENGTH));
 
     scrollPane.setContent(vBox);
 
@@ -83,5 +86,9 @@ public class ScrollingDisplay {
 
   public GridPane getPane(){
     return pane;
+  }
+
+  public TerminalDisplay getTerminalDisplay() {
+    return workspace.getTerminalDisplay();
   }
 }
