@@ -246,4 +246,14 @@ public class CommandReaderTest {
       assertEquals(e.getMessage(), "Set Palette RGB Value Error - Not within range [0, 255]");
     }
   }
+
+  @Test
+  void testUndefinedCommand () {
+    try{
+      myReader.testParseInput("felix");
+    } catch(IllegalArgumentException e){
+      assertEquals(e.getMessage(), "Command felix undefined!");
+    }
+
+  }
 }
