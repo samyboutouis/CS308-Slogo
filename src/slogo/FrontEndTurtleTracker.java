@@ -12,6 +12,7 @@ import javafx.scene.paint.Color;
 import slogo.model.BackEndTurtleTracker;
 import slogo.visualization.BackgroundObserver;
 import slogo.visualization.FrontEndTurtle;
+import slogo.visualization.PaletteDisplay;
 import slogo.visualization.TurtleObserver;
 
 public class FrontEndTurtleTracker implements SafeFrontEndTurtleTracker{
@@ -19,12 +20,14 @@ public class FrontEndTurtleTracker implements SafeFrontEndTurtleTracker{
   private final List<Integer> activeTurtles;
   private final List<TurtleObserver> turtleObservers;
   private final List<BackgroundObserver> backgroundObservers;
+  private final PaletteDisplay paletteDisplay;
 
-  public FrontEndTurtleTracker() {
+  public FrontEndTurtleTracker(PaletteDisplay paletteDisplay) {
     allTurtles = new TreeMap<>();
     activeTurtles = new ArrayList<>();
     turtleObservers = new ArrayList<>();
     backgroundObservers = new ArrayList<>();
+    this.paletteDisplay = paletteDisplay;
   }
 
   public void addObserver(TurtleObserver turtleObserver) {
@@ -111,8 +114,8 @@ public class FrontEndTurtleTracker implements SafeFrontEndTurtleTracker{
     notifyAddTurtle(getTurtleIDs(), turtle);
   }
 
-  public void changeColor() {
-
+  public void updatePalette(int index, int r, int g, int b){
+    paletteDisplay.updatePaletteBox(index, r, g, b);
   }
 
   public void forward(double pixels) {

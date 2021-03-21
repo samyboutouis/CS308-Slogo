@@ -9,7 +9,7 @@ public class ViewContainer {
 
   private final static int GRID_ROW_COUNT = 10;
   private final static int GRID_COLUMN_COUNT = 6;
-  private final static int PADDING_LENGTH = 5;
+  private final static int PADDING_LENGTH = 10;
   private final static int BUTTON_LENGTH = 5;
 
   private final ViewLayout viewLayout;

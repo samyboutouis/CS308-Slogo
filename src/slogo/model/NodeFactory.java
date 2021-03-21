@@ -29,14 +29,13 @@ public class NodeFactory {
   }
 
   private SlogoNode makeCase(int parameters, Map<String, String> userDefinedCommandsInString) {
-    SlogoNode curr;
-    curr = new MakeUserInstructionNode(parameters, userDefinedCommandsInString);
-    return curr;
+    return new MakeUserInstructionNode(parameters, userDefinedCommandsInString);
   }
 
   private SlogoNode commandCase(SlogoNode curr, String value, Map<String,
       MakeUserInstructionNode> userDefinedCommands) throws IllegalArgumentException {
     if (curr instanceof MakeUserInstructionNode) {
+      ((MakeUserInstructionNode) curr).setMethodName(value);
       userDefinedCommands.put(value, (MakeUserInstructionNode) curr);
       return null; // command reader should treat this as a continue
     } else {
@@ -49,25 +48,19 @@ public class NodeFactory {
   }
 
   private SlogoNode repeatCase(int parameters, Map<String, Double> variables) {
-    SlogoNode curr;
     // needs the map of variables in constructor to add repcount variable
-    curr = new RepeatNode(parameters, variables);
-    return curr;
+    return new RepeatNode(parameters, variables);
   }
 
   private SlogoNode variableCase(String value, int parameters, Map<String, Double> variables) {
-    SlogoNode curr;
-    curr = new VariableNode(parameters, variables, value);
     // s is the value we read, symbol is the classification
-    return curr;
+    return new VariableNode(parameters, variables, value);
   }
 
   private SlogoNode constantCase(String value, int parameters) {
-    SlogoNode curr;
-    curr = new ConstantNode(parameters, Double.parseDouble(value));
     // guaranteed to be parsable to double since our regex will catch something that isn't
     // if stack is empty and we see a constant, it doesn't do anything to the program but
     // we still add it to the tree
-    return curr;
+    return new ConstantNode(parameters, Double.parseDouble(value));
   }
 }
