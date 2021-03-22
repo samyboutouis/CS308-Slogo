@@ -14,20 +14,6 @@ public class IsShowingNode extends TurtleCommandNode {
     super(parameter);
   }
 
-  /*@Override
-  public double getReturnValue(List<Command> commands) {
-
-    if (turtle.isShowing()){
-      mesg = "Turtle is shown";
-      ret  =1;
-    } else {
-      mesg = "Turtle is hidden";
-      ret = 0;
-    }
-    commands.add(new DisplayCommand(mesg));
-    return ret;
-  }*/
-
   @Override
   public double getReturnValue(BackEndTurtleTracker tracker) {
     return super.loopThroughTurtles(tracker, new ArrayList<>(), (currTurtle, values) -> {

@@ -65,6 +65,22 @@ Creates one turtle with id 100, rather than all turtles up to 100. Design decisi
 We thought up cases where we only wanted to tell a single turtle something (to see their xcor for example)
 So tell [ 2 ] xcor would provide us the xcor of second turtle, but if we didn't allow single tells to only create one turtle, issues may occur
 
+#### ID
+```
+tell [ 1 2 3 4 ] 
+id
+ask [ 1 2 3 4 ] [ id ]
+```
+ID will return 1 in both cases because that is the first ID in the tell/ask list. ID only returns the id for the current turtle, so it will not loop around and return the last value in the list.
+
+#### Multi-Turtle Variables
+```
+set :x 10
+tell [ 1 2 3 ]
+fd set :x sum :x 10
+```
+Each turtle will move a different amount forward, because for each turtle, the fd command will run each of its parameters again
+
 
 ### Impressions
 

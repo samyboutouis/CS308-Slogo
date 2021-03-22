@@ -5,7 +5,7 @@ import java.util.Map;
 import slogo.model.SlogoNode;
 import slogo.model.BackEndTurtleTracker;
 
-public class RepeatNode extends SlogoNode {
+public class RepeatNode extends BracketNode {
 
   private List<SlogoNode> parameters;
   private Map<String, Double> variables;
@@ -16,11 +16,6 @@ public class RepeatNode extends SlogoNode {
     super(numParameters); // parameters being full determined like IfNode (last one is ListEnd)
     this.variables = variables;
     parameters = super.getParameters();
-  }
-
-  @Override
-  public boolean isFull() {
-    return !parameters.isEmpty() && parameters.get(parameters.size() - 1) instanceof ListEndNode;
   }
 
   @Override
