@@ -124,10 +124,15 @@ public class FrontEndTurtle implements Turtle, SafeTurtle {
     imageView.setImage(image);
   }
 
+  public void setImage(String filePath) {
+    Image image = new Image(filePath, IMAGE_WIDTH, IMAGE_HEIGHT, true, false);
+    imageView.setImage(image);
+  }
+
   public void setShape(int index) {
     shapeIndex = index;
     String filePath = turtleTracker.getShapeFromIndex(index);
-    setImage(new File(filePath));
+    setImage(filePath);
   }
 
   public int getShapeIndex() {

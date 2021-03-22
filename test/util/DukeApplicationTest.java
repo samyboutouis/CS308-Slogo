@@ -103,7 +103,7 @@ public class DukeApplicationTest extends ApplicationTest {
         simulateAction(cb, () -> cb.getSelectionModel().select(value));
     }
 
-    protected void select (ChoiceBox<String> cb, String value) {
+    protected void select (ComboBox<Integer> cb, int value) {
         // FIXME: duplicated code - but no common ancestor defines getSelectionModel()
         simulateAction(cb, () -> cb.getSelectionModel().select(value));
     }

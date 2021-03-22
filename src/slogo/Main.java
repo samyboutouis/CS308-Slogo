@@ -13,13 +13,6 @@ public class Main extends Application {
   private final static String STAGE_TITLE = "SLogo Application";
 
   /**
-   * A method to test (and a joke :).
-   */
-  public double getVersion() {
-    return 0.001;
-  }
-
-  /**
    * Starts the window application
    *
    * @param stage The top-level container class for the application window

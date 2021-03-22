@@ -15,6 +15,7 @@ import slogo.visualization.Workspace;
 public class ButtonDisplay extends ScrollingDisplay {
   private static final String TITLE = "ButtonsTitle";
   private static final String BUTTON_BOX_ID = "ButtonBoxID";
+  private static final String TEXT_FIELD_ID = "TextField";
 
   private final VBox vbox;
   private final ButtonFactory buttonFactory;
@@ -36,6 +37,7 @@ public class ButtonDisplay extends ScrollingDisplay {
       HBox hbox = new HBox();
       TextField textField = makeTextField();
       hbox.getChildren().add(textField);
+      textField.setId(TEXT_FIELD_ID + property);
       hbox.getChildren().add(buttonFactory.createTextFieldButton(property, textField));
       vbox.getChildren().add(hbox);
     }
