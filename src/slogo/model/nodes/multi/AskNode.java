@@ -4,43 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 import slogo.model.BackEndTurtleTracker;
 import slogo.model.SlogoNode;
+import slogo.model.nodes.control.BracketNode;
 import slogo.model.nodes.control.ConstantNode;
-import slogo.model.nodes.control.ListEndNode;
 
-public class AskNode extends SlogoNode {
+public class AskNode extends BracketNode {
 
   private List<SlogoNode> parameters;
-  private int brackets;
   private int firstEnd;
 
   public AskNode(int numParameters) {
     super(numParameters);
-    brackets = numParameters;
     parameters = super.getParameters();
-  }
-
-  @Override
-  public boolean isFull() {
-    return !parameters.isEmpty() && checkBrackets();
-  }
-
-  private boolean checkBrackets() {
-    int seen = 0;
-    for (SlogoNode node : parameters) {
-      if (node instanceof ListEndNode) {
-        seen++;
-      }
-    }
-    return seen == brackets;
-  }
-
-  private void setFirstEnd() {
-    for (int i = 0; i < parameters.size(); i++) {
-      if (parameters.get(i) instanceof ListEndNode) {
-        firstEnd = i;
-        break;
-      }
-    }
   }
 
   // gets all the turtles that the ask command wants
@@ -60,7 +34,7 @@ public class AskNode extends SlogoNode {
 
   @Override
   public double getReturnValue(BackEndTurtleTracker tracker) {
-    setFirstEnd();
+    firstEnd = super.getFirstEnd();
     List<Integer> askTurtleList = getAskTurtles(tracker);
     tracker.setAskList(askTurtleList); // creates the tellCommand
     double ret = 0;
