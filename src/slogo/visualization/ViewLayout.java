@@ -74,7 +74,7 @@ public class ViewLayout {
     setAllDisplaysInvisible();
   }
 
-  private void setAllDisplaysInvisible(){
+  private void setAllDisplaysInvisible() {
     historyDisplay.getPane().setVisible(false);
     variablesDisplay.getPane().setVisible(false);
     userCommandsDisplay.getPane().setVisible(false);

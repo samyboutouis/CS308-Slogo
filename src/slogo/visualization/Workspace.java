@@ -52,7 +52,7 @@ public class Workspace {
     PaletteDisplay paletteDisplay = new PaletteDisplay(this, RESOURCE_PACKAGE);
     FrontEndTurtleTracker frontEndTurtleTracker = new FrontEndTurtleTracker(paletteDisplay);
     FrontEndController frontEndController = new FrontEndController(stage, frontEndTurtleTracker,
-      controller, this);
+        controller, this);
     HistoryDisplay historyDisplay = new HistoryDisplay(this, RESOURCE_PACKAGE);
     VariablesDisplay variablesDisplay = new VariablesDisplay(this, RESOURCE_PACKAGE);
     UserCommandsDisplay userCommandsDisplay = new UserCommandsDisplay(this, RESOURCE_PACKAGE);
@@ -82,8 +82,8 @@ public class Workspace {
   public void setStyleSheet(String styleSheetName) {
     scene.getStylesheets().clear();
     scene.getStylesheets().add(
-      getClass().getResource(String.format("%s/%s", STYLESHEETS_PACKAGE, styleSheetName))
-        .toExternalForm());
+        getClass().getResource(String.format("%s/%s", STYLESHEETS_PACKAGE, styleSheetName))
+            .toExternalForm());
     stylesheet = styleSheetName;
   }
 

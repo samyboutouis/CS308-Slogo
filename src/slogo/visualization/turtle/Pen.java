@@ -80,7 +80,7 @@ public class Pen {
 
   public List<Map<String, String>> getLineInfo() {
     List<Map<String, String>> listInfo = new ArrayList<>();
-    for(Line line : lineList) {
+    for (Line line : lineList) {
       Map<String, String> map = new HashMap<>();
       map.put("TranslateX", String.valueOf(line.getTranslateX()));
       map.put("TranslateY", String.valueOf(line.getTranslateY()));

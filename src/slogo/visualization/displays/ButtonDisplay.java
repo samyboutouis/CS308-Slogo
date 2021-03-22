@@ -13,6 +13,7 @@ import slogo.visualization.ButtonFactory;
 import slogo.visualization.Workspace;
 
 public class ButtonDisplay extends ScrollingDisplay {
+
   private static final String TITLE = "ButtonsTitle";
   private static final String BUTTON_BOX_ID = "ButtonBoxID";
 
@@ -21,7 +22,8 @@ public class ButtonDisplay extends ScrollingDisplay {
   private final List<String> buttonList;
   private final GridPane pane;
 
-  public ButtonDisplay(Workspace workspace, String resourcePackage, FrontEndController frontEndController) {
+  public ButtonDisplay(Workspace workspace, String resourcePackage,
+      FrontEndController frontEndController) {
     super(workspace, resourcePackage);
     vbox = setupVBoxContainer(TITLE, BUTTON_BOX_ID);
     buttonFactory = new ButtonFactory(frontEndController);

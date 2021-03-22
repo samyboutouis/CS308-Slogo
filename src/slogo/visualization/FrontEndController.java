@@ -18,6 +18,7 @@ import slogo.visualization.turtle.Turtle;
 import slogo.visualization.turtle.FrontEndTurtle;
 
 public class FrontEndController {
+
   private static final String IMAGE_FILE_CHOOSER_TITLE = "Open Image File";
   private static final String XML_FILE_CHOOSER_TITLE = "Open XML File";
   private static final String INITIAL_DIRECTORY = "src/resources/preferences";
@@ -33,7 +34,7 @@ public class FrontEndController {
   private final Workspace workspace;
 
   public FrontEndController(Stage stage, FrontEndTurtleTracker frontEndTurtleTracker,
-    Controller controller, Workspace workspace) {
+      Controller controller, Workspace workspace) {
     this.stage = stage;
     this.frontEndTurtleTracker = frontEndTurtleTracker;
     this.buttonFactory = new ButtonFactory(this);
@@ -51,7 +52,7 @@ public class FrontEndController {
     fileChooser.setTitle(IMAGE_FILE_CHOOSER_TITLE);
     fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
     fileChooser.getExtensionFilters()
-      .setAll(new ExtensionFilter("Image File", "*.png", "*.jpg", "*.svg"));
+        .setAll(new ExtensionFilter("Image File", "*.png", "*.jpg", "*.svg"));
     File file = fileChooser.showOpenDialog(stage);
     if (file != null) {
       turtle.setImage(file);
@@ -100,7 +101,7 @@ public class FrontEndController {
     fileChooser.setTitle(XML_FILE_CHOOSER_TITLE);
     fileChooser.setInitialDirectory(new File(INITIAL_DIRECTORY));
     fileChooser.getExtensionFilters()
-      .setAll(new ExtensionFilter("XML File", "*.xml"));
+        .setAll(new ExtensionFilter("XML File", "*.xml"));
     File file = fileChooser.showOpenDialog(stage);
     if (file != null) {
       try {
@@ -120,7 +121,7 @@ public class FrontEndController {
     String newValue = textDialog.getEditor().getText();
     if (newValue != null) {
       XMLCreator xmlCreator = new XMLCreator(frontEndTurtleTracker, controller, workspace,
-        newValue);
+          newValue);
     }
   }
 

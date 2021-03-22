@@ -18,7 +18,7 @@ public class SetBackgroundNode extends TurtleCommandNode {
   @Override
   public double getReturnValue(BackEndTurtleTracker tracker) {
     return super.loopThroughTurtles(tracker, parameters, (currTurtle, values) -> {
-      currTurtle.addCommand( new SetBackgroundCommand(tracker.getSafe(), values.get(0).intValue()));
+      currTurtle.addCommand(new SetBackgroundCommand(tracker.getSafe(), values.get(0).intValue()));
       return values.get(0);
     });
   }

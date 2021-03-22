@@ -14,7 +14,8 @@ public class GetShapeNode extends TurtleCommandNode {
   @Override
   public double getReturnValue(BackEndTurtleTracker tracker) {
     return super.loopThroughTurtles(tracker, new ArrayList<>(), (currTurtle, values) -> {
-      currTurtle.addCommand( new DisplayCommand("Turtle Shape Index is " + currTurtle.getShapeIndex()));
+      currTurtle
+          .addCommand(new DisplayCommand("Turtle Shape Index is " + currTurtle.getShapeIndex()));
       return currTurtle.getShapeIndex();
     });
   }

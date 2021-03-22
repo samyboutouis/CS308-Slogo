@@ -21,6 +21,7 @@ import slogo.visualization.turtle.Turtle;
 import slogo.visualization.Workspace;
 
 public class XMLCreator {
+
   private static final String RESOURCES_FILE = "resources.languages.EnglishErrors";
   private static final String DEFAULT_FILE_PATH = "src/resources/preferences/";
   private static final String XML = ".xml";
@@ -32,8 +33,9 @@ public class XMLCreator {
   private String filePath;
   private ResourceBundle errorBundle;
 
-  public XMLCreator(FrontEndTurtleTracker frontEndTurtleTracker, Controller controller, Workspace workspace,
-    String filePath) {
+  public XMLCreator(FrontEndTurtleTracker frontEndTurtleTracker, Controller controller,
+      Workspace workspace,
+      String filePath) {
     this.filePath = filePath;
     this.errorBundle = ResourceBundle.getBundle(RESOURCES_FILE);
     this.turtleTracker = frontEndTurtleTracker;
@@ -75,7 +77,7 @@ public class XMLCreator {
   private void recordTurtles(Element root) {
     Element turtlesTag = doc.createElement("Turtles");
     List<Integer> allTurtleIDs = turtleTracker.getTurtleIDs();
-    for(int id : allTurtleIDs) {
+    for (int id : allTurtleIDs) {
       Element turtleTag = doc.createElement("Turtle");
       Turtle turtle = turtleTracker.getTurtle(id);
       turtleTag.appendChild(createLineTag(turtle.getLineInfo()));
@@ -94,9 +96,9 @@ public class XMLCreator {
 
   private Element createLineTag(List<Map<String, String>> lineList) {
     Element linesTag = doc.createElement("Lines");
-    for(Map<String, String> lineInfo : lineList){
+    for (Map<String, String> lineInfo : lineList) {
       Element lineTag = doc.createElement("Line");
-      for(String key : lineInfo.keySet()) {
+      for (String key : lineInfo.keySet()) {
         addToDocument(lineTag, key, lineInfo.get(key));
       }
       linesTag.appendChild(lineTag);

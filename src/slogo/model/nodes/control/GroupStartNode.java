@@ -27,7 +27,7 @@ public class GroupStartNode extends SlogoNode {
     command = parameters.get(0);
     getArguments(tracker);
     double ret = command.getReturnValue(tracker);
-    for(int i = 1; i < parameters.size() - 1; i = i + arguments){
+    for (int i = 1; i < parameters.size() - 1; i = i + arguments) {
       // i represents start of subList of parameters
       // i = 0 was the command
       List<SlogoNode> newParams = getNewParams(i, i + arguments);
@@ -49,7 +49,7 @@ public class GroupStartNode extends SlogoNode {
 
   private List<SlogoNode> getNewParams(int start, int end) {
     List<SlogoNode> ret = new ArrayList<>();
-    for(int i = start; i < end; i++){
+    for (int i = start; i < end; i++) {
       ret.add(parameters.get(i));
       // to be sent to command again
     }
@@ -58,7 +58,7 @@ public class GroupStartNode extends SlogoNode {
 
   private void getArguments(BackEndTurtleTracker tracker) {
     arguments = command.getNumParameters();
-    if( (parameters.size() - 2) % arguments != 0) {
+    if ((parameters.size() - 2) % arguments != 0) {
       // subtract off command node and group end
       throw new IllegalArgumentException("Grouping does not have correct multiple of arguments!");
     }
