@@ -64,6 +64,8 @@ class ToolbarDisplayTest extends DukeApplicationTest {
     workspace.getStylesheet().equals("dark.css");
     clickOn(myColorThemeButton);
     workspace.getStylesheet().equals("light.css");
+    clickOn(myColorThemeButton);
+    workspace.getStylesheet().equals("dark.css");
   }
 
   @Test
