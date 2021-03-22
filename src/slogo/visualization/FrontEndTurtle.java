@@ -8,7 +8,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Line;
 import slogo.FrontEndTurtleTracker;
 import slogo.SafeTurtle;
 import slogo.Turtle;
@@ -30,7 +29,6 @@ public class FrontEndTurtle implements Turtle, SafeTurtle {
   private final FrontEndTurtleTracker turtleTracker;
   private ActiveCircle activeCircle;
   private boolean isActive;
-  private int shapeIndex;
 
   public FrontEndTurtle(FrontEndTurtleTracker frontEndTurtleTracker) {
     this.idBundle = ResourceBundle
@@ -125,6 +123,11 @@ public class FrontEndTurtle implements Turtle, SafeTurtle {
     imageView.setImage(image);
   }
 
+  public void setShape(int index) {
+    String filePath = turtleTracker.getShapeFromIndex(index);
+    setImage(new File(filePath));
+  }
+
   private void setDefaultImage() {
     Image image = new Image(DEFAULT_IMAGE, IMAGE_WIDTH, IMAGE_HEIGHT, false, false);
     imageView = new ImageView(image);
@@ -149,7 +152,7 @@ public class FrontEndTurtle implements Turtle, SafeTurtle {
   }
 
   public void setPenColor(int index) {
-    Color color = turtleTracker.getColorIndex(index);
+    Color color = turtleTracker.getColorFromIndex(index);
     setPenColor(color);
   }
 
@@ -217,17 +220,6 @@ public class FrontEndTurtle implements Turtle, SafeTurtle {
     activeCircle.hide();
     isActive = false;
     turtleTracker.setInactive(this);
-  }
-
-  public int getShapeIndex() {
-    return shapeIndex;
-  }
-
-  public int getPenColorIndex() {
-    // get index from color
-    //return pen.getColor()
-    //FIXME
-    return -1;
   }
 
   public List<Map<String, String>> getLineInfo() {

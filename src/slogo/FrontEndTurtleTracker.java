@@ -1,5 +1,6 @@
 package slogo;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -177,11 +178,15 @@ public class FrontEndTurtleTracker implements SafeFrontEndTurtleTracker {
     return allTurtles.isEmpty();
   }
 
-  public Color getColorIndex(int index) {
+  public Color getColorFromIndex(int index) {
     return paletteDisplay.getColorFromIndex(index);
   }
 
   public Color getBackgroundColor() {
     return backgroundObservers.get(0).getBackgroundColor();
+  }
+
+  public String getShapeFromIndex(int index) {
+    return paletteDisplay.getImagePathFromIndex(index);
   }
 }
