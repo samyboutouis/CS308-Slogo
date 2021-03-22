@@ -11,6 +11,7 @@ import slogo.turtlecommands.HomeCommand;
 import slogo.turtlecommands.MovementCommand;
 import slogo.turtlecommands.SetBackgroundCommand;
 import slogo.turtlecommands.SetPaletteCommand;
+import slogo.turtlecommands.SetPenColorCommand;
 import slogo.turtlecommands.SetPenSizeCommand;
 import slogo.turtlecommands.TellCommand;
 
@@ -226,6 +227,7 @@ public class CommandReaderTest {
     assertTrue(getAllCommands(myReader.parseInput("setpalette 1 0 100 255", tracker).getAllTurtleCommands()).get(0) instanceof SetPaletteCommand);
     assertTrue(getAllCommands(myReader.parseInput("setpensize 10", tracker).getAllTurtleCommands()).get(0) instanceof SetPenSizeCommand);
     assertTrue(getAllCommands(myReader.parseInput("setbg 1", tracker).getAllTurtleCommands()).get(0) instanceof SetBackgroundCommand);
+    assertTrue(getAllCommands(myReader.parseInput("setpc 1", tracker).getAllTurtleCommands()).get(0) instanceof SetPenColorCommand);
   }
 
   // SECTION
