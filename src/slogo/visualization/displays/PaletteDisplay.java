@@ -10,31 +10,23 @@ import slogo.visualization.Workspace;
 
 public class PaletteDisplay extends ScrollingDisplay {
 
-  private static final String ID_PROPERTY = "resources/stylesheets/CSS_IDs";
-  private static final String DEFAULT_PALETTE_PROPERTY = "resources/parameters/DefaultPalette";
-  private final static String PALETTE_TITLE = "PaletteTitle";
-  private final static String PALETTE_BOX_ID = "PaletteBoxID";
-  private final static String PALETTE_TAG_ID = "PaletteTagID";
-
-  private final static String[] DEFAULT_PALETTE_TAG_PROPERTIES = {"Default1", "Default2",
+  private static final ResourceBundle idBundle = ResourceBundle
+      .getBundle("resources/stylesheets/CSS_IDs");
+  private static final ResourceBundle paletteBundle = ResourceBundle.getBundle("resources/parameters/DefaultPalette");
+  private static final String PALETTE_TITLE = "PaletteTitle";
+  private static final String PALETTE_BOX_ID = "PaletteBoxID";
+  private static final String PALETTE_TAG_ID = "PaletteTagID";
+  private static final String[] DEFAULT_PALETTE_TAG_PROPERTIES = {"Default1", "Default2",
       "Default3", "Default4", "Default5", "Default6"};
-
-  private final static int PALETTE_TAG_ROW_COUNT = 1;
-  private final static int PALETTE_TAG_COL_COUNT = 6;
-  private final static int PALETTE_TAG_PADDING_LENGTH = 5;
-
-  private final ResourceBundle idBundle;
-  private final ResourceBundle paletteBundle;
+  private static final int PALETTE_TAG_ROW_COUNT = 1;
+  private static final int PALETTE_TAG_COL_COUNT = 6;
+  private static final int PALETTE_TAG_PADDING_LENGTH = 5;
 
   private final VBox paletteBox;
 
-  public PaletteDisplay(Workspace workspace, String resourcePackage) {
-    super(workspace, resourcePackage);
+  public PaletteDisplay(Workspace workspace) {
+    super(workspace);
     paletteBox = setupVBoxContainer(PALETTE_TITLE, PALETTE_BOX_ID);
-
-    idBundle = ResourceBundle.getBundle(ID_PROPERTY);
-    paletteBundle = ResourceBundle.getBundle(DEFAULT_PALETTE_PROPERTY);
-
     addDefaultPaletteTags();
   }
 

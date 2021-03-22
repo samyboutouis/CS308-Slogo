@@ -21,8 +21,7 @@ public class Workspace {
 
   private final static String WORKSPACE_PANE_ID = "Workspace";
   private final static String RESOURCE_PACKAGE = "resources";
-  private final static String STYLESHEETS_PACKAGE = String
-      .format("/%s/stylesheets", RESOURCE_PACKAGE);
+  private final static String STYLESHEETS_PACKAGE = "/resources/stylesheets";
   private final static int GRID_ROW_COUNT = 10;
   private final static int GRID_COLUMN_COUNT = 5;
   private final static int PADDING_LENGTH = 10;
@@ -49,14 +48,14 @@ public class Workspace {
   }
 
   private void setupDisplays() {
-    PaletteDisplay paletteDisplay = new PaletteDisplay(this, RESOURCE_PACKAGE);
+    PaletteDisplay paletteDisplay = new PaletteDisplay(this);
     FrontEndTurtleTracker frontEndTurtleTracker = new FrontEndTurtleTracker(paletteDisplay);
     FrontEndController frontEndController = new FrontEndController(stage, frontEndTurtleTracker,
       controller, this);
-    HistoryDisplay historyDisplay = new HistoryDisplay(this, RESOURCE_PACKAGE);
-    VariablesDisplay variablesDisplay = new VariablesDisplay(this, RESOURCE_PACKAGE);
-    UserCommandsDisplay userCommandsDisplay = new UserCommandsDisplay(this, RESOURCE_PACKAGE);
-    ButtonDisplay buttonDisplay = new ButtonDisplay(this, RESOURCE_PACKAGE, frontEndController);
+    HistoryDisplay historyDisplay = new HistoryDisplay(this);
+    VariablesDisplay variablesDisplay = new VariablesDisplay(this);
+    UserCommandsDisplay userCommandsDisplay = new UserCommandsDisplay(this);
+    ButtonDisplay buttonDisplay = new ButtonDisplay(this, frontEndController);
     TurtleStateDisplay turtleStateDisplay = new TurtleStateDisplay(frontEndController,
         frontEndTurtleTracker);
     TurtleDisplay turtleDisplay = new TurtleDisplay(frontEndTurtleTracker);

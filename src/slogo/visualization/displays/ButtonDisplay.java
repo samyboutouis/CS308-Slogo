@@ -21,8 +21,8 @@ public class ButtonDisplay extends ScrollingDisplay {
   private final List<String> buttonList;
   private final GridPane pane;
 
-  public ButtonDisplay(Workspace workspace, String resourcePackage, FrontEndController frontEndController) {
-    super(workspace, resourcePackage);
+  public ButtonDisplay(Workspace workspace, FrontEndController frontEndController) {
+    super(workspace);
     vbox = setupVBoxContainer(TITLE, BUTTON_BOX_ID);
     buttonFactory = new ButtonFactory(frontEndController);
     buttonList = List.of("UpButton", "DownButton", "RightButton", "LeftButton");

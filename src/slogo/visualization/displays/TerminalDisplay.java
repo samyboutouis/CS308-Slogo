@@ -27,37 +27,34 @@ import slogo.visualization.turtle.FrontEndTurtleTracker;
 
 public class TerminalDisplay {
 
-  private final static int PADDING_LENGTH = 10;
-  private final static String TERMINAL_RUN_BUTTON = "TerminalRunButton";
-  private final static String TERMINAL_SAVE_BUTTON = "TerminalSaveButton";
-  private final static String TERMINAL_LOAD_BUTTON = "TerminalLoadButton";
-  private final static String TERMINAL_PROMPT = "TerminalPrompt";
-  private final static String TERMINAL_TEXT_BOX_ID = "TerminalTextBoxID";
-  private final static String TERMINAL_BUTTON_ID = "TerminalButtonID";
-  private final static String ERROR_TITLE_PROPERTY = "ErrorTitle";
-  private final static String DISPLAY_CLASS_NAME = "displayWindow";
-  private final static int COLUMN_COUNT = 4;
-
-  private final static int BUTTON_WIDTH = 80;
-
-  private final static String LIBRARIES_PATH = "src/resources/libraries";
+  private static final String LIBRARIES_PATH = "src/resources/libraries";
+  private static final String TERMINAL_RUN_BUTTON = "TerminalRunButton";
+  private static final String TERMINAL_SAVE_BUTTON = "TerminalSaveButton";
+  private static final String TERMINAL_LOAD_BUTTON = "TerminalLoadButton";
+  private static final String TERMINAL_PROMPT = "TerminalPrompt";
+  private static final String TERMINAL_TEXT_BOX_ID = "TerminalTextBoxID";
+  private static final String TERMINAL_BUTTON_ID = "TerminalButtonID";
+  private static final String ERROR_TITLE_PROPERTY = "ErrorTitle";
+  private static final String DISPLAY_CLASS_NAME = "displayWindow";
+  private static final int COLUMN_COUNT = 4;
+  private static final int PADDING_LENGTH = 10;
+  private static final int BUTTON_WIDTH = 80;
 
   private final Scene scene;
   private final ResourceBundle resourceBundle;
   private final ResourceBundle idBundle;
   private final ResourceBundle errorBundle;
   private final GridPane pane;
+  private final HistoryDisplay historyDisplay;
+  private final VariablesDisplay variablesDisplay;
+  private final UserCommandsDisplay userCommandsDisplay;
+  private final FrontEndTurtleTracker turtleTracker;
+  private final Controller controller;
+
   private TextArea textBox;
   private Button runButton;
   private Button saveButton;
   private Button loadButton;
-  private final HistoryDisplay historyDisplay;
-  private final VariablesDisplay variablesDisplay;
-  private final UserCommandsDisplay userCommandsDisplay;
-
-  private final FrontEndTurtleTracker turtleTracker;
-  private final Controller controller;
-
   private boolean ctrlPressed;
 
   public TerminalDisplay(String resourcePackage, Scene scene, HistoryDisplay historyDisplay,

@@ -7,15 +7,13 @@ import javafx.scene.layout.GridPane;
 
 public class ViewContainer {
 
-  private final static int GRID_ROW_COUNT = 10;
-  private final static int GRID_COLUMN_COUNT = 6;
-  private final static int PADDING_LENGTH = 10;
-  private final static int BUTTON_LENGTH = 5;
-
-  private static final String ID_PROPERTY = "resources/stylesheets/CSS_IDs";
   private static final String VIEW_CONTAINER_ID = "ViewContainer";
   private static final String VIEW_CONTAINER_COMBOBOX_ID = "ViewContainerComboBox";
   private static final String VIEW_CONTAINER_BUTTON_ID = "ViewContainerCloseButton";
+  private static final int GRID_ROW_COUNT = 10;
+  private static final int GRID_COLUMN_COUNT = 6;
+  private static final int PADDING_LENGTH = 10;
+  private static final int BUTTON_LENGTH = 5;
 
   private final ViewLayout viewLayout;
   private final CustomGridPane pane;

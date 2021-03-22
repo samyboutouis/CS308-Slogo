@@ -9,30 +9,20 @@ import slogo.visualization.Workspace;
 
 public class UserCommandsDisplay extends ScrollingDisplay {
 
-  private final static String USER_COMMANDS_TITLE = "UserCommandsTitle";
-  private final static String USER_COMMANDS_BOX_ID = "UserCommandsBoxID";
-  private final static String USER_COMMANDS_TAG_ID = "UserCommandsTagID";
+  private static final ResourceBundle idBundle = ResourceBundle
+      .getBundle("resources/stylesheets/CSS_IDs");
+  private static final String USER_COMMANDS_TITLE = "UserCommandsTitle";
+  private static final String USER_COMMANDS_BOX_ID = "UserCommandsBoxID";
+  private static final String USER_COMMANDS_TAG_ID = "UserCommandsTagID";
+  private static final String DIALOG_BOX_HEADER_TEXT = "Set the parameters, with each parameter separated by spaces, for the command:";
 
-  private final static String DIALOG_BOX_HEADER_TEXT = "Set the parameters, with each parameter separated by spaces, for the command:";
-
-  private final ResourceBundle resourceBundle;
-  private final ResourceBundle idBundle;
   private final VBox userCommandsBox;
 
-  public UserCommandsDisplay(Workspace workspace, String resourcePackage) {
-    super(workspace, resourcePackage);
-
+  public UserCommandsDisplay(Workspace workspace) {
+    super(workspace);
     userCommandsBox = setupVBoxContainer(USER_COMMANDS_TITLE, USER_COMMANDS_BOX_ID);
-    String language = "English";
-    this.resourceBundle = ResourceBundle
-        .getBundle(String.format("%s/%s/%s", resourcePackage, "languages", language));
-    this.idBundle = ResourceBundle
-        .getBundle(String.format("%s/%s/%s", resourcePackage, "stylesheets", "CSS_IDs"));
   }
 
-  /**
-   * @param commandsMap
-   */
   public void updateBox(Map<String, String> commandsMap) {
     userCommandsBox.getChildren().clear();
 

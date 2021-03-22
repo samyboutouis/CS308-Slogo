@@ -13,28 +13,22 @@ import slogo.visualization.Workspace;
 
 public class ScrollingDisplay {
 
-  private final static int PADDING_LENGTH = 10;
-  private final static int VBOX_PADDING_LENGTH = 5;
-  private final static int ROW_COUNT = 10;
-  private final static String DISPLAY_CLASS_NAME = "displayWindow";
+  private static final ResourceBundle resourceBundle = ResourceBundle
+      .getBundle("resources/languages/English");
+  private static final ResourceBundle idBundle = ResourceBundle
+      .getBundle("resources/stylesheets/CSS_IDs");
+  private static final int PADDING_LENGTH = 10;
+  private static final int VBOX_PADDING_LENGTH = 5;
+  private static final int ROW_COUNT = 10;
+  private static final String DISPLAY_CLASS_NAME = "displayWindow";
 
-  private final ResourceBundle resourceBundle;
-  private final ResourceBundle idBundle;
   private final GridPane pane;
   private final Workspace workspace;
 
-  /**
-   * @param resourcePackage
-   */
-  public ScrollingDisplay(Workspace workspace, String resourcePackage) {
+  public ScrollingDisplay(Workspace workspace) {
+    this.workspace = workspace;
     pane = new GridPane();
     pane.getStyleClass().add(DISPLAY_CLASS_NAME);
-    String language = "English";
-    this.workspace = workspace;
-    this.resourceBundle = ResourceBundle
-        .getBundle(String.format("%s/%s/%s", resourcePackage, "languages", language));
-    this.idBundle = ResourceBundle
-        .getBundle(String.format("%s/%s/%s", resourcePackage, "stylesheets", "CSS_IDs"));
   }
 
   /**
