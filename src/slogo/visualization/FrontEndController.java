@@ -25,6 +25,10 @@ public class FrontEndController {
   private static final String ERROR_MESSAGE = "Invalid file.";
   private static final String LIGHT_STYLESHEET = "light.css";
   private static final String DARK_STYLESHEET = "dark.css";
+  private static final String PEN_DOWN_BUTTON = "PenDownButton";
+  private static final String PEN_UP_BUTTON = "PenUpButton";
+  private static final String LIGHT_MODE_BUTTON = "ColorThemeButton";
+  private static final String DARK_MODE_BUTTON = "DarkThemeButton";
 
   private final Stage stage;
   private final FrontEndTurtleTracker frontEndTurtleTracker;
@@ -79,13 +83,15 @@ public class FrontEndController {
   }
 
   public void handlePenUpClick(Button button, Turtle turtle) {
-    buttonFactory.setImage(button, "PenDownButton");
+    buttonFactory.setImage(button, PEN_DOWN_BUTTON);
+    button.setId(PEN_DOWN_BUTTON);
     turtle.penUp();
     button.setOnAction(event -> handlePenDownClick(button, turtle));
   }
 
   public void handlePenDownClick(Button button, Turtle turtle) {
-    buttonFactory.setImage(button, "PenUpButton");
+    buttonFactory.setImage(button, PEN_UP_BUTTON);
+    button.setId(PEN_UP_BUTTON);
     turtle.penDown();
     button.setOnAction(event -> handlePenUpClick(button, turtle));
   }
@@ -135,13 +141,13 @@ public class FrontEndController {
   }
 
   public void handleColorThemeClick(Button button) {
-    buttonFactory.setImage(button, "DarkThemeButton");
+    buttonFactory.setImage(button, DARK_MODE_BUTTON);
     workspace.setStyleSheet(LIGHT_STYLESHEET);
     button.setOnAction(event -> handleDarkThemeClick(button));
   }
 
   public void handleDarkThemeClick(Button button) {
-    buttonFactory.setImage(button, "ColorThemeButton");
+    buttonFactory.setImage(button, LIGHT_MODE_BUTTON);
     workspace.setStyleSheet(DARK_STYLESHEET);
     button.setOnAction(event -> handleColorThemeClick(button));
   }
