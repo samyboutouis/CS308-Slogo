@@ -30,9 +30,9 @@ public class TerminalDisplay {
   private static final ResourceBundle idBundle = ResourceBundle
       .getBundle("resources/stylesheets/CSS_IDs");
   private static final ResourceBundle resourceBundle = ResourceBundle
-      .getBundle("resources/stylesheets/English");
+      .getBundle("resources/languages/English");
   private static final ResourceBundle errorBundle = ResourceBundle
-      .getBundle("resources/stylesheets/EnglishErrors");
+      .getBundle("resources/languages/EnglishErrors");
   private static final String LIBRARIES_PATH = "src/resources/libraries";
   private static final String TERMINAL_RUN_BUTTON = "TerminalRunButton";
   private static final String TERMINAL_SAVE_BUTTON = "TerminalSaveButton";
@@ -70,7 +70,6 @@ public class TerminalDisplay {
     this.userCommandsDisplay = userCommandsDisplay;
     this.turtleTracker = frontEndTurtleTracker;
     this.controller = controller;
-
 
     pane = new GridPane();
     pane.getStyleClass().add(DISPLAY_CLASS_NAME);
