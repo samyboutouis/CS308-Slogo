@@ -95,17 +95,13 @@ public class BackEndTurtleTracker implements SafeBackEndTurtleTracker {
   // only used in AskWithNode, to temporarily set the active turtle list to a specific turtle, and run
   // the logic expression to see if that specific turtle satisfies the requirement in AskWith.
   public void checkOneTurtle(int id) {
-    clearActiveTurtles();
-    activeTurtles.add(id);
-  }
-
-  // clear the list of activeTurtles
-  public void clearActiveTurtles() {
     activeTurtles.clear();
+    activeTurtles.add(id);
   }
 
   public void setTellList(List<Integer> tellList) {
     activeTurtles.clear();
+    // clear the previous active list of turtles, to prepare room for new list of active turtles.
     for (Integer i : tellList) {
       addTurtle(getBasicTurtle(i));
     }
