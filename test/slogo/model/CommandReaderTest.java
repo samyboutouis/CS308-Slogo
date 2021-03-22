@@ -9,6 +9,7 @@ import slogo.Command;
 import slogo.BackEndTurtle;
 import slogo.turtlecommands.HomeCommand;
 import slogo.turtlecommands.MovementCommand;
+import slogo.turtlecommands.SetBackgroundCommand;
 import slogo.turtlecommands.SetPaletteCommand;
 import slogo.turtlecommands.SetPenSizeCommand;
 import slogo.turtlecommands.TellCommand;
