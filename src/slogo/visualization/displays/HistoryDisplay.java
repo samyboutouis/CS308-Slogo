@@ -7,7 +7,7 @@ import slogo.visualization.Workspace;
 
 public class HistoryDisplay extends ScrollingDisplay {
 
-  private static final ResourceBundle idBundle = ResourceBundle
+  private static final ResourceBundle ID_BUNDLE = ResourceBundle
       .getBundle("resources/stylesheets/CSS_IDs");
   private static final String HISTORY_TITLE = "HistoryTitle";
   private static final String HISTORY_BOX_ID = "HistoryBoxID";
@@ -29,10 +29,9 @@ public class HistoryDisplay extends ScrollingDisplay {
     historyTag.setWrapText(true);
     historyTag.setMaxWidth(Double.MAX_VALUE);
     historyTag.setMaxHeight(Double.MAX_VALUE);
-    historyTag.setId(idBundle.getString(HISTORY_TAG_ID));
+    historyTag.setId(ID_BUNDLE.getString(HISTORY_TAG_ID));
 
     historyBox.getChildren().add(historyTag);
-
     applyHistoryTagLogic(historyTag);
   }
 

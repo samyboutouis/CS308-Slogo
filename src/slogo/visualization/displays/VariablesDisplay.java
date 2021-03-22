@@ -9,7 +9,7 @@ import slogo.visualization.Workspace;
 
 public class VariablesDisplay extends ScrollingDisplay {
 
-  private static final ResourceBundle idBundle = ResourceBundle
+  private static final ResourceBundle ID_BUNDLE = ResourceBundle
       .getBundle("resources/stylesheets/CSS_IDs");
   private static final String VARIABLES_TITLE = "VariablesTitle";
   private static final String VARIABLES_BOX_ID = "VariablesBoxID";
@@ -37,9 +37,9 @@ public class VariablesDisplay extends ScrollingDisplay {
     variablesTag.setWrapText(true);
     variablesTag.setMaxWidth(Double.MAX_VALUE);
     variablesTag.setMaxHeight(Double.MAX_VALUE);
-    variablesTag.setId(idBundle.getString(VARIABLES_TAG_ID));
-    applyVariablesTagLogic(variablesTag);
+    variablesTag.setId(ID_BUNDLE.getString(VARIABLES_TAG_ID));
 
+    applyVariablesTagLogic(variablesTag);
     variablesBox.getChildren().add(variablesTag);
   }
 

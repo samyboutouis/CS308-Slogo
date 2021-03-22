@@ -27,11 +27,11 @@ import slogo.visualization.turtle.FrontEndTurtleTracker;
 
 public class TerminalDisplay {
 
-  private static final ResourceBundle idBundle = ResourceBundle
+  private static final ResourceBundle ID_BUNDLE = ResourceBundle
       .getBundle("resources/stylesheets/CSS_IDs");
-  private static final ResourceBundle resourceBundle = ResourceBundle
+  private static final ResourceBundle RESOURCE_BUNDLE = ResourceBundle
       .getBundle("resources/languages/English");
-  private static final ResourceBundle errorBundle = ResourceBundle
+  private static final ResourceBundle ERROR_BUNDLE = ResourceBundle
       .getBundle("resources/languages/EnglishErrors");
   private static final String LIBRARIES_PATH = "src/resources/libraries";
   private static final String TERMINAL_RUN_BUTTON = "TerminalRunButton";
@@ -106,13 +106,13 @@ public class TerminalDisplay {
     textBox.setPrefColumnCount(COLUMN_COUNT);
     textBox.setWrapText(true);
     textBox.setFocusTraversable(false);
-    textBox.setPromptText(resourceBundle.getString(TERMINAL_PROMPT));
-    textBox.setId(idBundle.getString(TERMINAL_TEXT_BOX_ID));
+    textBox.setPromptText(RESOURCE_BUNDLE.getString(TERMINAL_PROMPT));
+    textBox.setId(ID_BUNDLE.getString(TERMINAL_TEXT_BOX_ID));
     pane.add(textBox, 0, 0, 3, 1);
   }
 
   private Button makeButton(String property, double width, double height, int X, int Y){
-    Button button = new Button(resourceBundle.getString(property));
+    Button button = new Button(RESOURCE_BUNDLE.getString(property));
     button.setMaxSize(width, height);
     button.setWrapText(true);
     button.setTextAlignment(TextAlignment.CENTER);
@@ -123,7 +123,7 @@ public class TerminalDisplay {
 
   private void initializeRunButton() {
     runButton = makeButton(TERMINAL_RUN_BUTTON, Double.MAX_VALUE, Double.MAX_VALUE,0, 0);
-    runButton.setId(idBundle.getString(TERMINAL_BUTTON_ID));
+    runButton.setId(ID_BUNDLE.getString(TERMINAL_BUTTON_ID));
     pane.add(runButton, 3, 0, 1, 1);
   }
 
@@ -215,7 +215,7 @@ public class TerminalDisplay {
 
   private void createErrorDialog(Exception error) {
     Alert newAlert = new Alert(AlertType.ERROR);
-    newAlert.setTitle(errorBundle.getString(ERROR_TITLE_PROPERTY));
+    newAlert.setTitle(ERROR_BUNDLE.getString(ERROR_TITLE_PROPERTY));
     newAlert.setHeaderText(null);
     newAlert.setContentText(error.getMessage());
     newAlert.showAndWait();

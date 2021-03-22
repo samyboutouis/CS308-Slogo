@@ -9,7 +9,7 @@ import slogo.visualization.Workspace;
 
 public class UserCommandsDisplay extends ScrollingDisplay {
 
-  private static final ResourceBundle idBundle = ResourceBundle
+  private static final ResourceBundle ID_BUNDLE = ResourceBundle
       .getBundle("resources/stylesheets/CSS_IDs");
   private static final String USER_COMMANDS_TITLE = "UserCommandsTitle";
   private static final String USER_COMMANDS_BOX_ID = "UserCommandsBoxID";
@@ -25,7 +25,6 @@ public class UserCommandsDisplay extends ScrollingDisplay {
 
   public void updateBox(Map<String, String> commandsMap) {
     userCommandsBox.getChildren().clear();
-
     for (Map.Entry<String, String> entry : commandsMap.entrySet()) {
       addNewCommandsTag(entry.getKey(), entry.getValue());
     }
@@ -36,10 +35,9 @@ public class UserCommandsDisplay extends ScrollingDisplay {
     commandsTag.setWrapText(true);
     commandsTag.setMaxWidth(Double.MAX_VALUE);
     commandsTag.setMaxHeight(Double.MAX_VALUE);
-    commandsTag.setId(idBundle.getString(USER_COMMANDS_TAG_ID));
+    commandsTag.setId(ID_BUNDLE.getString(USER_COMMANDS_TAG_ID));
 
     userCommandsBox.getChildren().add(commandsTag);
-
     applyCommandsTagLogic(commandsTag);
   }
 

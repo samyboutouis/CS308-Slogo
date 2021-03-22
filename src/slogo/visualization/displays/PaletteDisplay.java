@@ -10,12 +10,14 @@ import slogo.visualization.Workspace;
 
 public class PaletteDisplay extends ScrollingDisplay {
 
-  private static final ResourceBundle idBundle = ResourceBundle
+  private static final ResourceBundle ID_BUNDLE = ResourceBundle
       .getBundle("resources/stylesheets/CSS_IDs");
-  private static final ResourceBundle paletteBundle = ResourceBundle.getBundle("resources/parameters/DefaultPalette");
+  private static final ResourceBundle PALETTE_BUNDLE = ResourceBundle.getBundle("resources/parameters/DefaultPalette");
+  private static final String RESOURCES = "resources";
   private static final String PALETTE_TITLE = "PaletteTitle";
   private static final String PALETTE_BOX_ID = "PaletteBoxID";
   private static final String PALETTE_TAG_ID = "PaletteTagID";
+  private static final String NULL = "null";
   private static final String[] DEFAULT_PALETTE_TAG_PROPERTIES = {"Default1", "Default2",
       "Default3", "Default4", "Default5", "Default6"};
   private static final int PALETTE_TAG_ROW_COUNT = 1;
@@ -41,7 +43,7 @@ public class PaletteDisplay extends ScrollingDisplay {
   private void addNewPaletteTag(int index, int r, int g, int b, String imageName) {
     CustomGridPane paletteTag = new CustomGridPane(PALETTE_TAG_ROW_COUNT, PALETTE_TAG_COL_COUNT,
         PALETTE_TAG_PADDING_LENGTH);
-    paletteTag.setId(idBundle.getString(PALETTE_TAG_ID));
+    paletteTag.setId(ID_BUNDLE.getString(PALETTE_TAG_ID));
 
     Label indexLabel = new Label();
     Circle paletteCircle = new Circle();
@@ -56,7 +58,6 @@ public class PaletteDisplay extends ScrollingDisplay {
     paletteTag.add(paletteLabel, 2, 0, 4, 1);
 
     paletteBox.getChildren().add(paletteTag);
-
     updatePaletteTag(index, r, g, b, imageName);
   }
 
@@ -75,8 +76,8 @@ public class PaletteDisplay extends ScrollingDisplay {
 
   private void addDefaultPaletteTags() {
     for (int i = 0; i < DEFAULT_PALETTE_TAG_PROPERTIES.length; i++) {
-      String[] paletteValue = paletteBundle.getString(DEFAULT_PALETTE_TAG_PROPERTIES[i]).split(" ");
-      paletteValue[3] = paletteValue[3].equals("null") ? null : paletteValue[3];
+      String[] paletteValue = PALETTE_BUNDLE.getString(DEFAULT_PALETTE_TAG_PROPERTIES[i]).split(" ");
+      paletteValue[3] = paletteValue[3].equals(NULL) ? null : paletteValue[3];
       addNewPaletteTag(
           i + 1,
           Integer.parseInt(paletteValue[0]),
@@ -116,7 +117,7 @@ public class PaletteDisplay extends ScrollingDisplay {
   public String getImagePathFromIndex(int index) {
     CustomGridPane paletteTag = (CustomGridPane) paletteBox.getChildren().get(index - 1);
     Label paletteLabel = (Label) paletteTag.getChildren().get(2);
-    return String.format("resources/%s", paletteLabel.getText());
+    return String.format("%s/%s", RESOURCES, paletteLabel.getText());
   }
 
   public int getIndexFromImage(String path) {

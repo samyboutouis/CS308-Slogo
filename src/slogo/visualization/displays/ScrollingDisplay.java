@@ -13,9 +13,9 @@ import slogo.visualization.Workspace;
 
 public class ScrollingDisplay {
 
-  private static final ResourceBundle resourceBundle = ResourceBundle
+  private static final ResourceBundle RESOURCE_BUNDLE = ResourceBundle
       .getBundle("resources/languages/English");
-  private static final ResourceBundle idBundle = ResourceBundle
+  private static final ResourceBundle ID_BUNDLE = ResourceBundle
       .getBundle("resources/stylesheets/CSS_IDs");
   private static final int PADDING_LENGTH = 10;
   private static final int VBOX_PADDING_LENGTH = 5;
@@ -52,7 +52,7 @@ public class ScrollingDisplay {
   }
 
   private void initializeTitleLabel(String title) {
-    Label titleLabel = new Label(resourceBundle.getString(title));
+    Label titleLabel = new Label(RESOURCE_BUNDLE.getString(title));
     pane.add(titleLabel, 0, 0, 1, 1);
   }
 
@@ -60,7 +60,7 @@ public class ScrollingDisplay {
     ScrollPane scrollPane = new ScrollPane();
     scrollPane.setFitToWidth(true);
     scrollPane.setPrefViewportHeight(1);
-    scrollPane.setId(idBundle.getString(vBoxID));
+    scrollPane.setId(ID_BUNDLE.getString(vBoxID));
     pane.add(scrollPane, 0, 1, 1, 9);
 
     VBox vBox = new VBox();
