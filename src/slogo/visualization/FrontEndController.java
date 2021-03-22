@@ -23,7 +23,7 @@ public class FrontEndController {
   private static final String INITIAL_DIRECTORY = "src/resources/preferences";
   private static final String DIALOG_HEADER_TEXT = "Create XML File";
   private static final String ERROR_MESSAGE = "Invalid file.";
-  private static final String LIGHT_STYLESHEET = "default.css";
+  private static final String LIGHT_STYLESHEET = "light.css";
   private static final String DARK_STYLESHEET = "dark.css";
 
   private final Stage stage;
