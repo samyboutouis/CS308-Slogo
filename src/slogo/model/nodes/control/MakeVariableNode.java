@@ -21,8 +21,7 @@ public class MakeVariableNode extends SlogoNode {
     if (leftChild instanceof VariableNode) {
       ((VariableNode) leftChild).setValue(value);
     } else {
-      // some error
-      System.out.println("make/set was not given a variable");
+      throw new IllegalArgumentException("make/set was not given a variable");
     }
     return value;
   }

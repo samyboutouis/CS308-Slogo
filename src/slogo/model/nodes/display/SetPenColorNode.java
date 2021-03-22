@@ -1,16 +1,16 @@
-package slogo.model.nodes.commands;
+package slogo.model.nodes.display;
 
 import java.util.List;
 import slogo.model.BackEndTurtleTracker;
-import slogo.turtlecommands.MovementCommand;
 import slogo.model.SlogoNode;
+import slogo.model.nodes.commands.TurtleCommandNode;
+import slogo.turtlecommands.SetPenColorCommand;
 
-public class LeftNode extends TurtleCommandNode {
+public class SetPenColorNode extends TurtleCommandNode {
 
   private List<SlogoNode> parameters;
-  private List<Double> values;
 
-  public LeftNode(int numParameters) {
+  public SetPenColorNode(int numParameters) {
     super(numParameters);
     parameters = super.getParameters();
   }
@@ -18,8 +18,8 @@ public class LeftNode extends TurtleCommandNode {
   @Override
   public double getReturnValue(BackEndTurtleTracker tracker) {
     return super.loopThroughTurtles(tracker, parameters, (currTurtle, values) -> {
-      currTurtle.rotate(-1 * values.get(0));
-      currTurtle.addCommand(new MovementCommand(0, -1 * values.get(0)));
+      currTurtle.addCommand( new SetPenColorCommand(values.get(0).intValue()));
+      currTurtle.setPenColorIndex(values.get(0).intValue());
       return values.get(0);
     });
   }

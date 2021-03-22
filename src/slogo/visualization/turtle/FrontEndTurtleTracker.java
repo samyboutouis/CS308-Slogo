@@ -68,8 +68,8 @@ public class FrontEndTurtleTracker implements SafeFrontEndTurtleTracker {
 
   public BackEndTurtleTracker passToBackEnd() {
     Map<Integer, BackEndTurtle> backEndAllTurtles = new HashMap<>();
-    for (int i = 1; i <= allTurtles.size(); i++) {
-      backEndAllTurtles.put(i, new BackEndTurtle(allTurtles.get(i)));
+    for (Integer id : allTurtles.keySet()) {
+      backEndAllTurtles.put(id, new BackEndTurtle(allTurtles.get(id), id));
     }
     return new BackEndTurtleTracker(backEndAllTurtles, new ArrayList<>(activeTurtles), this);
   }

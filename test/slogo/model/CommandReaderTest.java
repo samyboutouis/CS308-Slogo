@@ -9,9 +9,11 @@ import slogo.Command;
 import slogo.BackEndTurtle;
 import slogo.turtlecommands.HomeCommand;
 import slogo.turtlecommands.MovementCommand;
+import slogo.turtlecommands.SetBackgroundCommand;
 import slogo.turtlecommands.SetPaletteCommand;
+import slogo.turtlecommands.SetPenColorCommand;
 import slogo.turtlecommands.SetPenSizeCommand;
-import slogo.turtlecommands.TellCommand;
+import slogo.turtlecommands.SetShapeCommand;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -114,6 +116,12 @@ public class CommandReaderTest {
     assertEquals(List.of(1.0,1.0), myReader.testParseInput("pendown pendown?"));
     assertEquals(List.of(1.0,1.0), myReader.testParseInput("st showing?"));
     assertEquals(List.of(0.0,0.0), myReader.testParseInput("ht showing?"));
+
+    assertEquals(List.of(3.0,3.0), myReader.testParseInput("setpc 3 pc"));
+    assertEquals(List.of(4.0,4.0), myReader.testParseInput("setsh 4 sh"));
+
+    assertEquals(List.of(4.0,5.0), myReader.testParseInput("tell [ 0 1 2 3 4 ] turtles"));
+    assertEquals(List.of(4.0, 2.0), myReader.testParseInput("tell [ 0 1 2 3 4 ] ask [ 2 ] [ id ] "));
   }
 
   @Test
@@ -167,6 +175,8 @@ public class CommandReaderTest {
     assertEquals("felix:  [ sum 50 50 ] [ fd 50 ]\n"
         + "example:  [ :x ] [ if greater? :x 10 [ example difference :x 10 fd 50 ] ]\n", ret);
   }
+
+
 
   // SECTION
   // test that command objects created are correct
@@ -224,6 +234,9 @@ public class CommandReaderTest {
     setUpTracker();
     assertTrue(getAllCommands(myReader.parseInput("setpalette 1 0 100 255", tracker).getAllTurtleCommands()).get(0) instanceof SetPaletteCommand);
     assertTrue(getAllCommands(myReader.parseInput("setpensize 10", tracker).getAllTurtleCommands()).get(0) instanceof SetPenSizeCommand);
+    assertTrue(getAllCommands(myReader.parseInput("setbg 1", tracker).getAllTurtleCommands()).get(0) instanceof SetBackgroundCommand);
+    assertTrue(getAllCommands(myReader.parseInput("setpc 1", tracker).getAllTurtleCommands()).get(0) instanceof SetPenColorCommand);
+    assertTrue(getAllCommands(myReader.parseInput("setsh 1", tracker).getAllTurtleCommands()).get(0) instanceof SetShapeCommand);
   }
 
   // SECTION
@@ -254,6 +267,19 @@ public class CommandReaderTest {
     } catch(IllegalArgumentException e){
       assertEquals(e.getMessage(), "Command felix undefined!");
     }
+  }
 
+  @Test
+  void testClassCastInMakeUserInstructionCommand () {
+      assertEquals(List.of(0.0), myReader.testParseInput("to felix [ :good sum 50 50 ] [ fd 50 ]"));
+  }
+  
+  @Test
+  void testMakeVariableNoVariable() {
+    try{
+      myReader.testParseInput("make 10 10");
+    } catch(IllegalArgumentException e){
+      assertEquals(e.getMessage(), "make/set was not given a variable");
+    }
   }
 }

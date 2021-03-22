@@ -4,18 +4,13 @@ import java.util.List;
 import slogo.model.SlogoNode;
 import slogo.model.BackEndTurtleTracker;
 
-public class IfNode extends SlogoNode {
+public class IfNode extends BracketNode {
 
   private List<SlogoNode> parameters;
 
   public IfNode(int numParameters) {
     super(numParameters); // dummy value since isFull is overridden
     parameters = super.getParameters();
-  }
-
-  @Override
-  public boolean isFull() {
-    return !parameters.isEmpty() && parameters.get(parameters.size() - 1) instanceof ListEndNode;
   }
 
   @Override

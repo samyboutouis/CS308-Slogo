@@ -4,31 +4,23 @@ import java.util.List;
 import slogo.model.SlogoNode;
 import slogo.model.BackEndTurtleTracker;
 
-public class ForNode extends SlogoNode {
+public class ForNode extends BracketNode {
 
   private List<SlogoNode> parameters;
   private VariableNode variable;
-  private int brackets;
   private double forStart;
   private double forEnd;
   private double forIncrement;
-  private int firstEnd;
 
   public ForNode(int numParameters) {
-    super(
-        numParameters); // parameters being full determined by bracket, just like conditional node, so this is a dummy value
-    brackets = numParameters;
+    // parameters being full determined by bracket, just like conditional node, so this is a dummy value
+    super(numParameters);
     parameters = super.getParameters();
   }
 
   @Override
-  public boolean isFull() {
-    return !parameters.isEmpty() && checkBrackets();
-  }
-
-  @Override
   public double getReturnValue(BackEndTurtleTracker tracker) {
-    setFirstEnd();
+    int firstEnd = super.getFirstEnd();
     getIndexing(tracker);
     double ret = 0;
     for (double i = forStart; i <= forEnd; i = i + forIncrement) {
@@ -52,25 +44,5 @@ public class ForNode extends SlogoNode {
     forStart = parameters.get(2).getReturnValue(tracker);
     forEnd = parameters.get(3).getReturnValue(tracker);
     forIncrement = parameters.get(4).getReturnValue(tracker);
-  }
-
-  private void setFirstEnd() {
-    for (int i = 0; i < parameters.size(); i++) {
-      if (parameters.get(i) instanceof ListEndNode) {
-        firstEnd = i;
-        break;
-      }
-    }
-  }
-
-  // check to see if we've seen brackets number of list end nodes
-  private boolean checkBrackets() {
-    int seen = 0;
-    for (SlogoNode node : parameters) {
-      if (node instanceof ListEndNode) {
-        seen++;
-      }
-    }
-    return seen == brackets;
   }
 }

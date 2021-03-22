@@ -95,17 +95,14 @@ public class BackEndTurtleTracker implements SafeBackEndTurtleTracker {
   // only used in AskWithNode, to temporarily set the active turtle list to a specific turtle, and run
   // the logic expression to see if that specific turtle satisfies the requirement in AskWith.
   public void checkOneTurtle(int id) {
-    clearActiveTurtles();
+    activeTurtles.clear();
     activeTurtles.add(id);
   }
 
-  // clear the list of activeTurtles
-  public void clearActiveTurtles() {
-    activeTurtles.clear();
-  }
-
   public void setTellList(List<Integer> tellList) {
+    // clear the previous active list of turtles, to prepare room for new list of active turtles.
     activeTurtles.clear();
+    setCurr(tellList.get(0)); // default curr is first id
     for (Integer i : tellList) {
       addTurtle(getBasicTurtle(i));
     }
@@ -115,6 +112,7 @@ public class BackEndTurtleTracker implements SafeBackEndTurtleTracker {
 
   public void setAskList(List<Integer> askList) {
     activeTurtles.clear(); // tellActiveTurtles should have this handled
+    setCurr(askList.get(0)); // default curr is first id
     for (Integer i : askList) {
       addTurtle(getBasicTurtle(i));
     }
@@ -142,6 +140,7 @@ public class BackEndTurtleTracker implements SafeBackEndTurtleTracker {
     return activeTurtles.iterator();
   }
 
+  // used by turtleCommandNode loop to access the turtle at this index of activeTurtles
   public BackEndTurtle getTurtle(int index) {
     // not possible for a turtle to not be in allTurtles when using iterator
     return allTurtles.get(index);
@@ -170,7 +169,7 @@ public class BackEndTurtleTracker implements SafeBackEndTurtleTracker {
   }
 
   private BackEndTurtle getBasicTurtle(int id) {
-    return new BackEndTurtle(0, 0, 0, true, true, id);
+    return allTurtles.getOrDefault(id, new BackEndTurtle(0, 0, 0, true, true, id));
   }
 
 //  tell [ 1 2 3 ]

@@ -11,12 +11,6 @@ public class YCoordinateNode extends TurtleCommandNode {
     super(parameter);
   }
 
-  /*@Override
-  public double getReturnValue(List<Command> commands) {
-    commands.add(new DisplayCommand("Y Coordinate: "+turtle.getY()));
-    return turtle.getY();
-  }*/
-
   @Override
   public double getReturnValue(BackEndTurtleTracker tracker) {
     return super.loopThroughTurtles(tracker, new ArrayList<>(), (currTurtle, values) -> {
