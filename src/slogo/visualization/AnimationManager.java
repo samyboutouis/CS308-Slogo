@@ -7,7 +7,8 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.util.Duration;
 import slogo.Command;
-import slogo.FrontEndTurtleTracker;
+import slogo.visualization.turtle.FrontEndTurtle;
+import slogo.visualization.turtle.FrontEndTurtleTracker;
 
 public class AnimationManager {
 

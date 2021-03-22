@@ -1,4 +1,4 @@
-package slogo.visualization;
+package slogo.visualization.turtle;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -1,4 +1,4 @@
-package slogo.visualization;
+package slogo.visualization.displays;
 
 import java.lang.reflect.Method;
 import java.util.List;
@@ -13,9 +13,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-import slogo.FrontEndTurtleTracker;
-import slogo.Turtle;
-import slogo.controller.FrontEndController;
+import slogo.visualization.turtle.Turtle;
+import slogo.visualization.FrontEndController;
+import slogo.visualization.ButtonFactory;
+import slogo.visualization.turtle.FrontEndTurtleTracker;
+import slogo.visualization.observers.TurtleObserver;
 
 public class TurtleStateDisplay implements TurtleObserver {
 

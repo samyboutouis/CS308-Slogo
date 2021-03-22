@@ -1,7 +1,7 @@
 package slogo.turtlecommands;
 
 import slogo.Command;
-import slogo.visualization.FrontEndTurtle;
+import slogo.visualization.turtle.FrontEndTurtle;
 
 // handles TOWARDS
 public class SetTowardsCommand implements Command {

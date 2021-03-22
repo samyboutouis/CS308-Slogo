@@ -1,4 +1,4 @@
-package slogo.visualization;
+package slogo.visualization.displays;
 
 import java.util.List;
 import java.util.function.UnaryOperator;
@@ -8,7 +8,9 @@ import javafx.scene.control.TextFormatter.Change;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import slogo.controller.FrontEndController;
+import slogo.visualization.FrontEndController;
+import slogo.visualization.ButtonFactory;
+import slogo.visualization.Workspace;
 
 public class ButtonDisplay extends ScrollingDisplay {
   private static final String TITLE = "ButtonsTitle";

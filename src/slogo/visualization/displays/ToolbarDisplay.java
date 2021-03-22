@@ -1,4 +1,4 @@
-package slogo.visualization;
+package slogo.visualization.displays;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,9 +21,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.paint.Color;
-import slogo.FrontEndTurtleTracker;
 import slogo.controller.Controller;
-import slogo.controller.FrontEndController;
+import slogo.visualization.FrontEndController;
+import slogo.visualization.ButtonFactory;
+import slogo.visualization.turtle.FrontEndTurtleTracker;
+import slogo.visualization.observers.XMLObserver;
 
 public class ToolbarDisplay implements XMLObserver {
 

@@ -1,4 +1,4 @@
-package slogo;
+package slogo.visualization.turtle;
 
 import java.io.File;
 import java.util.List;

@@ -1,6 +1,5 @@
-package slogo;
+package slogo.visualization.turtle;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -10,11 +9,12 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 import javafx.scene.paint.Color;
+import slogo.BackEndTurtle;
+import slogo.SafeFrontEndTurtleTracker;
 import slogo.model.BackEndTurtleTracker;
-import slogo.visualization.BackgroundObserver;
-import slogo.visualization.FrontEndTurtle;
-import slogo.visualization.PaletteDisplay;
-import slogo.visualization.TurtleObserver;
+import slogo.visualization.observers.BackgroundObserver;
+import slogo.visualization.observers.TurtleObserver;
+import slogo.visualization.displays.PaletteDisplay;
 
 public class FrontEndTurtleTracker implements SafeFrontEndTurtleTracker {
 

@@ -2,7 +2,7 @@ package slogo.turtlecommands;
 
 import slogo.Command;
 import slogo.SafeFrontEndTurtleTracker;
-import slogo.visualization.FrontEndTurtle;
+import slogo.visualization.turtle.FrontEndTurtle;
 
 public class SetPaletteCommand implements Command {
 

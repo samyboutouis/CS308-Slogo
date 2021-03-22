@@ -5,9 +5,17 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import slogo.FrontEndTurtleTracker;
 import slogo.controller.Controller;
-import slogo.controller.FrontEndController;
+import slogo.visualization.displays.ButtonDisplay;
+import slogo.visualization.displays.HistoryDisplay;
+import slogo.visualization.displays.PaletteDisplay;
+import slogo.visualization.displays.TerminalDisplay;
+import slogo.visualization.displays.ToolbarDisplay;
+import slogo.visualization.displays.TurtleDisplay;
+import slogo.visualization.displays.TurtleStateDisplay;
+import slogo.visualization.displays.UserCommandsDisplay;
+import slogo.visualization.displays.VariablesDisplay;
+import slogo.visualization.turtle.FrontEndTurtleTracker;
 
 public class Workspace {
 

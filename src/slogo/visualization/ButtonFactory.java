@@ -6,9 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import slogo.SafeTurtle;
-import slogo.Turtle;
-import slogo.controller.FrontEndController;
+import slogo.visualization.turtle.Turtle;
 
 public class ButtonFactory {
 

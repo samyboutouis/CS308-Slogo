@@ -6,7 +6,12 @@ import java.util.List;
 import java.util.Map;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import slogo.controller.FrontEndController;
+import slogo.visualization.displays.ButtonDisplay;
+import slogo.visualization.displays.HistoryDisplay;
+import slogo.visualization.displays.PaletteDisplay;
+import slogo.visualization.displays.TurtleStateDisplay;
+import slogo.visualization.displays.UserCommandsDisplay;
+import slogo.visualization.displays.VariablesDisplay;
 
 public class ViewLayout {
 

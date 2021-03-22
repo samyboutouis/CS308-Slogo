@@ -1,4 +1,4 @@
-package slogo.visualization;
+package slogo.visualization.observers;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package slogo.visualization;
+package slogo.visualization.turtle;
 
 import java.io.File;
 import java.util.List;
@@ -8,9 +8,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import slogo.FrontEndTurtleTracker;
 import slogo.SafeTurtle;
-import slogo.Turtle;
 
 public class FrontEndTurtle implements Turtle, SafeTurtle {
 

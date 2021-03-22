@@ -1,4 +1,4 @@
-package slogo.visualization;
+package slogo.visualization.displays;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -19,9 +19,11 @@ import javafx.scene.layout.Priority;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
-import slogo.FrontEndTurtleTracker;
 import slogo.controller.Controller;
 import slogo.model.BackEndTurtleTracker;
+import slogo.visualization.AnimationManager;
+import slogo.visualization.turtle.FrontEndTurtle;
+import slogo.visualization.turtle.FrontEndTurtleTracker;
 
 public class TerminalDisplay {
 

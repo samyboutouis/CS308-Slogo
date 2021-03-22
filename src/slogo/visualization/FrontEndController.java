@@ -1,4 +1,4 @@
-package slogo.controller;
+package slogo.visualization;
 
 import java.io.File;
 import javafx.scene.control.Alert;
@@ -9,13 +9,14 @@ import javafx.scene.control.TextInputDialog;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
-import slogo.FrontEndTurtleTracker;
+import slogo.controller.Controller;
+import slogo.controller.XMLCreator;
+import slogo.controller.XMLParser;
+import slogo.visualization.turtle.FrontEndTurtleTracker;
 import slogo.Main;
-import slogo.Turtle;
-import slogo.visualization.ButtonFactory;
-import slogo.visualization.FrontEndTurtle;
-import slogo.visualization.PaletteDisplay;
-import slogo.visualization.Workspace;
+import slogo.visualization.turtle.Turtle;
+import slogo.visualization.turtle.FrontEndTurtle;
+import slogo.visualization.displays.PaletteDisplay;
 
 public class FrontEndController {
   private static final String INITIAL_DIRECTORY = "src/resources/preferences";
