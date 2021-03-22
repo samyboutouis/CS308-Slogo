@@ -68,4 +68,11 @@ public class TerminalDisplayTest extends DukeApplicationTest {
     clickOn(runButton);
     assertEquals("fd a", terminalTextArea.getText());
   }
+
+  @Test
+  void testMultipleTurtles(){
+    writeTo(terminalTextArea, "tell [ 1 2 3 ] fd 100");
+    clickOn(runButton);
+    assertEquals("", terminalTextArea.getText());
+  }
 }
