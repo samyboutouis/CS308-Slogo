@@ -27,6 +27,12 @@ import slogo.visualization.turtle.FrontEndTurtleTracker;
 
 public class TerminalDisplay {
 
+  private static final ResourceBundle idBundle = ResourceBundle
+      .getBundle("resources/stylesheets/CSS_IDs");
+  private static final ResourceBundle resourceBundle = ResourceBundle
+      .getBundle("resources/stylesheets/English");
+  private static final ResourceBundle errorBundle = ResourceBundle
+      .getBundle("resources/stylesheets/EnglishErrors");
   private static final String LIBRARIES_PATH = "src/resources/libraries";
   private static final String TERMINAL_RUN_BUTTON = "TerminalRunButton";
   private static final String TERMINAL_SAVE_BUTTON = "TerminalSaveButton";
@@ -41,9 +47,6 @@ public class TerminalDisplay {
   private static final int BUTTON_WIDTH = 80;
 
   private final Scene scene;
-  private final ResourceBundle resourceBundle;
-  private final ResourceBundle idBundle;
-  private final ResourceBundle errorBundle;
   private final GridPane pane;
   private final HistoryDisplay historyDisplay;
   private final VariablesDisplay variablesDisplay;
@@ -57,12 +60,10 @@ public class TerminalDisplay {
   private Button loadButton;
   private boolean ctrlPressed;
 
-  public TerminalDisplay(String resourcePackage, Scene scene, HistoryDisplay historyDisplay,
+  public TerminalDisplay(Scene scene, HistoryDisplay historyDisplay,
       FrontEndTurtleTracker frontEndTurtleTracker, VariablesDisplay variablesDisplay,
       UserCommandsDisplay userCommandsDisplay, Controller controller) {
 
-    pane = new GridPane();
-    pane.getStyleClass().add(DISPLAY_CLASS_NAME);
     this.scene = scene;
     this.historyDisplay = historyDisplay;
     this.variablesDisplay = variablesDisplay;
@@ -70,19 +71,13 @@ public class TerminalDisplay {
     this.turtleTracker = frontEndTurtleTracker;
     this.controller = controller;
 
-    pane.setMaxWidth(Double.MAX_VALUE);
-    pane.setMaxHeight(Double.MAX_VALUE);
+
+    pane = new GridPane();
+    pane.getStyleClass().add(DISPLAY_CLASS_NAME);
+    pane.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 
     pane.setHgap(PADDING_LENGTH);
     pane.setPadding(new Insets(PADDING_LENGTH, PADDING_LENGTH, PADDING_LENGTH, PADDING_LENGTH));
-
-    String language = "English";
-    this.resourceBundle = ResourceBundle
-        .getBundle(String.format("%s/%s/%s", resourcePackage, "languages", language));
-    this.idBundle = ResourceBundle
-        .getBundle(String.format("%s/%s/%s", resourcePackage, "stylesheets", "CSS_IDs"));
-    this.errorBundle = ResourceBundle
-        .getBundle(String.format("%s/%s/%s", resourcePackage, "languages", language + "Errors"));
 
     for (int i = 0; i < COLUMN_COUNT; i++) {
       ColumnConstraints col = new ColumnConstraints();

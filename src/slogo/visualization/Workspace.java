@@ -59,7 +59,7 @@ public class Workspace {
     TurtleStateDisplay turtleStateDisplay = new TurtleStateDisplay(frontEndController,
         frontEndTurtleTracker);
     TurtleDisplay turtleDisplay = new TurtleDisplay(frontEndTurtleTracker);
-    terminalDisplay = new TerminalDisplay(RESOURCE_PACKAGE, scene, historyDisplay,
+    terminalDisplay = new TerminalDisplay(scene, historyDisplay,
         frontEndTurtleTracker, variablesDisplay, userCommandsDisplay, controller);
     ToolbarDisplay toolbarDisplay = new ToolbarDisplay(RESOURCE_PACKAGE, controller,
         frontEndController, frontEndTurtleTracker);
