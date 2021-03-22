@@ -11,29 +11,30 @@ import slogo.FrontEndTurtleTracker;
 
 public class AnimationManager {
 
+  private static final int FPS = 100;
+  private static final double SECOND_DELAY = 1.0 / FPS;
+
   private final Map<Integer, List<Command>> commands;
   private final FrontEndTurtleTracker turtleTracker;
-  private int frameIndex;
-  private Iterator<Integer> turtleIterator;
-  private int turtleID;
 
   private Timeline animation;
+  private Iterator<Integer> turtleIterator;
+  private int frameIndex;
+  private int turtleID;
 
   public AnimationManager(Map<Integer, List<Command>> map, FrontEndTurtleTracker frontEndTurtleTracker) {
     this.commands = map;
     this.turtleTracker = frontEndTurtleTracker;
+
     setupTimeline();
   }
 
   private void setupTimeline() {
-    int FPS = 100;
-    double secondDelay = 1.0 / FPS;
-
     frameIndex = -1;
     turtleIterator = commands.keySet().iterator();
     addTurtles();
 
-    KeyFrame keyframe = new KeyFrame(Duration.seconds(secondDelay), e -> {
+    KeyFrame keyframe = new KeyFrame(Duration.seconds(SECOND_DELAY), e -> {
       stepIndex();
     });
 
