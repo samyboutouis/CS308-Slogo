@@ -14,7 +14,8 @@ public class PaletteDisplay extends ScrollingDisplay {
   private final static String PALETTE_BOX_ID = "PaletteBoxID";
   private final static String PALETTE_TAG_ID = "PaletteTagID";
 
-  private final static String[] DEFAULT_PALETTE_TAG_PROPERTIES = {"Default1", "Default2", "Default3", "Default4", "Default5"};
+  private final static String[] DEFAULT_PALETTE_TAG_PROPERTIES = {"Default1", "Default2",
+      "Default3", "Default4", "Default5", "Default6"};
 
   private final static int PALETTE_TAG_ROW_COUNT = 1;
   private final static int PALETTE_TAG_COL_COUNT = 6;
@@ -44,7 +45,8 @@ public class PaletteDisplay extends ScrollingDisplay {
   }
 
   private void addNewPaletteTag(int index, int r, int g, int b, String imageName) {
-    CustomGridPane paletteTag = new CustomGridPane(PALETTE_TAG_ROW_COUNT, PALETTE_TAG_COL_COUNT, PALETTE_TAG_PADDING_LENGTH);
+    CustomGridPane paletteTag = new CustomGridPane(PALETTE_TAG_ROW_COUNT, PALETTE_TAG_COL_COUNT,
+        PALETTE_TAG_PADDING_LENGTH);
     paletteTag.setId(idBundle.getString(PALETTE_TAG_ID));
 
     Label indexLabel = new Label();
@@ -101,12 +103,12 @@ public class PaletteDisplay extends ScrollingDisplay {
     return (Color) paletteCircle.getFill();
   }
 
-  public int getIndexFromColor(Color color){
-    for(int i = 0; i < paletteBox.getChildren().size(); i++){
+  public int getIndexFromColor(Color color) {
+    for (int i = 0; i < paletteBox.getChildren().size(); i++) {
       CustomGridPane paletteTag = (CustomGridPane) paletteBox.getChildren().get(i);
       Circle paletteCircle = (Circle) paletteTag.getChildren().get(1);
       Color paletteColor = (Color) paletteCircle.getFill();
-      if(paletteColor == color){
+      if (paletteColor == color) {
         return i + 1;
       }
     }
@@ -123,12 +125,12 @@ public class PaletteDisplay extends ScrollingDisplay {
     return String.format("resources/%s", paletteLabel.getText());
   }
 
-  public int getIndexFromImage(String path){
-    for(int i = 0; i < paletteBox.getChildren().size(); i++){
+  public int getIndexFromImage(String path) {
+    for (int i = 0; i < paletteBox.getChildren().size(); i++) {
       CustomGridPane paletteTag = (CustomGridPane) paletteBox.getChildren().get(i);
       Label paletteLabel = (Label) paletteTag.getChildren().get(2);
       String paletteValue = paletteLabel.getText();
-      if(paletteValue.equals(path)){
+      if (paletteValue.equals(path)) {
         return i + 1;
       }
     }
