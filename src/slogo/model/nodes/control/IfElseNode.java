@@ -4,26 +4,19 @@ import java.util.List;
 import slogo.model.SlogoNode;
 import slogo.model.BackEndTurtleTracker;
 
-public class IfElseNode extends SlogoNode {
+public class IfElseNode extends BracketNode {
 
   private List<SlogoNode> parameters;
-  private int brackets; // how many pairs of brackets to expect
 
   public IfElseNode(int numParameters) {
-    super(numParameters); // dummy value since isFull is overridden
-    brackets = numParameters;
+    super(numParameters); // dummy value since isFull is overridden in bracket node
     parameters = super.getParameters();
-  }
-
-  @Override
-  public boolean isFull() {
-    return !parameters.isEmpty() && checkBrackets();
   }
 
   @Override
   public double getReturnValue(BackEndTurtleTracker tracker) {
     // assume expr is just one tree
-    int firstEnd = getFirstEnd(); // index of first end bracket
+    int firstEnd = super.getFirstEnd(); // index of first end bracket
     int start = 0;
     int end = 0;
     double ret = 0;
@@ -41,27 +34,5 @@ public class IfElseNode extends SlogoNode {
       }
     }
     return ret;
-  }
-
-  private int getFirstEnd() {
-    int firstEnd = 0;
-    for (int i = 0; i < parameters.size(); i++) {
-      if (parameters.get(i) instanceof ListEndNode) {
-        firstEnd = i;
-        break;
-      }
-    }
-    return firstEnd;
-  }
-
-  // check to see if we've seen brackets number of list end nodes
-  private boolean checkBrackets() {
-    int seen = 0;
-    for (SlogoNode node : parameters) {
-      if (node instanceof ListEndNode) {
-        seen++;
-      }
-    }
-    return seen == brackets;
   }
 }

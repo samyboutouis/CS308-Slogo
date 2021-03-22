@@ -6,7 +6,7 @@ import slogo.model.SlogoNode;
 public abstract class BracketNode extends SlogoNode {
 
   private List<SlogoNode> parameters;
-  private int brackets;
+  private int brackets; // how many pairs of brackets to expect
 
   public BracketNode(int numParameters) {
     super(numParameters);
