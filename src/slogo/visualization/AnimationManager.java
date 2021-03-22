@@ -63,6 +63,7 @@ public class AnimationManager {
     List<Command> commandList = commands.get(turtleID);
     if (frameIndex < commandList.size()) {
       commandList.get(frameIndex).doCommand(turtle);
+      turtleTracker.notifyUpdateTurtleState(turtleID);
     }
     frameIndex++;
   }

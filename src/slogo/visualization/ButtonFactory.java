@@ -9,7 +9,6 @@ import javafx.scene.image.ImageView;
 import slogo.visualization.turtle.Turtle;
 
 public class ButtonFactory {
-
   private static final int ICON_WIDTH = 30;
   private static final int ICON_HEIGHT = 30;
   private static final String DEFAULT_RESOURCE_FOLDER = "resources/";
@@ -17,6 +16,7 @@ public class ButtonFactory {
   private static final String ID_PROPERTY = "stylesheets/CSS_IDs";
   private static final String METHODS_PROPERTY = "reflection/ButtonMethods";
   private static final String LABELS_PROPERTY = "reflection/ButtonText";
+  private static final String ERROR = "Improper configuration";
 
   private final ResourceBundle imageBundle;
   private final ResourceBundle idBundle;
@@ -42,7 +42,7 @@ public class ButtonFactory {
             .getDeclaredMethod(commandBundle.getString(property));
         m.invoke(controller);
       } catch (Exception e) {
-        throw new RuntimeException("Improper configuration", e);
+        throw new RuntimeException(ERROR, e);
       }
     });
     return button;
@@ -56,7 +56,7 @@ public class ButtonFactory {
             .getDeclaredMethod(commandBundle.getString(property), Button.class, Turtle.class);
         m.invoke(controller, button, turtle);
       } catch (Exception e) {
-        throw new RuntimeException("Improper configuration", e);
+        throw new RuntimeException(ERROR, e);
       }
     });
     return button;
@@ -70,7 +70,7 @@ public class ButtonFactory {
             .getDeclaredMethod(commandBundle.getString(property), Button.class);
         m.invoke(controller, button);
       } catch (Exception e) {
-        throw new RuntimeException("Improper configuration", e);
+        throw new RuntimeException(ERROR, e);
       }
     });
     return button;
@@ -84,7 +84,7 @@ public class ButtonFactory {
             .getDeclaredMethod(commandBundle.getString(property), TextField.class);
         m.invoke(controller, textField);
       } catch (Exception e) {
-        throw new RuntimeException("Improper configuration", e);
+        throw new RuntimeException(ERROR, e);
       }
     });
     return button;

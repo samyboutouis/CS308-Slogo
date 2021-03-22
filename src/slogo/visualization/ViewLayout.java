@@ -23,7 +23,6 @@ public class ViewLayout {
 
   private final List<ViewContainer> viewContainers = new ArrayList<>();
   private final CustomGridPane pane;
-  private final FrontEndController frontEndController;
   private final HistoryDisplay historyDisplay;
   private final VariablesDisplay variablesDisplay;
   private final UserCommandsDisplay userCommandsDisplay;
@@ -34,11 +33,9 @@ public class ViewLayout {
 
   public ViewLayout(HistoryDisplay historyDisplay, VariablesDisplay variablesDisplay,
       UserCommandsDisplay userCommandsDisplay, PaletteDisplay paletteDisplay,
-      ButtonDisplay buttonDisplay, TurtleStateDisplay turtleStateDisplay,
-      FrontEndController frontEndController) {
+      ButtonDisplay buttonDisplay, TurtleStateDisplay turtleStateDisplay) {
 
     this.pane = new CustomGridPane(GRID_ROW_COUNT, GRID_COLUMN_COUNT, PADDING_LENGTH);
-    this.frontEndController = frontEndController;
     this.historyDisplay = historyDisplay;
     this.variablesDisplay = variablesDisplay;
     this.userCommandsDisplay = userCommandsDisplay;
