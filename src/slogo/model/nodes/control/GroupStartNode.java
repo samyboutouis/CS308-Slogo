@@ -26,7 +26,6 @@ public class GroupStartNode extends SlogoNode {
 
   @Override
   public double getReturnValue(BackEndTurtleTracker tracker) {
-    System.out.println("Felix");
     command = parameters.get(0);
     getArguments(tracker);
     double ret = command.getReturnValue(tracker);
@@ -58,7 +57,6 @@ public class GroupStartNode extends SlogoNode {
 
   private void getArguments(BackEndTurtleTracker tracker) {
     arguments = command.getNumParameters();
-    System.out.println(parameters.size() + " + arguments: "+ arguments);
     if( (parameters.size() - 2) % arguments != 0) {
       // subtract off command node and group end
       throw new IllegalArgumentException("Grouping does not have correct multiple of arguments!");
