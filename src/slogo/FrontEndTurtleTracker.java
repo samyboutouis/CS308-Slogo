@@ -147,7 +147,7 @@ public class FrontEndTurtleTracker implements SafeFrontEndTurtleTracker {
     }
   }
 
-  public static <T, E> Set<T> getKeyByValue(Map<T, E> map, E value) {
+  public <T, E> Set<T> getKeyByValue(Map<T, E> map, E value) {
     return map.entrySet()
         .stream()
         .filter(entry -> Objects.equals(entry.getValue(), value))
@@ -159,7 +159,7 @@ public class FrontEndTurtleTracker implements SafeFrontEndTurtleTracker {
     return allTurtles.get(id);
   }
 
-  private List<Integer> getTurtleIDs() {
+  public List<Integer> getTurtleIDs() {
     return allTurtles.keySet()
         .stream()
         .collect(Collectors.toUnmodifiableList());
@@ -175,5 +175,13 @@ public class FrontEndTurtleTracker implements SafeFrontEndTurtleTracker {
 
   public boolean isEmpty() {
     return allTurtles.isEmpty();
+  }
+
+  public Color getColorIndex(int index) {
+    return paletteDisplay.getColorFromIndex(index);
+  }
+
+  public Color getBackgroundColor() {
+    return backgroundObservers.get(0).getBackgroundColor();
   }
 }
