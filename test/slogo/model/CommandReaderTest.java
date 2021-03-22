@@ -257,6 +257,10 @@ public class CommandReaderTest {
     } catch(IllegalArgumentException e){
       assertEquals(e.getMessage(), "Command felix undefined!");
     }
+  }
 
+  @Test
+  void testClassCastInMakeUserInstructionCommand () {
+      assertEquals(List.of(0.0), myReader.testParseInput("to felix [ :good sum 50 50 ] [ fd 50 ]"));
   }
 }
