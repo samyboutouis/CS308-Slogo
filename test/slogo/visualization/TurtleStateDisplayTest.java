@@ -100,6 +100,17 @@ public class TurtleStateDisplayTest extends DukeApplicationTest {
     assertEquals(5.0, lineWidth);
   }
 
+  @Test
+  void testPenStatus() {
+    selectTurtleView();
+    runCommand("cs");
+    Button penStatus = lookup("#" + idBundle.getString("PenUpButton")).query();
+    clickOn(penStatus);
+    assertEquals(penStatus.getId(), "PenDownButton");
+    clickOn(penStatus);
+    assertEquals(penStatus.getId(), "PenUpButton");
+  }
+
   private void addTurtle() {
     Button addTurtleButton = lookup("#" + idBundle.getString("AddTurtleButton")).query();
     clickOn(addTurtleButton);
