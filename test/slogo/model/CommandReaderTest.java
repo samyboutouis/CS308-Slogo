@@ -293,4 +293,13 @@ public class CommandReaderTest {
       assertEquals(e.getMessage(), "make/set was not given a variable");
     }
   }
+
+  @Test
+  void testGroupingBadMultiple() {
+    try{
+      myReader.testParseInput("( sum 10 10 10 )");
+    } catch(IllegalArgumentException e){
+      assertEquals(e.getMessage(), "Grouping does not have correct multiple of arguments!");
+    }
+  }
 }
