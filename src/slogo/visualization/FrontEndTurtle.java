@@ -36,7 +36,6 @@ public class FrontEndTurtle implements Turtle, SafeTurtle {
     setDefaultImage();
     isActive = true;
     turtleTracker = frontEndTurtleTracker;
-    shapeIndex = 3;
   }
 
   public void forward(double pixels) {
