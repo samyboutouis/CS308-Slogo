@@ -1,5 +1,6 @@
 package slogo.visualization;
 
+import java.util.ResourceBundle;
 import java.util.Set;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -7,9 +8,12 @@ import javafx.scene.layout.GridPane;
 
 public class ViewContainer {
 
+  private static final ResourceBundle RESOURCE_BUNDLE = ResourceBundle
+      .getBundle("resources/languages/English");
   private static final String VIEW_CONTAINER_ID = "ViewContainer";
   private static final String VIEW_CONTAINER_COMBOBOX_ID = "ViewContainerComboBox";
   private static final String VIEW_CONTAINER_BUTTON_ID = "ViewContainerCloseButton";
+  private static final String CLOSE_BUTTON = "CloseButton";
   private static final int GRID_ROW_COUNT = 10;
   private static final int GRID_COLUMN_COUNT = 6;
   private static final int PADDING_LENGTH = 10;
@@ -31,37 +35,37 @@ public class ViewContainer {
     pane.getStyleClass().add(VIEW_CONTAINER_ID);
 
     comboBox = new ComboBox<>();
-    comboBox.setId(VIEW_CONTAINER_COMBOBOX_ID);
-    comboBox.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+    closeButton = new Button();
 
-    closeButton = new Button("-");
+    initializeCloseButton();
+    initializeComboBox();
+    applyCloseButtonLogic();
+  }
+
+  private void initializeCloseButton(){
+    closeButton.setText(RESOURCE_BUNDLE.getString(CLOSE_BUTTON));
     closeButton.setId(VIEW_CONTAINER_BUTTON_ID);
     closeButton.setMaxSize(BUTTON_LENGTH, BUTTON_LENGTH);
-
-    pane.add(comboBox, 0, 0, 5, 1);
     pane.add(closeButton, 5, 0, 1, 1);
-
-    initializeComboBox();
-    initializeCloseButton();
   }
 
   private void initializeComboBox() {
+    comboBox.setId(VIEW_CONTAINER_COMBOBOX_ID);
+    comboBox.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+    pane.add(comboBox, 0, 0, 5, 1);
+
     for (String viewName : viewNames) {
       comboBox.getItems().add(viewName);
     }
-    comboBox.setOnAction(event -> handleClick(comboBox.getValue()));
+    applyComboBoxLogic();
   }
 
-  private void initializeCloseButton() {
-    closeButton.setOnAction(e -> handleCloseButton());
+  private void applyCloseButtonLogic() {
+    closeButton.setOnAction(e -> viewLayout.updateViewLayouts(containerIndex, null));
   }
 
-  private void handleClick(String viewName) {
-    viewLayout.updateViewLayouts(containerIndex, viewName);
-  }
-
-  private void handleCloseButton() {
-    viewLayout.updateViewLayouts(containerIndex, null);
+  private void applyComboBoxLogic() {
+    comboBox.setOnAction(e -> viewLayout.updateViewLayouts(containerIndex, comboBox.getValue()));
   }
 
   public void updateComboBox(String title) {
