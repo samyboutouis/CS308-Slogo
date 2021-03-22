@@ -1,4 +1,4 @@
-package slogo.visualization;
+package slogo.visualization.displays;
 
 import java.util.ResourceBundle;
 import javafx.geometry.Insets;
@@ -9,6 +9,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
+import slogo.visualization.Workspace;
 
 public class ScrollingDisplay {
 

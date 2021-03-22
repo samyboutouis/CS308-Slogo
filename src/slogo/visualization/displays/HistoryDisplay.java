@@ -1,9 +1,9 @@
-package slogo.visualization;
+package slogo.visualization.displays;
 
 import java.util.ResourceBundle;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.VBox;
+import slogo.visualization.Workspace;
 
 public class HistoryDisplay extends ScrollingDisplay {
 

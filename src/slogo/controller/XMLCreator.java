@@ -16,8 +16,8 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import slogo.FrontEndTurtleTracker;
-import slogo.SafeTurtle;
+import slogo.visualization.turtle.FrontEndTurtleTracker;
+import slogo.visualization.turtle.Turtle;
 import slogo.visualization.Workspace;
 
 public class XMLCreator {
@@ -77,7 +77,7 @@ public class XMLCreator {
     List<Integer> allTurtleIDs = turtleTracker.getTurtleIDs();
     for(int id : allTurtleIDs) {
       Element turtleTag = doc.createElement("Turtle");
-      SafeTurtle turtle = turtleTracker.getSafeTurtle(id);
+      Turtle turtle = turtleTracker.getTurtle(id);
       turtleTag.appendChild(createLineTag(turtle.getLineInfo()));
       addToDocument(turtleTag, "XPosition", String.valueOf(turtle.getX()));
       addToDocument(turtleTag, "YPosition", String.valueOf(turtle.getY()));

@@ -1,7 +1,7 @@
 package slogo.turtlecommands;
 
 import slogo.Command;
-import slogo.visualization.FrontEndTurtle;
+import slogo.visualization.turtle.FrontEndTurtle;
 
 public class ClearScreenCommand implements Command {
 

@@ -1,6 +1,7 @@
-package slogo.visualization;
+package slogo.visualization.observers;
 
 import javafx.scene.paint.Color;
+import slogo.visualization.turtle.FrontEndTurtle;
 
 public interface BackgroundObserver {
 

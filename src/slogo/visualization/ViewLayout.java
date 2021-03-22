@@ -6,7 +6,12 @@ import java.util.List;
 import java.util.Map;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import slogo.controller.FrontEndController;
+import slogo.visualization.displays.ButtonDisplay;
+import slogo.visualization.displays.HistoryDisplay;
+import slogo.visualization.displays.PaletteDisplay;
+import slogo.visualization.displays.TurtleStateDisplay;
+import slogo.visualization.displays.UserCommandsDisplay;
+import slogo.visualization.displays.VariablesDisplay;
 
 public class ViewLayout {
 
@@ -18,7 +23,6 @@ public class ViewLayout {
 
   private final List<ViewContainer> viewContainers = new ArrayList<>();
   private final CustomGridPane pane;
-  private final FrontEndController frontEndController;
   private final HistoryDisplay historyDisplay;
   private final VariablesDisplay variablesDisplay;
   private final UserCommandsDisplay userCommandsDisplay;
@@ -29,11 +33,9 @@ public class ViewLayout {
 
   public ViewLayout(HistoryDisplay historyDisplay, VariablesDisplay variablesDisplay,
       UserCommandsDisplay userCommandsDisplay, PaletteDisplay paletteDisplay,
-      ButtonDisplay buttonDisplay, TurtleStateDisplay turtleStateDisplay,
-      FrontEndController frontEndController) {
+      ButtonDisplay buttonDisplay, TurtleStateDisplay turtleStateDisplay) {
 
     this.pane = new CustomGridPane(GRID_ROW_COUNT, GRID_COLUMN_COUNT, PADDING_LENGTH);
-    this.frontEndController = frontEndController;
     this.historyDisplay = historyDisplay;
     this.variablesDisplay = variablesDisplay;
     this.userCommandsDisplay = userCommandsDisplay;
@@ -69,7 +71,10 @@ public class ViewLayout {
       }
     }
 
-    //initially set all panes invisible
+    setAllDisplaysInvisible();
+  }
+
+  private void setAllDisplaysInvisible(){
     historyDisplay.getPane().setVisible(false);
     variablesDisplay.getPane().setVisible(false);
     userCommandsDisplay.getPane().setVisible(false);

@@ -47,7 +47,7 @@
     <resources>
         <!-- external data files -->
         <resource>
-            <directory>data</directory>
+            <directory>src/resources</directory>
         </resource>
         <!-- internal resource files also need to be included, but not directly -->
         <resource>

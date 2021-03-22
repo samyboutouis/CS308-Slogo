@@ -1,4 +1,4 @@
-package slogo;
+package slogo.visualization.turtle;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,11 +9,12 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 import javafx.scene.paint.Color;
+import slogo.BackEndTurtle;
+import slogo.SafeFrontEndTurtleTracker;
 import slogo.model.BackEndTurtleTracker;
-import slogo.visualization.BackgroundObserver;
-import slogo.visualization.FrontEndTurtle;
-import slogo.visualization.PaletteDisplay;
-import slogo.visualization.TurtleObserver;
+import slogo.visualization.observers.BackgroundObserver;
+import slogo.visualization.observers.TurtleObserver;
+import slogo.visualization.displays.PaletteDisplay;
 
 public class FrontEndTurtleTracker implements SafeFrontEndTurtleTracker {
 
@@ -48,7 +49,7 @@ public class FrontEndTurtleTracker implements SafeFrontEndTurtleTracker {
     }
   }
 
-  private void notifyUpdateTurtleState(int id) {
+  public void notifyUpdateTurtleState(int id) {
     for (TurtleObserver turtleObserver : turtleObservers) {
       turtleObserver.updateTurtleState(id);
     }
@@ -155,7 +156,7 @@ public class FrontEndTurtleTracker implements SafeFrontEndTurtleTracker {
         .collect(Collectors.toSet());
   }
 
-  public SafeTurtle getSafeTurtle(int id) {
+  public Turtle getTurtle(int id) {
     return allTurtles.get(id);
   }
 
@@ -177,11 +178,15 @@ public class FrontEndTurtleTracker implements SafeFrontEndTurtleTracker {
     return allTurtles.isEmpty();
   }
 
-  public Color getColorIndex(int index) {
+  public Color getColorFromIndex(int index) {
     return paletteDisplay.getColorFromIndex(index);
   }
 
   public Color getBackgroundColor() {
     return backgroundObservers.get(0).getBackgroundColor();
+  }
+
+  public String getShapeFromIndex(int index) {
+    return paletteDisplay.getImagePathFromIndex(index);
   }
 }

@@ -1,7 +1,7 @@
 package slogo.turtlecommands;
 
 import slogo.Command;
-import slogo.visualization.FrontEndTurtle;
+import slogo.visualization.turtle.FrontEndTurtle;
 
 // handles SETXY and GOTO
 public class SetPositionCommand implements Command {

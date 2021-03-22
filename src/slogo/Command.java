@@ -1,6 +1,6 @@
 package slogo;
 
-import slogo.visualization.FrontEndTurtle;
+import slogo.visualization.turtle.FrontEndTurtle;
 
 public interface Command {
 

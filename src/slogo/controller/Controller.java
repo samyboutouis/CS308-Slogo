@@ -2,11 +2,10 @@ package slogo.controller;
 
 import java.util.Map;
 import java.util.ResourceBundle;
-import slogo.BackEndTurtle;
 import slogo.SafeBackEndTurtleTracker;
 import slogo.model.CommandReader;
 import slogo.model.BackEndTurtleTracker;
-import slogo.visualization.XMLObserver;
+import slogo.visualization.observers.XMLObserver;
 
 public class Controller {
 

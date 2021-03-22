@@ -1,4 +1,9 @@
-package slogo;
+package slogo.visualization.turtle;
+
+import java.io.File;
+import java.util.List;
+import java.util.Map;
+import javafx.scene.paint.Color;
 
 public interface Turtle {
 
@@ -35,4 +40,18 @@ public interface Turtle {
   void home();
 
   void clearScreen();
+
+  Color getPenColor();
+
+  void setPenColor(Color color);
+
+  double getPenThickness();
+
+  void setPenThickness(double width);
+
+  void setImage(File file);
+
+  List<Map<String, String>> getLineInfo();
+
+  boolean isActive();
 }
