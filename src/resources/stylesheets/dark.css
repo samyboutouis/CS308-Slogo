@@ -119,3 +119,7 @@
 #Slider {
   -fx-max-width: 100px;
 }
+
+#TurtlePaneID {
+  -fx-background-radius: 20px;
+}

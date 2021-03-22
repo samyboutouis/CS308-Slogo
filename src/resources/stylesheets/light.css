@@ -23,7 +23,6 @@
   -fx-background-color: #a9a9a9;
 }
 
-
 .combo-box .list-cell {
   -fx-text-fill: black;
 }
@@ -36,6 +35,7 @@
   -fx-font-size: 20;
   -fx-background-radius: 20px;
   -fx-border-radius: 20px;
+
 }
 
 #TerminalTextBox .scroll-pane{
