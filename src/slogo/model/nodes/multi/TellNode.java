@@ -19,19 +19,8 @@ public class TellNode extends SlogoNode {
 
   @Override
   public boolean isFull() {
-    return !parameters.isEmpty() && checkBrackets();
+    return !parameters.isEmpty() && parameters.get(parameters.size() - 1) instanceof ListEndNode;
   }
-
-  private boolean checkBrackets() {
-    int seen = 0;
-    for (SlogoNode node : parameters) {
-      if (node instanceof ListEndNode) {
-        seen++;
-      }
-    }
-    return seen == brackets;
-  }
-
 
   @Override
   public double getReturnValue(BackEndTurtleTracker tracker) {
