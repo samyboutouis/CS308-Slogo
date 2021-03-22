@@ -44,21 +44,8 @@ public class TerminalDisplayTest extends DukeApplicationTest {
   }
 
   @Test
-  void testSaveButton(){
-    writeTo(terminalTextArea, "fd 50");
-    clickOn(saveButton);
-    assertEquals(1, 1);
-  }
-
-  @Test
   void testSaveButtonWhenEmpty(){
     clickOn(saveButton);
-    assertEquals("", terminalTextArea.getText());
-  }
-
-  @Test
-  void testLoadButton(){
-    clickOn(loadButton);
     assertEquals("", terminalTextArea.getText());
   }
 
