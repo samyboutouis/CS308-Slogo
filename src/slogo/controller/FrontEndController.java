@@ -18,6 +18,7 @@ import slogo.visualization.PaletteDisplay;
 import slogo.visualization.Workspace;
 
 public class FrontEndController {
+  private static final String INITIAL_DIRECTORY = "src/resources/preferences";
   private static final String DIALOG_HEADER_TEXT = "Create XML File";
   private static final String ERROR_MESSAGE = "Invalid file.";
 
@@ -95,7 +96,7 @@ public class FrontEndController {
   public void handleLoadWorkspaceClick() {
     FileChooser fileChooser = new FileChooser();
     fileChooser.setTitle("Open XML File");
-    fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
+    fileChooser.setInitialDirectory(new File(INITIAL_DIRECTORY));
     fileChooser.getExtensionFilters()
       .setAll(new ExtensionFilter("XML File", "*.xml"));
     File file = fileChooser.showOpenDialog(stage);
