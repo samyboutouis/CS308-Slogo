@@ -41,6 +41,8 @@ public class GroupStartNode extends SlogoNode {
   // ( sum 50 49 48 47 46 45 )
   // i = 0 is command node, i = 1 and on is extra values (since command node takes in its original parameters)
   // values: 48 47 46 45
+  // tree:       sum  48  47  46  45  )
+  //            50  49
 
   // plan to just sum up the output values, since sum grouping is very different than palette grouping
   // grouping is equivalent to calling the same command multiple times, but I assume the outputs are summed up
