@@ -27,7 +27,6 @@ public class AnimationManager {
       FrontEndTurtleTracker frontEndTurtleTracker) {
     this.commands = map;
     this.turtleTracker = frontEndTurtleTracker;
-
     setupTimeline();
   }
 

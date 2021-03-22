@@ -1,7 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Workspace>
+
   <Turtles/>
   <Language>English</Language>
   <BackgroundColor>0xdedcdcff</BackgroundColor>
-  <ColorTheme>dark.css</ColorTheme>
+    <Turtles>
+        <Turtle>
+            <Lines/>
+            <XPosition>0.0</XPosition>
+            <YPosition>0.0</YPosition>
+            <Direction>0.0</Direction>
+            <PenColor>0x000000ff</PenColor>
+            <PenThickness>1.0</PenThickness>
+            <Active>true</Active>
+            <PenDown>true</PenDown>
+            <Showing>true</Showing>
+        </Turtle>
+    </Turtles>
+    <Language>English</Language>
+    <BackgroundColor>0xdedcdcff</BackgroundColor>
+    <ColorTheme>dark.css</ColorTheme>
 </Workspace>

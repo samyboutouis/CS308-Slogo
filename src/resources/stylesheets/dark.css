@@ -4,6 +4,10 @@
   -fx-text-fill: white;
 }
 
+.text-field, .text-area {
+  -fx-text-fill: black;
+}
+
 .combo-box, .combo-box .context-menu, .button, .color-picker {
   -fx-border-radius: 20px;
   -fx-background-radius: 20px;
@@ -84,13 +88,13 @@
   -fx-border-image-width: 0px;
 }
 
-#HistoryBox, #VariablesBox, #UserCommandsBox, #PaletteBox {
+#ScrollingBox {
   -fx-background-radius: 20px;
   -fx-border-radius: 20px;
   -fx-background-color: #aeadad;
 }
 
-#HistoryBox .viewport, #VariablesBox .viewport, #UserCommandsBox .viewport, #PaletteBox .viewport {
+#ScrollingBox .viewport {
   -fx-background-color: transparent;
 }
 
@@ -114,4 +118,8 @@
 
 #Slider {
   -fx-max-width: 100px;
+}
+
+#TurtlePaneID {
+  -fx-background-radius: 20px;
 }

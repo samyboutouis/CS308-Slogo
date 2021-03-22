@@ -20,7 +20,6 @@ public class ViewLayout {
   private final static int PADDING_LENGTH = 10;
 
   private final Map<String, Pane> viewNamesMap = new HashMap<>();
-
   private final List<ViewContainer> viewContainers = new ArrayList<>();
   private final CustomGridPane pane;
   private final HistoryDisplay historyDisplay;
@@ -29,6 +28,7 @@ public class ViewLayout {
   private final PaletteDisplay paletteDisplay;
   private final ButtonDisplay buttonDisplay;
   private final TurtleStateDisplay turtleStateDisplay;
+
   private String[] viewOrder;
 
   public ViewLayout(HistoryDisplay historyDisplay, VariablesDisplay variablesDisplay,
