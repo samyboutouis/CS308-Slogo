@@ -271,7 +271,7 @@ public class CommandReaderTest {
 
   @Test
   void testClassCastInMakeUserInstructionCommand () {
-      assertEquals(List.of(0.0), myReader.testParseInput("to felix [ :good sum 50 50 ] [ fd 50 ]"));
+      assertEquals(List.of(0.0), myReader.testParseInput("to felix [ :good sum 50 50 ] [ fd 50 ] felix"));
   }
   
   @Test
