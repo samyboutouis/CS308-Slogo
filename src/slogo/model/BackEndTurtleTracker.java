@@ -100,8 +100,9 @@ public class BackEndTurtleTracker implements SafeBackEndTurtleTracker {
   }
 
   public void setTellList(List<Integer> tellList) {
-    activeTurtles.clear();
     // clear the previous active list of turtles, to prepare room for new list of active turtles.
+    activeTurtles.clear();
+    setCurr(tellList.get(0)); // default curr is first id
     for (Integer i : tellList) {
       addTurtle(getBasicTurtle(i));
     }
@@ -111,6 +112,7 @@ public class BackEndTurtleTracker implements SafeBackEndTurtleTracker {
 
   public void setAskList(List<Integer> askList) {
     activeTurtles.clear(); // tellActiveTurtles should have this handled
+    setCurr(askList.get(0)); // default curr is first id
     for (Integer i : askList) {
       addTurtle(getBasicTurtle(i));
     }

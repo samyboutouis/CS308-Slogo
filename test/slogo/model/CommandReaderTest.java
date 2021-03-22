@@ -119,6 +119,9 @@ public class CommandReaderTest {
 
     assertEquals(List.of(3.0,3.0), myReader.testParseInput("setpc 3 pc"));
     assertEquals(List.of(4.0,4.0), myReader.testParseInput("setsh 4 sh"));
+
+    assertEquals(List.of(4.0,5.0), myReader.testParseInput("tell [ 0 1 2 3 4 ] turtles"));
+    assertEquals(List.of(4.0, 2.0), myReader.testParseInput("tell [ 0 1 2 3 4 ] ask [ 2 ] [ id ] "));
   }
 
   @Test
