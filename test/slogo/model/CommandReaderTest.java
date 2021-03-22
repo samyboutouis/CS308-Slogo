@@ -184,6 +184,11 @@ public class CommandReaderTest {
     assertEquals(List.of(1.0, 1.0, 3.0, 82.0), myReader.testParseInput(scopeTest));
   }
 
+  @Test
+  void testGrouping() {
+    assertEquals(List.of(46.0), myReader.testParseInput("fd ( sum 10 11 12 13 )"));
+  }
+
   // SECTION
   // test that command objects created are correct
 
