@@ -6,11 +6,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Slider;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.Test;
 import util.DukeApplicationTest;
@@ -47,6 +49,33 @@ public class TurtleStateDisplayTest extends DukeApplicationTest {
   }
 
   @Test
+  void testMoveForward() {
+    selectTurtleView();
+    runCommand("cs");
+    runCommand("fd 50");
+    Text yPosition = lookup("#YPosition").query();
+    assertEquals(yPosition.getText(), "50.00");
+  }
+
+  @Test
+  void testMoveBackward() {
+    selectTurtleView();
+    runCommand("cs");
+    runCommand("bk 50");
+    Text yPosition = lookup("#YPosition").query();
+    assertEquals(yPosition.getText(), "-50.00");
+  }
+
+  @Test
+  void testMoveRight() {
+    selectTurtleView();
+    runCommand("cs");
+    runCommand("rt 90");
+    Text direction = lookup("#Direction").query();
+    assertEquals(direction.getText(), "90.00");
+  }
+
+  @Test
   void testChangePenColor() {
     selectTurtleView();
     runCommand("cs");
@@ -59,15 +88,17 @@ public class TurtleStateDisplayTest extends DukeApplicationTest {
     assertEquals(lineColor, Color.RED);
   }
 
-//  @Test
-//  void testChangeTurtleImage() {
-//    selectTurtleView();
-//    runCommand("cs");
-//    turtle = lookup("#" + idBundle.getString("Turtle")).query();
-//    assertTrue(turtle.isVisible());
-//    Button turtleImageButton = lookup("#" + idBundle.getString("TurtleImageButton")).query();
-//    clickOn(turtleImageButton);
-//  }
+  @Test
+  void testChangePenWidth() {
+    selectTurtleView();
+    runCommand("cs");
+    Slider slider = lookup("#Slider").query();
+    setValue(slider, 5.0);
+    runCommand("fd 50");
+    Line line = lookup("#" + idBundle.getString("LineID")).query();
+    double lineWidth = line.getStrokeWidth();
+    assertEquals(5.0, lineWidth);
+  }
 
   private void addTurtle() {
     Button addTurtleButton = lookup("#" + idBundle.getString("AddTurtleButton")).query();

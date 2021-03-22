@@ -25,6 +25,9 @@ public class TurtleStateDisplay implements TurtleObserver {
   private static final String COLOR_PICKER_ID = "PenColorPicker";
   private static final String TURTLE_DROPDOWN = "TurtleDropdown";
   private static final String SLIDER_ID = "Slider";
+  private static final String X_ID = "XPosition";
+  private static final String Y_ID = "YPosition";
+  private static final String DIRECTION = "Direction";
   private static final int SLIDER_MIN = 1;
   private static final int SLIDER_MAX = 5;
   private static final String PEN_UP = "PenUpButton";
@@ -105,17 +108,23 @@ public class TurtleStateDisplay implements TurtleObserver {
 
   private void getX(Turtle turtle, HBox hBox) {
     double info = turtle.getX();
-    hBox.getChildren().add(new Text(String.format("%.2f", info)));
+    Text text = new Text(String.format("%.2f", info));
+    text.setId(X_ID);
+    hBox.getChildren().add(text);
   }
 
   private void getY(Turtle turtle, HBox hBox) {
     double info = turtle.getY();
-    hBox.getChildren().add(new Text(String.format("%.2f", info)));
+    Text text = new Text(String.format("%.2f", info));
+    text.setId(Y_ID);
+    hBox.getChildren().add(text);
   }
 
   private void getDirection(Turtle turtle, HBox hBox) {
     double info = turtle.getDirection();
-    hBox.getChildren().add(new Text(String.format("%.2f", info)));
+    Text text = new Text(String.format("%.2f", info));
+    text.setId(DIRECTION);
+    hBox.getChildren().add(text);
   }
 
   private void isPenDown(Turtle turtle, HBox hBox) {
