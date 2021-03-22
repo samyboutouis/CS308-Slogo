@@ -22,27 +22,13 @@ public class VariablesDisplayTest extends DukeApplicationTest {
 
   @Override
   public void start (Stage stage) {
-    createWindow(stage);
-    addTurtle();
-    addButtonView();
-  }
-
-  private void createWindow(Stage stage){
     Pane root = new Pane();
     Scene scene = new Scene(root, SCREEN_WIDTH, SCREEN_HEIGHT);
     stage.setScene(scene);
     stage.show();
     new Workspace(root, scene, stage);
-  }
-
-  private void addTurtle() {
-    Button addTurtleButton = lookup(String.format("%s%s", "#", ID_BUNDLE.getString("AddTurtleButton"))).query();
-    clickOn(addTurtleButton);
-  }
-
-  private void addButtonView() {
-    ComboBox<String> comboBox = lookup("#ViewContainerComboBox").query();
-    select(comboBox, "Move Turtle");
+    addTurtle();
+    addButtonView();
   }
 
   @Test
@@ -87,5 +73,15 @@ public class VariablesDisplayTest extends DukeApplicationTest {
     writeTo(textField, "90");
     clickOn(rightButton);
     assertEquals(-90, turtle.getRotate() - originalDirection);
+  }
+
+  private void addTurtle() {
+    Button addTurtleButton = lookup(String.format("%s%s", "#", ID_BUNDLE.getString("AddTurtleButton"))).query();
+    clickOn(addTurtleButton);
+  }
+
+  private void addButtonView() {
+    ComboBox<String> comboBox = lookup("#ViewContainerComboBox").query();
+    select(comboBox, "Move Turtle");
   }
 }
