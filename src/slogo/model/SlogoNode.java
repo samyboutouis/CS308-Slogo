@@ -47,6 +47,18 @@ public abstract class SlogoNode {
     return parameters;
   }
 
+  // for group node
+  public int getNumParameters() {
+    return numParameters;
+  }
+
+  // for group node to run command again with new parameters
+  public void replaceParameters(List<SlogoNode> newParameters) {
+    parameters.clear();
+    // can't replace the instance since the subclasses point to same instance
+    parameters.addAll(newParameters);
+  }
+
   public abstract double getReturnValue(BackEndTurtleTracker tracker);
 }
 

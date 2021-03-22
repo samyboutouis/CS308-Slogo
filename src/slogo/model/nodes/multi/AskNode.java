@@ -22,11 +22,13 @@ public class AskNode extends BracketNode {
     List<Integer> ret = new ArrayList<>();
     for (int i = 1; i < firstEnd; i++) {
       try {
-        int turtleId = (int) ((ConstantNode) parameters.get(i)).getReturnValue(tracker);
+        int turtleId = (int) parameters.get(i).getReturnValue(tracker);
         // should all be constant nodes
+        // Later edit by Felix: seems like example code has variables in this place, so can't make assumption
         ret.add(turtleId);
+        ConstantNode cast = ((ConstantNode) parameters.get(i)); // just to let user know
       } catch (ClassCastException e) {
-        System.out.println("Ask Turtle Format Incorrect!");
+        // System.out.println("Ask Turtle Format Incorrect!");
       }
     }
     return ret;

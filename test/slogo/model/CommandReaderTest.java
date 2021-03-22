@@ -6,7 +6,6 @@ import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import slogo.Command;
-import slogo.BackEndTurtle;
 import slogo.turtlecommands.HomeCommand;
 import slogo.turtlecommands.MovementCommand;
 import slogo.turtlecommands.SetBackgroundCommand;
@@ -164,10 +163,12 @@ public class CommandReaderTest {
         + "]\n"
         + "\n"
         + "example 30 ycor\n"));
-    assertEquals(List.of(0.0), myReader.testParseInput("to felix [ sum 50 50 ] [ fd 50 ]"));// unable to define method, variables are wrong
 
+    // unable to define method, variables are wrong
+    assertEquals(List.of(0.0), myReader.testParseInput("to felix [ sum 50 50 ] [ fd 50 ]"));
 
-    // the last test is to test that the getUserDefinedCommandsinString returns the map correctly
+    // the last test is to test that the getUserDefinedCommandsInString returns the map correctly
+    // DO NOT PLACE MORE USER DEFINED COMMAND TESTS BEFORE HERE
     String ret = "";
     for (String key: myReader.getUserDefinedCommandsInString().keySet()){
       ret += key+": "+myReader.getUserDefinedCommandsInString().get(key)+"\n";
@@ -176,7 +177,18 @@ public class CommandReaderTest {
         + "example:  [ :x ] [ if greater? :x 10 [ example difference :x 10 fd 50 ] ]\n", ret);
   }
 
+  @Test
+  void testVariableScope() {
+    // test if scope is local with variables
+    String scopeTest = "to felix [ :size ] [ fd :size ] to scopeTest [ ] [ set :size 3 felix 79 fd :size ] scopeTest ycor";
+    assertEquals(List.of(1.0, 1.0, 3.0, 82.0), myReader.testParseInput(scopeTest));
+  }
 
+  @Test
+  void testGrouping() {
+    assertEquals(List.of(46.0), myReader.testParseInput("fd ( sum 10 11 12 13 )"));
+    assertEquals(List.of(6.0), myReader.testParseInput("( setpalette 1 255 0 0 2 0 255 0 3 0 0 255 )"));
+  }
 
   // SECTION
   // test that command objects created are correct
@@ -280,6 +292,15 @@ public class CommandReaderTest {
       myReader.testParseInput("make 10 10");
     } catch(IllegalArgumentException e){
       assertEquals(e.getMessage(), "make/set was not given a variable");
+    }
+  }
+
+  @Test
+  void testGroupingBadMultiple() {
+    try{
+      myReader.testParseInput("( sum 10 10 10 )");
+    } catch(IllegalArgumentException e){
+      assertEquals(e.getMessage(), "Grouping does not have correct multiple of arguments!");
     }
   }
 }
