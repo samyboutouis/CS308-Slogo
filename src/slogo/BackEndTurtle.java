@@ -15,13 +15,15 @@ public class BackEndTurtle {
   private int shapeIndex;
   private List<Command> commands;
 
-  public BackEndTurtle(SafeTurtle transfer) {
-    this.ID = 0; // talk about where ID should be stored
+  public BackEndTurtle(SafeTurtle transfer, int ID) {
+    this.ID = ID; // talk about where ID should be stored
     this.xCoordinate = transfer.getX();
     this.yCoordinate = transfer.getY();
     this.direction = transfer.getDirection();
     this.isPenDown = transfer.isPenDown();
     this.isShowing = transfer.isShowing();
+    this.shapeIndex = transfer.getShapeIndex();
+    this.penColorIndex = transfer.getPenColorIndex();
     commands = new ArrayList<>();
   }
 
