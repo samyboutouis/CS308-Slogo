@@ -55,7 +55,7 @@ public class UserCommandsDisplay extends ScrollingDisplay {
       String newValue = textDialog.getEditor().getText();
       if (newValue != null) {
         String command = String.format("%s%s", commandName, newValue);
-        getTerminalDisplay().setTerminalText(command);
+        setTerminalText(command);
       }
     });
   }

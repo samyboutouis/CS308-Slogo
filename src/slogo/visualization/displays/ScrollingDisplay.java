@@ -31,11 +31,6 @@ public class ScrollingDisplay {
     pane.getStyleClass().add(DISPLAY_CLASS_NAME);
   }
 
-  /**
-   * @param title
-   * @param vBoxID
-   * @return
-   */
   public VBox setupVBoxContainer(String title, String vBoxID) {
     pane.setVgap(PADDING_LENGTH);
     pane.setPadding(new Insets(PADDING_LENGTH));
@@ -65,7 +60,6 @@ public class ScrollingDisplay {
     ScrollPane scrollPane = new ScrollPane();
     scrollPane.setFitToWidth(true);
     scrollPane.setPrefViewportHeight(1);
-
     scrollPane.setId(idBundle.getString(vBoxID));
     pane.add(scrollPane, 0, 1, 1, 9);
 
@@ -73,7 +67,6 @@ public class ScrollingDisplay {
     vBox.setFillWidth(true);
     vBox.setSpacing(VBOX_PADDING_LENGTH);
     vBox.setPadding(new Insets(VBOX_PADDING_LENGTH));
-
     scrollPane.setContent(vBox);
 
     return vBox;
@@ -83,7 +76,7 @@ public class ScrollingDisplay {
     return pane;
   }
 
-  public TerminalDisplay getTerminalDisplay() {
-    return workspace.getTerminalDisplay();
+  public void setTerminalText(String command) {
+    workspace.getTerminalDisplay().setTerminalText(command);
   }
 }

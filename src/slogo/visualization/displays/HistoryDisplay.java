@@ -39,7 +39,7 @@ public class HistoryDisplay extends ScrollingDisplay {
   public void applyHistoryTagLogic(Button historyTag) {
     historyTag.setOnAction(e -> {
       String command = historyTag.getText();
-      getTerminalDisplay().setTerminalText(command);
+      setTerminalText(command);
     });
   }
 }
