@@ -13,6 +13,7 @@ import slogo.turtlecommands.SetBackgroundCommand;
 import slogo.turtlecommands.SetPaletteCommand;
 import slogo.turtlecommands.SetPenColorCommand;
 import slogo.turtlecommands.SetPenSizeCommand;
+import slogo.turtlecommands.SetShapeCommand;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -232,6 +233,7 @@ public class CommandReaderTest {
     assertTrue(getAllCommands(myReader.parseInput("setpensize 10", tracker).getAllTurtleCommands()).get(0) instanceof SetPenSizeCommand);
     assertTrue(getAllCommands(myReader.parseInput("setbg 1", tracker).getAllTurtleCommands()).get(0) instanceof SetBackgroundCommand);
     assertTrue(getAllCommands(myReader.parseInput("setpc 1", tracker).getAllTurtleCommands()).get(0) instanceof SetPenColorCommand);
+    assertTrue(getAllCommands(myReader.parseInput("setsh 1", tracker).getAllTurtleCommands()).get(0) instanceof SetShapeCommand);
   }
 
   // SECTION
