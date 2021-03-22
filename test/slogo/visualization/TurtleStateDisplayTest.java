@@ -1,6 +1,7 @@
 package slogo.visualization;
 
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
@@ -22,6 +23,7 @@ public class TurtleStateDisplayTest extends DukeApplicationTest {
   private final static int SCREEN_HEIGHT = 800;
 
   private ResourceBundle idBundle;
+  private ComboBox<Integer> turtleComboBox;
   private ImageView turtle;
 
   @Override
@@ -39,28 +41,33 @@ public class TurtleStateDisplayTest extends DukeApplicationTest {
 
   @Test
   void testTurtleLoad() {
+    selectTurtleView();
     turtle = lookup("#" + idBundle.getString("Turtle")).query();
     assertTrue(turtle.isVisible());
   }
 
-//  @Test
-//  void testChangePenColor() {
-//    selectTurtleView();
-//    ColorPicker colorPicker = lookup("#PenColorPicker").query();
-//    assertTrue(colorPicker.isVisible());
-//    setValue(colorPicker, Color.RED);
-//    runCommand("fd 50");
-//    Line line = lookup("#" + idBundle.getString("LineID")).query();
-//    Color lineColor = (Color) line.getStroke();
-//    assertEquals(lineColor, Color.RED);
-//  }
+  @Test
+  void testChangePenColor() {
+    selectTurtleView();
+    runCommand("cs");
+    ColorPicker colorPicker = lookup("#PenColorPicker").query();
+    assertTrue(colorPicker.isVisible());
+    setValue(colorPicker, Color.RED);
+    runCommand("fd 50");
+    Line line = lookup("#" + idBundle.getString("LineID")).query();
+    Color lineColor = (Color) line.getStroke();
+    assertEquals(lineColor, Color.RED);
+  }
 
-//  @Test
-//  void testChangeTurtleImage() {
-//    ImageView turtleImageView = lookup("#" + idBundle.getString("Turtle")).query();
-//    assertTrue(myTurtleImageButton.isVisible());
-//    clickOn(myTurtleImageButton);
-//  }
+  @Test
+  void testChangeTurtleImage() {
+    selectTurtleView();
+    runCommand("cs");
+    turtle = lookup("#" + idBundle.getString("Turtle")).query();
+    assertTrue(turtle.isVisible());
+    Button turtleImageButton = lookup("#" + idBundle.getString("TurtleImageButton")).query();
+    clickOn(turtleImageButton);
+  }
 
   private void addTurtle() {
     Button addTurtleButton = lookup("#" + idBundle.getString("AddTurtleButton")).query();
@@ -80,7 +87,13 @@ public class TurtleStateDisplayTest extends DukeApplicationTest {
   }
 
   private void selectTurtleView() {
-    ComboBox<Integer> turtleComboBox = lookup("#TurtleDropdown").query();
+    turtleComboBox = lookup("#TurtleDropdown").query();
     select(turtleComboBox, 1);
+    Platform.runLater(new Runnable(){
+      @Override
+      public void run() {
+        turtleComboBox.setValue(1);
+      }
+    });
   }
 }

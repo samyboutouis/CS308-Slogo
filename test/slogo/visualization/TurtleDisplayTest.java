@@ -66,6 +66,11 @@ public class TurtleDisplayTest extends DukeApplicationTest {
     assertTrue(activeCircle.isVisible());
   }
 
+  @Test
+  void testClearScreen() {
+    runCommand("cs");
+  }
+
   private void addTurtle() {
     Button addTurtleButton = lookup("#" + idBundle.getString("AddTurtleButton")).query();
     clickOn(addTurtleButton);
