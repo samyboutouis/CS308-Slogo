@@ -4,6 +4,10 @@
   -fx-text-fill: white;
 }
 
+.text-field, .text-area {
+  -fx-text-fill: black;
+}
+
 .combo-box, .combo-box .context-menu, .button, .color-picker {
   -fx-border-radius: 20px;
   -fx-background-radius: 20px;
