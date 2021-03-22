@@ -25,8 +25,8 @@ public class Workspace {
   private final Scene scene;
   private final CustomGridPane pane;
   private final Controller controller;
-
   private TerminalDisplay terminalDisplay;
+  private String stylesheet;
 
   public Workspace(Pane root, Scene scene, Stage stage) {
     this.scene = scene;
@@ -43,11 +43,12 @@ public class Workspace {
   private void setupDisplays() {
     PaletteDisplay paletteDisplay = new PaletteDisplay(this, RESOURCE_PACKAGE);
     FrontEndTurtleTracker frontEndTurtleTracker = new FrontEndTurtleTracker(paletteDisplay);
-    FrontEndController frontEndController = new FrontEndController(stage, frontEndTurtleTracker);
+    FrontEndController frontEndController = new FrontEndController(stage, frontEndTurtleTracker,
+      controller, paletteDisplay, this);
     HistoryDisplay historyDisplay = new HistoryDisplay(this, RESOURCE_PACKAGE);
     VariablesDisplay variablesDisplay = new VariablesDisplay(this, RESOURCE_PACKAGE);
     UserCommandsDisplay userCommandsDisplay = new UserCommandsDisplay(this, RESOURCE_PACKAGE);
-    ButtonDisplay buttonDisplay = new ButtonDisplay(frontEndController);
+    ButtonDisplay buttonDisplay = new ButtonDisplay(this, RESOURCE_PACKAGE, frontEndController);
 
     TurtleStateDisplay turtleStateDisplay = new TurtleStateDisplay(frontEndController,
         frontEndTurtleTracker);
@@ -71,13 +72,19 @@ public class Workspace {
     pane.add(viewLayoutPane, paneIndexes[12], paneIndexes[13], paneIndexes[14], paneIndexes[15]);
   }
 
-  private void setStyleSheet(String styleSheetName) {
+  public void setStyleSheet(String styleSheetName) {
+    scene.getStylesheets().clear();
     scene.getStylesheets().add(
-        getClass().getResource(String.format("%s/%s", STYLESHEETS_PACKAGE, styleSheetName))
-            .toExternalForm());
+      getClass().getResource(String.format("%s/%s", STYLESHEETS_PACKAGE, styleSheetName))
+        .toExternalForm());
+    stylesheet = styleSheetName;
   }
 
   public TerminalDisplay getTerminalDisplay() {
     return terminalDisplay;
+  }
+
+  public String getStylesheet() {
+    return stylesheet;
   }
 }

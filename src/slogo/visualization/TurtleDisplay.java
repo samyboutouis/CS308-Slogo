@@ -14,7 +14,7 @@ public class TurtleDisplay implements BackgroundObserver {
   private static final int BACKGROUND_RADIUS = 20;
   private static final String ID_PROPERTY = "resources/stylesheets/CSS_IDs";
   private static final String TURTLE_PANE_ID = "TurtlePaneID";
-  private static final String DISPLAY_CLASS_NAME = "displayWindow";
+  private static final Color DEFAULT_COLOR = Color.web("#dedcdc");
 
   private final ResourceBundle idBundle;
   private final AnchorPane anchorPane;
@@ -27,8 +27,8 @@ public class TurtleDisplay implements BackgroundObserver {
   }
 
   private void setScreen() {
-    anchorPane.getStyleClass().add(DISPLAY_CLASS_NAME);
     anchorPane.setId(idBundle.getString(TURTLE_PANE_ID));
+    setBackgroundColor(DEFAULT_COLOR);
   }
 
   public void setBackgroundColor(Color color) {
@@ -43,5 +43,9 @@ public class TurtleDisplay implements BackgroundObserver {
 
   public AnchorPane getPane() {
     return anchorPane;
+  }
+
+  public Color getBackgroundColor() {
+    return (Color) anchorPane.getBackground().getFills().get(0).getFill();
   }
 }

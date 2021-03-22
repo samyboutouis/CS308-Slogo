@@ -3,7 +3,7 @@ package slogo;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BackEndTurtle implements Turtle {
+public class BackEndTurtle {
 
   private double xCoordinate;
   private final int ID;

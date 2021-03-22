@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Workspace>
+    <Turtles>
+        <Turtle>
+            <Lines/>
+            <XPosition>0.0</XPosition>
+            <YPosition>0.0</YPosition>
+            <Direction>0.0</Direction>
+            <PenColor>0x000000ff</PenColor>
+            <PenThickness>1.0</PenThickness>
+            <Active>true</Active>
+            <PenDown>true</PenDown>
+            <Showing>true</Showing>
+        </Turtle>
+        <Turtle>
+            <Lines/>
+            <XPosition>0.0</XPosition>
+            <YPosition>0.0</YPosition>
+            <Direction>0.0</Direction>
+            <PenColor>0x000000ff</PenColor>
+            <PenThickness>1.0</PenThickness>
+            <Active>true</Active>
+            <PenDown>true</PenDown>
+            <Showing>true</Showing>
+        </Turtle>
+    </Turtles>
+    <Language>Portuguese</Language>
+    <BackgroundColor>0xffccffff</BackgroundColor>
+    <ColorTheme>default.css</ColorTheme>
+</Workspace>

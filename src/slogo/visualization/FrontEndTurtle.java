@@ -1,6 +1,8 @@
 package slogo.visualization;
 
 import java.io.File;
+import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -27,7 +29,6 @@ public class FrontEndTurtle implements Turtle, SafeTurtle {
   private final FrontEndTurtleTracker turtleTracker;
   private ActiveCircle activeCircle;
   private boolean isActive;
-  private int shapeIndex;
 
   public FrontEndTurtle(FrontEndTurtleTracker frontEndTurtleTracker) {
     this.idBundle = ResourceBundle
@@ -121,6 +122,11 @@ public class FrontEndTurtle implements Turtle, SafeTurtle {
     imageView.setImage(image);
   }
 
+  public void setShape(int index) {
+    String filePath = turtleTracker.getShapeFromIndex(index);
+    setImage(new File(filePath));
+  }
+
   private void setDefaultImage() {
     Image image = new Image(DEFAULT_IMAGE, IMAGE_WIDTH, IMAGE_HEIGHT, false, false);
     imageView = new ImageView(image);
@@ -142,6 +148,11 @@ public class FrontEndTurtle implements Turtle, SafeTurtle {
 
   public void setPenColor(Color color) {
     pen.setColor(color);
+  }
+
+  public void setPenColor(int index) {
+    Color color = turtleTracker.getColorFromIndex(index);
+    setPenColor(color);
   }
 
   public double getPenThickness() {
@@ -210,11 +221,7 @@ public class FrontEndTurtle implements Turtle, SafeTurtle {
     turtleTracker.setInactive(this);
   }
 
-  public int getShapeIndex() {
-    return shapeIndex;
-  }
-
-  public int getPenColorIndex() {
-    return pen.getPenColorIndex();
+  public List<Map<String, String>> getLineInfo() {
+    return pen.getLineInfo();
   }
 }

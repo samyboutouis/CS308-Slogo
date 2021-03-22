@@ -1,5 +1,6 @@
 package slogo;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -147,7 +148,7 @@ public class FrontEndTurtleTracker implements SafeFrontEndTurtleTracker {
     }
   }
 
-  public static <T, E> Set<T> getKeyByValue(Map<T, E> map, E value) {
+  public <T, E> Set<T> getKeyByValue(Map<T, E> map, E value) {
     return map.entrySet()
         .stream()
         .filter(entry -> Objects.equals(entry.getValue(), value))
@@ -155,11 +156,11 @@ public class FrontEndTurtleTracker implements SafeFrontEndTurtleTracker {
         .collect(Collectors.toSet());
   }
 
-  public SafeTurtle getSafeTurtle(int id) {
+  public Turtle getTurtle(int id) {
     return allTurtles.get(id);
   }
 
-  private List<Integer> getTurtleIDs() {
+  public List<Integer> getTurtleIDs() {
     return allTurtles.keySet()
         .stream()
         .collect(Collectors.toUnmodifiableList());
@@ -175,5 +176,17 @@ public class FrontEndTurtleTracker implements SafeFrontEndTurtleTracker {
 
   public boolean isEmpty() {
     return allTurtles.isEmpty();
+  }
+
+  public Color getColorFromIndex(int index) {
+    return paletteDisplay.getColorFromIndex(index);
+  }
+
+  public Color getBackgroundColor() {
+    return backgroundObservers.get(0).getBackgroundColor();
+  }
+
+  public String getShapeFromIndex(int index) {
+    return paletteDisplay.getImagePathFromIndex(index);
   }
 }
