@@ -63,8 +63,8 @@
             <configuration>
                 <encoding>iso-8859-1</encoding>
                 <compilerArgs/>
-                <source>14</source>
-                <target>14</target>
+                <source>15</source>
+                <target>15</target>
             </configuration>
         </plugin>
         <plugin>
