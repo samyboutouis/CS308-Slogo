@@ -40,6 +40,8 @@ public class TerminalDisplay {
   private static final String TERMINAL_PROMPT = "TerminalPrompt";
   private static final String TERMINAL_TEXT_BOX_ID = "TerminalTextBoxID";
   private static final String TERMINAL_BUTTON_ID = "TerminalButtonID";
+  private static final String SAVE_BUTTON_ID = "TerminalSaveButton";
+  private static final String LOAD_BUTTON_ID = "TerminalLoadButton";
   private static final String ERROR_TITLE_PROPERTY = "ErrorTitle";
   private static final String DISPLAY_CLASS_NAME = "displayWindow";
   private static final String SAVE_DIALOG_DESC = "SLogo File";
@@ -129,12 +131,14 @@ public class TerminalDisplay {
 
   private void initializeSaveButton() {
     saveButton = makeButton(TERMINAL_SAVE_BUTTON, BUTTON_WIDTH, 0, SAVE_BUTTON_X, BUTTON_XY);
+    saveButton.setId(SAVE_BUTTON_ID);
     applySaveButtonLogic();
     pane.add(saveButton, 2, 0);
   }
 
   private void initializeLoadButton() {
     loadButton = makeButton(TERMINAL_LOAD_BUTTON, BUTTON_WIDTH, 0, LOAD_BUTTON_X, BUTTON_XY);
+    loadButton.setId(LOAD_BUTTON_ID);
     applyLoadButtonLogic();
     pane.add(loadButton, 2, 0);
   }
