@@ -7,7 +7,7 @@ to tree [ :size ] [
         lt 30
         tree * :size 0.6
         rt 30
-        fd /:size 6
+        fd / :size 6
         rt 25
         tree / :size 2
         lt 25
