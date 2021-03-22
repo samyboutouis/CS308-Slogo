@@ -115,6 +115,9 @@ public class CommandReaderTest {
     assertEquals(List.of(1.0,1.0), myReader.testParseInput("pendown pendown?"));
     assertEquals(List.of(1.0,1.0), myReader.testParseInput("st showing?"));
     assertEquals(List.of(0.0,0.0), myReader.testParseInput("ht showing?"));
+
+    assertEquals(List.of(3.0,3.0), myReader.testParseInput("setpc 3 pc"));
+    assertEquals(List.of(4.0,4.0), myReader.testParseInput("setsh 4 sh"));
   }
 
   @Test
@@ -168,6 +171,8 @@ public class CommandReaderTest {
     assertEquals("felix:  [ sum 50 50 ] [ fd 50 ]\n"
         + "example:  [ :x ] [ if greater? :x 10 [ example difference :x 10 fd 50 ] ]\n", ret);
   }
+
+
 
   // SECTION
   // test that command objects created are correct
