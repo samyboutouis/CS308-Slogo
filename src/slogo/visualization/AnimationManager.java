@@ -26,7 +26,6 @@ public class AnimationManager {
   public AnimationManager(Map<Integer, List<Command>> map, FrontEndTurtleTracker frontEndTurtleTracker) {
     this.commands = map;
     this.turtleTracker = frontEndTurtleTracker;
-
     setupTimeline();
   }
 

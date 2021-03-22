@@ -13,35 +13,25 @@ import slogo.visualization.Workspace;
 
 public class ScrollingDisplay {
 
-  private final static int PADDING_LENGTH = 10;
-  private final static int VBOX_PADDING_LENGTH = 5;
-  private final static int ROW_COUNT = 10;
-  private final static String DISPLAY_CLASS_NAME = "displayWindow";
+  private static final ResourceBundle RESOURCE_BUNDLE = ResourceBundle
+      .getBundle("resources/languages/English");
+  private static final ResourceBundle ID_BUNDLE = ResourceBundle
+      .getBundle("resources/stylesheets/CSS_IDs");
+  private static final int PADDING_LENGTH = 10;
+  private static final int VBOX_PADDING_LENGTH = 5;
+  private static final int ROW_COUNT = 10;
+  private static final String DISPLAY_CLASS_NAME = "displayWindow";
+  private static final String SCROLLING_ID = "ScrollingBox";
 
-  private final ResourceBundle resourceBundle;
-  private final ResourceBundle idBundle;
   private final GridPane pane;
   private final Workspace workspace;
 
-  /**
-   * @param resourcePackage
-   */
-  public ScrollingDisplay(Workspace workspace, String resourcePackage) {
+  public ScrollingDisplay(Workspace workspace) {
+    this.workspace = workspace;
     pane = new GridPane();
     pane.getStyleClass().add(DISPLAY_CLASS_NAME);
-    String language = "English";
-    this.workspace = workspace;
-    this.resourceBundle = ResourceBundle
-        .getBundle(String.format("%s/%s/%s", resourcePackage, "languages", language));
-    this.idBundle = ResourceBundle
-        .getBundle(String.format("%s/%s/%s", resourcePackage, "stylesheets", "CSS_IDs"));
   }
 
-  /**
-   * @param title
-   * @param vBoxID
-   * @return
-   */
   public VBox setupVBoxContainer(String title, String vBoxID) {
     pane.setVgap(PADDING_LENGTH);
     pane.setPadding(new Insets(PADDING_LENGTH));
@@ -63,7 +53,7 @@ public class ScrollingDisplay {
   }
 
   private void initializeTitleLabel(String title) {
-    Label titleLabel = new Label(resourceBundle.getString(title));
+    Label titleLabel = new Label(RESOURCE_BUNDLE.getString(title));
     pane.add(titleLabel, 0, 0, 1, 1);
   }
 
@@ -71,15 +61,14 @@ public class ScrollingDisplay {
     ScrollPane scrollPane = new ScrollPane();
     scrollPane.setFitToWidth(true);
     scrollPane.setPrefViewportHeight(1);
-
-    scrollPane.setId(idBundle.getString(vBoxID));
+    scrollPane.setId(SCROLLING_ID);
     pane.add(scrollPane, 0, 1, 1, 9);
 
     VBox vBox = new VBox();
+    vBox.setId(ID_BUNDLE.getString(vBoxID));
     vBox.setFillWidth(true);
     vBox.setSpacing(VBOX_PADDING_LENGTH);
     vBox.setPadding(new Insets(VBOX_PADDING_LENGTH));
-
     scrollPane.setContent(vBox);
 
     return vBox;
@@ -89,7 +78,7 @@ public class ScrollingDisplay {
     return pane;
   }
 
-  public TerminalDisplay getTerminalDisplay() {
-    return workspace.getTerminalDisplay();
+  public void setTerminalText(String command) {
+    workspace.getTerminalDisplay().setTerminalText(command);
   }
 }

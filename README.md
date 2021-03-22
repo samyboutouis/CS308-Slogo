@@ -9,19 +9,28 @@ Names: Andre Wang (jw542), Donghan Park (dp239), Samy Boutouis (sb590), Felix Ji
 
 Start Date: 03/04/2021
 
-Finish Date: 
+Finish Date: 03/22/2021
 
-Hours Spent:
+Hours Spent: 
 
 ### Primary Roles
 
+* Andre Wang (jw542)
+    * Back-end
+* Donghan Park (dp239)
+    * Front-end
+* Samy Boutouis (sb590)
+    * Controller, will switch between front-end and back-end depending on need
+* Felix Jiang (fj32)
+    * Back-end
 
 ### Resources Used
 
+- JavaFX FileChooser (loading/saving files)
 
 ### Running the Program
 
-Main class:
+Main class: `main`
 
 Data files needed: 
 

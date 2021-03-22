@@ -7,19 +7,18 @@ import slogo.visualization.Workspace;
 
 public class HistoryDisplay extends ScrollingDisplay {
 
-  private static final String ID_PROPERTY = "resources/stylesheets/CSS_IDs";
-  private final static String HISTORY_TITLE = "HistoryTitle";
-  private final static String HISTORY_BOX_ID = "HistoryBoxID";
-  private final static String HISTORY_TAG_ID = "HistoryTagID";
+  private static final ResourceBundle ID_BUNDLE = ResourceBundle
+      .getBundle("resources/stylesheets/CSS_IDs");
+  private static final String HISTORY_TITLE = "HistoryTitle";
+  private static final String HISTORY_BOX_ID = "HistoryBoxID";
+  private static final String HISTORY_TAG_ID = "HistoryTagID";
 
-  private final ResourceBundle idBundle;
 
   private final VBox historyBox;
 
-  public HistoryDisplay(Workspace workspace, String resourcePackage) {
-    super(workspace, resourcePackage);
+  public HistoryDisplay(Workspace workspace) {
+    super(workspace);
     historyBox = setupVBoxContainer(HISTORY_TITLE, HISTORY_BOX_ID);
-    this.idBundle = ResourceBundle.getBundle(ID_PROPERTY);
   }
 
   /**
@@ -30,17 +29,16 @@ public class HistoryDisplay extends ScrollingDisplay {
     historyTag.setWrapText(true);
     historyTag.setMaxWidth(Double.MAX_VALUE);
     historyTag.setMaxHeight(Double.MAX_VALUE);
-    historyTag.setId(idBundle.getString(HISTORY_TAG_ID));
+    historyTag.setId(ID_BUNDLE.getString(HISTORY_TAG_ID));
 
     historyBox.getChildren().add(historyTag);
-
     applyHistoryTagLogic(historyTag);
   }
 
   public void applyHistoryTagLogic(Button historyTag) {
     historyTag.setOnAction(e -> {
       String command = historyTag.getText();
-      getTerminalDisplay().setTerminalText(command);
+      setTerminalText(command);
     });
   }
 }
