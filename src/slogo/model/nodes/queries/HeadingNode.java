@@ -11,12 +11,6 @@ public class HeadingNode extends TurtleCommandNode {
     super(parameter);
   }
 
-  /*@Override
-  public double getReturnValue(List<Command> commands) {
-    commands.add(new DisplayCommand("Heading: "+turtle.getDirection()));
-    return turtle.getDirection();
-  }*/
-
   @Override
   public double getReturnValue(BackEndTurtleTracker tracker) {
     return super.loopThroughTurtles(tracker, new ArrayList<>(), (currTurtle, values) -> {

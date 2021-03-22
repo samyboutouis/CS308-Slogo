@@ -14,19 +14,6 @@ public class IsPenDownNode extends TurtleCommandNode {
     super(parameter);
   }
 
- /* @Override
-  public double getReturnValue(List<Command> commands) {
-    if (turtle.isPenDown()){
-    mesg = "Pen is down";
-    ret  =1;
-    } else {
-      mesg = "Pen is up";
-      ret = 0;
-    }
-    commands.add(new DisplayCommand(mesg));
-    return ret;
-  }*/
-
   @Override
   public double getReturnValue(BackEndTurtleTracker tracker) {
     return super.loopThroughTurtles(tracker, new ArrayList<>(), (currTurtle, values) -> {
