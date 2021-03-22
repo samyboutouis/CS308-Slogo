@@ -138,6 +138,7 @@ public class BackEndTurtleTracker implements SafeBackEndTurtleTracker {
     return activeTurtles.iterator();
   }
 
+  // used by turtleCommandNode loop to access the turtle at this index of activeTurtles
   public BackEndTurtle getTurtle(int index) {
     // not possible for a turtle to not be in allTurtles when using iterator
     return allTurtles.get(index);
@@ -166,7 +167,7 @@ public class BackEndTurtleTracker implements SafeBackEndTurtleTracker {
   }
 
   private BackEndTurtle getBasicTurtle(int id) {
-    return new BackEndTurtle(0, 0, 0, true, true, id);
+    return allTurtles.getOrDefault(id, new BackEndTurtle(0, 0, 0, true, true, id));
   }
 
 //  tell [ 1 2 3 ]
