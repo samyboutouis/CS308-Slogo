@@ -98,18 +98,6 @@ public class PaletteDisplay extends ScrollingDisplay {
     return (Color) paletteCircle.getFill();
   }
 
-  public int getIndexFromColor(Color color) {
-    for (int i = 0; i < paletteBox.getChildren().size(); i++) {
-      CustomGridPane paletteTag = (CustomGridPane) paletteBox.getChildren().get(i);
-      Circle paletteCircle = (Circle) paletteTag.getChildren().get(1);
-      Color paletteColor = (Color) paletteCircle.getFill();
-      if (paletteColor == color) {
-        return i + 1;
-      }
-    }
-    return -1;
-  }
-
   /**
    * @param index
    * @return
@@ -118,17 +106,5 @@ public class PaletteDisplay extends ScrollingDisplay {
     CustomGridPane paletteTag = (CustomGridPane) paletteBox.getChildren().get(index - 1);
     Label paletteLabel = (Label) paletteTag.getChildren().get(2);
     return String.format("%s/%s", RESOURCES, paletteLabel.getText());
-  }
-
-  public int getIndexFromImage(String path) {
-    for (int i = 0; i < paletteBox.getChildren().size(); i++) {
-      CustomGridPane paletteTag = (CustomGridPane) paletteBox.getChildren().get(i);
-      Label paletteLabel = (Label) paletteTag.getChildren().get(2);
-      String paletteValue = paletteLabel.getText();
-      if (paletteValue.equals(path)) {
-        return i + 1;
-      }
-    }
-    return -1;
   }
 }

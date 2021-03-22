@@ -56,4 +56,23 @@ class VariablesDisplayTest extends DukeApplicationTest {
     clickOn(runButton);
     assertEquals(1, variablesBox.getChildren().size());
   }
+
+  @Test
+  void testCorrectCommandTag(){
+    variablesBox = lookup("#VariablesBox").query();
+    writeTo(terminalTextArea, "set :a 100");
+    clickOn(runButton);
+    Button newTag = (Button) variablesBox.getChildren().get(0);
+    assertEquals("a = 100.00", newTag.getText());
+  }
+
+  @Test
+  void testVariableTagClick(){
+    variablesBox = lookup("#VariablesBox").query();
+    writeTo(terminalTextArea, "set :a 100");
+    clickOn(runButton);
+    Button newTag = (Button) variablesBox.getChildren().get(0);
+    clickOn(newTag);
+    assertEquals("a = 100.00", newTag.getText());
+  }
 }

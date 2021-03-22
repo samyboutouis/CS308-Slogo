@@ -1,7 +1,6 @@
 package slogo.visualization;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -54,5 +53,24 @@ public class UserCommandsDisplayTest extends DukeApplicationTest {
     writeTo(terminalTextArea, "to cmd [ :a ] [ fd :a ]");
     clickOn(runButton);
     assertEquals(1, commandsBox.getChildren().size());
+  }
+
+  @Test
+  void testCorrectCommandTag(){
+    commandsBox = lookup("#UserCommandsBox").query();
+    writeTo(terminalTextArea, "to cmd [ :a ] [ fd :a ]");
+    clickOn(runButton);
+    Button newTag = (Button) commandsBox.getChildren().get(0);
+    assertEquals("cmd = [ :a ] [ fd :a ]", newTag.getText());
+  }
+
+  @Test
+  void testCommandTagClick(){
+    commandsBox = lookup("#UserCommandsBox").query();
+    writeTo(terminalTextArea, "to cmd [ :a ] [ fd :a ]");
+    clickOn(runButton);
+    Button newTag = (Button) commandsBox.getChildren().get(0);
+    clickOn(newTag);
+    assertEquals("cmd = [ :a ] [ fd :a ]", newTag.getText());
   }
 }
