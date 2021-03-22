@@ -263,4 +263,13 @@ public class CommandReaderTest {
   void testClassCastInMakeUserInstructionCommand () {
       assertEquals(List.of(0.0), myReader.testParseInput("to felix [ :good sum 50 50 ] [ fd 50 ]"));
   }
+  
+  @Test
+  void testMakeVariableNoVariable() {
+    try{
+      myReader.testParseInput("make 10 10");
+    } catch(IllegalArgumentException e){
+      assertEquals(e.getMessage(), "make/set was not given a variable");
+    }
+  }
 }
