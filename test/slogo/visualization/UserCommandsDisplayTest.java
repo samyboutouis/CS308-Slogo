@@ -1,11 +1,10 @@
 package slogo.visualization;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import java.util.ResourceBundle;
+
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -13,13 +12,13 @@ import javafx.stage.Stage;
 import org.junit.jupiter.api.Test;
 import util.DukeApplicationTest;
 
-class VariablesDisplayTest extends DukeApplicationTest {
+public class UserCommandsDisplayTest extends DukeApplicationTest {
   private final static int SCREEN_WIDTH = 1280;
   private final static int SCREEN_HEIGHT = 800;
 
   private TextArea terminalTextArea;
-  private VBox variablesBox;
   private Button runButton;
+  private VBox commandsBox;
 
   @Override
   public void start (Stage stage) {
@@ -46,14 +45,14 @@ class VariablesDisplayTest extends DukeApplicationTest {
 
   private void addButtonView() {
     ComboBox<String> comboBox = lookup("#ViewContainerComboBox").query();
-    select(comboBox, "Variables");
+    select(comboBox, "Commands");
   }
 
   @Test
-  void testCreateVariable(){
-    variablesBox = lookup("#VariablesBox").query();
-    writeTo(terminalTextArea, "set :a 100");
+  void testCreateCommand(){
+    commandsBox = lookup("#UserCommandsBox").query();
+    writeTo(terminalTextArea, "to cmd [ :a ] [ fd :a ]");
     clickOn(runButton);
-    assertEquals(1, variablesBox.getChildren().size());
+    assertEquals(1, commandsBox.getChildren().size());
   }
 }
