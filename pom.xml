@@ -51,7 +51,7 @@
         </resource>
         <!-- internal resource files also need to be included, but not directly -->
         <resource>
-            <directory>src/resources</directory>
+            <directory>src</directory>
         </resource>
     </resources>
     <plugins>
