@@ -29,6 +29,8 @@ public class FrontEndTurtle implements Turtle, SafeTurtle {
   private final FrontEndTurtleTracker turtleTracker;
   private ActiveCircle activeCircle;
   private boolean isActive;
+  private int shapeIndex;
+  private int penColorIndex;
 
   public FrontEndTurtle(FrontEndTurtleTracker frontEndTurtleTracker) {
     this.idBundle = ResourceBundle
@@ -36,6 +38,7 @@ public class FrontEndTurtle implements Turtle, SafeTurtle {
     setDefaultImage();
     isActive = true;
     turtleTracker = frontEndTurtleTracker;
+    shapeIndex = 1;
   }
 
   public void forward(double pixels) {
@@ -123,8 +126,13 @@ public class FrontEndTurtle implements Turtle, SafeTurtle {
   }
 
   public void setShape(int index) {
+    shapeIndex = index;
     String filePath = turtleTracker.getShapeFromIndex(index);
     setImage(new File(filePath));
+  }
+
+  public int getShapeIndex() {
+    return shapeIndex;
   }
 
   private void setDefaultImage() {
