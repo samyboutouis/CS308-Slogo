@@ -21,6 +21,7 @@ public class ScrollingDisplay {
   private static final int VBOX_PADDING_LENGTH = 5;
   private static final int ROW_COUNT = 10;
   private static final String DISPLAY_CLASS_NAME = "displayWindow";
+  private static final String SCROLLING_ID = "ScrollingBox";
 
   private final GridPane pane;
   private final Workspace workspace;
@@ -60,10 +61,11 @@ public class ScrollingDisplay {
     ScrollPane scrollPane = new ScrollPane();
     scrollPane.setFitToWidth(true);
     scrollPane.setPrefViewportHeight(1);
-    scrollPane.setId(ID_BUNDLE.getString(vBoxID));
+    scrollPane.setId(SCROLLING_ID);
     pane.add(scrollPane, 0, 1, 1, 9);
 
     VBox vBox = new VBox();
+    vBox.setId(ID_BUNDLE.getString(vBoxID));
     vBox.setFillWidth(true);
     vBox.setSpacing(VBOX_PADDING_LENGTH);
     vBox.setPadding(new Insets(VBOX_PADDING_LENGTH));

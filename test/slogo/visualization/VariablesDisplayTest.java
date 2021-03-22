@@ -1,14 +1,12 @@
 package slogo.visualization;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import java.util.ResourceBundle;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -22,6 +20,7 @@ class VariablesDisplayTest extends DukeApplicationTest {
   private static final ResourceBundle ID_BUNDLE = ResourceBundle.getBundle("resources/stylesheets/CSS_IDs");
   private TextArea terminalTextArea;
   private VBox variablesBox;
+  private Button runButton;
 
   @Override
   public void start (Stage stage) {
@@ -37,12 +36,12 @@ class VariablesDisplayTest extends DukeApplicationTest {
     stage.show();
     new Workspace(root, scene, stage);
 
-    terminalTextArea = lookup(String.format("#%s", ID_BUNDLE.getString("TerminalTextBox"))).query();
-    variablesBox = lookup(String.format("#%s", ID_BUNDLE.getString("VariablesBox"))).query();
+    terminalTextArea = lookup("#TerminalTextBox").query();
+
   }
 
   private void addTurtle() {
-    Button addTurtleButton = lookup("#" + ID_BUNDLE.getString("AddTurtleButton")).query();
+    Button addTurtleButton = lookup("#AddTurtle").query();
     clickOn(addTurtleButton);
   }
 
@@ -52,9 +51,11 @@ class VariablesDisplayTest extends DukeApplicationTest {
   }
 
   @Test
-  void testVariableCreation(){
-    //writeTo(terminalTextArea, "set :a 100");
-    //assertEquals(1, variablesBox.getChildren().size());
-    assertEquals(1, 1);
+  void testCreateVariable(){
+    variablesBox = lookup("#VariablesBox").query();
+    runButton = lookup("#TerminalButton").query();
+    writeTo(terminalTextArea, "set :a 100");
+    clickOn(runButton);
+    assertEquals(1, variablesBox.getChildren().size());
   }
 }
