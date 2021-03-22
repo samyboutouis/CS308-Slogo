@@ -166,13 +166,13 @@ public class TerminalDisplay {
 
   private void applySaveButtonLogic(){
     saveButton.setOnAction(e -> {
-      FileChooser fileChooser = new FileChooser();
-      fileChooser.setInitialDirectory(new File(LIBRARIES_PATH));
-      fileChooser.getExtensionFilters().addAll(new ExtensionFilter("SLogo File",".slogo"));
-      File saveFile = fileChooser.showSaveDialog(scene.getWindow());
-
       String command = textBox.getText().trim();
       if(command.length() > 0){
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setInitialDirectory(new File(LIBRARIES_PATH));
+        fileChooser.getExtensionFilters().addAll(new ExtensionFilter("SLogo File",".slogo"));
+        File saveFile = fileChooser.showSaveDialog(scene.getWindow());
+
         try {
           PrintWriter printWriter = new PrintWriter(saveFile);
           printWriter.println(command);

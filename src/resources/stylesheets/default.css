@@ -8,7 +8,7 @@
   -fx-border-radius: 20px;
   -fx-background-radius: 20px;
   -fx-border-width: 0px;
-  -fx-background-color: #c3c3c3;
+  -fx-background-color: #eaeaea;
 }
 
 .combo-box:hover, .button:hover {
