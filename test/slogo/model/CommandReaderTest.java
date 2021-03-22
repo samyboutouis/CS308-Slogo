@@ -13,7 +13,6 @@ import slogo.turtlecommands.SetBackgroundCommand;
 import slogo.turtlecommands.SetPaletteCommand;
 import slogo.turtlecommands.SetPenColorCommand;
 import slogo.turtlecommands.SetPenSizeCommand;
-import slogo.turtlecommands.TellCommand;
 
 import static org.junit.jupiter.api.Assertions.*;
 
