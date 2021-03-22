@@ -134,7 +134,7 @@ public class FrontEndController {
 
   public void handleColorThemeClick(Button button) {
     buttonFactory.setImage(button, "DarkThemeButton");
-    workspace.setStyleSheet("default.css");
+    workspace.setStyleSheet("light.css");
     button.setOnAction(event -> handleDarkThemeClick(button));
   }
 

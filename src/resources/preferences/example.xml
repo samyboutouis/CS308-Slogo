@@ -60,5 +60,5 @@
     </Turtles>
     <Language>English</Language>
     <BackgroundColor>0xdedcdcff</BackgroundColor>
-    <ColorTheme>default.css</ColorTheme>
+    <ColorTheme>light.css</ColorTheme>
 </Workspace>

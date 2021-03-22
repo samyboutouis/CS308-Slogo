@@ -924,5 +924,5 @@
     </Turtles>
     <Language>Portuguese</Language>
     <BackgroundColor>0x996699ff</BackgroundColor>
-    <ColorTheme>default.css</ColorTheme>
+    <ColorTheme>light.css</ColorTheme>
 </Workspace>

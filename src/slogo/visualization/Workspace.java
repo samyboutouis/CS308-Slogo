@@ -27,7 +27,7 @@ public class Workspace {
   private final static int GRID_COLUMN_COUNT = 5;
   private final static int PADDING_LENGTH = 10;
   private final static int[] paneIndexes = {0, 0, 5, 1, 0, 1, 2, 7, 0, 8, 2, 2, 2, 1, 3, 9};
-  private final static String DEFAULT_STYLESHEET = "default.css";
+  private final static String DEFAULT_STYLESHEET = "dark.css";
 
   private final Stage stage;
   private final Scene scene;

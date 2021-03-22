@@ -26,5 +26,5 @@
     </Turtles>
     <Language>Portuguese</Language>
     <BackgroundColor>0xffccffff</BackgroundColor>
-    <ColorTheme>default.css</ColorTheme>
+    <ColorTheme>light.css</ColorTheme>
 </Workspace>
