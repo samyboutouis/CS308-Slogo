@@ -4,15 +4,15 @@
   -fx-text-fill: black;
 }
 
-.combo-box, .combo-box .context-menu, .button {
+.combo-box, .combo-box .context-menu, .button, .color-picker {
   -fx-border-radius: 20px;
   -fx-background-radius: 20px;
   -fx-border-width: 0px;
   -fx-background-color: #eaeaea;
 }
 
-.combo-box:hover, .button:hover {
-  -fx-background-color: #dbdbdb;
+.combo-box:hover, .button:hover, .color-picker:hover {
+  -fx-background-color: #dddddd;
 }
 
 .button:pressed {

@@ -4,14 +4,14 @@
   -fx-text-fill: white;
 }
 
-.combo-box, .combo-box .context-menu, .button {
+.combo-box, .combo-box .context-menu, .button, .color-picker {
   -fx-border-radius: 20px;
   -fx-background-radius: 20px;
   -fx-border-width: 0px;
   -fx-background-color: #3c3c3c;
 }
 
-.combo-box:hover, .button:hover {
+.combo-box:hover, .button:hover, .color-picker:hover {
   -fx-background-color: #4f4f4f;
 }
 

@@ -123,7 +123,7 @@ public class TerminalDisplay {
     pane.add(runButton, 3, 0, 1, 1);
   }
 
-  private void initializeSaveButton(){
+  private void initializeSaveButton() {
     saveButton = new Button(resourceBundle.getString(TERMINAL_SAVE_BUTTON));
     saveButton.setMaxWidth(BUTTON_WIDTH);
     saveButton.setTranslateX(-25);
@@ -134,7 +134,7 @@ public class TerminalDisplay {
     pane.add(saveButton, 2, 0);
   }
 
-  private void initializeLoadButton(){
+  private void initializeLoadButton() {
     loadButton = new Button(resourceBundle.getString(TERMINAL_LOAD_BUTTON));
     loadButton.setMaxWidth(BUTTON_WIDTH);
     loadButton.setTranslateX(60);
@@ -145,13 +145,13 @@ public class TerminalDisplay {
     pane.add(loadButton, 2, 0);
   }
 
-  private void applyLoadButtonLogic(){
+  private void applyLoadButtonLogic() {
     loadButton.setOnAction(e -> {
       FileChooser fileChooser = new FileChooser();
       fileChooser.setInitialDirectory(new File(LIBRARIES_PATH));
       File selectedFile = fileChooser.showOpenDialog(scene.getWindow());
 
-      if(selectedFile != null){
+      if (selectedFile != null) {
         try {
           String content = new Scanner(selectedFile).useDelimiter("\\Z").next();
           setTerminalText(content);
@@ -162,13 +162,13 @@ public class TerminalDisplay {
     });
   }
 
-  private void applySaveButtonLogic(){
+  private void applySaveButtonLogic() {
     saveButton.setOnAction(e -> {
       String command = textBox.getText().trim();
-      if(command.length() > 0){
+      if (command.length() > 0) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setInitialDirectory(new File(LIBRARIES_PATH));
-        fileChooser.getExtensionFilters().addAll(new ExtensionFilter("SLogo File",".slogo"));
+        fileChooser.getExtensionFilters().addAll(new ExtensionFilter("SLogo File", ".slogo"));
         File saveFile = fileChooser.showSaveDialog(scene.getWindow());
 
         try {
