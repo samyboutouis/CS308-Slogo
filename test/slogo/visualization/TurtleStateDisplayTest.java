@@ -59,15 +59,15 @@ public class TurtleStateDisplayTest extends DukeApplicationTest {
     assertEquals(lineColor, Color.RED);
   }
 
-  @Test
-  void testChangeTurtleImage() {
-    selectTurtleView();
-    runCommand("cs");
-    turtle = lookup("#" + idBundle.getString("Turtle")).query();
-    assertTrue(turtle.isVisible());
-    Button turtleImageButton = lookup("#" + idBundle.getString("TurtleImageButton")).query();
-    clickOn(turtleImageButton);
-  }
+//  @Test
+//  void testChangeTurtleImage() {
+//    selectTurtleView();
+//    runCommand("cs");
+//    turtle = lookup("#" + idBundle.getString("Turtle")).query();
+//    assertTrue(turtle.isVisible());
+//    Button turtleImageButton = lookup("#" + idBundle.getString("TurtleImageButton")).query();
+//    clickOn(turtleImageButton);
+//  }
 
   private void addTurtle() {
     Button addTurtleButton = lookup("#" + idBundle.getString("AddTurtleButton")).query();
