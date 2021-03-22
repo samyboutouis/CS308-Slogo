@@ -23,6 +23,7 @@ public class TurtleStateDisplay implements TurtleObserver {
 
   private static final String LABEL_PROPERTY = "resources/reflection/TurtleStateLabels";
   private static final String COLOR_PICKER_ID = "PenColorPicker";
+  private static final String TURTLE_DROPDOWN = "TurtleDropdown";
   private static final String SLIDER_ID = "Slider";
   private static final int SLIDER_MIN = 1;
   private static final int SLIDER_MAX = 5;
@@ -59,6 +60,7 @@ public class TurtleStateDisplay implements TurtleObserver {
     turtleDropdown = new ComboBox<>();
     vbox.getChildren().add(turtleDropdown);
     turtleDropdown.valueProperty().addListener(event -> updateFields(turtleDropdown.getValue()));
+    turtleDropdown.setId(TURTLE_DROPDOWN);
   }
 
   public void updateTurtleNumber(List<Integer> list) {
