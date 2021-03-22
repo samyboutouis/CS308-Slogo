@@ -47,6 +47,10 @@ public abstract class SlogoNode {
     return parameters;
   }
 
+  public int getNumParameters() {
+    return numParameters;
+  }
+
   public abstract double getReturnValue(BackEndTurtleTracker tracker);
 }
 
