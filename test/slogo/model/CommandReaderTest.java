@@ -187,6 +187,7 @@ public class CommandReaderTest {
   @Test
   void testGrouping() {
     assertEquals(List.of(46.0), myReader.testParseInput("fd ( sum 10 11 12 13 )"));
+    assertEquals(List.of(6.0), myReader.testParseInput("( setpalette 1 255 0 0 2 0 255 0 3 0 0 255 )"));
   }
 
   // SECTION
