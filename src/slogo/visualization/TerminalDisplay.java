@@ -1,6 +1,12 @@
 package slogo.visualization;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ResourceBundle;
+import java.util.Scanner;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -13,6 +19,8 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.text.TextAlignment;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 import slogo.FrontEndTurtleTracker;
 import slogo.controller.Controller;
 import slogo.model.BackEndTurtleTracker;
@@ -29,6 +37,10 @@ public class TerminalDisplay {
   private final static String ERROR_TITLE_PROPERTY = "ErrorTitle";
   private final static String DISPLAY_CLASS_NAME = "displayWindow";
   private final static int COLUMN_COUNT = 4;
+
+  private final static int BUTTON_WIDTH = 80;
+
+  private final static String LIBRARIES_PATH = "src/resources/libraries";
 
   private final Scene scene;
   private final ResourceBundle resourceBundle;
@@ -87,6 +99,7 @@ public class TerminalDisplay {
     initializeTextField();
     initializeRunButton();
     initializeSaveButton();
+    initializeLoadButton();
     applyTerminalLogic();
   }
 
@@ -114,11 +127,61 @@ public class TerminalDisplay {
 
   private void initializeSaveButton(){
     saveButton = new Button(resourceBundle.getString(TERMINAL_SAVE_BUTTON));
-    saveButton.setMaxSize(100, 20);
+    saveButton.setMaxWidth(BUTTON_WIDTH);
+    saveButton.setTranslateX(-25);
     saveButton.setTranslateY(50);
-    saveButton.setTranslateX(10);
 
-    pane.add(saveButton, 0, 0);
+    applySaveButtonLogic();
+
+    pane.add(saveButton, 2, 0);
+  }
+
+  private void initializeLoadButton(){
+    loadButton = new Button(resourceBundle.getString(TERMINAL_LOAD_BUTTON));
+    loadButton.setMaxWidth(BUTTON_WIDTH);
+    loadButton.setTranslateX(60);
+    loadButton.setTranslateY(50);
+
+    applyLoadButtonLogic();
+
+    pane.add(loadButton, 2, 0);
+  }
+
+  private void applyLoadButtonLogic(){
+    loadButton.setOnAction(e -> {
+      FileChooser fileChooser = new FileChooser();
+      fileChooser.setInitialDirectory(new File(LIBRARIES_PATH));
+      File selectedFile = fileChooser.showOpenDialog(scene.getWindow());
+
+      if(selectedFile != null){
+        try {
+          String content = new Scanner(selectedFile).useDelimiter("\\Z").next();
+          setTerminalText(content);
+        } catch (FileNotFoundException fileNotFoundException) {
+          fileNotFoundException.printStackTrace();
+        }
+      }
+    });
+  }
+
+  private void applySaveButtonLogic(){
+    saveButton.setOnAction(e -> {
+      FileChooser fileChooser = new FileChooser();
+      fileChooser.setInitialDirectory(new File(LIBRARIES_PATH));
+      fileChooser.getExtensionFilters().addAll(new ExtensionFilter("SLogo File",".slogo"));
+      File saveFile = fileChooser.showSaveDialog(scene.getWindow());
+
+      String command = textBox.getText().trim();
+      if(command.length() > 0){
+        try {
+          PrintWriter printWriter = new PrintWriter(saveFile);
+          printWriter.println(command);
+          printWriter.close();
+        } catch (FileNotFoundException fileNotFoundException) {
+          fileNotFoundException.printStackTrace();
+        }
+      }
+    });
   }
 
   private void applyTerminalLogic() {
