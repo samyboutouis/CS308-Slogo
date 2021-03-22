@@ -22,14 +22,19 @@ import util.DukeApplicationTest;
 class ButtonDisplayTest extends DukeApplicationTest {
   public static final String LANGUAGE = "English";
   private final static String RESOURCE_PACKAGE = "resources";
+  private final static int SCREEN_WIDTH = 1280;
+  private final static int SCREEN_HEIGHT = 800;
 
   private ResourceBundle idBundle;
   private Button myRightButton;
 
   @Override
   public void start (Stage stage) {
-    Main main = new Main();
-    main.start(stage);
+    Pane root = new Pane();
+    Scene scene = new Scene(root, SCREEN_WIDTH, SCREEN_HEIGHT);
+    stage.setScene(scene);
+    stage.show();
+    new Workspace(root, scene, stage);
     idBundle = ResourceBundle
       .getBundle(String.format("%s/%s/%s", RESOURCE_PACKAGE, "stylesheets", "CSS_IDs"));
     myRightButton = lookup("#" + idBundle.getString("RightButton")).query();

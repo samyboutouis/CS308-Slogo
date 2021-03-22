@@ -17,8 +17,12 @@ import static org.junit.jupiter.api.Assertions.*;
 class ToolbarDisplayTest extends DukeApplicationTest {
   public static final String LANGUAGE = "English";
   private final static String RESOURCE_PACKAGE = "resources";
+  private final static int SCREEN_WIDTH = 1280;
+  private final static int SCREEN_HEIGHT = 800;
 
+  private Workspace workspace;
   private ResourceBundle idBundle;
+  private Button myColorThemeButton;
   private ColorPicker myBackgroundColorPicker;
   private ComboBox<String> myLanguageDropdown;
   private ComboBox<String> myHelpDropdown;
@@ -26,10 +30,14 @@ class ToolbarDisplayTest extends DukeApplicationTest {
 
   @Override
   public void start (Stage stage) {
-    Main main = new Main();
-    main.start(stage);
+    Pane root = new Pane();
+    Scene scene = new Scene(root, SCREEN_WIDTH, SCREEN_HEIGHT);
+    stage.setScene(scene);
+    stage.show();
+    workspace = new Workspace(root, scene, stage);
     idBundle = ResourceBundle
       .getBundle(String.format("%s/%s/%s", RESOURCE_PACKAGE, "stylesheets", "CSS_IDs"));
+    myColorThemeButton = lookup("#" + idBundle.getString("ColorThemeButton")).query();
     myBackgroundColorPicker = lookup("#" + idBundle.getString("ColorPicker")).query();
     myLanguageDropdown = lookup("#" + idBundle.getString("LanguageDropdown")).query();
     myHelpDropdown = lookup("#" + idBundle.getString("HelpDropdown")).query();
@@ -38,11 +46,19 @@ class ToolbarDisplayTest extends DukeApplicationTest {
   }
 
   @Test
+  void testChangeColorTheme(){
+    assertTrue(myColorThemeButton.isVisible());
+    workspace.getStylesheet().equals("dark.css");
+    clickOn(myColorThemeButton);
+    workspace.getStylesheet().equals("light.css");
+  }
+
+  @Test
   void testChangeBackgroundColor() {
     assertTrue(myBackgroundColorPicker.isVisible());
     setValue(myBackgroundColorPicker, Color.RED);
-//    Color backgroundColor = (Color) myTurtlePane.getBackground().getFills().get(0).getFill();
-//    assertEquals(backgroundColor, Color.RED);
+    Color backgroundColor = (Color) myTurtlePane.getBackground().getFills().get(0).getFill();
+    assertEquals(backgroundColor, Color.RED);
   }
 
   @Test
