@@ -8,6 +8,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.Test;
+import slogo.Main;
 import util.DukeApplicationTest;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -20,11 +21,8 @@ public class TurtleDisplayTest extends DukeApplicationTest {
 
   @Override
   public void start(Stage stage) {
-    Pane root = new Pane();
-    Scene scene = new Scene(root);
-    stage.setScene(scene);
-    stage.show();
-    new Workspace(root, scene, stage);
+    Main main = new Main();
+    main.start(stage);
     idBundle = ResourceBundle
       .getBundle(String.format("%s/%s/%s", RESOURCE_PACKAGE, "stylesheets", "CSS_IDs"));
     addTurtle();

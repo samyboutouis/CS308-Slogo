@@ -16,6 +16,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.Test;
+import slogo.Main;
 import util.DukeApplicationTest;
 
 class ButtonDisplayTest extends DukeApplicationTest {
@@ -27,11 +28,8 @@ class ButtonDisplayTest extends DukeApplicationTest {
 
   @Override
   public void start (Stage stage) {
-    Pane root = new Pane();
-    Scene scene = new Scene(root);
-    stage.setScene(scene);
-    stage.show();
-    new Workspace(root, scene, stage);
+    Main main = new Main();
+    main.start(stage);
     idBundle = ResourceBundle
       .getBundle(String.format("%s/%s/%s", RESOURCE_PACKAGE, "stylesheets", "CSS_IDs"));
     myRightButton = lookup("#" + idBundle.getString("RightButton")).query();
