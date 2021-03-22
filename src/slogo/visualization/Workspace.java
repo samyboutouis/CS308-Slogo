@@ -13,35 +13,42 @@ public class Workspace {
   private final static int GRID_COLUMN_COUNT = 5;
   private final static int PADDING_LENGTH = 10;
   private final static String RESOURCE_PACKAGE = "resources";
+  private final static String STYLESHEETS_PACKAGE = String
+    .format("/%s/stylesheets", RESOURCE_PACKAGE);
   private final static int[] paneIndexes = {0, 0, 5, 1, 0, 1, 2, 7, 0, 8, 2, 2, 2, 1, 3, 9};
+  private final static String DEFAULT_STYLESHEET = "default.css";
+
+  private final static String WORKSPACE_PANE_ID = "Workspace";
 
   private final Stage stage;
   private final Scene scene;
   private final CustomGridPane pane;
   private final Controller controller;
-
   private TerminalDisplay terminalDisplay;
+  private String stylesheet;
 
   public Workspace(Pane root, Scene scene, Stage stage) {
     this.scene = scene;
     this.stage = stage;
     controller = new Controller();
     pane = new CustomGridPane(GRID_ROW_COUNT, GRID_COLUMN_COUNT, PADDING_LENGTH);
+    pane.setId(WORKSPACE_PANE_ID);
     root.getChildren().add(pane);
     pane.setPrefSize(scene);
     setupDisplays();
-    setStyleSheet();
+    setStyleSheet(DEFAULT_STYLESHEET);
   }
 
 
   private void setupDisplays() {
     PaletteDisplay paletteDisplay = new PaletteDisplay(this, RESOURCE_PACKAGE);
     FrontEndTurtleTracker frontEndTurtleTracker = new FrontEndTurtleTracker(paletteDisplay);
-    FrontEndController frontEndController = new FrontEndController(stage, frontEndTurtleTracker);
+    FrontEndController frontEndController = new FrontEndController(stage, frontEndTurtleTracker,
+      controller, paletteDisplay, this);
     HistoryDisplay historyDisplay = new HistoryDisplay(this, RESOURCE_PACKAGE);
     VariablesDisplay variablesDisplay = new VariablesDisplay(this, RESOURCE_PACKAGE);
     UserCommandsDisplay userCommandsDisplay = new UserCommandsDisplay(this, RESOURCE_PACKAGE);
-    ButtonDisplay buttonDisplay = new ButtonDisplay(frontEndController);
+    ButtonDisplay buttonDisplay = new ButtonDisplay(this, RESOURCE_PACKAGE, frontEndController);
 
     TurtleStateDisplay turtleStateDisplay = new TurtleStateDisplay(frontEndController,
       frontEndTurtleTracker);
@@ -63,13 +70,19 @@ public class Workspace {
       paneIndexes[15]);
   }
 
-  private void setStyleSheet() {
+  public void setStyleSheet(String styleSheetName) {
+    scene.getStylesheets().clear();
     scene.getStylesheets().add(
-      getClass().getResource(String.format("/%s/stylesheets/%s", RESOURCE_PACKAGE, "default.css"))
+      getClass().getResource(String.format("%s/%s", STYLESHEETS_PACKAGE, styleSheetName))
         .toExternalForm());
+    stylesheet = styleSheetName;
   }
 
   public TerminalDisplay getTerminalDisplay() {
     return terminalDisplay;
+  }
+
+  public String getStylesheet() {
+    return stylesheet;
   }
 }

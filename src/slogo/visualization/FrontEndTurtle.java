@@ -1,11 +1,14 @@
 package slogo.visualization;
 
 import java.io.File;
+import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
 import slogo.FrontEndTurtleTracker;
 import slogo.SafeTurtle;
 import slogo.Turtle;
@@ -35,6 +38,7 @@ public class FrontEndTurtle implements Turtle, SafeTurtle {
     setDefaultImage();
     isActive = true;
     turtleTracker = frontEndTurtleTracker;
+    shapeIndex = 3;
   }
 
   public void forward(double pixels) {
@@ -144,6 +148,11 @@ public class FrontEndTurtle implements Turtle, SafeTurtle {
     pen.setColor(color);
   }
 
+  public void setPenColor(int index) {
+    Color color = turtleTracker.getColorIndex(index);
+    setPenColor(color);
+  }
+
   public double getPenThickness() {
     return pen.getThickness();
   }
@@ -215,6 +224,13 @@ public class FrontEndTurtle implements Turtle, SafeTurtle {
   }
 
   public int getPenColorIndex() {
-    return pen.getPenColorIndex();
+    // get index from color
+    //return pen.getColor()
+    //FIXME
+    return -1;
+  }
+
+  public List<Map<String, String>> getLineInfo() {
+    return pen.getLineInfo();
   }
 }

@@ -1,0 +1,117 @@
+* {
+  -fx-font-family: monospace;
+  -fx-font-size: 20;
+  -fx-text-fill: white;
+}
+
+.combo-box, .combo-box .context-menu, .button {
+  -fx-border-radius: 20px;
+  -fx-background-radius: 20px;
+  -fx-border-width: 0px;
+  -fx-background-color: #3c3c3c;
+}
+
+.combo-box:hover, .button:hover {
+  -fx-background-color: #4f4f4f;
+}
+
+.button:pressed {
+  -fx-background-color: #2b2b2b;
+}
+
+.combo-box .list-cell {
+  -fx-text-fill: black;
+}
+
+#Workspace {
+  -fx-background-color: #292929;
+}
+
+#TerminalTextBox {
+  -fx-font-size: 20;
+  -fx-background-radius: 20px;
+  -fx-border-radius: 20px;
+  -fx-prompt-text-fill: #606060;
+}
+
+#TerminalTextBox .scroll-pane{
+  -fx-background-color: #acacac;
+  -fx-background-radius: 20px;
+}
+
+#TerminalTextBox .scroll-pane .viewport, #TerminalTextBox .scroll-pane .content{
+  -fx-background-color: transparent;
+}
+
+#TerminalButton {
+  -fx-background-radius: 20px;
+  -fx-border-width: 0px;
+  -fx-background-color: #6c8c52;
+  -fx-font-size: 10;
+}
+
+#TerminalButton:hover {
+  -fx-background-color: #7e9d63;
+}
+
+#TerminalButton:pressed {
+  -fx-background-color: #5b7942;
+}
+
+.displayWindow{
+  -fx-background-color: #343434;
+  -fx-background-radius: 20px;
+}
+
+.ViewContainer{
+  -fx-background-color: #7c7c7c;
+  -fx-background-radius: 20px;
+}
+
+#ViewContainerCloseButton {
+  -fx-background-radius: 50%;
+  -fx-border-width: 0px;
+  -fx-background-color: #ab3737;
+}
+
+#ViewContainerCloseButton:hover {
+  -fx-background-color: #ca4848;
+}
+
+#ViewContainerComboBox {
+  -fx-background-radius: 20px;
+  -fx-border-width: 0px;
+  -fx-border-image-width: 0px;
+}
+
+#HistoryBox, #VariablesBox, #UserCommandsBox, #PaletteBox {
+  -fx-background-radius: 20px;
+  -fx-border-radius: 20px;
+  -fx-background-color: #aeadad;
+}
+
+#HistoryBox .viewport, #VariablesBox .viewport, #UserCommandsBox .viewport, #PaletteBox .viewport{
+  -fx-background-color: transparent;
+}
+
+#HistoryTag, #VariablesTag, #UserCommandsTag, #PaletteTag {
+  -fx-background-radius: 20px;
+  -fx-border-width: 0px;
+  -fx-background-color: #707070;
+}
+
+#HistoryTag:hover, #VariablesTag:hover, #UserCommandsTag:hover {
+  -fx-background-color: #838282;
+}
+
+#HistoryTag:pressed, #VariablesTag:pressed, #UserCommandsTag:pressed {
+  -fx-background-color: #5a5a5a;
+}
+
+#PenColorPicker {
+  -fx-max-width: 100px;
+}
+
+#Slider {
+  -fx-max-width: 100px;
+}

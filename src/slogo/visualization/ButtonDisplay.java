@@ -10,15 +10,18 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import slogo.controller.FrontEndController;
 
-public class ButtonDisplay {
+public class ButtonDisplay extends ScrollingDisplay {
+  private static final String TITLE = "ButtonsTitle";
+  private static final String BUTTON_BOX_ID = "ButtonBoxID";
 
   private final VBox vbox;
   private final ButtonFactory buttonFactory;
   private final List<String> buttonList;
   private final GridPane pane;
 
-  public ButtonDisplay(FrontEndController frontEndController) {
-    vbox = new VBox();
+  public ButtonDisplay(Workspace workspace, String resourcePackage, FrontEndController frontEndController) {
+    super(workspace, resourcePackage);
+    vbox = setupVBoxContainer(TITLE, BUTTON_BOX_ID);
     buttonFactory = new ButtonFactory(frontEndController);
     buttonList = List.of("UpButton", "DownButton", "RightButton", "LeftButton");
     pane = new GridPane();

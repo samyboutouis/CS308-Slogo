@@ -4,6 +4,30 @@
   -fx-text-fill: black;
 }
 
+.combo-box, .combo-box .context-menu, .button {
+  -fx-border-radius: 20px;
+  -fx-background-radius: 20px;
+  -fx-border-width: 0px;
+  -fx-background-color: #eaeaea;
+}
+
+.combo-box:hover, .button:hover {
+  -fx-background-color: #dbdbdb;
+}
+
+.button:pressed {
+  -fx-background-color: #a9a9a9;
+}
+
+
+.combo-box .list-cell {
+  -fx-text-fill: black;
+}
+
+#Workspace {
+  -fx-background-color: #f3f3f3;
+}
+
 #TerminalTextBox {
   -fx-font-size: 20;
   -fx-background-radius: 20px;
@@ -14,6 +38,7 @@
   -fx-background-color: white;
   -fx-background-radius: 20px;
 }
+
 #TerminalTextBox .scroll-pane .viewport, #TerminalTextBox .scroll-pane .content{
   -fx-background-color: transparent;
 }
@@ -38,9 +63,25 @@
   -fx-background-radius: 20px;
 }
 
-.yeetBox{
-  -fx-background-color: #ffffff;
+.ViewContainer{
+  -fx-background-color: #fafafa;
   -fx-background-radius: 20px;
+}
+
+#ViewContainerCloseButton {
+  -fx-background-radius: 50%;
+  -fx-border-width: 0px;
+  -fx-background-color: #f37878;
+}
+
+#ViewContainerCloseButton:hover {
+  -fx-background-color: #d44848;
+}
+
+#ViewContainerComboBox {
+  -fx-background-radius: 20px;
+  -fx-border-width: 0px;
+  -fx-border-image-width: 0px;
 }
 
 #HistoryBox, #VariablesBox, #UserCommandsBox, #PaletteBox {
@@ -59,11 +100,11 @@
   -fx-background-color: #f5f5f5;
 }
 
-#HistoryTag:hover, #VariablesTag:hover {
+#HistoryTag:hover, #VariablesTag:hover, #UserCommandsTag:hover {
   -fx-background-color: #fafafa;
 }
 
-#HistoryTag:pressed, #VariablesTag:pressed {
+#HistoryTag:pressed, #VariablesTag:pressed, #UserCommandsTag:pressed {
   -fx-background-color: #e7e7e7;
 }
 
@@ -73,21 +114,8 @@
 
 #Slider {
   -fx-max-width: 100px;
-
 }
 
-#ViewContainerCloseButton {
-  -fx-background-radius: 50%;
-  -fx-border-width: 0px;
-  -fx-background-color: #f37878;
-}
-
-#ViewContainerCloseButton:hover {
-  -fx-background-color: #d44848;
-}
-
-#ViewContainerComboBox {
+#TurtlePaneID {
   -fx-background-radius: 20px;
-  -fx-border-width: 0px;
-  -fx-border-image-width: 0px;
 }
