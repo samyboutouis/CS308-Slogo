@@ -64,6 +64,14 @@ ask [ 1 2 3 4 ] [ id ]
 ```
 ID will return 1 in both cases because that is the first ID in the tell/ask list. 
 
+#### Multi-Turtle Variables
+```
+set :x 10
+tell [ 1 2 3 ]
+fd set :x sum :x 10
+```
+Each turtle will move a different amount forward, because for each turtle, the fd command will run each of its parameters again
+
 
 ### Impressions
 
