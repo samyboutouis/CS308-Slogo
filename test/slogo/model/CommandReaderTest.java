@@ -163,10 +163,12 @@ public class CommandReaderTest {
         + "]\n"
         + "\n"
         + "example 30 ycor\n"));
-    assertEquals(List.of(0.0), myReader.testParseInput("to felix [ sum 50 50 ] [ fd 50 ]"));// unable to define method, variables are wrong
 
+    // unable to define method, variables are wrong
+    assertEquals(List.of(0.0), myReader.testParseInput("to felix [ sum 50 50 ] [ fd 50 ]"));
 
-    // the last test is to test that the getUserDefinedCommandsinString returns the map correctly
+    // the last test is to test that the getUserDefinedCommandsInString returns the map correctly
+    // DO NOT PLACE MORE USER DEFINED COMMAND TESTS BEFORE HERE
     String ret = "";
     for (String key: myReader.getUserDefinedCommandsInString().keySet()){
       ret += key+": "+myReader.getUserDefinedCommandsInString().get(key)+"\n";
@@ -175,7 +177,12 @@ public class CommandReaderTest {
         + "example:  [ :x ] [ if greater? :x 10 [ example difference :x 10 fd 50 ] ]\n", ret);
   }
 
-
+  @Test
+  void testVariableScope() {
+    // test if scope is local with variables
+    String scopeTest = "to felix [ :size ] [ fd :size ] to scopeTest [ ] [ set :size 3 felix 79 fd :size ] scopeTest ycor";
+    assertEquals(List.of(1.0, 1.0, 3.0, 82.0), myReader.testParseInput(scopeTest));
+  }
 
   // SECTION
   // test that command objects created are correct
