@@ -13,6 +13,7 @@ import slogo.visualization.ButtonFactory;
 import slogo.visualization.Workspace;
 
 public class ButtonDisplay extends ScrollingDisplay {
+
   private static final String TITLE = "ButtonsTitle";
   private static final String BUTTON_BOX_ID = "ButtonBoxID";
   private static final String TEXT_FIELD_ID = "TextField";

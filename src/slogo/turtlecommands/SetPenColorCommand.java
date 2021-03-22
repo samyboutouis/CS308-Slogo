@@ -7,7 +7,7 @@ public class SetPenColorCommand implements Command {
 
   private int index;
 
-  public SetPenColorCommand(int index){
+  public SetPenColorCommand(int index) {
     this.index = index;
   }
 

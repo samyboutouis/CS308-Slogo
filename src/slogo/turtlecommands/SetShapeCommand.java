@@ -7,7 +7,7 @@ public class SetShapeCommand implements Command {
 
   private int index;
 
-  public SetShapeCommand(int index){
+  public SetShapeCommand(int index) {
     this.index = index;
   }
 

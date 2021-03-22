@@ -23,7 +23,7 @@ public class Controller {
     translationBundle = ResourceBundle
         .getBundle(String.format("%s/%s/%s", "resources", "languages", "TranslateOptions"));
     languageBundle = ResourceBundle
-      .getBundle(String.format("%s/%s/%s", "resources", "languages", "LanguageOptions"));
+        .getBundle(String.format("%s/%s/%s", "resources", "languages", "LanguageOptions"));
   }
 
   public SafeBackEndTurtleTracker parseProgram(String program,

@@ -81,8 +81,8 @@ public class Workspace {
   public void setStyleSheet(String styleSheetName) {
     scene.getStylesheets().clear();
     scene.getStylesheets().add(
-      getClass().getResource(String.format("%s/%s", STYLESHEETS_PACKAGE, styleSheetName))
-        .toExternalForm());
+        getClass().getResource(String.format("%s/%s", STYLESHEETS_PACKAGE, styleSheetName))
+            .toExternalForm());
     stylesheet = styleSheetName;
   }
 

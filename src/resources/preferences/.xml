@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Workspace>
+
+  <Turtles/>
+  <Language>English</Language>
+  <BackgroundColor>0xdedcdcff</BackgroundColor>
     <Turtles>
         <Turtle>
             <Lines/>

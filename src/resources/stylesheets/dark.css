@@ -38,12 +38,12 @@
   -fx-prompt-text-fill: #606060;
 }
 
-#TerminalTextBox .scroll-pane{
+#TerminalTextBox .scroll-pane {
   -fx-background-color: #acacac;
   -fx-background-radius: 20px;
 }
 
-#TerminalTextBox .scroll-pane .viewport, #TerminalTextBox .scroll-pane .content{
+#TerminalTextBox .scroll-pane .viewport, #TerminalTextBox .scroll-pane .content {
   -fx-background-color: transparent;
 }
 
@@ -62,12 +62,12 @@
   -fx-background-color: #5b7942;
 }
 
-.displayWindow{
+.displayWindow {
   -fx-background-color: #343434;
   -fx-background-radius: 20px;
 }
 
-.ViewContainer{
+.ViewContainer {
   -fx-background-color: #7c7c7c;
   -fx-background-radius: 20px;
 }

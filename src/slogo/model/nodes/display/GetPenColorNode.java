@@ -14,7 +14,8 @@ public class GetPenColorNode extends TurtleCommandNode {
   @Override
   public double getReturnValue(BackEndTurtleTracker tracker) {
     return super.loopThroughTurtles(tracker, new ArrayList<>(), (currTurtle, values) -> {
-      currTurtle.addCommand( new DisplayCommand("Pen Color Index is " + currTurtle.getPenColorIndex()));
+      currTurtle
+          .addCommand(new DisplayCommand("Pen Color Index is " + currTurtle.getPenColorIndex()));
       return currTurtle.getPenColorIndex();
     });
   }

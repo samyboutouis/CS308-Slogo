@@ -63,7 +63,8 @@ public class ToolbarDisplay implements XMLObserver {
     this.idBundle = ResourceBundle.getBundle(DEFAULT_RESOURCE_FOLDER + ID_PROPERTY);
     this.frontEndController = frontEndController;
     this.toggleButtonList = List.of("AddTurtleButton", "ColorThemeButton");
-    this.defaultButtonList = List.of("NewWorkspaceButton", "LoadWorkspaceButton", "SaveWorkspaceButton");
+    this.defaultButtonList = List
+        .of("NewWorkspaceButton", "LoadWorkspaceButton", "SaveWorkspaceButton");
     this.backgroundColor = DEFAULT_COLOR;
     this.turtleTracker = frontEndTurtleTracker;
     initializeGridPane();

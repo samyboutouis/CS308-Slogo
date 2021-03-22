@@ -38,12 +38,12 @@
 
 }
 
-#TerminalTextBox .scroll-pane{
+#TerminalTextBox .scroll-pane {
   -fx-background-color: white;
   -fx-background-radius: 20px;
 }
 
-#TerminalTextBox .scroll-pane .viewport, #TerminalTextBox .scroll-pane .content{
+#TerminalTextBox .scroll-pane .viewport, #TerminalTextBox .scroll-pane .content {
   -fx-background-color: transparent;
 }
 
@@ -62,12 +62,12 @@
   -fx-background-color: #7fcd37;
 }
 
-.displayWindow{
+.displayWindow {
   -fx-background-color: #dedcdc;
   -fx-background-radius: 20px;
 }
 
-.ViewContainer{
+.ViewContainer {
   -fx-background-color: #fafafa;
   -fx-background-radius: 20px;
 }

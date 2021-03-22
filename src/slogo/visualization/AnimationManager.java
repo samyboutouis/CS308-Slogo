@@ -23,7 +23,8 @@ public class AnimationManager {
   private int frameIndex;
   private int turtleID;
 
-  public AnimationManager(Map<Integer, List<Command>> map, FrontEndTurtleTracker frontEndTurtleTracker) {
+  public AnimationManager(Map<Integer, List<Command>> map,
+      FrontEndTurtleTracker frontEndTurtleTracker) {
     this.commands = map;
     this.turtleTracker = frontEndTurtleTracker;
     setupTimeline();

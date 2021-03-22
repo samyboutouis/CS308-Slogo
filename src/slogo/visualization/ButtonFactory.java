@@ -9,6 +9,7 @@ import javafx.scene.image.ImageView;
 import slogo.visualization.turtle.Turtle;
 
 public class ButtonFactory {
+
   private static final int ICON_WIDTH = 30;
   private static final int ICON_HEIGHT = 30;
   private static final String DEFAULT_RESOURCE_FOLDER = "resources/";
