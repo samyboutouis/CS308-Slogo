@@ -3,9 +3,13 @@ package slogo.visualization;
 import java.util.ResourceBundle;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ColorPicker;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.Test;
 import util.DukeApplicationTest;
@@ -14,6 +18,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class TurtleStateDisplayTest extends DukeApplicationTest {
   private final static String RESOURCE_PACKAGE = "resources";
+  private final static int SCREEN_WIDTH = 1280;
+  private final static int SCREEN_HEIGHT = 800;
 
   private ResourceBundle idBundle;
   private ImageView turtle;
@@ -21,13 +27,14 @@ public class TurtleStateDisplayTest extends DukeApplicationTest {
   @Override
   public void start(Stage stage) {
     Pane root = new Pane();
-    Scene scene = new Scene(root);
+    Scene scene = new Scene(root, SCREEN_WIDTH, SCREEN_HEIGHT);
     stage.setScene(scene);
     stage.show();
     new Workspace(root, scene, stage);
     idBundle = ResourceBundle
       .getBundle(String.format("%s/%s/%s", RESOURCE_PACKAGE, "stylesheets", "CSS_IDs"));
     addTurtle();
+    addStateView();
   }
 
   @Test
@@ -38,16 +45,11 @@ public class TurtleStateDisplayTest extends DukeApplicationTest {
 
 //  @Test
 //  void testChangePenColor() {
-//    assertTrue(myPenColorButton.isVisible());
-//    clickOn(myPenColorButton);
-//    assertTrue(myPenColorButton.isDisabled());
-//    assertFalse(myPenColorButton.isVisible());
-//    ColorPicker colorPicker = lookup("#" + idBundle.getString("ColorPicker")).query();
+//    selectTurtleView();
+//    ColorPicker colorPicker = lookup("#PenColorPicker").query();
+//    assertTrue(colorPicker.isVisible());
 //    setValue(colorPicker, Color.RED);
-//    TextArea terminalTextBox = lookup("#" + idBundle.getString("TerminalTextBoxID")).query();
-//    Button terminalButton =  lookup("#" + idBundle.getString("TerminalButtonID")).query();
-//    writeTo(terminalTextBox, "fd 50");
-//    clickOn(terminalButton);
+//    runCommand("fd 50");
 //    Line line = lookup("#" + idBundle.getString("LineID")).query();
 //    Color lineColor = (Color) line.getStroke();
 //    assertEquals(lineColor, Color.RED);
@@ -70,5 +72,15 @@ public class TurtleStateDisplayTest extends DukeApplicationTest {
     Button terminalButton =  lookup("#" + idBundle.getString("TerminalButtonID")).query();
     writeTo(terminalTextBox, command);
     clickOn(terminalButton);
+  }
+
+  private void addStateView() {
+    ComboBox<String> comboBox = lookup("#ViewContainerComboBox").query();
+    select(comboBox, "Turtles");
+  }
+
+  private void selectTurtleView() {
+    ComboBox<Integer> turtleComboBox = lookup("#TurtleDropdown").query();
+    select(turtleComboBox, 1);
   }
 }
