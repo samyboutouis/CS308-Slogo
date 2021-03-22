@@ -49,7 +49,7 @@ public class FrontEndTurtleTracker implements SafeFrontEndTurtleTracker {
     }
   }
 
-  private void notifyUpdateTurtleState(int id) {
+  public void notifyUpdateTurtleState(int id) {
     for (TurtleObserver turtleObserver : turtleObservers) {
       turtleObserver.updateTurtleState(id);
     }
