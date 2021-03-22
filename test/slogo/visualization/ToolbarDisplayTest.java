@@ -91,12 +91,6 @@ class ToolbarDisplayTest extends DukeApplicationTest {
   }
 
   @Test
-  void testLoadWorkspace() {
-    assertTrue(myLoadButton.isVisible());
-    clickOn(myLoadButton);
-  }
-
-  @Test
   void testSaveWorkspace() {
     assertTrue(mySaveButton.isVisible());
     clickOn(mySaveButton);
