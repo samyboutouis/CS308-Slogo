@@ -140,4 +140,12 @@ public class BackEndTurtle {
     home();
     setDirection(0);
   }
+
+  public int getPenColorIndex() {
+    return penColorIndex;
+  }
+
+  public int getShapeIndex() {
+    return shapeIndex;
+  }
 }
