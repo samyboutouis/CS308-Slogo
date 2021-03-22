@@ -13,6 +13,7 @@ public class XMLParser {
   private String language;
   private Color backgroundColor;
   private String stylesheet;
+  private int numTurtles;
 
   public XMLParser(File file) throws Exception {
     try {
@@ -38,6 +39,7 @@ public class XMLParser {
     language = findValue("Language");
     backgroundColor = Color.web(findValue("BackgroundColor"));
     stylesheet = findValue("ColorTheme");
+    numTurtles = findCount("Turtle");
   }
 
   private String findValue(String key) throws Exception {
@@ -46,6 +48,15 @@ public class XMLParser {
       throw new Exception();
     } else {
       return nodes.item(0).getTextContent();
+    }
+  }
+
+  private int findCount(String key) throws Exception {
+    NodeList nodes = doc.getElementsByTagName(key);
+    if (nodes.getLength() == 0) {
+      throw new Exception();
+    } else {
+      return nodes.getLength();
     }
   }
 
@@ -59,5 +70,9 @@ public class XMLParser {
 
   public String getStylesheet() {
     return stylesheet;
+  }
+
+  public int getNumTurtles() {
+    return numTurtles;
   }
 }

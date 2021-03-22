@@ -102,9 +102,7 @@ public class FrontEndController {
     if (file != null) {
       try {
         XMLParser xmlParser = new XMLParser(file);
-        controller.setTranslatedLanguage(xmlParser.getLanguage());
-        workspace.setStyleSheet(xmlParser.getStylesheet());
-        frontEndTurtleTracker.notifyBackgroundObservers(xmlParser.getBackgroundColor());
+        setUpWorkspace(xmlParser);
       } catch (Exception e) {
         AlertType type = AlertType.ERROR;
         new Alert(type, ERROR_MESSAGE).showAndWait();
@@ -119,6 +117,16 @@ public class FrontEndController {
     String newValue = textDialog.getEditor().getText();
     if (newValue != null) {
       XMLCreator xmlCreator = new XMLCreator(frontEndTurtleTracker, controller, workspace, newValue);
+    }
+  }
+
+  private void setUpWorkspace(XMLParser xmlParser) {
+    controller.setTranslatedLanguage(xmlParser.getLanguage());
+    workspace.setStyleSheet(xmlParser.getStylesheet());
+    frontEndTurtleTracker.notifyBackgroundObservers(xmlParser.getBackgroundColor());
+    for(int i = 0; i < xmlParser.getNumTurtles(); i++){
+      FrontEndTurtle turtle = new FrontEndTurtle(frontEndTurtleTracker);
+      frontEndTurtleTracker.addTurtle(turtle);
     }
   }
 
