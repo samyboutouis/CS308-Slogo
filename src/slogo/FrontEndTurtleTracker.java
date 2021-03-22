@@ -156,7 +156,7 @@ public class FrontEndTurtleTracker implements SafeFrontEndTurtleTracker {
         .collect(Collectors.toSet());
   }
 
-  public SafeTurtle getSafeTurtle(int id) {
+  public Turtle getTurtle(int id) {
     return allTurtles.get(id);
   }
 

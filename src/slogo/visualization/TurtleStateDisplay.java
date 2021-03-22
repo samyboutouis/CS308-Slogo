@@ -14,7 +14,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import slogo.FrontEndTurtleTracker;
-import slogo.SafeTurtle;
+import slogo.Turtle;
 import slogo.controller.FrontEndController;
 
 public class TurtleStateDisplay implements TurtleObserver {
@@ -80,8 +80,8 @@ public class TurtleStateDisplay implements TurtleObserver {
     hbox.getChildren().add(new Label(property + ": "));
     try {
       Method m = this.getClass()
-          .getDeclaredMethod(labelBundle.getString(property), SafeTurtle.class, HBox.class);
-      m.invoke(this, turtleTracker.getSafeTurtle(id), hbox);
+          .getDeclaredMethod(labelBundle.getString(property), Turtle.class, HBox.class);
+      m.invoke(this, turtleTracker.getTurtle(id), hbox);
     } catch (Exception e) {
       throw new RuntimeException("Improper configuration", e);
     }
@@ -97,53 +97,53 @@ public class TurtleStateDisplay implements TurtleObserver {
     return pane;
   }
 
-  private void getX(SafeTurtle safeTurtle, HBox hBox) {
-    double info = safeTurtle.getX();
+  private void getX(Turtle turtle, HBox hBox) {
+    double info = turtle.getX();
     hBox.getChildren().add(new Text(String.format("%.2f", info)));
   }
 
-  private void getY(SafeTurtle safeTurtle, HBox hBox) {
-    double info = safeTurtle.getY();
+  private void getY(Turtle turtle, HBox hBox) {
+    double info = turtle.getY();
     hBox.getChildren().add(new Text(String.format("%.2f", info)));
   }
 
-  private void getDirection(SafeTurtle safeTurtle, HBox hBox) {
-    double info = safeTurtle.getDirection();
+  private void getDirection(Turtle turtle, HBox hBox) {
+    double info = turtle.getDirection();
     hBox.getChildren().add(new Text(String.format("%.2f", info)));
   }
 
-  private void isPenDown(SafeTurtle safeTurtle, HBox hBox) {
+  private void isPenDown(Turtle turtle, HBox hBox) {
     Button button;
-    if (safeTurtle.isPenDown()) {
-      button = buttonFactory.createTurtleButton(PEN_UP, safeTurtle);
+    if (turtle.isPenDown()) {
+      button = buttonFactory.createTurtleButton(PEN_UP, turtle);
     } else {
-      button = buttonFactory.createTurtleButton(PEN_DOWN, safeTurtle);
+      button = buttonFactory.createTurtleButton(PEN_DOWN, turtle);
     }
     hBox.getChildren().add(button);
   }
 
-  private void getPenColor(SafeTurtle safeTurtle, HBox hBox) {
-    Color color = safeTurtle.getPenColor();
+  private void getPenColor(Turtle turtle, HBox hBox) {
+    Color color = turtle.getPenColor();
     ColorPicker colorPicker = new ColorPicker();
     colorPicker.setId(COLORPICKER_ID);
     colorPicker.setValue(color);
-    colorPicker.setOnAction(event -> safeTurtle.setPenColor(colorPicker.getValue()));
+    colorPicker.setOnAction(event -> turtle.setPenColor(colorPicker.getValue()));
     hBox.getChildren().add(colorPicker);
   }
 
-  private void getPenThickness(SafeTurtle safeTurtle, HBox hBox) {
-    double thickness = safeTurtle.getPenThickness();
+  private void getPenThickness(Turtle turtle, HBox hBox) {
+    double thickness = turtle.getPenThickness();
     Slider slider = new Slider(1, 5, thickness);
     slider.setId(SLIDER_ID);
     slider.setShowTickLabels(true);
     slider.setShowTickMarks(true);
     slider.setMajorTickUnit(1);
-    slider.valueProperty().addListener(event -> safeTurtle.setPenThickness(slider.getValue()));
+    slider.valueProperty().addListener(event -> turtle.setPenThickness(slider.getValue()));
     hBox.getChildren().add(slider);
   }
 
-  private void setImage(SafeTurtle safeTurtle, HBox hBox) {
-    Button button = buttonFactory.createTurtleButton(IMAGE_BUTTON, safeTurtle);
+  private void setImage(Turtle turtle, HBox hBox) {
+    Button button = buttonFactory.createTurtleButton(IMAGE_BUTTON, turtle);
     hBox.getChildren().add(button);
   }
 }

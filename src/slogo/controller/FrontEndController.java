@@ -11,7 +11,7 @@ import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 import slogo.FrontEndTurtleTracker;
 import slogo.Main;
-import slogo.SafeTurtle;
+import slogo.Turtle;
 import slogo.visualization.ButtonFactory;
 import slogo.visualization.FrontEndTurtle;
 import slogo.visualization.PaletteDisplay;
@@ -42,7 +42,7 @@ public class FrontEndController {
     frontEndTurtleTracker.addTurtle(turtle);
   }
 
-  public void handleTurtleImageClick(Button button, SafeTurtle safeTurtle) {
+  public void handleTurtleImageClick(Button button, Turtle turtle) {
     FileChooser fileChooser = new FileChooser();
     fileChooser.setTitle("Open Image File");
     fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
@@ -51,7 +51,7 @@ public class FrontEndController {
     File file = fileChooser.showOpenDialog(stage);
     if (file != null) {
       //paletteDisplay.getImagePathFromIndex();
-      safeTurtle.setImage(file);
+      turtle.setImage(file);
     }
   }
 
@@ -75,13 +75,13 @@ public class FrontEndController {
     textField.clear();
   }
 
-  public void handlePenUpClick(Button button, SafeTurtle turtle) {
+  public void handlePenUpClick(Button button, Turtle turtle) {
     buttonFactory.setImage(button, "PenDownButton");
     turtle.penUp();
     button.setOnAction(event -> handlePenDownClick(button, turtle));
   }
 
-  public void handlePenDownClick(Button button, SafeTurtle turtle) {
+  public void handlePenDownClick(Button button, Turtle turtle) {
     buttonFactory.setImage(button, "PenUpButton");
     turtle.penDown();
     button.setOnAction(event -> handlePenUpClick(button, turtle));

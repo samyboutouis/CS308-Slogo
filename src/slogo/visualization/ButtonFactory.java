@@ -7,6 +7,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import slogo.SafeTurtle;
+import slogo.Turtle;
 import slogo.controller.FrontEndController;
 
 public class ButtonFactory {
@@ -49,12 +50,12 @@ public class ButtonFactory {
     return button;
   }
 
-  public Button createTurtleButton(String property, SafeTurtle turtle) {
+  public Button createTurtleButton(String property, Turtle turtle) {
     Button button = makeButton(property);
     button.setOnAction(handler -> {
       try {
         Method m = controller.getClass()
-            .getDeclaredMethod(commandBundle.getString(property), Button.class, SafeTurtle.class);
+            .getDeclaredMethod(commandBundle.getString(property), Button.class, Turtle.class);
         m.invoke(controller, button, turtle);
       } catch (Exception e) {
         throw new RuntimeException("Improper configuration", e);

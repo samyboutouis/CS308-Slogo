@@ -20,18 +20,4 @@ public interface SafeTurtle {
   void penUp();
 
   boolean isShowing();
-
-  Color getPenColor();
-
-  void setPenColor(Color color);
-
-  double getPenThickness();
-
-  void setPenThickness(double width);
-
-  void setImage(File file);
-
-  List<Map<String, String>> getLineInfo();
-
-  boolean isActive();
 }

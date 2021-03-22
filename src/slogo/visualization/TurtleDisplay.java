@@ -14,6 +14,7 @@ public class TurtleDisplay implements BackgroundObserver {
   private static final int BACKGROUND_RADIUS = 20;
   private static final String ID_PROPERTY = "resources/stylesheets/CSS_IDs";
   private static final String TURTLE_PANE_ID = "TurtlePaneID";
+  private static final Color DEFAULT_COLOR = Color.web("#dedcdc");
 
   private final ResourceBundle idBundle;
   private final AnchorPane anchorPane;
@@ -27,6 +28,7 @@ public class TurtleDisplay implements BackgroundObserver {
 
   private void setScreen() {
     anchorPane.setId(idBundle.getString(TURTLE_PANE_ID));
+    setBackgroundColor(DEFAULT_COLOR);
   }
 
   public void setBackgroundColor(Color color) {
