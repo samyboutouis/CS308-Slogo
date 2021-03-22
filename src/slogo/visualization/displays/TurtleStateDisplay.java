@@ -22,8 +22,10 @@ import slogo.visualization.observers.TurtleObserver;
 public class TurtleStateDisplay implements TurtleObserver {
 
   private static final String LABEL_PROPERTY = "resources/reflection/TurtleStateLabels";
-  private static final String COLORPICKER_ID = "PenColorPicker";
+  private static final String COLOR_PICKER_ID = "PenColorPicker";
   private static final String SLIDER_ID = "Slider";
+  private static final int SLIDER_MIN = 1;
+  private static final int SLIDER_MAX = 5;
   private static final String PEN_UP = "PenUpButton";
   private static final String PEN_DOWN = "PenDownButton";
   private static final String IMAGE_BUTTON = "TurtleImageButton";
@@ -127,7 +129,7 @@ public class TurtleStateDisplay implements TurtleObserver {
   private void getPenColor(Turtle turtle, HBox hBox) {
     Color color = turtle.getPenColor();
     ColorPicker colorPicker = new ColorPicker();
-    colorPicker.setId(COLORPICKER_ID);
+    colorPicker.setId(COLOR_PICKER_ID);
     colorPicker.setValue(color);
     colorPicker.setOnAction(event -> turtle.setPenColor(colorPicker.getValue()));
     hBox.getChildren().add(colorPicker);
@@ -135,7 +137,7 @@ public class TurtleStateDisplay implements TurtleObserver {
 
   private void getPenThickness(Turtle turtle, HBox hBox) {
     double thickness = turtle.getPenThickness();
-    Slider slider = new Slider(1, 5, thickness);
+    Slider slider = new Slider(SLIDER_MIN, SLIDER_MAX, thickness);
     slider.setId(SLIDER_ID);
     slider.setShowTickLabels(true);
     slider.setShowTickMarks(true);
