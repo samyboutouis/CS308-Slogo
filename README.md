@@ -62,7 +62,7 @@ tell [ 1 2 3 4 ]
 id
 ask [ 1 2 3 4 ] [ id ]
 ```
-ID will return 1 in both cases because that is the first ID in the tell/ask list. 
+ID will return 1 in both cases because that is the first ID in the tell/ask list. ID only returns the id for the current turtle, so it will not loop around and return the last value in the list.
 
 #### Multi-Turtle Variables
 ```
