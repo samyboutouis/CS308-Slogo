@@ -9,7 +9,7 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 import javafx.scene.paint.Color;
-import slogo.BackEndTurtle;
+import slogo.model.BackEndTurtle;
 import slogo.SafeFrontEndTurtleTracker;
 import slogo.model.BackEndTurtleTracker;
 import slogo.visualization.observers.BackgroundObserver;

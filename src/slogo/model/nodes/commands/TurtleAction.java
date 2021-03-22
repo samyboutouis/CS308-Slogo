@@ -1,7 +1,7 @@
 package slogo.model.nodes.commands;
 
 import java.util.List;
-import slogo.BackEndTurtle;
+import slogo.model.BackEndTurtle;
 
 @FunctionalInterface
 public interface TurtleAction {

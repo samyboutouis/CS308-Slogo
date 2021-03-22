@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
-import slogo.BackEndTurtle;
 import slogo.Command;
 import slogo.SafeBackEndTurtleTracker;
 import slogo.SafeFrontEndTurtleTracker;

@@ -1,7 +1,9 @@
-package slogo;
+package slogo.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import slogo.Command;
+import slogo.SafeTurtle;
 
 public class BackEndTurtle {
 
