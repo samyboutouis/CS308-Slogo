@@ -18,7 +18,6 @@ public class MakeUserInstructionNode extends BracketNode {
 
   // this node creates the user defined node and adds it to the map of commands
   // that node needs a list of string to represent the variable names
-
   public MakeUserInstructionNode(int numParameters, Map<String, String> map) {
     super(numParameters); // dummy value since isFull is overridden
     parameters = super.getParameters();
