@@ -54,7 +54,8 @@ public class ProgramParser {
         return e.getKey();
       }
     }
-    // FIXME: perhaps throw an exception instead
+    // perhaps throw an exception instead
+    // exception thrown in command reader buildTree
     return ERROR;
   }
 
