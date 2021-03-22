@@ -72,6 +72,8 @@ Features implemented:
 * grouping: allow an unlimited number of parameters to commands by using parentheses
 * recursion: allow user defined commands to include recursive calls
 * variable scope: recursion variable scope is also considered and implemented
+* exception handling: parser will give as detailed messages as it can to be thrown as an error, which is caught by front end and displayed to the user in a safe-format
+  * handle a variety of bad input strings and provide information about failure, such as unrecognized command, unrecognized syntax, bad variables, etc.
 
 ### Notes/Assumptions
 
