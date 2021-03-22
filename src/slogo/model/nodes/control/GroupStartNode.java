@@ -5,14 +5,15 @@ import java.util.List;
 import slogo.model.BackEndTurtleTracker;
 import slogo.model.SlogoNode;
 
-public class GroupNode extends SlogoNode {
+// what is created when a group start "(" is seen, represents the entire grouping structure
+public class GroupStartNode extends SlogoNode {
 
   private List<SlogoNode> parameters;
   private SlogoNode command;
   private List<Double> values;
   private int arguments;
 
-  public GroupNode(int numParameters) {
+  public GroupStartNode(int numParameters) {
     super(numParameters);
     parameters = super.getParameters();
     values = new ArrayList<>();
@@ -57,7 +58,8 @@ public class GroupNode extends SlogoNode {
 
   private void getArguments(BackEndTurtleTracker tracker) {
     arguments = command.getNumParameters();
-    if(parameters.size() - 2 % arguments != 0) {
+    System.out.println(parameters.size() + " + arguments: "+ arguments);
+    if( (parameters.size() - 2) % arguments != 0) {
       // subtract off command node and group end
       throw new IllegalArgumentException("Grouping does not have correct multiple of arguments!");
     }
