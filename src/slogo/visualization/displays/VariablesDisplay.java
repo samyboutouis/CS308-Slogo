@@ -9,34 +9,21 @@ import slogo.visualization.Workspace;
 
 public class VariablesDisplay extends ScrollingDisplay {
 
-  private static final String ID_PROPERTY = "resources/stylesheets/CSS_IDs";
-  private final static String VARIABLES_TITLE = "VariablesTitle";
-  private final static String VARIABLES_BOX_ID = "VariablesBoxID";
-  private final static String VARIABLES_TAG_ID = "VariablesTagID";
+  private static final ResourceBundle ID_BUNDLE = ResourceBundle
+      .getBundle("resources/stylesheets/CSS_IDs");
+  private static final String VARIABLES_TITLE = "VariablesTitle";
+  private static final String VARIABLES_BOX_ID = "VariablesBoxID";
+  private static final String VARIABLES_TAG_ID = "VariablesTagID";
+  private static final String DIALOG_BOX_HEADER_TEXT = "Set a new value for:";
+  private static final String SET_COMMAND = "set :";
 
-  private final static String DIALOG_BOX_HEADER_TEXT = "Set a new value for:";
-  private final static String SET_COMMAND = "set :";
-
-  private final ResourceBundle resourceBundle;
-  private final ResourceBundle idBundle;
   private final VBox variablesBox;
 
-  /**
-   * @param resourcePackage
-   */
-  public VariablesDisplay(Workspace workspace, String resourcePackage) {
-    super(workspace, resourcePackage);
-
+  public VariablesDisplay(Workspace workspace) {
+    super(workspace);
     variablesBox = setupVBoxContainer(VARIABLES_TITLE, VARIABLES_BOX_ID);
-    String language = "English";
-    this.resourceBundle = ResourceBundle
-        .getBundle(String.format("%s/%s/%s", resourcePackage, "languages", language));
-    this.idBundle = ResourceBundle.getBundle(ID_PROPERTY);
   }
 
-  /**
-   * @param variablesMap
-   */
   public void updateBox(Map<String, Double> variablesMap) {
     variablesBox.getChildren().clear();
 
@@ -50,9 +37,9 @@ public class VariablesDisplay extends ScrollingDisplay {
     variablesTag.setWrapText(true);
     variablesTag.setMaxWidth(Double.MAX_VALUE);
     variablesTag.setMaxHeight(Double.MAX_VALUE);
-    variablesTag.setId(idBundle.getString(VARIABLES_TAG_ID));
-    applyVariablesTagLogic(variablesTag);
+    variablesTag.setId(ID_BUNDLE.getString(VARIABLES_TAG_ID));
 
+    applyVariablesTagLogic(variablesTag);
     variablesBox.getChildren().add(variablesTag);
   }
 
@@ -68,7 +55,7 @@ public class VariablesDisplay extends ScrollingDisplay {
       String newValue = textDialog.getEditor().getText();
       if (newValue != null && !newValue.equals(variableValue)) {
         String command = String.format("%s%s%s", SET_COMMAND, variableName, newValue);
-        getTerminalDisplay().setTerminalText(command);
+        setTerminalText(command);
       }
     });
   }

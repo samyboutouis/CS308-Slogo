@@ -27,45 +27,51 @@ import slogo.visualization.turtle.FrontEndTurtleTracker;
 
 public class TerminalDisplay {
 
-  private final static int PADDING_LENGTH = 10;
-  private final static String TERMINAL_RUN_BUTTON = "TerminalRunButton";
-  private final static String TERMINAL_SAVE_BUTTON = "TerminalSaveButton";
-  private final static String TERMINAL_LOAD_BUTTON = "TerminalLoadButton";
-  private final static String TERMINAL_PROMPT = "TerminalPrompt";
-  private final static String TERMINAL_TEXT_BOX_ID = "TerminalTextBoxID";
-  private final static String TERMINAL_BUTTON_ID = "TerminalButtonID";
-  private final static String ERROR_TITLE_PROPERTY = "ErrorTitle";
-  private final static String DISPLAY_CLASS_NAME = "displayWindow";
-  private final static int COLUMN_COUNT = 4;
-
-  private final static int BUTTON_WIDTH = 80;
-
-  private final static String LIBRARIES_PATH = "src/resources/libraries";
+  private static final ResourceBundle ID_BUNDLE = ResourceBundle
+      .getBundle("resources/stylesheets/CSS_IDs");
+  private static final ResourceBundle RESOURCE_BUNDLE = ResourceBundle
+      .getBundle("resources/languages/English");
+  private static final ResourceBundle ERROR_BUNDLE = ResourceBundle
+      .getBundle("resources/languages/EnglishErrors");
+  private static final String LIBRARIES_PATH = "src/resources/libraries";
+  private static final String TERMINAL_RUN_BUTTON = "TerminalRunButton";
+  private static final String TERMINAL_SAVE_BUTTON = "TerminalSaveButton";
+  private static final String TERMINAL_LOAD_BUTTON = "TerminalLoadButton";
+  private static final String TERMINAL_PROMPT = "TerminalPrompt";
+  private static final String TERMINAL_TEXT_BOX_ID = "TerminalTextBoxID";
+  private static final String TERMINAL_BUTTON_ID = "TerminalButtonID";
+  private static final String SAVE_BUTTON_ID = "TerminalSaveButton";
+  private static final String LOAD_BUTTON_ID = "TerminalLoadButton";
+  private static final String ERROR_TITLE_PROPERTY = "ErrorTitle";
+  private static final String DISPLAY_CLASS_NAME = "displayWindow";
+  private static final String SAVE_DIALOG_DESC = "SLogo File";
+  private static final String SAVE_DIALOG_FORMAT = ".slogo";
+  private static final int COLUMN_COUNT = 4;
+  private static final int PADDING_LENGTH = 10;
+  private static final int BUTTON_WIDTH = 80;
+  private static final int SAVE_BUTTON_X = -25;
+  private static final int LOAD_BUTTON_X = 60;
+  private static final int BUTTON_XY = 50;
 
   private final Scene scene;
-  private final ResourceBundle resourceBundle;
-  private final ResourceBundle idBundle;
-  private final ResourceBundle errorBundle;
   private final GridPane pane;
+  private final HistoryDisplay historyDisplay;
+  private final VariablesDisplay variablesDisplay;
+  private final UserCommandsDisplay userCommandsDisplay;
+  private final FrontEndTurtleTracker turtleTracker;
+  private final Controller controller;
+
   private TextArea textBox;
   private Button runButton;
   private Button saveButton;
   private Button loadButton;
-  private final HistoryDisplay historyDisplay;
-  private final VariablesDisplay variablesDisplay;
-  private final UserCommandsDisplay userCommandsDisplay;
-
-  private final FrontEndTurtleTracker turtleTracker;
-  private final Controller controller;
 
   private boolean ctrlPressed;
 
-  public TerminalDisplay(String resourcePackage, Scene scene, HistoryDisplay historyDisplay,
+  public TerminalDisplay(Scene scene, HistoryDisplay historyDisplay,
       FrontEndTurtleTracker frontEndTurtleTracker, VariablesDisplay variablesDisplay,
       UserCommandsDisplay userCommandsDisplay, Controller controller) {
 
-    pane = new GridPane();
-    pane.getStyleClass().add(DISPLAY_CLASS_NAME);
     this.scene = scene;
     this.historyDisplay = historyDisplay;
     this.variablesDisplay = variablesDisplay;
@@ -73,29 +79,9 @@ public class TerminalDisplay {
     this.turtleTracker = frontEndTurtleTracker;
     this.controller = controller;
 
-    pane.setMaxWidth(Double.MAX_VALUE);
-    pane.setMaxHeight(Double.MAX_VALUE);
+    pane = new GridPane();
 
-    pane.setHgap(PADDING_LENGTH);
-    pane.setPadding(new Insets(PADDING_LENGTH, PADDING_LENGTH, PADDING_LENGTH, PADDING_LENGTH));
-
-    String language = "English";
-    this.resourceBundle = ResourceBundle
-        .getBundle(String.format("%s/%s/%s", resourcePackage, "languages", language));
-    this.idBundle = ResourceBundle
-        .getBundle(String.format("%s/%s/%s", resourcePackage, "stylesheets", "CSS_IDs"));
-    this.errorBundle = ResourceBundle
-        .getBundle(String.format("%s/%s/%s", resourcePackage, "languages", language + "Errors"));
-
-    for (int i = 0; i < COLUMN_COUNT; i++) {
-      ColumnConstraints col = new ColumnConstraints();
-      col.setHgrow(Priority.ALWAYS);
-      col.setPercentWidth(100.0 / COLUMN_COUNT);
-      pane.getColumnConstraints().add(col);
-    }
-
-    ctrlPressed = false;
-
+    initializePane();
     initializeTextField();
     initializeRunButton();
     initializeSaveButton();
@@ -103,47 +89,57 @@ public class TerminalDisplay {
     applyTerminalLogic();
   }
 
+  private void initializePane(){
+    pane.getStyleClass().add(DISPLAY_CLASS_NAME);
+    pane.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+    pane.setHgap(PADDING_LENGTH);
+    pane.setPadding(new Insets(PADDING_LENGTH, PADDING_LENGTH, PADDING_LENGTH, PADDING_LENGTH));
+
+    for (int i = 0; i < COLUMN_COUNT; i++) {
+      ColumnConstraints col = new ColumnConstraints();
+      col.setHgrow(Priority.ALWAYS);
+      col.setPercentWidth(100.0 / COLUMN_COUNT);
+      pane.getColumnConstraints().add(col);
+    }
+  }
+
   private void initializeTextField() {
     textBox = new TextArea();
     textBox.setPrefColumnCount(COLUMN_COUNT);
     textBox.setWrapText(true);
     textBox.setFocusTraversable(false);
-    textBox.setPromptText(resourceBundle.getString(TERMINAL_PROMPT));
-    textBox.setId(idBundle.getString(TERMINAL_TEXT_BOX_ID));
-
+    textBox.setPromptText(RESOURCE_BUNDLE.getString(TERMINAL_PROMPT));
+    textBox.setId(ID_BUNDLE.getString(TERMINAL_TEXT_BOX_ID));
     pane.add(textBox, 0, 0, 3, 1);
   }
 
-  private void initializeRunButton() {
-    runButton = new Button(resourceBundle.getString(TERMINAL_RUN_BUTTON));
-    runButton.setMaxWidth(Double.MAX_VALUE);
-    runButton.setMaxHeight(Double.MAX_VALUE);
-    runButton.setWrapText(true);
-    runButton.setTextAlignment(TextAlignment.CENTER);
-    runButton.setId(idBundle.getString(TERMINAL_BUTTON_ID));
+  private Button makeButton(String property, double width, double height, int X, int Y){
+    Button button = new Button(RESOURCE_BUNDLE.getString(property));
+    button.setMaxSize(width, height);
+    button.setWrapText(true);
+    button.setTextAlignment(TextAlignment.CENTER);
+    button.setTranslateX(X);
+    button.setTranslateY(Y);
+    return button;
+  }
 
+  private void initializeRunButton() {
+    runButton = makeButton(TERMINAL_RUN_BUTTON, Double.MAX_VALUE, Double.MAX_VALUE,0, 0);
+    runButton.setId(ID_BUNDLE.getString(TERMINAL_BUTTON_ID));
     pane.add(runButton, 3, 0, 1, 1);
   }
 
   private void initializeSaveButton() {
-    saveButton = new Button(resourceBundle.getString(TERMINAL_SAVE_BUTTON));
-    saveButton.setMaxWidth(BUTTON_WIDTH);
-    saveButton.setTranslateX(-25);
-    saveButton.setTranslateY(50);
-
+    saveButton = makeButton(TERMINAL_SAVE_BUTTON, BUTTON_WIDTH, 0, SAVE_BUTTON_X, BUTTON_XY);
+    saveButton.setId(SAVE_BUTTON_ID);
     applySaveButtonLogic();
-
     pane.add(saveButton, 2, 0);
   }
 
   private void initializeLoadButton() {
-    loadButton = new Button(resourceBundle.getString(TERMINAL_LOAD_BUTTON));
-    loadButton.setMaxWidth(BUTTON_WIDTH);
-    loadButton.setTranslateX(60);
-    loadButton.setTranslateY(50);
-
+    loadButton = makeButton(TERMINAL_LOAD_BUTTON, BUTTON_WIDTH, 0, LOAD_BUTTON_X, BUTTON_XY);
+    loadButton.setId(LOAD_BUTTON_ID);
     applyLoadButtonLogic();
-
     pane.add(loadButton, 2, 0);
   }
 
@@ -170,7 +166,7 @@ public class TerminalDisplay {
       if (command.length() > 0) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setInitialDirectory(new File(LIBRARIES_PATH));
-        fileChooser.getExtensionFilters().addAll(new ExtensionFilter("SLogo File", ".slogo"));
+        fileChooser.getExtensionFilters().addAll(new ExtensionFilter(SAVE_DIALOG_DESC, SAVE_DIALOG_FORMAT));
         File saveFile = fileChooser.showSaveDialog(scene.getWindow());
 
         try {
@@ -185,17 +181,10 @@ public class TerminalDisplay {
   }
 
   private void applyTerminalLogic() {
-    runButton.setOnAction(e -> {
-      sendCommandToController();
-    });
-
-    scene.setOnKeyPressed(e -> {
-      applyKeyPressedLogic(e, true);
-    });
-
-    scene.setOnKeyReleased(e -> {
-      applyKeyPressedLogic(e, false);
-    });
+    ctrlPressed = false;
+    runButton.setOnAction(e -> sendCommandToController());
+    scene.setOnKeyPressed(e -> applyKeyPressedLogic(e, true));
+    scene.setOnKeyReleased(e -> applyKeyPressedLogic(e, false));
   }
 
   private void applyKeyPressedLogic(KeyEvent e, boolean state) {
@@ -230,7 +219,7 @@ public class TerminalDisplay {
 
   private void createErrorDialog(Exception error) {
     Alert newAlert = new Alert(AlertType.ERROR);
-    newAlert.setTitle(errorBundle.getString(ERROR_TITLE_PROPERTY));
+    newAlert.setTitle(ERROR_BUNDLE.getString(ERROR_TITLE_PROPERTY));
     newAlert.setHeaderText(null);
     newAlert.setContentText(error.getMessage());
     newAlert.showAndWait();

@@ -28,7 +28,6 @@ import slogo.visualization.turtle.FrontEndTurtleTracker;
 import slogo.visualization.observers.XMLObserver;
 
 public class ToolbarDisplay implements XMLObserver {
-
   private static final String COLOR_PICKER_ID = "ColorPicker";
   private static final int PADDING_LENGTH = 10;
   private static final int COLUMN_COUNT = 10;

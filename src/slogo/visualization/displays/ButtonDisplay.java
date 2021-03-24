@@ -16,15 +16,15 @@ public class ButtonDisplay extends ScrollingDisplay {
 
   private static final String TITLE = "ButtonsTitle";
   private static final String BUTTON_BOX_ID = "ButtonBoxID";
+  private static final String TEXT_FIELD_ID = "TextField";
 
   private final VBox vbox;
   private final ButtonFactory buttonFactory;
   private final List<String> buttonList;
   private final GridPane pane;
 
-  public ButtonDisplay(Workspace workspace, String resourcePackage,
-      FrontEndController frontEndController) {
-    super(workspace, resourcePackage);
+  public ButtonDisplay(Workspace workspace, FrontEndController frontEndController) {
+    super(workspace);
     vbox = setupVBoxContainer(TITLE, BUTTON_BOX_ID);
     buttonFactory = new ButtonFactory(frontEndController);
     buttonList = List.of("UpButton", "DownButton", "RightButton", "LeftButton");
@@ -38,6 +38,7 @@ public class ButtonDisplay extends ScrollingDisplay {
       HBox hbox = new HBox();
       TextField textField = makeTextField();
       hbox.getChildren().add(textField);
+      textField.setId(TEXT_FIELD_ID + property);
       hbox.getChildren().add(buttonFactory.createTextFieldButton(property, textField));
       vbox.getChildren().add(hbox);
     }
