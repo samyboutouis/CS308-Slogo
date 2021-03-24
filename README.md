@@ -40,6 +40,8 @@ Data files needed:
 - Property file (called `ButtonMethods`) with the names of event listener methods for UI buttons in `src/resources/reflection`
 - Property file (called `CSS_IDs`) with the names of each UI's CSS IDs in `src/resources/stylesheets`
 - CSS files for each supported color theme in `src/resources/stylesheets`
+- Property file (called `Commands`) holding the number of parameters or brackets each command needs in `src/resources/parameters`
+- Property file (called `Packages`) with the package name the command node is in (used for reflection) in `src/resources/packages`
 
 Features implemented:
 
