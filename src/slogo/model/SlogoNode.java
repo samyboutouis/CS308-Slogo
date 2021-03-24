@@ -80,6 +80,16 @@ public abstract class SlogoNode {
     return ret.toString();
   }
 
+  /**
+   * Set the string of this command, basically what value the user typed in to
+   * correspond to this SlogoNode.
+   *
+   * Could have been included in our constructor since it applies to every node,
+   * but it was added later on and did not get fixed during refactoring sessions.
+   *
+   * @param s what value the user typed in to represent this command, e.g. "sum", "fd",
+   *          "setbg", "50"
+   */
   public void setString(String s) {
     myString = s;
   }
