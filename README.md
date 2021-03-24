@@ -81,11 +81,12 @@ Features implemented:
 
 Assumptions or Simplifications:
 * Users can only add to the color palette through the program
-* Grouping command's output is sum of each individual commpand output
+* Grouping command's output is sum of each individual command output
 * Different instances of the workspace are created in separate windows
 * By creating separate windows, users are able to freely
   open and close different workspaces and adjust how they want it on the screen
 * Animations are implemented but user cannot control the speed or pause them
+* When telling multiple turtles to do a command, they must be inputted linearly with turtles that already exist (i.e. tell [ 1 2 ], not tell [ 1 5 ] if turtle 2 does not exist)
 
 Interesting data files:
 * spiral.SLogo
@@ -107,7 +108,7 @@ Extra credit:
 * In the process of saving preferences, all the turtles on the screen along with their current states and line states are saved for reference
 * Users are able to move around and open/close different display views using interactive graphical buttons at any time (doesn't require use of premade files)
 * Besides recursion and grouping, we were also able to create a list of commands that seperated each turtle action, so the turtle could've been stepped through if a button was made for it
-    * Additionally, the queries all print the querie value to the front end, except the front end method was not implemented for us to actually see it. The DisplayCommand class has this framework set up so the user could see the turtle queries through code as well
+    * Additionally, the queries all print the queried value to the front end, except the front end method was not implemented for us to actually see it. The DisplayCommand class has this framework set up so the user could see the turtle queries through code as well
 
 ### Code Design Decisions
 
