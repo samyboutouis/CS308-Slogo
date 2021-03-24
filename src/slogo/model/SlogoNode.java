@@ -43,6 +43,13 @@ public abstract class SlogoNode {
   private String myString;
   private boolean BooleanNode = false;
 
+  /**
+   * Constructs a SlogoNode with an empty ArrayList representing its parameters. Sets the initial
+   * value of parameters to the argument.
+   *
+   * @param numParameters number of parameters the command needs, or if isFull is overridden,
+   *                      the number of bracket pairs the command has
+   */
   public SlogoNode(int numParameters) {
     this.numParameters = numParameters;
     parameters = new ArrayList<>();
