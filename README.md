@@ -97,6 +97,11 @@ Known Bugs:
 * If an index is not in the palette and is called in a command, the program malfunctions
 * Stack overflow occurs in some cases of recursion
 * If turtle leaves the pane and comes back, the pane extends blocking parts of the toolbar of terminal
+* Concurrent Modification error occurs if a command that loops through all the active turtles has an ask/askwith command as its parameter. The ask/askwith will modify the list of active turtles while the initial command is still looping through each turtle.
+```
+fd ask [ 1 2 3 ] [ fd 50 ]
+```
+Above command will throw a concurrent modification error because the first fd is looping through a list that the ask command modifies.
 
 Extra credit:
 * In the process of saving preferences, all the turtles on the screen along with their current states and line states are saved for reference
