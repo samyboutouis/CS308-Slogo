@@ -55,10 +55,23 @@ public abstract class SlogoNode {
     parameters = new ArrayList<>();
   }
 
+  /**
+   * Add a child node (one of this node's parameters) to this SlogoNode.
+   *
+   * @param node child node to be added
+   */
   public void addNode(SlogoNode node) {
     parameters.add(node);
   }
 
+  /**
+   * Return the string of commands that originate from this SlogoNode.
+   *
+   * Calls getMyString() on each children in order to build the entire string
+   * of commands and their parameters.
+   *
+   * @return String representing the entire command and all of its parameters for this SlogoNode
+   */
   public String getMyString() {
     StringBuilder ret = new StringBuilder(myString);
     for (SlogoNode s : parameters) {
