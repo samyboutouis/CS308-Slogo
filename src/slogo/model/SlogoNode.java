@@ -130,23 +130,67 @@ public abstract class SlogoNode {
   public boolean isFull() {
     return parameters.size() == numParameters;
   }
-  
+
+  /**
+   * Protected getter used by subclasses to access same list of parameters that super class
+   * has access to.
+   *
+   * Any node that has parameters calls this method in its constructor, or one of its
+   * intermediate superclass constructors.
+   *
+   * @return list that will hold all parameters for this node
+   */
   protected List<SlogoNode> getParameters() {
     return parameters;
   }
 
-  // for group node
+  /**
+   * Returns the number of parameters this node takes in. Used by the GroupStartNode which
+   * implements the grouping feature. Needs to know this value in order to see if grouping
+   * contains the correct multiple of parameters.
+   *
+   * numParameters sometimes also refers to the number of bracket pairs a command (e.g. repeat,
+   * for, dotimes, if...) takes in. This method still returns that value to GroupStartNode,
+   * but behavior is unknown, although allowable to the user.
+   *
+   * @return number of parameters or bracket pairs the command this node represents uses
+   */
   public int getNumParameters() {
     return numParameters;
   }
 
-  // for group node to run command again with new parameters
+  /**
+   * Replace the values in parameters with the values in newParameters. Makes sure to only
+   * replace the values and not the entire reference, since the subclass still points
+   * to the same list.
+   *
+   * Used by GroupStartNode to allow multiple parameters to be called on a command node
+   * without creating more command nodes.
+   *
+   * @param newParameters new list of parameters for the subclass to run getReturnValue(tracker)
+   */
   public void replaceParameters(List<SlogoNode> newParameters) {
     parameters.clear();
     // can't replace the instance since the subclasses point to same instance
     parameters.addAll(newParameters);
   }
 
+  /**
+   * Calculates the value of the command and returns it to the parent node. Subclasses will
+   * always provide the implementation (thus it is an abstract method). Unless the node is a
+   * variable, constant, or has no parameters, the getReturnValue will always call the children
+   * getReturnValue first to get the parameters before returning its own, similar to a pre order
+   * traversal.
+   *
+   * The backendTurtleTracker must be passed to each children in case one of the child commands
+   * will need it to calculate turtle position or add a command. Some methods won't directly
+   * use this object.
+   *
+   * @param tracker keeps track of all the turtles, allows commands that require receiving turtle
+   *                information or adding commands to a turtle to do so with the parameter, rather
+   *                than an instance variable present in every subclass.
+   * @return the output value of executing this command, e.g. sum 50 50 has return value 100
+   */
   public abstract double getReturnValue(BackEndTurtleTracker tracker);
 }
 
