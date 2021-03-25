@@ -148,7 +148,7 @@ public class CommandReader {
   }
 
   /**
-   * Similar functionality as the parseInput() method, except soley used for testing if ther return
+   * Similar functionality as the parseInput() method, except solely used for testing if the return
    * values of the SLogo commands are accurate.
    *
    * Does not make the assumption that multiple calls will not be made in the same test, so this
@@ -162,7 +162,6 @@ public class CommandReader {
    * @param input string that the tester would like to test, represents a SLogo program
    * @return value of each command output from the test in a list.
    */
-  // used to test return values
   public List<Double> testParseInput(String input) {
     forTests = new ArrayList<>();
     tracker.deleteAllData();
