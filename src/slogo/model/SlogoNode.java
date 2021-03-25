@@ -94,18 +94,43 @@ public abstract class SlogoNode {
     myString = s;
   }
 
+  /**
+   * Indicates if this SlogoNode is a node that implements a boolean command.
+   * Subclass constructor will call this method if it is a boolean node.
+   *
+   * Default value of BooleanNode is false, so non-boolean node subclasses won't call this method.
+   *
+   * @param flag true if this node is a boolean node, false otherwise
+   */
   public void setBooleanNode(boolean flag) {
     BooleanNode = flag;
   }
 
+  /**
+   * Return if this node is a boolean node. Solely used in askwith command to make sure
+   * the expression is only a boolean node, although the code will parse regardless, it is
+   * more of a warning to the user on how to correctly use the language.
+   *
+   * @return true if node is a boolean node, false otherwise
+   */
   public boolean getBooleanNode() {
     return BooleanNode;
   }
 
+  /**
+   * Lets the tree builder methods in CommandReader know if this node's parameters/commands within
+   * brackets have all been read, so the node can be popped off the stack and added to its parent
+   * or be the next root in the list of SlogoNodes in CommandReader.
+   *
+   * Method is overridden by nodes that have commands which use brackets rather than simple
+   * parameters.
+   *
+   * @return true if current node has all its children parsed, false otherwise
+   */
   public boolean isFull() {
     return parameters.size() == numParameters;
   }
-
+  
   protected List<SlogoNode> getParameters() {
     return parameters;
   }
