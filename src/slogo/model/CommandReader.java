@@ -11,7 +11,39 @@ import java.util.Stack;
 import slogo.SafeBackEndTurtleTracker;
 import slogo.model.nodes.control.MakeUserInstructionNode;
 
-// creates parser, reads commands, and creates nodes
+/**
+ * Public API of the BackEnd Model. Creates the parser and reads commands sent from the FrontEnd.
+ *
+ * First takes in uncleaned string that user typed in and separates by newline in order to
+ * ignore any comments. Then, separates each line by whitespace to pass into the buildTree
+ * method that constructs the tree of SlogoNodes. Finally, return a SafeBackEndTurtleTracker
+ * which contains information regarding Command objects the FrontEnd should run on its
+ * turtles.
+ *
+ * This class also provides the front end with a map of variables and a map of user defined
+ * commands to be displayed for the user. A language must be provided on construction, but
+ * the frontEnd can call setLanguage(language) to change the language of what the CommandReader
+ * should read in.
+ *
+ * Delegates task of creating nodes to the NodeFactory.
+ *
+ * Also provides JUnit tests with a way to monitor output values, through the
+ * testParseInput(input) method.
+ *
+ * Assumes user typed in string that separates each item by whitespace, otherwise this class would
+ * not be able to parse the input.
+ *
+ * Depends on the ProgramParser class and NodeFactory class. The BackEndTurtleTracker is indirectly
+ * depended on in this class because it is needed to be passed through for each getReturnValue
+ * method call.
+ *
+ *      CommandReader commandReader = new CommandReader(language);
+ *      commandReader.parseInput(program, backEndTurtleTracker); // program represents user program
+ *      // returns a SafeBackEndTurtleTracker
+ *
+ * @author Felix Jiang
+ * @author Andre Wang
+ */
 public class CommandReader {
 
   private static final String WHITESPACE = "\\s+";
@@ -65,10 +97,6 @@ public class CommandReader {
 
   // where you get the user specified functions to appear in UI.
   public Map<String, String> getUserDefinedCommandsInString() {
-    return userDefinedCommandsInString;
-  }
-
-  public Map<String, String> getCommands() {
     return userDefinedCommandsInString;
   }
 
