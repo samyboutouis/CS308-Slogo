@@ -62,6 +62,17 @@ public class CommandReader {
   private BackEndTurtleTracker tracker;
   private NodeFactory nodeFactory;
 
+  /**
+   * Creates a CommandReader object with an initial language.
+   *
+   * Sets up resource bundles in order to read the package names of nodes and the number of
+   * parameters or bracket pairs. Initializes all instance variables, including the
+   * BackEndTurtleTracker, which is used for testing purposes, since FrontEnd will send a new
+   * turtleTracker for each parseInput call.
+   *
+   * @param language language corresponding to property file name for reading in commands of
+   *                 different languages.
+   */
   public CommandReader(String language) {
     setLanguage(language);
     numParameters = ResourceBundle.getBundle(RESOURCES_PACKAGE + PARAMETERS_FILE);
@@ -75,6 +86,20 @@ public class CommandReader {
     nodeFactory = new NodeFactory();
   }
 
+  /**
+   * Parse a string input from the user in order to return an object that holds the Command
+   * objects that will be run on the FrontEnd turtles.
+   *
+   * @param input exact string that user typed in to terminal
+   * @param tracker tracker representing all current turtles on the screen and their position,
+   *                orientation, pen color index, and shape index.
+   * @return object containing all commands that should be run on each turtle. obtained from
+   * the method getAllTurtleCommands(), which returns a map of turtle ID to list of commands
+   * it should run.
+   * @throws IllegalArgumentException Represents any kind of parsing error that is encountered
+   * by this command reader. Message is displayed by front end to alert the user of the error
+   * in their written program.
+   */
   public SafeBackEndTurtleTracker parseInput(String input, BackEndTurtleTracker tracker)
       throws IllegalArgumentException {
     try {
@@ -91,21 +116,52 @@ public class CommandReader {
     return tracker;
   }
 
+  /**
+   * Gives map of variable names and values to front end for display.
+   *
+   * @return map of variable name and their value.
+   */
   public Map<String, Double> getVariables() {
     return variables;
   }
 
-  // where you get the user specified functions to appear in UI.
+  /**
+   * Gives map of user specified commands and the logic they typed in to front end for display.
+   *
+   * @return map of user specified command names and the rest of the command they typed in.
+   */
   public Map<String, String> getUserDefinedCommandsInString() {
     return userDefinedCommandsInString;
   }
 
+  /**
+   * Sets the language of the reader. The reader will create a new instance of the ProgramParser
+   * with a new pattern representing the language the user wants to read, as well as the original
+   * Syntax properties for recognizing the kind of string the user has typed in for each string.
+   *
+   * @param language string representing the new language the user wants to type in.
+   */
   public void setLanguage(String language) {
     parser = new ProgramParser();
     parser.addPatterns(language);
     parser.addPatterns("Syntax");
   }
 
+  /**
+   * Similar functionality as the parseInput() method, except soley used for testing if ther return
+   * values of the SLogo commands are accurate.
+   *
+   * Does not make the assumption that multiple calls will not be made in the same test, so this
+   * method will clear the tracker data for each subsequent call.
+   *
+   * Initializes the forTests array used to keep track of all return values from the SLogo commands.
+   * forTests is updated in the private method makeCommands().
+   *
+   * For example, an input of: sum 20 30 fd 40 would return a list of {50.0, 40.0}
+   *
+   * @param input string that the tester would like to test, represents a SLogo program
+   * @return value of each command output from the test in a list.
+   */
   // used to test return values
   public List<Double> testParseInput(String input) {
     forTests = new ArrayList<>();
