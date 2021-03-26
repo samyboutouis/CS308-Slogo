@@ -10,6 +10,13 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 
+/**
+ * Responsible for drawing all the lines when a turtle moves. In most instances, this class would
+ * belong to a turtle object and draw the lines associated with a turtle. It is dependent on a pane
+ * that the pen draws lines on and a resource bundle to set the IDs of lines.
+ *
+ * @author Samy Boutouis
+ */
 public class Pen {
 
   private static final String LINE_ID = "LineID";
@@ -22,6 +29,12 @@ public class Pen {
   private Color lineColor;
   private double strokeWidth;
 
+  /**
+   * Constructor for pen.
+   *
+   * @param pane Pane that the pen will draw its lines on to show on the screen.
+   * @param resourceBundle
+   */
   public Pen(Pane pane, ResourceBundle resourceBundle) {
     this.pane = pane;
     isPenDown = true;

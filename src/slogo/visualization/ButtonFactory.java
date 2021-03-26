@@ -8,6 +8,13 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import slogo.visualization.turtle.Turtle;
 
+/**
+ * Responsible for creating different types of buttons and assigning different event handlers using
+ * reflection. Dependent on the FrontEndController class for the button event handlers and property
+ * files to receive the correct method names and image names.
+ *
+ * @author Samy Boutouis
+ */
 public class ButtonFactory {
 
   private static final int ICON_WIDTH = 30;
@@ -25,6 +32,11 @@ public class ButtonFactory {
   private final ResourceBundle labelBundle;
   private final FrontEndController controller;
 
+  /**
+   * Constructor for class.
+   *
+   * @param controller FrontEndController responsible for having all the button event handler methods.
+   */
   public ButtonFactory(FrontEndController controller) {
     this.imageBundle = ResourceBundle.getBundle(DEFAULT_RESOURCE_FOLDER + IMAGE_PROPERTY);
     this.idBundle = ResourceBundle.getBundle(DEFAULT_RESOURCE_FOLDER + ID_PROPERTY);
@@ -33,6 +45,12 @@ public class ButtonFactory {
     this.controller = controller;
   }
 
+  /**
+   * Creates a default button with plain text.
+   *
+   * @param property Key value in the label bundle containing the text of the button
+   * @return Button object containing the correct text and associated event handler
+   */
   public Button createDefaultButton(String property) {
     Button button = new Button();
     button.setText(labelBundle.getString(property));
@@ -49,6 +67,13 @@ public class ButtonFactory {
     return button;
   }
 
+  /**
+   * Create a button that performs actions on the turtle.
+   *
+   * @param property Key value in the resource bundle containing image names, method names, etc.
+   * @param turtle Turtle object that is having methods called on it on the screen
+   * @return Button containing correct image and event handler
+   */
   public Button createTurtleButton(String property, Turtle turtle) {
     Button button = makeButton(property);
     button.setOnAction(handler -> {
@@ -63,6 +88,12 @@ public class ButtonFactory {
     return button;
   }
 
+  /**
+   * Create a button object that is able to toggle itself by passing itself in to its event handler
+   *
+   * @param property Key value in the resource bundle containing image names, method names, etc.
+   * @return Button containing correct image and event handler
+   */
   public Button createToggleButton(String property) {
     Button button = makeButton(property);
     button.setOnAction(handler -> {
@@ -77,6 +108,13 @@ public class ButtonFactory {
     return button;
   }
 
+  /**
+   * Create a button object that uses information from a text field to call its event handler
+   *
+   * @param property Key value in the resource bundle containing image names, method names, etc.
+   * @param textField TextField that contains information that the user inputs into the box
+   * @return Button containing correct image and event handler
+   */
   public Button createTextFieldButton(String property, TextField textField) {
     Button button = makeButton(property);
     button.setOnAction(handler -> {
@@ -98,6 +136,12 @@ public class ButtonFactory {
     return button;
   }
 
+  /**
+   * Set the image associated with a button by passing in a property in the Image ResourceBundle
+   *
+   * @param button Button that is having its image graphic changed
+   * @param property Key value in the resource bundle containing the image name
+   */
   public void setImage(Button button, String property) {
     String label = imageBundle.getString(property);
     button.setGraphic(new ImageView(
