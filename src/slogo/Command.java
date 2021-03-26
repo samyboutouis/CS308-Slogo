@@ -28,10 +28,27 @@ import slogo.visualization.turtle.FrontEndTurtle;
  * Loop through the list of commands created from parsing a string input, and pass the appropriate (in
  * cases where multiple turtles are involved) turtle to the doCommand method. 
  *
+ * These Command objects are created after the SlogoNode tree has been built and all the exact values
+ * for each command have been calculated (from the children nodes). 
+ *
  * @author Felix Jiang
  * @author Andre Wang
  */
 public interface Command {
 
+  /**
+   * Perform an action that affects the passed in frontEndTurtle or the general UI that can be changed
+   * from commands. 
+   *
+   * Classes that implement this interface must provide an implementation for this method, or have a
+   * subclass that provides the implementation. 
+   *
+   * Providing a Command object that calls other methods on the turtle allows the method to be ran
+   * at the time the front end wants, rather than whenever the back end finishes parsing.
+   *
+   * Allows the front end to step through turtle commands if a UI was provided for the user. 
+   *
+   * @param frontEndTurtle the turtle that will do the command implemented in the Command object.
+   */
   void doCommand(FrontEndTurtle frontEndTurtle);
 }
