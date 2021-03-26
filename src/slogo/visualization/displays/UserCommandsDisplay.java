@@ -7,6 +7,13 @@ import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.VBox;
 import slogo.visualization.Workspace;
 
+/**
+ * The UserCommandsDisplay class is responsible for creating an instance of the user-defined
+ * commands display view, including all of its UI components, and managing the creation/modification
+ * of tags from certain actions (e.g., when a new user-defined command is created from the terminal).
+ *
+ * @author Donghan Park
+ */
 public class UserCommandsDisplay extends ScrollingDisplay {
 
   private static final ResourceBundle ID_BUNDLE = ResourceBundle
@@ -18,11 +25,21 @@ public class UserCommandsDisplay extends ScrollingDisplay {
 
   private final VBox userCommandsBox;
 
+  /**
+   * Constructor that creates an instance of the UserCommandsDisplay.
+   * @param workspace Reference to the workspace object, which encapsulates all display views.
+   */
   public UserCommandsDisplay(Workspace workspace) {
     super(workspace);
     userCommandsBox = setupVBoxContainer(USER_COMMANDS_TITLE, USER_COMMANDS_BOX_ID);
   }
 
+  /**
+   * Updates the scrolling VBox of the user-commands display view with tags that correspond
+   * to the most updated list of all currently existing user-defined commands.
+   * @param commandsMap Map that holds the names of all currently existing user-defined commands
+   *                    as keys and their corresponding commands as values
+   */
   public void updateBox(Map<String, String> commandsMap) {
     userCommandsBox.getChildren().clear();
     for (Map.Entry<String, String> entry : commandsMap.entrySet()) {
