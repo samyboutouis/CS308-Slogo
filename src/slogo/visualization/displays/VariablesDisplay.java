@@ -27,7 +27,7 @@ public class VariablesDisplay extends ScrollingDisplay {
   private final VBox variablesBox;
 
   /**
-   * Constructor that creates an instance of the VariablesDisplay.
+   * Constructor that creates an instance of the VariablesDisplay object.
    * @param workspace Reference to the workspace object, which encapsulates all display views.
    */
   public VariablesDisplay(Workspace workspace) {

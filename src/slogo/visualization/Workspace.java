@@ -17,6 +17,16 @@ import slogo.visualization.displays.UserCommandsDisplay;
 import slogo.visualization.displays.VariablesDisplay;
 import slogo.visualization.turtle.FrontEndTurtleTracker;
 
+/**
+ * The Workspace class is responsible for initializing and setting up all of the main display
+ * views found in the application, including the palette, history, variables, user-commands,
+ * button, turtle states, turtle, terminal, and toolbar displays. Additionally, it initializes
+ * the front-end turtle tracker and front-end controller objects, which allow for communication
+ * between the front-end and back-end.
+ *
+ * @author Samy Boutouis
+ * @author Donghan Park
+ */
 public class Workspace {
 
   private final static String WORKSPACE_PANE_ID = "Workspace";
@@ -35,6 +45,12 @@ public class Workspace {
   private TerminalDisplay terminalDisplay;
   private String stylesheet;
 
+  /**
+   * Constructor that creates an instance of the Workspace object.
+   * @param root Main root pane of the application window
+   * @param scene Main scene of the application window
+   * @param stage Main stage of the application window
+   */
   public Workspace(Pane root, Scene scene, Stage stage) {
     this.scene = scene;
     this.stage = stage;
@@ -78,6 +94,10 @@ public class Workspace {
     pane.add(viewLayoutPane, paneIndexes[12], paneIndexes[13], paneIndexes[14], paneIndexes[15]);
   }
 
+  /**
+   * Sets the stylesheet that is being used to style all UI components in the application.
+   * @param styleSheetName Name of the new stylesheet
+   */
   public void setStyleSheet(String styleSheetName) {
     scene.getStylesheets().clear();
     scene.getStylesheets().add(
@@ -86,10 +106,18 @@ public class Workspace {
     stylesheet = styleSheetName;
   }
 
+  /**
+   * Returns the reference to the terminal display view object.
+   * @return Reference to the terminal display view object
+   */
   public TerminalDisplay getTerminalDisplay() {
     return terminalDisplay;
   }
 
+  /**
+   * Returns the name of the stylesheet currently being used by the application.
+   * @return Name of stylesheet currently being used by the application
+   */
   public String getStylesheet() {
     return stylesheet;
   }

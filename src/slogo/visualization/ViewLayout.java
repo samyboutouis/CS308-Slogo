@@ -13,6 +13,14 @@ import slogo.visualization.displays.TurtleStateDisplay;
 import slogo.visualization.displays.UserCommandsDisplay;
 import slogo.visualization.displays.VariablesDisplay;
 
+/**
+ * The ViewLayout class is responsible for initializing and setting up the view containers
+ * that houses the movable display views, as well as managing/updating each display view's
+ * position and visibility according to user input.
+ *
+ * @author Samy Boutouis
+ * @author Donghan Park
+ */
 public class ViewLayout {
 
   private final static int GRID_ROW_COUNT = 2;
@@ -31,6 +39,15 @@ public class ViewLayout {
 
   private String[] viewOrder;
 
+  /**
+   * Constructor that creates an instance of the ViewLayout object.
+   * @param historyDisplay Reference to the history display view object
+   * @param variablesDisplay Reference to the variables display view object
+   * @param userCommandsDisplay Reference to the user-commands display view object
+   * @param paletteDisplay Reference to the palette display view object
+   * @param buttonDisplay Reference to the buttons display view object
+   * @param turtleStateDisplay Reference to the turtle states display view object
+   */
   public ViewLayout(HistoryDisplay historyDisplay, VariablesDisplay variablesDisplay,
       UserCommandsDisplay userCommandsDisplay, PaletteDisplay paletteDisplay,
       ButtonDisplay buttonDisplay, TurtleStateDisplay turtleStateDisplay) {
@@ -83,6 +100,19 @@ public class ViewLayout {
     turtleStateDisplay.getPane().setVisible(false);
   }
 
+  /**
+   * Updates the position and visibility of the six movable display views--including the
+   * variable, history, graphical buttons, turtle states, user-commands, and palette
+   * views--when the user opens a new desired view or closes the current view of the view
+   * container. Also implements swapping feature, which essentially swaps the position of
+   * the new desired view and the position of the view container that that respective view
+   * was currently in. For instance, let the variables display view be in view container 1
+   * and the history display view be in view container 2. Choosing to move the variables
+   * view to container 2 would swap the history view, currently in container 2, to
+   * container 1, where the variables view was at originally.
+   * @param clickedIndex The index of the view container to put the new desired view in
+   * @param viewName Name of the new desired view to set in the corresponding view container
+   */
   public void updateViewLayouts(int clickedIndex, String viewName) {
     int currentIndex = findIndexOf(viewName);
 
@@ -124,6 +154,10 @@ public class ViewLayout {
     return -1;
   }
 
+  /**
+   * Returns the root pane of the display view.
+   * @return Root pane of the display view
+   */
   public GridPane getPane() {
     return pane;
   }
