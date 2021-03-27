@@ -6,6 +6,13 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import slogo.visualization.Workspace;
 
+/**
+ * The Main class is responsible for starting the application window and
+ * creating the main scene.
+ *
+ * @author Samy Boutouis
+ * @author Donghan Park
+ */
 public class Main extends Application {
 
   private final static int SCREEN_WIDTH = 1600;
@@ -14,7 +21,6 @@ public class Main extends Application {
 
   /**
    * Starts the window application
-   *
    * @param stage The top-level container class for the application window
    */
   @Override
@@ -22,6 +28,10 @@ public class Main extends Application {
     createNewWorkspace();
   }
 
+  /**
+   * Sets up a new window by initializing the main scene, the root node,
+   * and the Workspace object of the stage.
+   */
   public void createNewWorkspace() {
     Stage stage = new Stage();
 
