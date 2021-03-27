@@ -12,7 +12,30 @@ import slogo.SafeBackEndTurtleTracker;
 import slogo.SafeFrontEndTurtleTracker;
 import slogo.turtlecommands.TellCommand;
 
-// manages all turtles in the backend,
+/**
+ * Manages all the turtles in the backend. Each BackEndTurtle is responsible for keeping track
+ * of the list of commands the corresponding frontEndTurtle will have to do. Turtles are
+ * distinguished based on their ID as the key to the map allTurtles.
+ *
+ * Purpose of safeTurtleTracker instance is to provide for Command objects that need to call the
+ * action on the frontEndTracker rather than a front end turtle (for changes such as set
+ * background).
+ *
+ * In the front end, a backEndTurtleTracker is created in the FrontEndTurtleTracker.
+ *
+ *      BackEndTurtleTracker backEndTurtleTracker = turtleTracker.passToBackEnd();
+ *      // turtleTracker is of type FrontEndTurtleTracker
+ *
+ * currTurtle represents the current turtle that is being looped through in a tell command or
+ * ask/askwith command.
+ *
+ * A new tell command replaces the list of active turtles, and tell can never nest another tell.
+ * However, ask/askwith can nest other ask/askwith, so those must have a stack that dynamically
+ * keep track of previous active lists.
+ *
+ * @author Felix Jiang
+ * @author Andre Wang
+ */
 public class BackEndTurtleTracker implements SafeBackEndTurtleTracker {
 
   // assume each new Tell overrides previous Tell
