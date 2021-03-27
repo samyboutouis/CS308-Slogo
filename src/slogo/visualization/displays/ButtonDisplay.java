@@ -34,8 +34,8 @@ public class ButtonDisplay extends ScrollingDisplay {
   /**
    * Constructor for class.
    *
-   * @param workspace
-   * @param frontEndController
+   * @param workspace Workspace object representing entire IDE
+   * @param frontEndController Controller handling changes to entire workspace from buttons
    */
   public ButtonDisplay(Workspace workspace, FrontEndController frontEndController) {
     super(workspace);
