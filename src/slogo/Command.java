@@ -7,7 +7,7 @@ import slogo.visualization.turtle.FrontEndTurtle;
  * will be able to pass in a turtle to this method and see the action performed on the turtle. 
  * 
  * Defining this interface allows the portion of the project responsible for displaying changes to the
- * turtle to operate with the type Command rather than a `SetPositionCommand` so that the 
+ * turtle to operate with the type Command rather than a SetPositionCommand so that the
  * implementation details are hidden. 
  *
  * Interface assumes the frontEndTurtle passed in is the correct turtle to do the action on. Note that
