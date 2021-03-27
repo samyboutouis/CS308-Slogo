@@ -6,6 +6,16 @@ import java.util.Map;
 import slogo.model.SlogoNode;
 import slogo.model.BackEndTurtleTracker;
 
+/**
+ * Represents the node of the SlogoNode tree for a to command. Holds the necessary information to
+ * create multiple copies of the user defined command whenever it is seen in the parser.
+ *
+ *    return userDefinedCommands.get(value).createNode();
+ *    // returns the CommandNode created by createNode method in this class.
+ *
+ * @author Felix Jiang
+ * @author Andre Wang
+ */
 public class MakeUserInstructionNode extends BracketNode {
 
   private List<SlogoNode> parameters;
@@ -16,8 +26,13 @@ public class MakeUserInstructionNode extends BracketNode {
   private String methodName;
   private Map<String, String> userDefinedCommandsInString;
 
-  // this node creates the user defined node and adds it to the map of commands
-  // that node needs a list of string to represent the variable names
+  /**
+   * This node creates the user defined node and adds it to the map of commands. That node needs a
+   * list of string to represent the variable names.
+   *
+   * @param numParameters number of bracket pairs in a to command.
+   * @param map map of command name and definition for user defined commands.
+   */
   public MakeUserInstructionNode(int numParameters, Map<String, String> map) {
     super(numParameters); // dummy value since isFull is overridden
     parameters = super.getParameters();
@@ -26,6 +41,15 @@ public class MakeUserInstructionNode extends BracketNode {
     userDefinedCommandsInString = map;
   }
 
+  /**
+   * Creates an object with a reference to the variable and command lists.
+   *
+   * Basically gives each node the same commands to run, except their parameters will be different.
+   *
+   * Last recursive node has parameters that make it not call the recursive part again.
+   *
+   * @return the node that represents the command to run that was defined by the user.
+   */
   public CommandNode createNode() {
     try {
       firstEnd = super.getFirstEnd(); // index of first end bracket
@@ -39,11 +63,15 @@ public class MakeUserInstructionNode extends BracketNode {
       ret = 0;
       return null;
     }
-    // create node creates an object with a reference to the variable and command lists
-    // basically gives it the same commands to run, except their parameters will be different
-    // last recursive node has parameters that make it not call the recursive part again
   }
 
+  /**
+   *
+   * @param tracker keeps track of all the turtles, allows commands that require receiving turtle
+   *                information or adding commands to a turtle to do so with the parameter, rather
+   *                than an instance variable present in every subclass.
+   * @return 1 if user defined command created successfully, 0 otherwise.
+   */
   @Override
   public double getReturnValue(BackEndTurtleTracker tracker) {
     getCommands(); // builds all the commands of this method, which could be recursive
@@ -54,6 +82,11 @@ public class MakeUserInstructionNode extends BracketNode {
     return ret;
   }
 
+  /**
+   * Set name of this method, for front end to display.
+   *
+   * @param name string name of method.
+   */
   public void setMethodName(String name) {
     methodName = name;
   }
