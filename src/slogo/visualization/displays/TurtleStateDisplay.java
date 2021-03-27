@@ -19,6 +19,14 @@ import slogo.visualization.ButtonFactory;
 import slogo.visualization.turtle.FrontEndTurtleTracker;
 import slogo.visualization.observers.TurtleObserver;
 
+/**
+ * Display class that controls and displays a specific turtle's state information including
+ * position, heading, line color and thickness, etc. Is dependent on the front-end controller and
+ * turtle tracker classes to handle changes to the global workspace and list of turtles on the
+ * screen.
+ *
+ * @author Samy Boutouis
+ */
 public class TurtleStateDisplay implements TurtleObserver {
 
   private static final String LABEL_PROPERTY = "resources/reflection/TurtleStateLabels";
@@ -43,6 +51,12 @@ public class TurtleStateDisplay implements TurtleObserver {
   private ComboBox<Integer> turtleDropdown;
   private int currentID;
 
+  /**
+   * Constructor for the class.
+   *
+   * @param frontEndController FrontEndController for the entire workspace.
+   * @param frontEndTurtleTracker TurtleTracker for the entire workspace tracking all the turtles
+   */
   public TurtleStateDisplay(FrontEndController frontEndController,
       FrontEndTurtleTracker frontEndTurtleTracker) {
     vbox = new VBox();
@@ -66,6 +80,12 @@ public class TurtleStateDisplay implements TurtleObserver {
     turtleDropdown.setId(TURTLE_DROPDOWN);
   }
 
+  /**
+   * Updates the list of turtles in the dropdown when the number of turtles on the screen update.
+   * Is called by the turtle tracker using the TurtleObserver interface.
+   *
+   * @param list List representing all the IDs of turtles on the screen
+   */
   public void updateTurtleNumber(List<Integer> list) {
     for (int id : list) {
       if (!turtleDropdown.getItems().contains(id)) {
@@ -96,12 +116,23 @@ public class TurtleStateDisplay implements TurtleObserver {
     }
   }
 
+  /**
+   * Updates the turtle state view if a turtle is updated and showed on the dropdown. Is called by
+   * the turtle tracker using the TurtleObserver interface.
+   *
+   * @param id Integer corresponding to an ID of a turtle
+   */
   public void updateTurtleState(int id) {
     if (id == currentID) {
       updateFields(id);
     }
   }
 
+  /**
+   * Returns the root pane of the display view.
+   *
+   * @return Root pane of the display view
+   */
   public GridPane getPane() {
     return pane;
   }

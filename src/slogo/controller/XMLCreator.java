@@ -20,6 +20,14 @@ import slogo.visualization.turtle.FrontEndTurtleTracker;
 import slogo.visualization.turtle.Turtle;
 import slogo.visualization.Workspace;
 
+/**
+ * This class is responsible for creating the XML file storing all the user preferences about a
+ * certain workspace. Because it needs to receive information about the workspace and turtles, it
+ * is dependent on the workspace and turtle tracker classes. Should be used to create preference
+ * XML files.
+ *
+ * @author Samy Boutouis
+ */
 public class XMLCreator {
 
   private static final String RESOURCES_FILE = "resources.languages.EnglishErrors";
@@ -33,6 +41,14 @@ public class XMLCreator {
   private String filePath;
   private ResourceBundle errorBundle;
 
+  /**
+   * Constructor for class.
+   *
+   * @param frontEndTurtleTracker FrontEndTurtleTracker object that has all info about turtles
+   * @param controller Controller that communicates with back-end
+   * @param workspace Workspace object that contains all displays and styles
+   * @param filePath String for the file path it will be saved as
+   */
   public XMLCreator(FrontEndTurtleTracker frontEndTurtleTracker, Controller controller,
       Workspace workspace,
       String filePath) {
