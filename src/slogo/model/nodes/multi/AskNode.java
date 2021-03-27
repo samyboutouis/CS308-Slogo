@@ -7,6 +7,12 @@ import slogo.model.SlogoNode;
 import slogo.model.nodes.control.BracketNode;
 import slogo.model.nodes.control.ConstantNode;
 
+/**
+ * Represents the node of the SlogoNode tree for an ask command.
+ *
+ * @author Felix Jiang
+ * @author Andre Wang
+ */
 public class AskNode extends BracketNode {
 
   private List<SlogoNode> parameters;

@@ -9,6 +9,12 @@ import slogo.model.nodes.control.ConstantNode;
 import slogo.model.nodes.control.ListEndNode;
 import slogo.turtlecommands.TellCommand;
 
+/**
+ * Represents the node of the SlogoNode tree for an ask with command.
+ *
+ * @author Felix Jiang
+ * @author Andre Wang
+ */
 public class AskWithNode extends AskNode {
 
   private List<SlogoNode> parameters;

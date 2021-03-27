@@ -3,6 +3,12 @@ package slogo.model.nodes.multi;
 import slogo.model.SlogoNode;
 import slogo.model.BackEndTurtleTracker;
 
+/**
+ * Represents the node of the SlogoNode tree for a turtles command.
+ *
+ * @author Felix Jiang
+ * @author Andre Wang
+ */
 public class TurtlesNode extends SlogoNode {
 
   public TurtlesNode(int numParameters) {

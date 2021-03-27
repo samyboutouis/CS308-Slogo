@@ -6,6 +6,12 @@ import slogo.model.SlogoNode;
 import slogo.model.BackEndTurtleTracker;
 import slogo.model.nodes.control.BracketNode;
 
+/**
+ * Represents the node of the SlogoNode tree for a tell command.
+ *
+ * @author Felix Jiang
+ * @author Andre Wang
+ */
 public class TellNode extends BracketNode {
 
   private List<SlogoNode> parameters;
