@@ -6,6 +6,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.GridPane;
 
+/**
+ * The ViewContainer class is responsible for creating an instance of a view container,
+ * including all of its UI components, and sending updated information about what new
+ * display view it should house to the parent ViewLayout object from user input.
+ *
+ * @author Samy Boutouis
+ * @author Donghan Park
+ */
 public class ViewContainer {
 
   private static final ResourceBundle RESOURCE_BUNDLE = ResourceBundle
@@ -26,6 +34,12 @@ public class ViewContainer {
   private final int containerIndex;
   private final Set<String> viewNames;
 
+  /**
+   * Constructor that creates an instance of the ViewContainer object.
+   * @param viewLayout Reference to the ViewLayout object, which encapsulates and manages all view containers
+   * @param containerIndex Corresponding index of the current view container in the list of all view containers
+   * @param viewNames Set of all possible display views that the view container can house
+   */
   public ViewContainer(ViewLayout viewLayout, int containerIndex, Set<String> viewNames) {
     this.viewLayout = viewLayout;
     this.containerIndex = containerIndex;
@@ -68,10 +82,18 @@ public class ViewContainer {
     comboBox.setOnAction(e -> viewLayout.updateViewLayouts(containerIndex, comboBox.getValue()));
   }
 
+  /**
+   * Updates the title of the combobox with a new desired one.
+   * @param title New title of the combobox
+   */
   public void updateComboBox(String title) {
     comboBox.setValue(title);
   }
 
+  /**
+   * Returns the root pane of the display view.
+   * @return Root pane of the display view
+   */
   public GridPane getPane() {
     return pane;
   }

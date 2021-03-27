@@ -8,6 +8,14 @@ import javafx.scene.shape.Circle;
 import slogo.visualization.CustomGridPane;
 import slogo.visualization.Workspace;
 
+/**
+ * The PaletteDisplay class is responsible for creating an instance of the palette display
+ * view, including all of its UI components, and managing the creation/modification of tags
+ * from certain actions (e.g., when a new palette index is made with a corresponding RGB
+ * value).
+ *
+ * @author Donghan Park
+ */
 public class PaletteDisplay extends ScrollingDisplay {
 
   private static final ResourceBundle ID_BUNDLE = ResourceBundle
@@ -26,12 +34,23 @@ public class PaletteDisplay extends ScrollingDisplay {
 
   private final VBox paletteBox;
 
+  /**
+   * Constructor that creates an instance of the PaletteDisplay object.
+   * @param workspace Reference to the workspace object, which encapsulates all display views.
+   */
   public PaletteDisplay(Workspace workspace) {
     super(workspace);
     paletteBox = setupVBoxContainer(PALETTE_TITLE, PALETTE_BOX_ID);
     addDefaultPaletteTags();
   }
 
+  /**
+   * Updates the palette tag with the corresponding index with an updated RGB value.
+   * @param index Desired index of the palette tag
+   * @param r New red-value for the RGB color
+   * @param g New green-value for the RGB color
+   * @param b New blue-value for the RGB color
+   */
   public void updatePaletteBox(int index, int r, int g, int b) {
     if (paletteBox.getChildren().size() < index) {
       addNewPaletteTag(index, r, g, b, null);
@@ -89,8 +108,9 @@ public class PaletteDisplay extends ScrollingDisplay {
   }
 
   /**
-   * @param index
-   * @return
+   * Returns the corresponding RGB color of a given index within the current palette list.
+   * @param index Index of the desired palette tag
+   * @return Corresponding RGB color value of the palette tag with the desired index
    */
   public Color getColorFromIndex(int index) {
     CustomGridPane paletteTag = (CustomGridPane) paletteBox.getChildren().get(index - 1);
@@ -99,8 +119,9 @@ public class PaletteDisplay extends ScrollingDisplay {
   }
 
   /**
-   * @param index
-   * @return
+   * Returns the corresponding image file name of a given index within the current palette list.
+   * @param index Index of the desired palette tag
+   * @return Corresponding image file name of the palette tag with the desired index
    */
   public String getImagePathFromIndex(int index) {
     CustomGridPane paletteTag = (CustomGridPane) paletteBox.getChildren().get(index - 1);

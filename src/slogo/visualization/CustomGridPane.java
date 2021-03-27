@@ -6,12 +6,25 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 
+/**
+ * The CustomGridPane class extends the GridPane class from JavaFX and initializes certain
+ * parameters with preset values, including the grid size and row/col constraints.
+ *
+ * @author Samy Boutouis
+ * @author Donghan Park
+ */
 public class CustomGridPane extends GridPane {
 
   private final int rowCount;
   private final int colCount;
   private final int paddingLength;
 
+  /**
+   * Constructor that creates an instance of the CustomGridPane object.
+   * @param rowCount Number of rows in the grid
+   * @param colCount Number of columns in the grid
+   * @param paddingLength Length of the padding between adjacent grid cells
+   */
   public CustomGridPane(int rowCount, int colCount, int paddingLength) {
     this.rowCount = rowCount;
     this.colCount = colCount;
@@ -22,7 +35,8 @@ public class CustomGridPane extends GridPane {
   }
 
   /**
-   * @param scene
+   * Sets the preferred width and height of the main scene of the application window.
+   * @param scene Main scene of the application window
    */
   public void setPrefSize(Scene scene) {
     this.setPrefSize(scene.getWidth(), scene.getHeight());

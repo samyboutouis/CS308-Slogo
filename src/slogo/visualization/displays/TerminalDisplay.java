@@ -25,6 +25,14 @@ import slogo.visualization.AnimationManager;
 import slogo.visualization.turtle.FrontEndTurtle;
 import slogo.visualization.turtle.FrontEndTurtleTracker;
 
+/**
+ * The TerminalDisplay class is responsible for creating an instance of the terminal display
+ * view, including all of its UI components, and managing what happens when a command is run
+ * in the front end. That is, the terminal display is responsible for sending the String of
+ * the command to the controller, which then sends the data to the backend for it to parse.
+ *
+ * @author Donghan Park
+ */
 public class TerminalDisplay {
 
   private static final ResourceBundle ID_BUNDLE = ResourceBundle
@@ -68,6 +76,15 @@ public class TerminalDisplay {
 
   private boolean ctrlPressed;
 
+  /**
+   * Constructor that creates an instance of the TerminalDisplay object.
+   * @param scene Main scene of the application window
+   * @param historyDisplay Reference to the history display view
+   * @param frontEndTurtleTracker Reference to the front-end turtle tracker object
+   * @param variablesDisplay Reference to the variables display view
+   * @param userCommandsDisplay Reference to the user-commands display view
+   * @param controller Reference to the controller
+   */
   public TerminalDisplay(Scene scene, HistoryDisplay historyDisplay,
       FrontEndTurtleTracker frontEndTurtleTracker, VariablesDisplay variablesDisplay,
       UserCommandsDisplay userCommandsDisplay, Controller controller) {
@@ -225,10 +242,18 @@ public class TerminalDisplay {
     newAlert.showAndWait();
   }
 
+  /**
+   * Sets the text of the terminal text field with a desired command.
+   * @param command Desired command to set the text of the terminal text field with
+   */
   public void setTerminalText(String command) {
     textBox.setText(command);
   }
 
+  /**
+   * Returns the root pane of the display view.
+   * @return Root pane of the display view
+   */
   public GridPane getPane() {
     return pane;
   }
