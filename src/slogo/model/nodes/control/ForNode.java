@@ -4,6 +4,12 @@ import java.util.List;
 import slogo.model.SlogoNode;
 import slogo.model.BackEndTurtleTracker;
 
+/**
+ * Represents the node of the SlogoNode tree for a for command.
+ *
+ * @author Felix Jiang
+ * @author Andre Wang
+ */
 public class ForNode extends BracketNode {
 
   private List<SlogoNode> parameters;
@@ -12,12 +18,24 @@ public class ForNode extends BracketNode {
   private double forEnd;
   private double forIncrement;
 
+  /**
+   * Constructor for for node.
+   *
+   * @param numParameters number of bracket pairs in a for command (2)
+   */
   public ForNode(int numParameters) {
     // parameters being full determined by bracket, just like conditional node, so this is a dummy value
     super(numParameters);
     parameters = super.getParameters();
   }
 
+  /**
+   *
+   * @param tracker keeps track of all the turtles, allows commands that require receiving turtle
+   *                information or adding commands to a turtle to do so with the parameter, rather
+   *                than an instance variable present in every subclass.
+   * @return value of last command run in the for loop.
+   */
   @Override
   public double getReturnValue(BackEndTurtleTracker tracker) {
     int firstEnd = super.getFirstEnd();
