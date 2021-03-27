@@ -25,6 +25,7 @@ public class ButtonDisplay extends ScrollingDisplay {
   private static final String TITLE = "ButtonsTitle";
   private static final String BUTTON_BOX_ID = "ButtonBoxID";
   private static final String TEXT_FIELD_ID = "TextField";
+  private static final String NUMBER_REGEX = "[0-9]*";
 
   private final VBox vbox;
   private final ButtonFactory buttonFactory;
@@ -61,7 +62,7 @@ public class ButtonDisplay extends ScrollingDisplay {
   private TextField makeTextField() {
     UnaryOperator<Change> filter = change -> {
       String text = change.getText();
-      if (text.matches("[0-9]*")) {
+      if (text.matches(NUMBER_REGEX)) {
         return change;
       }
       return null;
