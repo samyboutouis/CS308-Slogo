@@ -19,9 +19,9 @@ public abstract class TurtleCommandNode extends SlogoNode {
     Iterator<Integer> itr = tracker.getIterator();
     double ret = 0.0;
     while (itr.hasNext()) {
-      int index = itr.next();
-      tracker.setCurr(index);
-      BackEndTurtle currTurtle = tracker.getTurtle(index);
+      int id = itr.next();
+      tracker.setCurr(id);
+      BackEndTurtle currTurtle = tracker.getTurtle(id);
       ret = action.turtleAction(currTurtle, getValues(tracker, parameters));
     }
     return ret;
