@@ -21,6 +21,13 @@ public class PenUpNode extends TurtleCommandNode {
     super(numParameters);
   }
 
+  /**
+   *
+   * @param tracker keeps track of all the turtles, allows commands that require receiving turtle
+   *                information or adding commands to a turtle to do so with the parameter, rather
+   *                than an instance variable present in every subclass.
+   * @return 0 since pen is up.
+   */
   @Override
   public double getReturnValue(BackEndTurtleTracker tracker) {
     return super.loopThroughTurtles(tracker, new ArrayList<>(), (currTurtle, values) -> {
