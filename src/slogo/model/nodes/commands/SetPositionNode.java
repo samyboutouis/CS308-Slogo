@@ -5,10 +5,15 @@ import slogo.model.SlogoNode;
 import slogo.model.BackEndTurtleTracker;
 import slogo.turtlecommands.SetPositionCommand;
 
+/**
+ * Represents the node of the SlogoNode tree for a set position command.
+ *
+ * @author Felix Jiang
+ * @author Andre Wang
+ */
 public class SetPositionNode extends TurtleCommandNode {
 
   private List<SlogoNode> parameters;
-  private List<Double> values;
 
   public SetPositionNode(int numParameters) {
     super(numParameters);
@@ -26,20 +31,4 @@ public class SetPositionNode extends TurtleCommandNode {
           .sqrt(Math.pow(prevX - currTurtle.getX(), 2) + Math.pow(prevY - currTurtle.getY(), 2));
     });
   }
-
- /* @Override
-  public double getReturnValue(List<Command> commands) {
-    values = super.getValues(commands, parameters);
-    createMovement(commands);
-    double prevX = turtle.getX();
-    double prevY = turtle.getY();
-    turtle.setXY(values.get(0), values.get(1));
-    return Math.sqrt(Math.pow(prevX - turtle.getX(), 2) +  Math.pow(prevY - turtle.getY(), 2));
-  }
-
-  private void createMovement(List<Command> commands) {
-    commands.add(new SetPositionCommand(values.get(0), values.get(1)));
-  }*/
-
-
 }

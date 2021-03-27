@@ -4,21 +4,17 @@ import java.util.ArrayList;
 import slogo.model.BackEndTurtleTracker;
 import slogo.turtlecommands.HomeCommand;
 
+/**
+ * Represents the node of the SlogoNode tree for a home command.
+ *
+ * @author Felix Jiang
+ * @author Andre Wang
+ */
 public class HomeNode extends TurtleCommandNode {
 
   public HomeNode(int numParameters) {
     super(numParameters);
   }
-/*
-  @Override
-  public double getReturnValue(List<Command> commands) {
-    commands.add(new HomeCommand());
-    double prevX = turtle.getX();
-    double prevY = turtle.getY();
-    turtle.home();
-    return Math.sqrt(Math.pow(prevX - turtle.getX(), 2) +  Math.pow(prevY - turtle.getY(), 2));
-    // fd fd 50 fd 50 home
-  }*/
 
   @Override
   public double getReturnValue(BackEndTurtleTracker tracker) {

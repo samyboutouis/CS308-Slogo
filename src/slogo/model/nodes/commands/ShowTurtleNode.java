@@ -4,19 +4,18 @@ import java.util.ArrayList;
 import slogo.model.BackEndTurtleTracker;
 import slogo.turtlecommands.ShowTurtleCommand;
 
+/**
+ * Represents the node of the SlogoNode tree for a show command.
+ *
+ * @author Felix Jiang
+ * @author Andre Wang
+ */
 public class ShowTurtleNode extends TurtleCommandNode {
 
 
   public ShowTurtleNode(int numParameters) {
     super(numParameters);
   }
-
-  /*@Override
-  public double getReturnValue(List<Command> commands) {
-    commands.add(new ShowTurtleCommand());
-    turtle.show();
-    return 1;
-  }*/
 
   @Override
   public double getReturnValue(BackEndTurtleTracker tracker) {

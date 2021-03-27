@@ -5,10 +5,15 @@ import slogo.model.BackEndTurtleTracker;
 import slogo.turtlecommands.MovementCommand;
 import slogo.model.SlogoNode;
 
+/**
+ * Represents the node of the SlogoNode tree for a left command.
+ *
+ * @author Felix Jiang
+ * @author Andre Wang
+ */
 public class LeftNode extends TurtleCommandNode {
 
   private List<SlogoNode> parameters;
-  private List<Double> values;
 
   public LeftNode(int numParameters) {
     super(numParameters);

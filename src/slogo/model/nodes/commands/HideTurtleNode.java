@@ -4,18 +4,17 @@ import java.util.ArrayList;
 import slogo.model.BackEndTurtleTracker;
 import slogo.turtlecommands.HideTurtleCommand;
 
+/**
+ * Represents the node of the SlogoNode tree for a hide command.
+ *
+ * @author Felix Jiang
+ * @author Andre Wang
+ */
 public class HideTurtleNode extends TurtleCommandNode {
 
   public HideTurtleNode(int numParameters) {
     super(numParameters);
   }
-/*
-  @Override
-  public double getReturnValue(List<Command> commands) {
-    commands.add(new HideTurtleCommand());
-    turtle.hide();
-    return 0;
-  }*/
 
   @Override
   public double getReturnValue(BackEndTurtleTracker tracker) {

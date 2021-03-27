@@ -4,6 +4,12 @@ import java.util.ArrayList;
 import slogo.model.BackEndTurtleTracker;
 import slogo.turtlecommands.ClearScreenCommand;
 
+/**
+ * Represents the node of the SlogoNode tree for a clear screen command.
+ *
+ * @author Felix Jiang
+ * @author Andre Wang
+ */
 public class ClearScreenNode extends TurtleCommandNode {
 
   public ClearScreenNode(int numParameters) {

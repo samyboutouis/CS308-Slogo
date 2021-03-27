@@ -4,18 +4,17 @@ import java.util.ArrayList;
 import slogo.model.BackEndTurtleTracker;
 import slogo.turtlecommands.PenDownCommand;
 
+/**
+ * Represents the node of the SlogoNode tree for a pen down command.
+ *
+ * @author Felix Jiang
+ * @author Andre Wang
+ */
 public class PenDownNode extends TurtleCommandNode {
 
   public PenDownNode(int numParameters) {
     super(numParameters);
   }
-
-  /*@Override
-  public double getReturnValue(List<Command> commands) {
-    commands.add(new PenDownCommand());
-    turtle.penDown();
-    return 1;
-  }*/
 
   @Override
   public double getReturnValue(BackEndTurtleTracker tracker) {
