@@ -46,7 +46,17 @@ public class BackEndTurtleTracker implements SafeBackEndTurtleTracker {
   private int currTurtle;
   private SafeFrontEndTurtleTracker safeTurtleTracker;
 
-  // frontend would pass these in so we can create a back end turtle
+  /**
+   * Creates a backend turtle tracker. Uses the safe tracker interface to easily get values and
+   * also gets the list of all turtle and active turtles from the current state of the front
+   * end.
+   *
+   * This constructor is used in the front end turtle tracker.
+   *
+   * @param allTurtles map of each turtle ID to the back end turtle corresponding to it
+   * @param activeTurtles holds list of current active turtles set by user clicks/code
+   * @param safeTurtleTracker controls group of turtles in the front end, passed to command objects
+   */
   public BackEndTurtleTracker(Map<Integer, BackEndTurtle> allTurtles, List<Integer> activeTurtles,
       SafeFrontEndTurtleTracker safeTurtleTracker) {
     this.allTurtles = allTurtles;
