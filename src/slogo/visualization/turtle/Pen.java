@@ -33,7 +33,7 @@ public class Pen {
    * Constructor for pen.
    *
    * @param pane Pane that the pen will draw its lines on to show on the screen.
-   * @param resourceBundle
+   * @param resourceBundle Resource bundle getting IDs for lines
    */
   public Pen(Pane pane, ResourceBundle resourceBundle) {
     this.pane = pane;

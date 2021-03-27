@@ -45,7 +45,7 @@ public class FrontEndController {
   private final Workspace workspace;
 
   /**
-   * Contructs object.
+   * Constructs object.
    *
    * @param stage Stage that holds the components of the UI
    * @param frontEndTurtleTracker object that contains references to the turtles currently active
