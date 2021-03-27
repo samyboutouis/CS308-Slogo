@@ -23,8 +23,9 @@ public class AskWithNode extends AskNode {
   private int brackets;
 
   /**
+   * Constructor for ask with. super is AskNode
    *
-   * @param numParameters
+   * @param numParameters amount of bracket pairs an ask with command takes (2)
    */
   public AskWithNode(int numParameters) {
     super(numParameters);

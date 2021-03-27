@@ -16,11 +16,23 @@ public class TellNode extends BracketNode {
 
   private List<SlogoNode> parameters;
 
+  /**
+   * Constructor for tell node.
+   *
+   * @param numParameters amount of bracket pairs a tell command takes (1)
+   */
   public TellNode(int numParameters) {
     super(numParameters);
     parameters = super.getParameters();
   }
 
+  /**
+   *
+   * @param tracker keeps track of all the turtles, allows commands that require receiving turtle
+   *                information or adding commands to a turtle to do so with the parameter, rather
+   *                than an instance variable present in every subclass.
+   * @return id of last turtle in the tell list.
+   */
   @Override
   public double getReturnValue(BackEndTurtleTracker tracker) {
     int ret = 0;

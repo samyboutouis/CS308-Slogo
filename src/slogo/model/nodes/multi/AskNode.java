@@ -21,7 +21,7 @@ public class AskNode extends BracketNode {
   /**
    * Constructor for Ask Node.
    *
-   * @param numParameters amount of brackets an ask command takes (2)
+   * @param numParameters amount of bracket pairs an ask command takes (2)
    */
   public AskNode(int numParameters) {
     super(numParameters);
