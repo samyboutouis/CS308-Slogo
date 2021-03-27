@@ -5,23 +5,54 @@ import java.util.List;
 import slogo.model.BackEndTurtleTracker;
 import slogo.model.SlogoNode;
 
-// what is created when a group start "(" is seen, represents the entire grouping structure
+/**
+ * Represents the node of the SlogoNode tree for a group start symbol.
+ *
+ * What is created when a group start "(" is seen, represents the entire grouping structure
+ *
+ * Grouping is basically done by replacing each multiple of parameters in the command with the
+ * group values until there are none left, and then returning the sum of outputs for each command
+ * executed with its parameters.
+ *
+ * @author Felix Jiang
+ */
 public class GroupStartNode extends SlogoNode {
 
   private List<SlogoNode> parameters;
   private SlogoNode command;
   private int arguments;
 
+  /**
+   * Constructor for Group Start.
+   *
+   * @param numParameters 0 expected parameters
+   */
   public GroupStartNode(int numParameters) {
     super(numParameters);
     parameters = super.getParameters();
   }
 
+  /**
+   * Group Start is full once we see a matching group end.
+   * @return true if the last node in our children is a group end node.
+   */
   @Override
   public boolean isFull() {
     return !parameters.isEmpty() && parameters.get(parameters.size() - 1) instanceof GroupEndNode;
   }
 
+  /**
+   * Group node will find all the parameter values, and then run the initial command on each
+   * multiple of those parameters.
+   *
+   * Uses helper methods to get the argument values and to find the next set of parameters to run
+   * on the initial command.
+   *
+   * @param tracker keeps track of all the turtles, allows commands that require receiving turtle
+   *                information or adding commands to a turtle to do so with the parameter, rather
+   *                than an instance variable present in every subclass.
+   * @return sum of return value of each multiple of parameters ran on the initial command.
+   */
   @Override
   public double getReturnValue(BackEndTurtleTracker tracker) {
     command = parameters.get(0);

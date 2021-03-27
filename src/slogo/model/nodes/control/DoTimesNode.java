@@ -4,6 +4,12 @@ import java.util.List;
 import slogo.model.SlogoNode;
 import slogo.model.BackEndTurtleTracker;
 
+/**
+ * Represents the node of the SlogoNode tree for a dotimes command.
+ *
+ * @author Felix Jiang
+ * @author Andre Wang
+ */
 public class DoTimesNode extends BracketNode {
 
   private List<SlogoNode> parameters;
@@ -11,12 +17,24 @@ public class DoTimesNode extends BracketNode {
   private double doTimesEnd;
   private int firstEnd;
 
+  /**
+   * Constructor.
+   *
+   * @param numParameters number of bracket pairs expected.
+   */
   public DoTimesNode(int numParameters) {
     // parameters being full determined by bracket, just like conditional node, so this is a dummy value
     super(numParameters);
     parameters = super.getParameters();
   }
 
+  /**
+   *
+   * @param tracker keeps track of all the turtles, allows commands that require receiving turtle
+   *                information or adding commands to a turtle to do so with the parameter, rather
+   *                than an instance variable present in every subclass.
+   * @return value of last executed command in loop.
+   */
   @Override
   public double getReturnValue(BackEndTurtleTracker tracker) {
     firstEnd = super.getFirstEnd();
