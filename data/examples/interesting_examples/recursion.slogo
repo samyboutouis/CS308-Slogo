@@ -1,0 +1,11 @@
+to spiral [ :len ]
+[
+  if less? :len 300
+  [
+    fd :len
+    lt 89
+    spiral + :len 2
+  ]
+]
+
+spiral 10

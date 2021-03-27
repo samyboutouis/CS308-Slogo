@@ -1,0 +1,13 @@
+repete 6
+[
+  repete 2
+  [
+    repete 30
+    [
+      dev 1
+      dr 2
+    ]
+    dr 120
+  ]
+  dr 60
+]
