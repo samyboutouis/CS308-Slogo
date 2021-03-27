@@ -12,6 +12,14 @@ import slogo.visualization.FrontEndController;
 import slogo.visualization.ButtonFactory;
 import slogo.visualization.Workspace;
 
+/**
+ * Display view class that implements movements for all active turtles on the screen graphically.
+ * Dependent on the workspace and the front-end controller. Should be used to move all active
+ * turtles on the screen or rotate them. Still works even if there are only inactive turtles on the
+ * screen.
+ *
+ * @author Samy Boutouis
+ */
 public class ButtonDisplay extends ScrollingDisplay {
 
   private static final String TITLE = "ButtonsTitle";
@@ -23,6 +31,12 @@ public class ButtonDisplay extends ScrollingDisplay {
   private final List<String> buttonList;
   private final GridPane pane;
 
+  /**
+   * Constructor for class.
+   *
+   * @param workspace
+   * @param frontEndController
+   */
   public ButtonDisplay(Workspace workspace, FrontEndController frontEndController) {
     super(workspace);
     vbox = setupVBoxContainer(TITLE, BUTTON_BOX_ID);
@@ -58,6 +72,11 @@ public class ButtonDisplay extends ScrollingDisplay {
     return textField;
   }
 
+  /**
+   * Returns the root pane of the display view.
+   *
+   * @return Root pane of the display view
+   */
   public GridPane getPane() {
     return pane;
   }

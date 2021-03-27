@@ -27,6 +27,14 @@ import slogo.visualization.ButtonFactory;
 import slogo.visualization.turtle.FrontEndTurtleTracker;
 import slogo.visualization.observers.XMLObserver;
 
+/**
+ * Display view that creates a toolbar on top of the workspace. Contains buttons and dropdowns that
+ * are necessary for changing the global state of the workspace and parts of the turtle display.
+ * Dependent on both controllers and the turtle tracker for information about the global state
+ * of the workspace. Should be used to create a toolbar in a part of the workspace.
+ *
+ * @author Samy Boutouis
+ */
 public class ToolbarDisplay implements XMLObserver {
   private static final String COLOR_PICKER_ID = "ColorPicker";
   private static final int PADDING_LENGTH = 10;
@@ -51,6 +59,14 @@ public class ToolbarDisplay implements XMLObserver {
   private Color backgroundColor;
   private ComboBox<String> languageBox;
 
+  /**
+   * Constructor for the class.
+   *
+   * @param resourcePackage String representing file path of the resources package
+   * @param controller Controller that communicates information and actions to the back-end
+   * @param frontEndController Controller that manages responses to changes made in toolbar
+   * @param frontEndTurtleTracker TurtleTracker for the entire workspace tracking all the turtles
+   */
   public ToolbarDisplay(String resourcePackage, Controller controller,
       FrontEndController frontEndController, FrontEndTurtleTracker frontEndTurtleTracker) {
     String language = DEFAULT_LANGUAGE;
@@ -162,10 +178,20 @@ public class ToolbarDisplay implements XMLObserver {
     }
   }
 
+  /**
+   * Returns the root pane of the display view.
+   *
+   * @return Root pane of the display view
+   */
   public GridPane getPane() {
     return gridPane;
   }
 
+  /**
+   * Updates the language represented in the combobox.
+   *
+   * @param language String representing the language chosen.
+   */
   public void updateLanguage(String language) {
     languageBox.setValue(language);
   }
