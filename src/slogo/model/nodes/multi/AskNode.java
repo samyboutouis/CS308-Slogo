@@ -18,12 +18,22 @@ public class AskNode extends BracketNode {
   private List<SlogoNode> parameters;
   private int firstEnd;
 
+  /**
+   * Constructor for Ask Node.
+   *
+   * @param numParameters amount of brackets an ask command takes (2)
+   */
   public AskNode(int numParameters) {
     super(numParameters);
     parameters = super.getParameters();
   }
 
-  // gets all the turtles that the ask command wants
+  /**
+   * Gets all the turtles that should be in this ask command block.
+   *
+   * @param tracker to be passed in the getReturnValue calls of children nodes.
+   * @return list of turtle IDs that
+   */
   protected List<Integer> getAskTurtles(BackEndTurtleTracker tracker) {
     List<Integer> ret = new ArrayList<>();
     for (int i = 1; i < firstEnd; i++) {
@@ -40,6 +50,13 @@ public class AskNode extends BracketNode {
     return ret;
   }
 
+  /**
+   *
+   * @param tracker keeps track of all the turtles, allows commands that require receiving turtle
+   *                information or adding commands to a turtle to do so with the parameter, rather
+   *                than an instance variable present in every subclass.
+   * @return value of last command ran on last turtle.
+   */
   @Override
   public double getReturnValue(BackEndTurtleTracker tracker) {
     firstEnd = super.getFirstEnd();
