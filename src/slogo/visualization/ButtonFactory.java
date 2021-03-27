@@ -11,7 +11,19 @@ import slogo.visualization.turtle.Turtle;
 /**
  * Responsible for creating different types of buttons and assigning different event handlers using
  * reflection. Dependent on the FrontEndController class for the button event handlers and property
- * files to receive the correct method names and image names.
+ * files to receive the correct method names and image names. I believe this class incorporates good
+ * aspects of software design because it implements the factory design pattern and uses reflection,
+ * allowing for maximal flexibility. By using the factory design pattern, in other parts of my code,
+ * I am able to reduce the amount of repeated lines from creating similar buttons, and instead, handle
+ * the creation of the different types of buttons in this class. Additionally, I am simply able to add
+ * new types of buttons and event handlers by adding properties to my property file and creating the
+ * associated event handler in the controller. In this class, I tried to minimize the amount of
+ * repeated code, but in order to have different types of buttons that take in different variables
+ * for their respective event handlers, I have to make multiple "create" methods such as creating a
+ * default text button or creating a toggle button. Overall, by using the factory design pattern and
+ * reflection, I am able to minimize the amount of repeated code and easily extend the types of buttons
+ * I can have, following the open-closed principle, keeping the types of button open for extension
+ * but the core logic of creating buttons closed. It also keeps the implementation encapsulated.
  *
  * @author Samy Boutouis
  */

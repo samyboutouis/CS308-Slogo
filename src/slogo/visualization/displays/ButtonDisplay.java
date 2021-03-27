@@ -16,7 +16,13 @@ import slogo.visualization.Workspace;
  * Display view class that implements movements for all active turtles on the screen graphically.
  * Dependent on the workspace and the front-end controller. Should be used to move all active
  * turtles on the screen or rotate them. Still works even if there are only inactive turtles on the
- * screen.
+ * screen. This class incorporates good design as it shows use of the ButtonFactory class.
+ * Specifically, by using the ButtonFactory in this class, one simply needs to write the properties
+ * of each button as specified in the properties file, and the button factory will handle the creation
+ * of the actual button and its event handlers. By incorporating this factory design, the code is much
+ * more concise, easy to read, and flexible. If I wanted to add another button to the screen, all I
+ * would have to do is add the new property string to the list, create the event handler for it, and
+ * add the property to the properties file. It also keeps the implementation encapsulated.
  *
  * @author Samy Boutouis
  */
