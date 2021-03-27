@@ -1,3 +1,9 @@
+/**
+ * Represents the node of the SlogoNode tree for a isshowing node command.
+ *
+ * @author Felix Jiang
+ * @author Andre Wang
+ */
 package slogo.model.nodes.queries;
 
 import java.util.ArrayList;
@@ -10,9 +16,21 @@ public class IsShowingNode extends TurtleCommandNode {
   private String mesg;
   private int ret;
 
+  /**
+   * constructor for isshowing node
+   * @param parameter
+   */
   public IsShowingNode(int parameter) {
     super(parameter);
   }
+
+  /**
+   *
+   * @param tracker keeps track of all the turtles, allows commands that require receiving turtle
+   *                information or adding commands to a turtle to do so with the parameter, rather
+   *                than an instance variable present in every subclass.
+   * @return 1 if the turtle is shown, else 0. adds a customized display command to the current turtle.
+   */
 
   @Override
   public double getReturnValue(BackEndTurtleTracker tracker) {
