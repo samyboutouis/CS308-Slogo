@@ -15,6 +15,11 @@ public class SetTowardsNode extends TurtleCommandNode {
 
   private List<SlogoNode> parameters;
 
+  /**
+   * Constructor for node.
+   *
+   * @param numParameters number of parameters a set towards node takes (2)
+   */
   public SetTowardsNode(int numParameters) {
     super(numParameters);
     parameters = super.getParameters();

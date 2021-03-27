@@ -12,6 +12,11 @@ import slogo.turtlecommands.HomeCommand;
  */
 public class HomeNode extends TurtleCommandNode {
 
+  /**
+   * Constructor for node.
+   *
+   * @param numParameters number of parameters a home node takes (0)
+   */
   public HomeNode(int numParameters) {
     super(numParameters);
   }

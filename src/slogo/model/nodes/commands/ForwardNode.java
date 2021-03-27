@@ -15,6 +15,11 @@ public class ForwardNode extends TurtleCommandNode {
 
   private List<SlogoNode> parameters;
 
+  /**
+   * Constructor for node.
+   *
+   * @param numParameters number of parameters a forward node takes (1)
+   */
   public ForwardNode(int numParameters) {
     super(numParameters);
     parameters = super.getParameters();

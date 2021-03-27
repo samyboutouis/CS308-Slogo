@@ -12,6 +12,11 @@ import slogo.turtlecommands.HideTurtleCommand;
  */
 public class HideTurtleNode extends TurtleCommandNode {
 
+  /**
+   * Constructor for node.
+   *
+   * @param numParameters number of parameters a hide turtle node takes (0)
+   */
   public HideTurtleNode(int numParameters) {
     super(numParameters);
   }

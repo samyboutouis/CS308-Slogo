@@ -12,6 +12,11 @@ import slogo.turtlecommands.PenUpCommand;
  */
 public class PenUpNode extends TurtleCommandNode {
 
+  /**
+   * Constructor for node.
+   *
+   * @param numParameters number of parameters a pen up node takes (0)
+   */
   public PenUpNode(int numParameters) {
     super(numParameters);
   }

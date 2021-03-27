@@ -15,6 +15,11 @@ public class LeftNode extends TurtleCommandNode {
 
   private List<SlogoNode> parameters;
 
+  /**
+   * Constructor for node.
+   *
+   * @param numParameters number of parameters a left node takes (1)
+   */
   public LeftNode(int numParameters) {
     super(numParameters);
     parameters = super.getParameters();

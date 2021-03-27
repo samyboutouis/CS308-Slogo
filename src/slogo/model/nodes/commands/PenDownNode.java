@@ -12,6 +12,11 @@ import slogo.turtlecommands.PenDownCommand;
  */
 public class PenDownNode extends TurtleCommandNode {
 
+  /**
+   * Constructor for node.
+   *
+   * @param numParameters number of parameters a pen down node takes (0)
+   */
   public PenDownNode(int numParameters) {
     super(numParameters);
   }

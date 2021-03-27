@@ -15,6 +15,11 @@ public class SetPositionNode extends TurtleCommandNode {
 
   private List<SlogoNode> parameters;
 
+  /**
+   * Constructor for node.
+   *
+   * @param numParameters number of parameters a set position node takes (2)
+   */
   public SetPositionNode(int numParameters) {
     super(numParameters);
     parameters = super.getParameters();

@@ -12,7 +12,11 @@ import slogo.turtlecommands.ShowTurtleCommand;
  */
 public class ShowTurtleNode extends TurtleCommandNode {
 
-
+  /**
+   * Constructor for node.
+   *
+   * @param numParameters number of parameters a show node takes (0)
+   */
   public ShowTurtleNode(int numParameters) {
     super(numParameters);
   }

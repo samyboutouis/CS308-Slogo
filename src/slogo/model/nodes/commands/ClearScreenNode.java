@@ -12,18 +12,14 @@ import slogo.turtlecommands.ClearScreenCommand;
  */
 public class ClearScreenNode extends TurtleCommandNode {
 
+  /**
+   * Constructor for node.
+   *
+   * @param numParameters number of parameters a clear screen node takes (0)
+   */
   public ClearScreenNode(int numParameters) {
     super(numParameters);
   }
-/*
-  @Override
-  public double getReturnValue(List<Command> commands) {
-    commands.add(new ClearScreenCommand());
-    double prevX = turtle.getX();
-    double prevY = turtle.getY();
-    turtle.clearScreen();
-    return Math.sqrt(Math.pow(prevX - turtle.getX(), 2) +  Math.pow(prevY - turtle.getY(), 2));
-  }*/
 
   @Override
   public double getReturnValue(BackEndTurtleTracker tracker) {

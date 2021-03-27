@@ -15,6 +15,11 @@ public class SetHeadingNode extends TurtleCommandNode {
 
   private List<SlogoNode> parameters;
 
+  /**
+   * Constructor for node.
+   *
+   * @param numParameters number of parameters a set heading node takes (1)
+   */
   public SetHeadingNode(int numParameters) {
     super(numParameters);
     parameters = super.getParameters();
