@@ -1,3 +1,10 @@
+/**
+ * Represents the node of the SlogoNode tree for a power command.
+ *
+ * @author Andre Wang
+ */
+
+
 package slogo.model.nodes.math;
 
 import java.util.List;
@@ -8,11 +15,23 @@ public class PowerNode extends SlogoNode {
 
   private List<SlogoNode> parameters;
 
+  /**
+   * constructor for PowerNode
+   * @param numParameters for PowerNode
+   */
   public PowerNode(int numParameters) {
     super(numParameters);
     parameters = super.getParameters();
   }
 
+
+  /**
+   *
+   * @param tracker keeps track of all the turtles, allows commands that require receiving turtle
+   *                information or adding commands to a turtle to do so with the parameter, rather
+   *                than an instance variable present in every subclass.
+   * @return x**y
+   */
   @Override
   public double getReturnValue(BackEndTurtleTracker tracker) {
     return Math
